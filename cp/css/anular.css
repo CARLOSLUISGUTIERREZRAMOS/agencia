@@ -1,0 +1,68 @@
+.input {
+	border: 1px solid #CCCCCC;
+	background-color: #F9F9F9;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-transform: uppercase;
+	width: 140px;
+	margin: 0px;
+	padding: 2px;
+	padding-top: 3px;
+	float: none;
+}
+
+.btn_anular { 
+	width: 100px;
+	height: 30px;
+	background-color: #6F9FF1; 
+	border: 1px solid #000000;
+	color: #FFFFFF;
+	font-weight: bold;
+	cursor: pointer;
+	float: none;
+	margin: 0px;
+	padding: 0px;
+}
+.cabecera_listado {
+    background: linear-gradient(#f01515, darkred) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f01515', endColorstr='darkred');
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.contenido_listado, .contenido_listado td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+
+}
+#resultado, .resultado {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #8A1316;
+}
+td {
+	font-size: 12px;
+	cursor: default;
+}
+form {
+	margin: 0px;
+	padding: 0px;
+}
+.bol_anulado {
+	color: #FF0000 !important;
+	text-decoration: line-through;
+}
+
+.btn-red {
+    background: url(../images/imgContinuar.png) no-repeat !important;
+    color: #FFFFFF;
+    font-family: 'ArialNarrowRegular', Sans-Serif;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    width: 100px;
+    height: 30px;
+    padding: 0 20px 2px 0;
+}

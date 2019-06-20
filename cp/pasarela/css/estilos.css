@@ -1,0 +1,174 @@
+@charset "iso-8859-2";
+/* CSS Document */
+
+body {
+	/*background-color: #999999;*/
+	overflow: auto;
+}
+td, select {
+	cursor: default;
+}
+td, select, input {
+	font-family: Arial,Helvetica,sans-serif;
+	/*font-size: 12px;
+	color: #656565;*/
+        font-size: 13px;
+        color: black;
+	padding: 0px;
+	margin: 0px;
+}
+#cabecera, #cabecera td {
+	padding: 0px;
+	margin: 0px;
+}
+.reserva_option {
+	background: none;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 13px;
+	/*color: #666666;*/
+        color:black;
+	margin: 0px;
+/*	padding: 3px 3px 3px 6px;*/
+	width: 90px;
+	height: 22px;
+}
+.reserva_option option {
+	margin: 0px;
+	padding: 3px 3px 3px 6px;
+}
+.ui-datepicker-trigger {
+/*	padding-top: 7px;*/
+        text-indent: -9999;
+        width: 24px;
+        height:24px;
+}
+#fecha0, #fecha1 {
+	margin-right: 4px;
+}
+.btn-red {
+	background:  url(../images/imgContinuar.png) no-repeat;
+	float: none;
+}
+			
+ul.list {
+	display:block;
+}
+ul.list li {
+	background: url(../images/bullet-red.png) no-repeat scroll 0 7px;
+	line-height: 20px;
+	margin: 0 5px 15px 0;
+	list-style: none;
+  padding-left: 10px;
+	text-align: justify;
+}
+ul.list-item {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	display: block;
+	margin-bottom: 10px;
+}	
+ul.list-item li {
+	background: url(../images/bullet-red.png) no-repeat scroll 0 7px;
+	line-height: 20px;
+	margin: 0 5px 5px 10px;
+	padding-left: 10px;
+}
+.subtitleTabla {
+	background-color: #E9E0DC;
+	padding: 5px;
+	color: #3B3B3B;
+	font-size: 12px;
+	font-weight: bold;
+	border: 1px solid #FFFFFF;
+}
+.bgTable_data {
+	padding: 5px;
+	/*color: #656565;*/
+        color: black;
+	font-size: 12px;
+	border: 1px solid #FFFFFF;
+}
+.mnReser { 
+	margin-left: 10px;
+}
+.mnReser ul li, .mnReser ul li.active {
+	margin: 0px 20px 0px 20px;
+	padding-right: 85px;
+}
+.mnReser ul li {
+	background: url(../images/line-off.gif) no-repeat center right;
+}
+.mnReser ul li.active {
+	background: url(../images/line-on.gif) no-repeat top right;
+}
+#desplegable ul {
+	display: block;
+	list-style: disc;
+	margin-bottom: 15px;
+	margin-left: 13px;
+}
+#desplegable ul li {
+	padding:0px 0px 0px 5px;
+}
+
+#desplegable h2 span{
+	color: #3b3b3b;
+	font-size: 16px;
+	padding-bottom: 5px;
+	font-family:'ArialNarrowRegular', Sans-Serif;
+	font-weight: normal;
+	line-height: 17px;
+}
+h2 {
+	font-size: 20px;
+	font-family:'ArialNarrowRegular', Sans-Serif;
+	font-weight: normal;
+	line-height: 17px;
+}
+
+.frmInput {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #535353;
+	border: 1px solid #b4c1c8;
+	padding: 3px;
+}
+
+.pasajeros td {
+	background:#F0F0F0;
+	padding: 0px;
+	clear: none;
+	font-size: 12px;
+}
+
+.titleTable {
+	background-color: #DDD1CB;
+	font-size: 13px;
+	font-weight: bold;
+	color: #3B3B3B;
+	padding: 4px 5px;
+}
+
+.lblReser {
+	border: 1px solid #FFFFFF;
+}
+#menu_vuelo td {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #323131;
+/*	font-size: 18px;*/
+font-size: 13px;
+font-weight: 700;
+}
+#menu_vuelo a {
+	color: #F31300;
+	text-decoration: underline;
+}
+#menu_vuelo .activo {
+	color: #F31300;
+}
+.Cursor{
+    background: white;
+    cursor:pointer;
+}

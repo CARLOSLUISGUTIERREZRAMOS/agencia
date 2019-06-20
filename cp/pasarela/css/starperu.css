@@ -1,0 +1,966 @@
+
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; } unifica entre navegadores con o sin el html5 parser
+audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; } unifica entre navegadores con o sin el html5 parser
+audio:not([controls]) { display: none; } esconde los controles de audio que no poseen controles para los navegadores que los colocan
+[hidden] { display: none; } crea el atributo para navegadores que no lo tienen
+
+ 
+html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+html, button, input, select, textarea { font-family: sans-serif; /*color: #565F66;*/ }
+body { margin: 0; font-size: 80%; line-height: 1.2; font-family: "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif}
+div
+{
+
+
+}
+
+ * Remueve el text-shadow en una seleccion con highlight
+ 
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+
+********************************** L A Y O U T ********************************************************
+
+#Portal {
+	width: 958px;
+	margin:0 auto;
+	padding: 25px;
+	font-size: 85%;
+}
+	#Cabecera {
+		border:1px solid #ccc;
+		height: 97px;
+		padding: 0 5px;
+		background: url(../imgs/corporativo.png) 700px 20px no-repeat;
+	}
+		#Cabecera h1{
+			text-indent: -8000px;
+			width: 220px;
+			height: 90px;
+			line-height: 1em;
+			margin: 0;
+			padding: 0;
+			background: url(../imgs/LogoStar.png) bottom left no-repeat;
+		}
+		#Cabecera h2{
+			font-size:12px;
+			width: 220px;
+			height: 90px;
+			line-height: 1em;
+			margin-top: -80px;
+			padding: 0px 0px 0px 810px;
+			text-align: right;
+		}
+		#Cabecera h3{
+			font-size:12px;
+			height: 90px;
+			line-height: 1em;
+			margin-top: -90px;
+			padding: 0px 360px;
+			text-align: center;
+		}
+		#Cabecera h4{
+			font-size:12px;
+			width: 220px;
+			height: 90px;
+			line-height: 1em;
+			margin-top: -80px;
+			padding: 0px 730px;
+			text-align: right;
+		}
+		#Cabecera ul.idiomas{
+			margin: 0;
+			padding: 0;
+			width: 350px;
+			float: right;
+			
+			top:-10px;
+			list-style: none;
+		}
+			#Cabecera ul.idiomas li{
+				float:right;
+			}
+	#NavPrincipal {
+		padding: 4px 5px;
+		clear: both;
+		width:948px;
+		
+		z-index:9800;
+	}
+		#NavPrincipal ul{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+			#NavPrincipal ul li{
+				width: 148px;
+				height: 42px;
+				float: left;
+				margin:0 12px 0 0;
+			}
+			#NavPrincipal ul li.last{
+				width: 148px;
+				margin:0;
+			}
+				#NavPrincipal ul li a{
+					height: 26px;
+					padding: 10px;
+					display: block;
+					color: #fff;
+					text-decoration: none;
+					font-size: 1.2em;
+				}
+	#Cuerpo {
+		padding: 5px 5px 0 5px;
+	}
+		#Reservas {
+				padding-bottom: 12px;
+		}
+			#ListadoReservas{
+				background: #cfcecc;
+				width: 309px;
+				height: 278px;
+				float: left;
+			}
+			#ModuloReservas{
+				background: #F0F0F0;
+				width: 623px;
+				height: 278px;
+				float: right;
+				font-size: 110%;
+				background:#f0f0f0 url(../imgs/titpasarela.png) no-repeat right top;
+			}
+		#Ofertas {
+				
+		}
+			#ModuloOfertas{
+				background: #cfcecc;
+				width: 608px;
+				height: 300px;
+				float: left;
+			}
+			#ListadoOfertas{
+				width: 312px;
+				height: 300px;
+				float: right;
+			}
+				#ListadoOfertas .Modulo a{
+					width:124px;
+					height:124px;
+					float: left;
+					padding: 10px;
+					margin: 0 0 12px 12px;
+					color: #535f66;
+					font-size: 1.2em;
+					text-decoration: none;
+				}
+		#Servicios {
+			margin-top: 12px;
+		}
+			#Servicios a{
+				width:200px;
+				height:110px;
+				float: left;
+				padding: 14px;
+				margin: 0 12px 0 0;
+				color: #fff;
+			}
+			#Servicios a.final{
+				width:200px;
+				height:110px;
+				float: left;
+				padding: 14px;
+				margin: 0;
+				color: #fff;
+			}
+				.Modulo, .ModuloFinal{
+					line-height: 0;
+					font-weight: bold;
+				}
+				.Modulo h2, .ModuloFinal h2{
+					text-transform: uppercase;
+					line-height: 0.8em;
+					padding: 0;
+					margin: 0;
+				}
+				.Modulo h2, .ModuloFinal h2, .Modulo p strong, .ModuloFinal p strong{
+					font-size: 2.1em;
+					letter-spacing: -0.1em;
+				}
+				.Modulo h4, .ModuloFinal h4{
+					line-height: 0.8em;
+					padding: 0;
+					margin: 0;
+				}
+				.Modulo h4, .ModuloFinal h4, .Modulo p strong, .ModuloFinal p strong{
+					font-size: 1.9em;
+					letter-spacing: 0em;
+				}
+				.Modulo h5, .ModuloFinal h5{
+					line-height: 0.8em;
+					padding: 0;
+					margin: 0;
+				}
+				.Modulo h5, .ModuloFinal h5, .Modulo p strong, .ModuloFinal p strong{
+					font-size: 2.2em;
+					letter-spacing: 0em;
+				}
+				.Modulo p, .ModuloFinal p{
+					line-height: 1.4em;
+					margin-top: 25px;
+				}
+				#Servicios .Modulo p, #Servicios .ModuloFinal p{
+					line-height: 1.8em;
+					margin-top: 15px;
+				}
+					#Servicios .Modulo h2{
+						padding-left: 75px;
+						margin-top: 10px;
+					}
+					#Servicios .Modulo h4{
+						padding-left: 80px;
+						margin-top: 7px;
+					}
+					#Servicios .Modulo h5{
+						padding-left: 80px;
+						margin-top: 7px;
+					}
+					#Servicios .Modulo a{
+						text-decoration: none;
+					}
+						.decimales{
+							position: relative;
+							top:-9px;
+							font-size: 0.55em
+						}
+	#Pie {
+		background:#c90e14;
+		margin: 12px 5px;
+		height: 45px;
+		padding: 15px;
+	}
+	#Pie h2, #Pie p, #Pie ul, #Pie li{
+		float: left;
+	}
+	#Pie h2{
+		width: 180px;
+		height: 52px;
+		margin: 0;
+		padding: 0px;
+		background: url(../imgs/LogoStarPie.png) no-repeat left top;
+		text-indent: -8000px;
+	}
+	#Pie p{
+		width: 325px;
+		margin: 0;
+		padding: 10px 0 0 0;
+		color: #fff;
+		font-weight: bold;
+		line-height: 1.3em;
+	}
+	#Pie ul{
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	#Pie ul li{
+	text-align: right;
+	margin: 0 0 0 58px;
+	padding: 5px 0 0 0;
+	color: #fff;
+	font-weight: bold;
+	line-height: 1.3em;
+	}
+	#Pie a{
+		color: #fff;
+		text-decoration: none;
+		display: block;
+		border-bottom: 2px solid #c90e14;
+		padding-bottom: 4px;
+	}
+		#Pie a:hover{
+			color: #fff;
+			text-decoration: none;
+			border-bottom: 2px solid #d34a4e;
+		}
+	p.final{
+		text-align: center;
+		color:#555;
+	}
+	p.final a{
+		color:#000;
+		text-decoration: none;
+		border-bottom: 1px dashed #999;
+	}
+		p.final a:hover{
+			color:#c90e14;
+			border-bottom: 1px solid #c90e14;
+		}
+*************************************************************************
+******************************  ENLACES  ********************************
+*************************************************************************
+
+a.destinos{
+	background:#c90e14;
+}
+a.promociones{
+	background:#c90e14;
+}
+a.startravel{
+	background:#c90e14;
+}
+a.volar{
+	background:#c90e14;
+}
+a.oficinas{
+	background:#c90e14;
+}
+a.blog{
+	background:#c90e14;
+}
+	a.destinos:hover{
+		background:#ae0208;
+	}
+	a.promociones:hover{
+		background:#ae0208;
+	}
+	a.startravel:hover{
+		background:#ae0208;
+	}
+	a.volar:hover{
+		background:#ae0208;
+	}
+	a.oficinas:hover{
+		background:#ae0208;
+	}
+	a.blog:hover{
+		background:#ae0208;
+	}
+
+.box1 { 
+     
+    margin: 0px; 
+    padding: 0px;
+	width: 220px; 
+    height: 90px; 
+    background-image: url(images/LogoStar.jpg); 
+    background-repeat: no-repeat; 
+    }
+
+#box-link { 
+    position: absolute; 
+    top: 0px; 
+    left: 0px; 
+    width: 220px; 
+    height: 90px; 
+    background-color: transparent;
+	}
+
+a:link { color: #565F66; }  valores antiguos 
+a:visited { color: #565F66; }
+a:link { color: withe; }	 para que se mantenga blanco el texto del boton reset clave 
+a:visited { color: withe; }  para que se mantenga blanco el texto del boton reset clave 
+a:hover { color: blue; }
+
+
+*************************************************************
+*************************************************************
+*************************************************************
+	
+	#menu, #menu ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	#menu ul{
+		z-index:3000;	
+	}
+	
+	#menu:before,
+	#menu:after {
+		content: "";
+		display: table;
+	}
+	
+	#menu:after {
+		clear: both;
+	}
+	
+	#menu {
+		zoom:1;
+	}
+	
+	#menu li {
+		float: left;
+		position: relative;
+		margin: 0 12px 0 0;
+		width: 143px;
+		height: 42px;
+	}
+	#menu li.last, #menu li ul li {
+		float: left;
+		position: relative;
+		margin: 0;
+		width: 143px;
+		height: 42px;
+	}
+	
+	#menu a {
+		float: left;
+		padding: 12px 30px;
+		color: #999;
+		text-decoration: none;
+		display: block;
+		width: 128px;
+		height: 42px;
+	}
+	
+	#menu li:hover > a {
+		color: #fafafa;
+	}
+	
+	*html #menu li a:hover { 
+/*                 IE6 only */
+		color: #fafafa;
+	}
+	
+	#menu ul {
+		margin: 20px 0 0 0;
+		_margin: 0; /*IE6 only*/
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		top: 42px;
+		left: 0;
+		z-index: 1;    
+		background: #c90e14;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+		-webkit-transition: all .2s ease-in-out;
+		-moz-transition: all .2s ease-in-out;
+		-ms-transition: all .2s ease-in-out;
+		-o-transition: all .2s ease-in-out;
+		transition: all .2s ease-in-out;  
+	}
+
+	#menu li:hover > ul {
+		opacity: 1;
+		visibility: visible;
+		margin: 0;
+	}
+	
+	#menu ul ul {
+		top: 0;
+		left: 150px;
+		margin: 0 0 0 20px;
+		_margin: 0; /*IE6 only*/
+		-moz-box-shadow: -1px 0 0 rgba(255,255,255,.3);
+		-webkit-box-shadow: -1px 0 0 rgba(255,255,255,.3);
+		box-shadow: -1px 0 0 rgba(255,255,255,.3);		
+	}
+	
+	#menu ul li {
+		float: none;
+		display: block;
+		border: 0;
+		_line-height: 0; /*IE6 only*/
+		-moz-box-shadow: 0 1px 0 #a40606, 0 2px 0 #e63137;
+		-webkit-box-shadow: 0 1px 0 #a40606, 0 2px 0 #e63137;
+		box-shadow: 0 1px 0 #a40606, 0 2px 0 #e63137;
+	}
+	
+	#menu ul li:last-child {   
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;    
+	}
+	
+	#menu ul a {    
+		padding: 8px;
+		width: 127px;
+		_height: 10px; /*IE6 only*/
+		display: block;
+		white-space: nowrap;
+		float: none;
+		text-transform: none;
+	}
+	
+	#menu ul a:hover {
+		background-color: #ae0208;
+	}
+	
+	#menu ul li:first-child > a {
+		-moz-border-radius: 3px 3px 0 0;
+		-webkit-border-radius: 3px 3px 0 0;
+		border-radius: 3px 3px 0 0;
+	}
+	
+	#menu ul li:first-child > a:after {
+		content: '';
+		position: absolute;
+		left: 40px;
+		top: -6px;
+		border-left: 6px solid transparent;
+		border-right: 6px solid transparent;
+		border-bottom: 6px solid #c90e14;
+	}
+
+	#menu ul ul li:first-child a:after {
+		left: -6px;
+		top: 50%;
+		margin-top: -6px;
+		border-left: 0;	
+		border-bottom: 6px solid transparent;
+		border-top: 6px solid transparent;
+		border-right: 6px solid #c90e14;
+	}
+	
+	#menu ul li:first-child a:hover:after {
+		border-bottom-color: #c90e14; 
+	}
+	
+	#menu ul ul li:first-child a:hover:after {
+		border-right-color: #c90e14; 
+		border-bottom-color: transparent; 	
+	}
+	
+	#menu ul li:last-child > a {
+		-moz-border-radius: 0 0 3px 3px;
+		-webkit-border-radius: 0 0 3px 3px;
+		border-radius: 0 0 3px 3px;
+	}
+	
+	 Mobile 
+	#menu-trigger {
+		display: none;
+	}
+
+	@media screen and (min-width: 600px) {
+		#menu {
+			display: block !important;
+		}
+	}	
+
+	 iPad 
+	.no-transition {
+		-webkit-transition: none;
+		-moz-transition: none;
+		-ms-transition: none;
+		-o-transition: none;
+		transition: none;
+		opacity: 1;
+		visibility: visible;
+		display: none;  		
+	}
+
+	#menu li:hover > .no-transition {
+		display: block;
+	}
+
+**************************Feb2013********************************
+#contenidocpanel{
+	border: 2px solid #4f4e53;
+	margin-bottom: 15px;
+	margin-right: 1px;
+	height: 550px;
+}
+
+
+**********MARZO2013**************************
+
+#NavegacionLateral{
+	width: 250px;
+	height: 330px;
+	background: #c6c5c3 url(../imgs/bkgmenulateral-OFF.png) repeat-y top right;
+	float: left;
+}
+#NavegacionLateral ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#NavegacionLateral ul li a{
+	background: #e4dcda url(../imgs/bkgmenulateral-OFF.png) repeat-y top right;
+	display: block;
+	width: 240px;
+	height: 43px;
+	line-height: 43px;
+	margin-bottom: 7px;
+	padding-left: 10px;
+	color: #5D4859;
+	text-decoration: none;
+}
+#NavegacionLateral ul li a:hover{
+	background: #a1a5a8 url(../imgs/bkgmenulateral-ON.png) repeat-y top right;
+}
+#Galeria{
+	width: 650px;
+	padding: 4px 0 15px 25px;
+	float: right;
+	background: #F0F0F0 url(../imgs/titgalflota.png) no-repeat top left;
+}
+#Galeria2{
+	width: 650px;
+	padding: 4px 0 15px 25px;
+	float: right;
+	background: #F0F0F0 url(../imgs/titgalservicio.png) no-repeat top left;
+}
+#Galeria h2{
+	color: #fff;
+}
+p.miniaturas{
+	text-align: center;
+	width: 190px;
+	padding: 0 10px 10px 0;
+	float: left;
+	margin-right: 15px;
+}
+#Promociones{
+	
+}
+#Promociones img{
+	float: left;
+	margin: 0 0 15px 0;
+}
+#Promociones .detallepromo{
+	padding:0 15px;
+	float: right;
+	width: 758px;
+	height: 148px;
+	background: #F0F0F0;
+	margin: 0 0 15px 0; 
+	text-align: justify;
+}
+#Promociones .detallepromo a{
+	color:#da1b34;
+	text-decoration: none;
+}
+
+************************************************************
+                      equipaje                              
+************************************************************
+#MenuLateral{
+	width: 245px;
+	height: 580px;
+	float: left;
+}
+	#MenuLateral img.lateral {
+	margin-top:20px;
+		}
+	#MenuLateral ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		background: url(../imgs/BkgMenuLateralUl.png) repeat top right;
+		padding-bottom: 35px;
+	}
+	#MenuLateral ul a{
+		display: block;
+		height: 48px;
+		line-height: 40px;
+		color: #5d4859;
+		text-decoration: none;
+		padding-left: 9px;
+		font-size: 1.1em;
+		}
+		#MenuLateral ul a.lateral01{
+			background: url(../imgs/BkgMenuLateral01Off.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral01:hover{
+			background: url(../imgs/BkgMenuLateral01Hover.png) no-repeat center right;
+		}
+		#MenuLateral ul a#ON.lateral01, #MenuLateral ul a#ON.lateral01:hover{
+			background: url(../imgs/BkgMenuLateral01On.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral02{
+			background: url(../imgs/BkgMenuLateral02Off.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral02:hover{
+			background: url(../imgs/BkgMenuLateral02Hover.png) no-repeat center right;
+		}
+		#MenuLateral ul a#ON.lateral02, #MenuLateral ul a#ON.lateral02:hover{
+			background: url(../imgs/BkgMenuLateral02On.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral03{
+			background: url(../imgs/BkgMenuLateral03Off.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral03:hover{
+			background: url(../imgs/BkgMenuLateral03Hover.png) no-repeat center right;
+		}
+		#MenuLateral ul a#ON.lateral03, #MenuLateral ul a#ON.lateral03:hover{
+			background: url(../imgs/BkgMenuLateral03On.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral04{
+			background: url(../imgs/BkgMenuLateral04Off.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral04:hover{
+			background: url(../imgs/BkgMenuLateral04Hover.png) no-repeat center right;
+		}
+		#MenuLateral ul a#ON.lateral04, #MenuLateral ul a#ON.lateral04:hover{
+			background: url(../imgs/BkgMenuLateral04On.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral05{
+			background: url(../imgs/BkgMenuLateral05Off.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral05:hover{
+			background: url(../imgs/BkgMenuLateral05Hover.png) no-repeat center right;
+		}
+		#MenuLateral ul a#ON.lateral05, #MenuLateral ul a#ON.lateral05:hover{
+			background: url(../imgs/BkgMenuLateral05On.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral06{
+			background: url(../imgs/BkgMenuLateral06Off.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral06:hover{
+			background: url(../imgs/BkgMenuLateral06Hover.png) no-repeat center right;
+		}
+		#MenuLateral ul a#ON.lateral06, #MenuLateral ul a#ON.lateral06:hover{
+			background: url(../imgs/BkgMenuLateral06On.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral07{
+			background: url(../imgs/BkgMenuabajo01Off.png) no-repeat center right;
+		}
+		#MenuLateral ul a.lateral07:hover{
+			background: url(../imgs/BkgMenuabajo01Hover.png) no-repeat center right;
+		}
+		#MenuLateral ul a#ON.lateral07, #MenuLateral ul a#ON.lateral07:hover{
+			background: url(../imgs/BkgMenuabajo01On.png) no-repeat center right;
+		}
+		
+a.lateral02{
+	background: url(../imgs/maleta.png) no-repeat center right;
+}
+a.lateral03{
+	background: url(../imgs/maleta.png) no-repeat center right;
+}
+a.lateral04{
+	background: url(../imgs/maleta.png) no-repeat center right;
+}
+a.lateral05{
+	background: url(../imgs/maleta.png) no-repeat center right;
+}
+a.lateral06{
+	background: url(../imgs/maleta.png) no-repeat center right;
+}
+#Contenido{
+	width: 655px;
+	min-height: 580px;
+	padding: 12px 20px 0 20px;
+	float: right;
+	background: #c5c5c5;
+}
+#MenuLateral2{
+	width: 245px;
+	height: 150px;
+	float: left;
+}
+	#MenuLateral2 img.lateral {
+	margin-top:20px;
+		}
+	#MenuLateral2 ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		padding-bottom: 35px;
+	}
+	#MenuLateral2 ul a{
+		display: block;
+		height: 48px;
+		line-height: 40px;
+		color: #5d4859;
+		text-decoration: none;
+		padding-left: 9px;
+		font-size: 1.1em;
+		}
+		#MenuLateral2 ul a.lateral08{
+			background: url(../imgs/BkgMenuabajo01apagado.png) no-repeat center right;
+		}
+		#MenuLateral2 ul a.lateral08:hover{
+			background: url(../imgs/BkgMenuabajo01encima.png) no-repeat center right;
+		}
+		#MenuLateral2 ul a#ON.lateral08, #MenuLateral ul a#ON.lateral08:hover{
+			background: url(../imgs/BkgMenuLateral01encima.png) no-repeat center right;
+		}
+#MenuLateral3{
+	width: 245px;
+	height: 580px;
+	float: left;
+}
+	#MenuLateral3 img.lateral {
+	margin-top:20px;
+		}
+	#MenuLateral3 ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		background: url(../imgs/BkgMenuLateralUl.png) repeat top right;
+		padding-bottom: 35px;
+	}
+	#MenuLateral3 ul a{
+		display: block;
+		height: 48px;
+		line-height: 40px;
+		color: #5d4859;
+		text-decoration: none;
+		padding-left: 9px;
+		font-size: 1.1em;
+		}
+		#MenuLateral3 ul a.lateral01{
+			background: url(../imgs/BkgMenuLateral01Off.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral01:hover{
+			background: url(../imgs/BkgMenuLateral01Hover.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a#ON.lateral01, #MenuLateral ul a#ON.lateral01:hover{
+			background: url(../imgs/BkgMenuLateral01On.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral02{
+			background: url(../imgs/BkgMenuLateral02Off.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral02:hover{
+			background: url(../imgs/BkgMenuLateral02Hover.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a#ON.lateral02, #MenuLateral ul a#ON.lateral02:hover{
+			background: url(../imgs/BkgMenuLateral02On.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral03{
+			background: url(../imgs/BkgMenuLateral03Off.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral03:hover{
+			background: url(../imgs/BkgMenuLateral03Hover.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a#ON.lateral03, #MenuLateral ul a#ON.lateral03:hover{
+			background: url(../imgs/BkgMenuLateral03On.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral04{
+			background: url(../imgs/BkgMenuLateral04Off.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral04:hover{
+			background: url(../imgs/BkgMenuLateral04Hover.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a#ON.lateral04, #MenuLateral ul a#ON.lateral04:hover{
+			background: url(../imgs/BkgMenuLateral04On.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral05{
+			background: url(../imgs/BkgMenuLateral05Off.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral05:hover{
+			background: url(../imgs/BkgMenuLateral05Hover.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a#ON.lateral05, #MenuLateral ul a#ON.lateral05:hover{
+			background: url(../imgs/BkgMenuLateral05On.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral06{
+			background: url(../imgs/BkgMenuLateral06Off.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral06:hover{
+			background: url(../imgs/BkgMenuLateral06Hover.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a#ON.lateral06, #MenuLateral ul a#ON.lateral06:hover{
+			background: url(../imgs/BkgMenuLateral06On.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral07{
+			background: url(../imgs/BkgMenuabajo01Off.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a.lateral07:hover{
+			background: url(../imgs/BkgMenuabajo01Hover.png) no-repeat center right;
+		}
+		#MenuLateral3 ul a#ON.lateral07, #MenuLateral ul a#ON.lateral07:hover{
+			background: url(../imgs/BkgMenuabajo01On.png) no-repeat center right;
+		}
+para el background de cada titulo agregar la clase respectiva
+#Contenido.equipaje{
+	background:#f0f0f0 url(../imgs/titequipaje.png) no-repeat left top;
+}
+#Contenido.atencion{
+	background:#f0f0f0 url(../imgs/titatencion.png) no-repeat left top;
+}
+#Contenido.casos{
+	background:#f0f0f0 url(../imgs/titcasos.png) no-repeat left top;
+}
+#Contenido.viajes{
+	background:#f0f0f0 url(../imgs/titviajes.png) no-repeat left top;
+}
+#Contenido.programa{
+	background:#f0f0f0 url(../imgs/titprograma.png) no-repeat left top;
+}
+#Contenido.tyc{
+	background:#f0f0f0 url(../imgs/tittos.png) no-repeat left top;
+}
+#Contenido.check{
+	background:#f0f0f0 url(../imgs/titcheck.png) no-repeat left top;
+}
+#Contenido.deventa{
+	background:#f0f0f0 url(../imgs/titdeventa.png) no-repeat left top;
+}
+#Contenido.privacidad{
+	background:#f0f0f0 url(../imgs/titprivacidad.png) no-repeat left top;
+}
+#Contenido.faq{
+	background:#f0f0f0 url(../imgs/titfaq.png) no-repeat left top;
+}
+#Contenido.empresas{
+	background:#f0f0f0 url(../imgs/titempresas.png) no-repeat left top;
+}
+#Contenido.imagen{
+	background:#f0f0f0 url(../imgs/titimagen.png) no-repeat left top;
+}
+#Contenido.tarifarias{
+	background:#f0f0f0 url(../imgs/tittarifarias.png) no-repeat left top;
+}
+#Contenido.flota{
+	background:#f0f0f0 url(../imgs/titflota.png) no-repeat left top;
+}
+#Contenido.operacional{
+	background:#f0f0f0 url(../imgs/titoperacional.png) no-repeat left top;
+}
+#Contenido.mapa{
+	background:#f0f0f0 url(../imgs/titmapa.png) no-repeat left top;
+}
+#Contenido.charter{
+	background:#f0f0f0 url(../imgs/titchar.png) no-repeat left top;
+}
+#Contenido.cargo{
+	background:#f0f0f0 url(../imgs/titcarg.png) no-repeat left top;
+}
+#Contenido.empresa{
+	background:#f0f0f0 url(../imgs/titemp.png) no-repeat left top;
+}
+#Contenido.contacto{
+	background:#f0f0f0 url(../imgs/titcontacto.png) no-repeat left top;
+}
+#Contenido.destino{
+	background:#f0f0f0 url(../imgs/titdestino.png) no-repeat left top;
+}
+#Contenido.promociones{
+	background:#f0f0f0 url(../imgs/titprom.png) no-repeat left top;
+}
+
+#Contenido h1{
+	color:#565F66;
+}
+
+
+************************************************************
+ Nada va despues de esta seccion 
+************************************************************
+  
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
+ Esconde visualmente pero mantiene el layout 
+.invisible { visibility: hidden;}
+	 For image replacement 
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
+.ir br { display: none; }
+ para esconder de los screenreaders y navegadores 
+.hidden { display: none !important; visibility: hidden; }
+#Portal #Cuerpo #Internas #Contenido p {
+
+
+}
+#Portal #Cuerpo #Internas #Promociones .detallepromo p {
+
+}

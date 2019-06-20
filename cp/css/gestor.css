@@ -1,0 +1,293 @@
+
+/*======================================== FORMULARIO ========================================*/
+form{
+	width:auto;
+	margin: 0px;
+}
+table{ 
+	border-collapse:collapse;
+}
+.no-info{
+	font-style:italic; font-weight:bold;
+}
+.span-activo{ 
+	color:#0607C3; font-weight:bold; font-style:italic;
+}
+.span-inactivo{
+	color:#C42425;  font-weight:bold; font-style:italic;
+}
+.span-requerido{
+	display:block; float:left; font-family:Arial, Helvetica, sans-serif; color:#900; font-size:18px;
+}
+#div-requerido{ 
+	width: 190px;
+	height: 30px;
+	clear:both;
+    float: left;
+	background: #FFFFCC;
+    border: 1px solid #D8D88C;
+    color: #990000;
+    font-size: 14px;
+    line-height: 30px;
+	text-align:center;
+        margin: 20px 40%;
+}
+.span_orden{
+	padding:3px 15px 4px 8px;
+	background:url(../images/bg_circulo.png) no-repeat; 
+	color:#fff; 
+	font-size:15px;
+}
+.label_info{
+	width:180px;
+	padding:0 10px 10px 0;
+	font-size:14px;
+	font-weight:bold;
+	font-style:italic;
+	text-align:right;
+	text-transform:capitalize;
+	vertical-align:text-top;
+}
+.span_info{
+	padding:0 10px 10px 0;
+	font-size:14px;
+	vertical-align:middle;
+}
+#div-gestor{
+	/*width:400px;*/
+	/*height:330px;*/
+	/*float:left;*/
+	padding:0 0 0 4px;
+}
+#div-gestor p{ float:left; }
+#div-delegado{
+	/*width:325px;*/
+        width:1000px;
+	height:430px;
+	float:left;
+	padding:0 0 0 4px;
+}
+
+
+#div-delegado p{ float:left; }
+p{ height:22px; margin:4px; }
+label{
+	width:90px;
+	float:left;
+	display:block;
+	text-align:right;
+	text-transform:capitalize;
+}
+input{ 
+	width:180px;
+	height:14px;
+	margin:0 5px 5px 10px;
+	padding:4px 4px;
+	float:left;
+	font-size:11px;
+	color:#333;
+	/*background:#eeeeee;*/
+	border:#e2e2e2 1px solid;
+	outline:none;
+}
+fieldset{
+	width:185px;
+	float:left;
+	margin:0 5px 15px 103px;
+	padding: 5px 0 5px 5px;
+	border: 1px solid #999;
+}
+legend{
+	paddin:0 0 0 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#666;
+	text-transform:capitalize;
+}
+select{
+	width:150px;
+	margin:5px 0 5px 10px; 
+}
+.button{
+	width:200px;
+	height:auto;
+	margin:10px 0 50px 95px;
+	padding:8px;
+	background: url(../images/guardar_2.png) 90% 50% no-repeat #6F9FF1;
+	border:1px solid #000;
+	color:#FFF;
+	font-weight:bold;
+	cursor:pointer;
+}
+h3{ 
+	width:1000px;
+	margin:5px 0 0 5px;
+	border-bottom:1px dotted #039;
+	line-height:30px;
+	color:#036;
+	font-size:15px;
+	text-transform:capitalize;
+}
+h5{
+	margin:10px 0 0 5px;
+	line-height:30px;
+	color:#036;
+	text-transform:capitalize;
+	font-size:12px;
+}
+/*================================== DIV AVISO FORMULARIO ====================================*/
+#div-entidad-aviso{
+	width:500px;
+	height:54px;
+	float:left;
+	margin:3px 0 2px 30px;
+	text-align:center;
+	font-size:16px;
+	font-weight:bold;
+}
+#div-entidad-aviso img{
+	margin:0 10px 0 0;
+}
+.aviso_ok{
+	border:1px solid #093; 
+	background:#B5DABF; 
+	line-height:45px;
+}
+/*.aviso_ok p{ line-height:45px; }*/
+.aviso_error{
+	border:1px solid #6A3737; 
+	background:#E0BBBB;
+	line-height:45px;
+}
+/*.aviso_ok p{ line-height:45px; }*/
+/*====================================== FIN FORMULARIO ======================================*/
+
+/*========================================== LISTADO =========================================*/
+#div-busqueda{
+ /*width:800px;*/height:70px; margin: 15px auto ; background:#F0F0F0; /*border:1px solid #919B9C*/;
+}
+
+.btn-red{
+    background: url(../images/imgContinuar.png) no-repeat !important;
+    color: #FFFFFF;
+    font-family: 'ArialNarrowRegular', Sans-Serif;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    width: 100px;
+    height: 30px;
+    padding: 0 20px 2px 0;
+}
+#div-busqueda input{ background: #FFF; }
+#div-busqueda select{ margin:0 0 10px 10px; }
+#div-busqueda #btnbusqueda{ 
+	width: 100px;
+        height: auto;
+        margin: 0 0 0 30px;
+        background: url(../images/filtrar.png) right no-repeat #6F9FF1;
+        border: 1px solid #000;
+        color: #FFF;
+        font-weight: bold;
+        cursor: pointer;
+}
+#div-listado{ width:auto; margin:10px 0; }
+
+#listaResultado .table{ 
+	border-collapse:collapse; 
+	width: 1000px; 
+	margin:20px 0 0 0; 
+}
+#listaResultado  .th{ 
+	font-size:12px;
+	text-transform:capitalize; 
+}
+#listaResultado  .th, .td{ 
+	width:auto; 
+	margin:0; 
+	font-size:11px;
+	border-right:1px dotted #036; 
+	border-left:1px dotted #036; 
+	border-bottom:1px solid #036;
+}
+.subtitleTabla{
+background-color: #E9E0DC;
+padding: 5px;
+color: #3B3B3B;
+font-size: 12px;
+font-weight: bold;
+border: 1px solid #FFFFFF;
+}
+
+.bgTable_data{
+    padding: 5px;
+/* color: #656565; */
+color: black;
+font-size: 12px;
+border: 1px solid #FFFFFF;
+}
+#listaResultado .data{
+	padding:8px 7px; 
+}
+#listaResultado .opcion{
+	padding:5px 10px; 
+}
+#listaResultado .centrado{
+	text-align:center;
+}
+
+.email{
+    text-transform: none !important;
+}
+/*======================================== FIN LISTADO =======================================*/
+
+/*======================================= DIV SEGURIDAD ======================================*/
+#div-panel-reset{
+	width:100%; height:100%; position:absolute; background:url(../images/bg_lightbox.png); display:none;
+}
+#div-reset-password{
+ 	width:500px;
+	height:100px;
+	position:absolute;
+	top:40%;
+	left:50%;
+	margin:-40px 0 0 -250px;
+	background:#F0F0F0;
+	border:2px solid #999;
+	text-align:center;
+}
+#div-reset-password a{
+    border: 0 none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;    
+    font-family: 'Helvetica',Arial,sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 32px;
+    margin: 5px 5px 0 0;
+    min-height: 32px;
+    padding: 5px 22px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
+    white-space: nowrap;
+    width: auto;
+    cursor:pointer;
+}
+#div-reset-password .aceptar{ 
+/*    background-color: #46844A; */
+    background: linear-gradient(#f01515, darkred) !important;color:white;font-size: 14px;
+    background: -webkit-linear-gradient(#f01515, darkred) !important;
+    /*padding: 0px 5px;*/
+    margin: 0px;
+    font-weight: bold;
+}
+#div-reset-password .cancelar{ 
+    /*background-color:#336699; */
+     background: linear-gradient(#CCC, #999) !important;color:white;font-size: 14px;
+     background: -webkit-linear-gradient(#CCC,  #999) !important;
+    /*padding: 0px 5px;*/
+    margin: 0px;
+    font-weight: bold;
+}
+/*=================================== FIN DIV SEGURIDAD ======================================*/

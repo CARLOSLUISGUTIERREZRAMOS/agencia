@@ -1,0 +1,28 @@
+.fondo{
+    background: #cccccc;
+    padding: 0;
+    margin: 0;
+}
+.mitad_cabecera{
+    width: 50%;
+}
+.texto_izquierda{
+  text-align: left;
+}
+.texto_derecha{
+    text-align: right;
+}
+
+.cabecera{
+    background: #fff;
+    width: 100%;
+    border-bottom: 1px solid;
+}
+.imagen_logo{
+    margin-left: 5%;
+    margin-top:10px;
+}
+.imagen_modulo{
+    margin-right: 5%;
+    margin-top:10px;
+}

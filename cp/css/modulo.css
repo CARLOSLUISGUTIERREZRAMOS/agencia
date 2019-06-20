@@ -1,0 +1,269 @@
+html{
+	margin:0px;
+	padding:0px;
+}
+body{
+	margin:0px;
+	padding:0px;
+	font-size:100%;
+	font-family:Arial, Helvetica, sans-serif;
+}
+img{ border:0; }
+
+#div-main {
+    width: 100%;
+    height: auto;
+}
+
+.gradiante{
+    background: linear-gradient(#f01515, darkred) !important;
+    background: -webkit-linear-gradient(#f01515, darkred) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f01515', endColorstr='darkred');
+}
+
+/*=====================================  HEADER ===================================================*/
+#div-header {
+	width: 100%;
+	height: 79px;
+	background:#FFF;
+	background:url(../images/bg_header.png) repeat-x #fff;
+}
+#div-header-content{
+	width:99%; height:100%; margin: 0 auto; 
+}
+#div-header-logo{
+	width:50%;
+	height:60px;
+	float:left;
+	margin:10px 0;
+	text-align:left;
+}
+#div-header-info-usuario {
+	width: 50%;
+	float: left;
+	font-weight:bold;
+}
+#div-info-usuario-content{
+	float:right; margin:10px 10px 0 0; height:60px; font-size:11px;
+}
+#div-info-usuario-content a{ text-decoration:none; color:#888; }
+#div-header-info-usuario a:hover{ border-bottom:1px dotted #666;color:#666;}
+
+#div-header-info-modulo{ 
+	width: 50%;
+	float: left;
+	margin:20px 0 0 0;
+	text-align:right;
+	font-family: 'SansationBold', Arial, sans-serif;
+	font-size:28px;
+	color:#666;
+        font-weight: bold;
+}
+/*=====================================  FIN HEADER ===================================================*/
+
+/*=====================================  INFO-USUARIO =================================================*/
+#div-info-user{
+	width: 100%;
+	height: 32px;
+	background:#CCCCCC;
+	text-align:right;
+}
+#div-info-user span{
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	margin:0 40px 0 0;
+}
+#div-info-user a{
+	text-decoration:none;
+	color:#666;
+}
+#div-info-user a:hover{
+	text-decoration:underline;
+}
+/*=====================================  FIN INFO-USUARIO ==============================================*/
+
+/*==========================================  MENU  ====================================================*/
+#div-menu-principal{
+	width:100%; 
+/*	height:30px; */
+        height:40px;  
+	background:url(../images/bg_menu.png);
+        border-top: 1px solid #c01c1e;
+}
+#div-menu-principal ul{
+/*	width:auto;
+	height:30px;
+	padding:0;
+	margin:0;*/
+        width: 930px;
+        height: 40px;
+        padding: 0;
+        margin: 0px auto;
+	list-style-type:none;
+	font-size:11px;
+	color:#FFF;
+	text-align:center;
+	text-transform:uppercase;
+       
+}
+#div-menu-principal ul li{
+	width:auto;
+	height:40px;
+	float:left;
+	cursor:pointer;
+	line-height:30px;
+/*        padding-top: 6px;*/
+}
+#div-menu-principal ul li div{
+	width:110px;
+	height:40px;
+}
+#div-menu-principal ul li .div_hover{
+        
+	background: url(../images/bg_menu_hover.png) repeat-x;
+}
+#div-menu-principal ul li a{
+	text-decoration:none;
+/*	color:#fff;*/
+        color: #000;
+        font-weight: bold;
+}
+/*#div-menu-principal ul li a:hover{
+	text-decoration:none;
+}*/
+/*=====================================  MENU OPCIONES ==========================================*/
+#div-menu-opciones{
+	width: 100%;
+	height: 40px;
+	/*background:#FFF;
+	text-align:right;
+	margin:0 20px 0 0;*/
+}
+#div-menu-opciones ul{
+	width:auto;
+	height:32px;
+	margin:0;
+	padding:0;
+	float:left;
+	list-style:none;
+	color:#FFF;
+	font-size:12px;
+	font-weight:bold;
+}
+#div-menu-opciones ul li{
+	width:130px;
+	height:32px;
+	float: left;
+}
+#div-menu-opciones ul li div{
+	width:128px;
+	height:32px;
+	background:#312E2E;
+	text-align:center;
+	line-height:32px;
+}
+#div-menu-opciones ul li a{
+	text-decoration:none;
+	color:#FFF;
+}
+#div-menu-opciones ul li a:hover{
+	border-bottom:1px dotted;
+	color:#CDCDCD;
+}
+/*=====================================  FIN MENU ==========================================*/
+
+/*==================================== CONTENIDO =============================================*/
+#div-contenido{
+	width:100%;
+	height:auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	/*color:#666;*/
+}
+/*============================================================================================*/
+
+/*====================================== CAMBIO PASSWORD USUARIO ================================*/
+#div-seguridad{
+	width:100%;
+	height:100%;
+	position:absolute;
+	background:url(../images/bg_lightbox.png);
+}
+#div-seguridad #div-panel-cambio-password{
+	width:600px;
+	height:250px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-125px 0 0 -300px;
+	background:#CCC; border:2px solid #999;
+}
+/*============================================================================================*/
+
+/*====================================== AVISO ACCESO USUARIO ================================*/
+#div-ingreso-usuario{ 
+	width:100%;
+	height:100%;
+	position:fixed;
+	background:url(../images/bg_lightbox.png);/**/
+}
+#div-mensaje-ingreso{
+	width:600px;
+	height:300px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-150px 0 0 -300px;
+	background: #FFC url(../images/alerta02_48.png) 30% 5px no-repeat;
+	border:#FC0 1px solid;
+	border-radius: 15px; 
+}
+#div-mensaje-ingreso .btn_ingreso{
+	margin:0 0 0 250px;
+}
+/*============================================================================================*/
+
+
+
+
+/*======================================= DIV SEGURIDAD ======================================*/
+
+#div-panel-reset{
+	width:100%; height:100%; position:absolute; background:url(../images/bg_lightbox.png); display:none;
+}
+#div-reset-password{
+ 	width:500px;
+	height:100px;
+	position:absolute;
+	top:40%;
+	left:50%;
+	margin:-40px 0 0 -250px;
+	background:#CCC;
+	border:2px solid #999;
+	text-align:center;
+}
+#div-reset-password a{
+    border: 0 none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;    
+    font-family: 'Helvetica',Arial,sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 32px;
+    margin: 5px 5px 0 0;
+    min-height: 32px;
+    padding: 5px 22px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
+    white-space: nowrap;
+    width: auto;
+	cursor:pointer;
+}
+#div-reset-password .aceptar{ background-color: #46844A; }
+#div-reset-password .cancelar{ background-color:#336699; }
+/*=================================== FIN DIV SEGURIDAD ======================================*/
+
+
