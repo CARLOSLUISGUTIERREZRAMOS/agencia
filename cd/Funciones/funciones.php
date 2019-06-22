@@ -379,9 +379,9 @@ function ordenar_tarifas_kiu($array,$campo, $inverse=false){
             $newRow[$key] = $row;  
         }  
         if ($inverse) {  
-            arsort($position);  
+            sort($position);  
         }else{  
-            asort($position);  
+            sort($position);  
         }  
         $returnArray = array(); 
         

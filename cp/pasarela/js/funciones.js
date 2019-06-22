@@ -80,7 +80,7 @@ function ComprobarCaractValido(texto)
 	var v_texto=trim(texto);
 	var ok=1;
 	var regEx=/^[a-z ]+$/i;
-	//if(v_texto.match('[á,é,í,ó,ú,a,e,i,o,u,ä,ë,i,ö,ü,n,Á,É,Í,Ó,Ú,A,E,I,O,U,Ä,Ë,I,Ö,Ü,N,@,.]'))
+	//if(v_texto.match('[ï¿½,ï¿½,ï¿½,ï¿½,ï¿½,a,e,i,o,u,ï¿½,ï¿½,i,ï¿½,ï¿½,n,ï¿½,ï¿½,ï¿½,ï¿½,ï¿½,A,E,I,O,U,ï¿½,ï¿½,I,ï¿½,ï¿½,N,@,.]'))
 	if(v_texto.length>0)
 	{
 		ok=0;
@@ -109,7 +109,7 @@ function ComprobarCaractValidoAlfa(texto)
 	var v_texto=trim(texto);
 	var ok=1;
 	var regEx=/^[a-z0-9]+$/i;
-	//if(v_texto.match('[á,é,í,ó,ú,a,e,i,o,u,ä,ë,i,ö,ü,n,Á,É,Í,Ó,Ú,A,E,I,O,U,Ä,Ë,I,Ö,Ü,N,@,.]'))
+	//if(v_texto.match('[ï¿½,ï¿½,ï¿½,ï¿½,ï¿½,a,e,i,o,u,ï¿½,ï¿½,i,ï¿½,ï¿½,n,ï¿½,ï¿½,ï¿½,ï¿½,ï¿½,A,E,I,O,U,ï¿½,ï¿½,I,ï¿½,ï¿½,N,@,.]'))
 	if(v_texto.length>0)
 	{
 		ok=0;
@@ -138,7 +138,7 @@ function ComprobarCaractValidoEmail(texto)
 	var v_texto=trim(texto);
 	var ok=1;
 	var regEx=/^[a-z0-9@._-]+$/i;
-	//if(v_texto.match('[á,é,í,ó,ú,a,e,i,o,u,ä,ë,i,ö,ü,n,Á,É,Í,Ó,Ú,A,E,I,O,U,Ä,Ë,I,Ö,Ü,N,@,.]'))
+	//if(v_texto.match('[ï¿½,ï¿½,ï¿½,ï¿½,ï¿½,a,e,i,o,u,ï¿½,ï¿½,i,ï¿½,ï¿½,n,ï¿½,ï¿½,ï¿½,ï¿½,ï¿½,A,E,I,O,U,ï¿½,ï¿½,I,ï¿½,ï¿½,N,@,.]'))
 	if(v_texto.length>0)
 	{
 		ok=0;

@@ -5,7 +5,8 @@ class KIU_Connection {
 //	protected $URL='https://ssl00.kiusys.com/ws3/';
         protected $URL='https://ssl00.kiusys.com/ws3/';
 	protected $user='2I';
-	protected $pass='nuo8noo0dooMJain';
+	/* protected $pass='nuo8noo0dooMJain'; */
+	protected $pass='kiu2019starperu';
 	protected $ErrorCode;
 	protected $ErrorMsg;
         protected $ch;

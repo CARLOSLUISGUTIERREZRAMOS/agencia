@@ -148,7 +148,9 @@ if($_POST['paso2']==1){
 	, 'QuantityADT' => $adultos
 	, 'QuantityCNN' => $menores
 	, 'QuantityINF' => $infantes
-	),$err);
+  ),$err);
+  
+  /* var_dump($res);die; */
 	if($err['ErrorCode']!=0) echo $err['ErrorMsg'];
 
 
@@ -1434,17 +1436,8 @@ $table_pasajeros=' <table width="898" border="0" cellpadding="0" cellspacing="0"
                                 <td></td>
                                 <td align="left">Celular <span class="colorRed">* </span> :</td>
                                 <td style="background-color: #FFFFFF"></td>
-                                <td></td>
-                                <td align="left">Nextel:</td>
-                                <td style="background-color: #FFFFFF"></td>
-                                <td></td>
-                                <td align="left">RPM:</td>
-                                <td style="background-color: #FFFFFF"></td>
-                                <td></td>
-                                <td align="left">RPC:</td>
-                                <td style="background-color: #FFFFFF"></td>
-                                <td></td>
-                                <td></td>
+                                <td colspan="11"></td>
+                              
                               </tr>
                               <tr>
                                 <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
@@ -1465,24 +1458,8 @@ $table_pasajeros=' <table width="898" border="0" cellpadding="0" cellspacing="0"
                                 <td align="left"><input name="celular_a_'.$i.'" type="text" id="celular_a_'.$i.'" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" /></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left">
-                                        <table cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                        <td><input name="nextel_a_'.$i.'_1" type="text" id="nextel_a_'.$i.'_1" maxlength="3" class="frmInput" style="width: 54px" onKeyPress="return NumeroInt(event)" /></td>
-                                                        <td width="12" align="center">*</td>
-                                        <td><input name="nextel_a_'.$i.'_2" type="text" id="nextel_a_'.$i.'_2" maxlength="4" class="frmInput" style="width: 54px" onKeyPress="return NumeroInt(event)" /></td>
-                                    </tr>
-                                  </table>
-                                </td>
-                                <td style="background-color: #FFFFFF"></td>
-                                <td></td>
-                                <td align="left"><input name="rpm_a_'.$i.'" type="text" id="rpm_a_'.$i.'" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" /></td>
-                                <td style="background-color: #FFFFFF"></td>
-                                <td></td>
-                                <td align="left"><input name="rpc_a_'.$i.'" type="text" id="rpc_a_'.$i.'" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" /></td>
-                                <td style="background-color: #FFFFFF"></td>
-                                <td></td>
-                                <td></td>
+                                <td align="left" colspan="11">
+                              
                               </tr>
                               <tr>
                                 <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
@@ -2671,7 +2648,7 @@ if($_POST['confirmacion']==1){
         if($cantidad_pasajeros_c==1){
             $respuesta_kiu = $KIU->AirDemandTicketRQ(array(
                     'PaymentType'=>"37"
-                    ,'MiscellaneousCode'=>"SR"
+                    ,'MiscellaneousCode'=>"SR" 
                     ,'Text'=>"$ruc"
                     , 'Country' => "PE"
                     , 'Currency' => "USD"

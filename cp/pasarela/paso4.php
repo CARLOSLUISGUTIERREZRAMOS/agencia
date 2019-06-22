@@ -849,10 +849,57 @@ $(function()
                          <!-- aqui va la las tablas que se generan -->
                          <?php echo $table_pasajeros;?>
                     </td>
-                  </tr>
-                  <tr>                                                                                                                                         <tr>
-                     <td height="30"></td>
-                  </tr>
+				  </tr>   
+
+				  <tr>
+                    <td align="center">
+                         <!-- aqui va la las tablas que se generan -->
+						  <table width="898" border="0" cellpadding="0" cellspacing="0">
+						 	<tbody>
+						  		<tr>
+                          			<td align="left" class="titleTable gradiante" style="color:white;">Formas de Pago</td>
+                        		</tr>
+                         		<tr>
+                            		<td height="3" colspan="5" style="background:#fdb813;"></td>
+                       			</tr>
+                        		<tr>
+								<td height="1" style="background-color: #FFFFFF"></td>
+								</tr>
+                        <tr>
+                          <td height="30" align="center">
+                         <table width="898" cellpadding="0" cellspacing="0" border="0">
+							  <tbody>
+							  <tr class="pasajeros">
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
+                              </tr>
+                              <tr class="pasajeros">
+								<td align="left">
+									<select name="forma_pago">
+									<option value="TC">Tarjeta de Credito</option>
+									</select>
+								</td>
+                              </tr>
+                              <tr>
+                                <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
+                              </tr>
+                            
+                              <tr>
+                                <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
+                              </tr>
+                              <tr class="pasajeros">
+                                <td height="30"></td>
+                                <td colspan="16" align="left" id="resultado_a_1" style="color: #CC0033"></td>
+                              </tr>
+                            </tbody></table>
+                          </td>
+                        </tr>
+				</tbody>
+				</table>                    
+				</td>
+				  </tr>
                   <tr>
                     <td align="right"><input name="btnAceptar" id="btnAceptar" value="Continuar" class="btn-red" type="submit" /></td>
                     <input type='hidden' value="1" name='paso5' id='paso5'/>
@@ -899,7 +946,8 @@ $(function()
                   <tr>
                     <td height="30" align="left" id="resultado" style="color: #CC0033"></td>
                   </tr>
-                </table>
+				</table>
+				
               </form>
 	</td>
   </tr>

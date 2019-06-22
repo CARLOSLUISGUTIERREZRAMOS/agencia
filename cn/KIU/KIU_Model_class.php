@@ -8,7 +8,8 @@ class KIU_Model extends KIU_Connection
 	protected $TimeStamp;
 	protected $Sine ='LIM002IWW';
 	protected $Device ='TCQ002IA01';
-	protected $Target ='Production';
+	/* protected $Target ='Production'; */
+	protected $Target ='Testing';
 	protected $SequenceNmbr = 1;
 
         

@@ -1,11 +1,9 @@
 <?php
 class ConexionBD{
-//      private $servidor="localhost";
-//      private $usuario="user_pasarela";
-//      private $password="t0p+s3cr3t";
+    
       private $servidor="localhost";
       private $usuario="root";
-      private $password="StarPeru12";
+      private $password="";
  
       function CrearConexion(){
          $conexion= mysqli_connect($this->servidor, $this->usuario, $this->password);
@@ -32,10 +30,7 @@ class ConexionBD{
       function ContarFilas($resultado){
           return mysqli_num_rows($resultado);
       }
-      function FilasAfectadas(){
-          return mysqli_affected_rows();
-      }
-      
+        
       function ErrorEjecucion($conexion){
           $error=1;
           if(mysqli_error($conexion)){

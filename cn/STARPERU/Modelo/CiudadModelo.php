@@ -5,7 +5,7 @@ require_once("../../cn/STARPERU/Entidades/CiudadEntidad.php");
 
 class CiudadModelo{
     
-    private $basedatos='db_pasarela';
+    private $basedatos='db_agencia';
    
     public function ObtenerCiudades($origen){
         
