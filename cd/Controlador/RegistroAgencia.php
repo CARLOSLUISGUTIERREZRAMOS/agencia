@@ -26,8 +26,6 @@
 		$registro=$obj_empresa->RegistarEmpresa($RUC,$RazonSocial,$NombreComercial,$Direccion,$CodigoCiudad,$DNIFuncionario,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$TelefoniaOficina,$Celular);
 		if ($registro==1) {
 			$id=$obj_empresa->UltimaEmpresa();
-			// echo $id.'123';
-			// return;
 			if ($id) {
 				$pass=  $obj_personal->generaPassword();
             	$Password=$obj_personal->encrypt($pass, "");

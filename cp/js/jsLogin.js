@@ -43,12 +43,25 @@ $(document).on('submit','#registrar-agencia',function (event) {
         data: data,
         success: function (data) {
             debugger
+            var data=JSON.parse(data);
+            if (data.data=='ok') {
+                $("#registrar-agencia")[0].reset();
+                alert('Datos registrados');
+                $("#modalNuevaAgencia").modal('hide');
+            }
+            else if (data.data=='ok-error'){
+                alert('ok-error');
+            }
+            else if (data.data=='registro-error'){
+                alert('registro-error');
+            }
+            else if (data.data=='error'){
+                alert('error');
+            }
         },
         error: function (xhr, textStatus, errorThrown) {
             alert("Error: " + errorThrown);
         }
     });
-
     return false;
-    return;
 });
