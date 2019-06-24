@@ -170,7 +170,7 @@ class ReservaModelo{
                            SUBSTRING(Reserva_Detalle.Apellidos, INSTR(Reserva_Detalle.Apellidos, ' '), LENGTH(Reserva.Apellidos)) PAS_APEM,
                            Reserva_Detalle.Nombres PAS_NOMB,
                           (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
-                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
+                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
                           '1' Cantidad,	
                           CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '1' Tramo,
@@ -198,7 +198,7 @@ class ReservaModelo{
                             SUBSTRING(Reserva_Detalle.Apellidos, INSTR(Reserva_Detalle.Apellidos, ' '), LENGTH(Reserva.Apellidos)) PAS_APEM,
                             Reserva_Detalle.Nombres PAS_NOMB,
                           (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
-                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
+                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
                           '1' Cantidad,	
                           CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '2' Tramo,
@@ -816,32 +816,29 @@ public function EnviarAlertaGestor($correo,$cod_reserva,$tickets) {
         $mail .="<tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'><p>Estimado Sr(a). <font color='#080897'><strong>GESTOR</strong></font>, se le informa que la entidad <font color='#080897'><strong>$entidad</strong></font> ha realizado la emisi&oacute;n de tickets a trav&eacute;s del portal de STARPERU.";//<font color='#080897'><strong>$gestor</strong></font>, en virtud de su acreditaci&oacute;n como 
+        $mail .="<tr><td colspan='2'><p>Estimada Agencia, se le informa que la entidad <font color='#080897'><strong>$entidad</strong></font> ha realizado la emisi&oacute;n de tickets a trav&eacute;s del portal de STARPERU.";//<font color='#080897'><strong>$gestor</strong></font>, en virtud de su acreditaci&oacute;n como 
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
-//        $mail .=" <tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
-//        $mail .="<tr><td width='178'><font color='#33333'><strong>Entidad:</strong></font></td><td width='512'><font color='#33333'><strong>Convenio Marco</strong></font></td></tr>";
         $mail .="<tr><td><font color='#33333'><strong>C&oacute;digo de Reserva:</strong></font></td><td><font color='#33333'><strong>$cod_reserva</strong></font></td></tr>";
         $mail .="<tr><td><font color='#33333'><strong>Tickets:</strong></font></td><td><font color='#080897'><strong>$lista_tickets</strong></font></td></tr>";
-//        $mail .="<tr><td><font color='#33333'><strong>Password:</strong></font></td><td><font color='#080897'><strong>$clave</strong></font></td></tr>";
         $mail .="<tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2' style='font-size: 14px;'><font color='#000000'><strong>Se le recuerda que los tickets emitidos son de entera responsabilidad de la entidad y del gestor, y que el plazo m&aacute;ximo para su cancelaci&oacute;n si no reconoce esta emisi&oacute;n son las 23h 59m 59s.</strong></font></td></tr>";
+        $mail .="<tr><td colspan='2' style='font-size: 14px;'><font color='#000000'><strong>Se le recuerda que los tickets emitidos son de entera responsabilidad de la Agencia y que el plazo m&aacute;ximo para su cancelaci&oacute;n será hasta las 23:59:59.</strong></font></td></tr>";
         $mail .="</table>";
         $mail .="</div>";
         $mail .="</center>";
         $mail .="</body>";
         $mail .="</html>";
 
-        $email = $correo.", "."ricardo.jaramillo@starperu.com, perucompras@starperu.com";
+        $email = $correo.", "."carlos.gutierrez@starperu.com";
         //$email = $correo.", "."ricardo.jaramillo@starperu.com";
         $remitente ="ecel@starperu.com";
         $to=$email;
-        $subject='Convenio Marco - Alerta de emisión de tickets';
+        $subject='Web Agencias - Alerta de emisión de tickets';
         $message=$mail;
         $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
-        $cabeceras.= "From: Convenio Marco <$remitente>\r\n";
+        $cabeceras.= "From: Web Agencias <$remitente>\r\n";
         mail($to, $subject,$message,$cabeceras ); 
 }
     

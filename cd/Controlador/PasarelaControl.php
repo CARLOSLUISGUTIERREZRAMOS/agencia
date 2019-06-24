@@ -2324,10 +2324,7 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
 	, 'Remark'=>'STARPERU'
 	),$err);
         if($err['ErrorCode']!=0){ echo $err['ErrorMsg'];} 
-//echo "<pre>";
-//print_r($res);
-//echo "</pre>";
-//die;
+
         $fecha_registro=date('Y-m-d H:i:s');
         $tipo_vuelo_letras='R';
         $pais='PE';
@@ -2358,18 +2355,8 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
         $total_pagar_5 = $tarifa_con_imp;
         $descuento = floatval($total_pagar_tabla_5) - floatval($tarifa_con_imp);
         
-//          echo 'total_pagar_tabla_5 = '.$total_pagar_tabla_5."<hr>";
-//            echo 'tarifa_con_imp = '.$tarifa_con_imp."<hr>";
-//            echo 'descuento - operacion | (total_pagar_tabla_5 - tarifa_con_imp):  = '.$descuento."<hr>";
-        
-        if($origen_ida_5=='PEM' || $destino_ida_5=='PEM' || $origen_ida_5=='IQT' || $destino_ida_5=='IQT'){
                 $igv = $res['TravelItinerary']['ItineraryInfo']['ItineraryPricing']['Taxes']['Tax'][0]['@attributes']['Amount'];
-                $descuento += $igv;
-//                 echo "IGV dentro de condicion = ".$igv;
-                $total_pagar_5 = $tarifa_con_imp - $igv;
-            }
-        $descuentoFormat=number_format($descuento,2,'.',',');
-//        echo 'descuento format'.$descuentoFormat."<hr>";
+          
         
         /*************************************************************************************/
         
@@ -2478,26 +2465,10 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                     if($err['ErrorCode']!=0) echo $err['ErrorMsg'];
               $tarifa_con_imp = $res['TravelItinerary']['ItineraryInfo']['ItineraryPricing']['Cost']['@attributes']['AmountAfterTax'];      
 
-             
-              
-//            echo '<pre>';
-//            print_r($res);
-//            echo '</pre>';
-//            die;
+  
             $total_pagar_tabla_5= $subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$tuua_adl+$tuua_ch+$tuua_i;
             $total_pagar_5 = $tarifa_con_imp;
-            $descuento = floatval($total_pagar_tabla_5) - floatval($tarifa_con_imp);
-
           
-            
-            if($origen_ida_5=='PEM' || $destino_ida_5=='PEM' || $origen_ida_5=='IQT' || $destino_ida_5=='IQT'){
-                $igv = $res['TravelItinerary']['ItineraryInfo']['ItineraryPricing']['Taxes']['Tax'][0]['@attributes']['Amount'];
-               
-                $descuento += $igv;
-                $total_pagar_5 = $tarifa_con_imp - $igv;
-            }
-            
-            $descuentoFormat=number_format($descuento,2,'.',',');  
             
             
             /****************************************************************************************/
@@ -2567,10 +2538,10 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                     <td colspan="4" align="left" class="subtitleTabla">Total:</td>
                     <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.number_format($total_pagar_tabla_5,2,'.',',').'</td>
                   </tr>
-                  <tr>
+                  <!--<tr>
                         <td colspan="4" align="left" class="subtitleTabla">Descuento (Perú Compras):</td>
                     <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.$descuentoFormat.'</td>
-                  </tr>
+                  </tr>-->
                   <tr>
                     <td colspan="4" align="left" class="subtitleTabla">Total a pagar:</td>
                     <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.number_format(floatval($total_pagar_5),2,'.',',').'</td>
@@ -2668,7 +2639,7 @@ if($_POST['confirmacion']==1){
       $cabeceras = 'MIME-Version: 1.0' . "\r\n";
       $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
       // Cabeceras adicionales
-      $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET PERU COMPRAS") . ' <ecel@starperu.com>' . "\r\n";
+      $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET WEB AGENCIAS") . ' <ecel@starperu.com>' . "\r\n";
       $cabeceras .= 'Bcc: diego.cortes@starperu.com,ricardo.jaramillo@starperu.com' . "\r\n";
       $cabeceras .= 'Reply-To: ecel@starperu.com' . "\r\n" .
                    'X-Mailer: PHP/' . phpversion();
@@ -2724,7 +2695,7 @@ if($_POST['confirmacion']==1){
                         $cabeceras = 'MIME-Version: 1.0' . "\r\n";
                         $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                           // Cabeceras adicionales
-                        $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET PERU COMPRAS") . ' <ecel@starperu.com>' . "\r\n";
+                        $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET WEB AGENCIAS") . ' <ecel@starperu.com>' . "\r\n";
                         $cabeceras .= 'Bcc: diego.cortes@starperu.com,ricardo.jaramillo@starperu.com' . "\r\n";
                         $cabeceras .= 'Reply-To: ecel@starperu.com' . "\r\n" .
                                        'X-Mailer: PHP/' . phpversion();
@@ -2742,7 +2713,7 @@ if($_POST['confirmacion']==1){
                         $cabeceras = 'MIME-Version: 1.0' . "\r\n";
                         $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                           // Cabeceras adicionales
-                        $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET PERU COMPRAS") . ' <ecel@starperu.com>' . "\r\n";
+                        $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET WEB AGENCIAS") . ' <ecel@starperu.com>' . "\r\n";
                         $cabeceras .= 'Bcc: ricardo.jaramillo@starperu.com' . "\r\n";
                         $cabeceras .= 'Reply-To: ecel@starperu.com' . "\r\n" .
                                        'X-Mailer: PHP/' . phpversion();
@@ -2807,7 +2778,7 @@ if($_POST['confirmacion']==1){
                                 $cabeceras = 'MIME-Version: 1.0' . "\r\n";
                                 $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                                   // Cabeceras adicionales
-                                $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET PERU COMPRAS") . ' <ecel@starperu.com>' . "\r\n";
+                                $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET WEB AGENCIAS") . ' <ecel@starperu.com>' . "\r\n";
                                 $cabeceras .= 'Bcc: diego.cortes@starperu.com,ricardo.jaramillo@starperu.com' . "\r\n";
                                 $cabeceras .= 'Reply-To: ecel@starperu.com' . "\r\n" .
                                                'X-Mailer: PHP/' . phpversion();
@@ -2946,5 +2917,3 @@ if($_POST['confirmacion']==1){
      $tabla_pasajeros.='</table>';
 }
 }
-
-?>

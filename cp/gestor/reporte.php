@@ -31,7 +31,7 @@ if($_POST['buscar']==1){
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>M&oacute;dulo Corporativo</title>
+<title>Web Agencias - StarPeru</title>
 <link href="../images/favicon_starperu.png" rel="shortcut icon" />
 <link href="../css/modulo.css" rel="stylesheet" type="text/css" />
 <link href="../css/entidad.css" rel="stylesheet" type="text/css" />
@@ -72,7 +72,7 @@ $("#flex2").flexigrid({
 		  {display: "Ap. Paterno", name : "apepa_pas", width : 100,  align: 'left',sortable : false},
                   {display: "Ap. Materno", name : "apema_pas", width : 100,  align: 'left',sortable : false},
                   {display: "Nombres", name : "nom_pas", width : 120,  align: 'left',sortable : false},
-		  {display: "Gestor", name : "ges_user", width : 60, align: 'center',sortable : false},
+		  {display: "Administrador", name : "ges_user", width : 60, align: 'center',sortable : false},
 		  {display: "Delegado", name : "del_user", width : 60, align: 'center',sortable : false},		  
 		  {display: "Cant. Boletos", name : "cant_boletos", width : 70,  align: 'center',sortable : false},
 		  {display: "Tipo Serv.", name : "ser_tipo", width : 60,  align: 'center',sortable : false},		  

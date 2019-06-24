@@ -1,48 +1,28 @@
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%">
-<head><meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <link href="cp/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-        <link href="cp/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="cp/css/agencias.min.css" rel="stylesheet" type="text/css"/>
-<!--        <script src="cp/js/bootstrap_v3.3.5.min.js" type="text/javascript"></script>-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="cp/js/jsLogin.js" type="text/javascript"></script>
-        
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <link href="cp/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="cp/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="cp/css/agencias.min.css" rel="stylesheet" type="text/css" />
+    <!--        <script src="cp/js/bootstrap_v3.3.5.min.js" type="text/javascript"></script>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="cp/js/jsLogin.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
     <title>
-	 Web Agencias - StarPeru
-</title>
-    <style>
-        #content > span { display: block; font-size: 20px; color: #b90007; line-height: 24px; } .col-submenu { text-align: center; transform: translateY(15%); }
-        .btn{ height: auto !important; font-size: 14px !important; } a { color: #e8e9ea; } a:hover { color: #c7c9cc; } .modal { overflow-x: hidden; overflow-y: auto; }
-        .modal-header .close { margin-top: -30px; } .modal-header { background-color: #b90007; border-radius: 5px 5px 0 0; }
-        button.close { color: #020202; } .modal-title { color:#f3f3f3; font-size: 18px; font-weight: bold; }
-        .btn-success { color: #fff; background-color: #28a745 !important; border-color: #28a745 !important; }
-    </style>
-    <script>
-        $(function () {
-            $('.btn-reset-pass').on("click", function () {
-                $('.buttons-clave').show();
-                $('.previo-clave').show();
-                $('.post-clave').hide();
-            });
-        });
-    </script>
-<link href="App_Themes/PasarelaTheme/jquery-ui-1.8.16.custom.css" type="text/css" rel="stylesheet" /><link href="App_Themes/PasarelaTheme/style.css" type="text/css" rel="stylesheet" /></head>
+        Web Agencias - StarPeru
+    </title>
+
+</head>
+
 <body class="fondo_panel">
     <form action="cd/Controlador/LoginControl.php" method="post" name="form1" id="form1" autocomplete="off">
-<div class="aspNetHidden">
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMzQ3NzUxNTQ2D2QWAgIDD2QWAgITDxYCHgdvbmNsaWNrBTFSZXN0YWJsZWNlclBhc3N3b3JkKCd0eHREb2N1bWVudG8nKTsgcmV0dXJuIGZhbHNlZGTjGgS6O/IhFWd9uM9DqQ3xa0BiEREs7md8KicUpQdvSA==" />
-</div>
+        <div class="aspNetHidden">
+        </div>
 
-<div class="aspNetHidden">
-
-	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="BC02C6D9" />
-	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAXc8vSV1MnZTqq+wYAXNOFuy96dWkumrXzDckADywQ75JxpWckI3qdmfEJVCu2f5cGzbZAChv7dk9rhe3bMi6TgQOrX9gIP1cj7j7QB658SkzzsIRf0FOHLz8iJw2J1SAL9UH9wmu+Bvn398ayRKOlc" />
-</div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="top-bar">
                 <div class="container">
@@ -63,21 +43,14 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
-                <div class="logo-22">
-                    <!--<div id="content" class="hidden-xs">
-                        <span>PORTAL</span>
-                        <span style="font-weight: bold;">EMPRESAS</span>
-                    </div>-->
+                <div class="logo">
+                <a href="/agencia" class="navbar-brand animated fadeInDown" style="padding-top: 0;">
+                        <img alt="logo StarPeru" class="logo" src="cp/images/LogoStar.png">
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-top">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a target="_blank">
-                                <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                                <span class="span">INFORMACIÓN AL</span>
-                                <span class="span span-bold span-font-medium">PASAJERO</span>
-                            </a>
-                        </li>
+                        
                         <li>
                             <a href="Contactanos" target="_blank">
                                 <i class="fa fa-university fa-2x" aria-hidden="true"></i>
@@ -95,7 +68,7 @@
         <div class="content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 col-xs-12" id="carrito" >
+                    <div class="col-md-6 col-sm-12 col-xs-12" id="carrito">
                         <div class="carrito-seccion">
                             <div class="row quick-search">
                                 <div class="row form-group" style="margin-top: 40px;">
@@ -109,15 +82,15 @@
                                 <div class="row form-group">
                                     <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
                                     <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
-                                        <input type="text" maxlength="8" placeholder="Ingrese usuario" name="usuario" id="usuario"  class="form-control" value="46516152"/>
+                                        <input type="text" maxlength="8" placeholder="Ingrese usuario" name="usuario" id="usuario" class="form-control" value="46516152" />
                                         <!--<input name="txtusuario" type="text" id="txtusuario" class="form-control" placeholder="Usuario" />-->
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                </div> 
+                                </div>
                                 <div class="row form-group">
                                     <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
                                     <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
-                                        <input type="password" maxlength="8"  placeholder="Ingrese contraseña" name="password" id="password"   class="form-control" value="ricardo"/>
+                                        <input type="password" maxlength="8" placeholder="Ingrese contraseña" name="password" id="password" class="form-control" value="ricardo" />
                                         <!--<input name="txtpassword" type="password" id="txtpassword" class="form-control" placeholder="Contraseña" />-->
                                         <span style="float: right; font-size: 13px; margin-top:2px;">
                                             <a class="links btn-reset-pass" data-toggle="modal" data-target="#modalPassword">¿Olvido su contraseña?</a>
@@ -129,7 +102,7 @@
                                     <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
                                     <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
                                         <!--<input title="click para ingresar" type="button" class="btn_login gradiante" id="btn_login" name="btn_login" value="Ingresar"/>-->
-                                        <input type="submit" name="btn_login" value="Iniciar Sesion" id="btn_login" class="btn btn-lg btn-secondary"  />
+                                        <input type="submit" name="btn_login" value="Iniciar Sesion" id="btn_login" class="btn btn-lg btn-secondary" />
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
                                 </div>
@@ -166,78 +139,20 @@
                         <div style="background-color: initial;">
                             <div class="row quick-search-white" style="text-align: center;">
                                 <div class="row form-group">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <i class="fa fa-trophy fa-5x" aria-hidden="true" style="font-weight: 900"></i>
-                                        <p>
-                                            <span style="font-weight: 900; color: #ffffff; font-size: large">FÁCIL Y RÁPIDO</span>
-                                            <br />
-                                            <span style="color: #ffffff;">Gestione la reservas y compras de los pasajes desde un solo lugar.</span>
-                                        </p>
-                                    </div>
-                                    <input type="hidden"  name="login" value="1"/>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <i class="fa fa-piggy-bank fa-5x" aria-hidden="true" style="font-weight: 900"></i>
-                                        <p>
-                                            <span style="font-weight: 900; color: #ffffff; font-size: large">AHORRA</span>
-                                            <br />
-                                            <span style="color: #ffffff;">Ahorre tiempo y dinero sin costos o comisiones adicionales.</span>
-                                        </p>
-                                    </div>
+                                    
+                                    <input type="hidden" name="login" value="1" />
+                                    
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
-                <div class="modal" tabindex="-1" role="dialog" id="modalPassword">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Restablecer Contraseña</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row previo-clave">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <p>
-                                            Para realizar el restablecimiento de la contraseña ingrese el numero de documento y se le enviara instrucciones a su correo.
-                                        </p>
-                                        <p>&nbsp;</p>
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <span id="lblDNI">Documento</span>
-                                                <input name="txtDocumento" type="text" id="txtDocumento" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row post-clave">
-                                    <div class="col-md-3 col-sm-3 col-xs-12 hidden-xs">
-                                        <img src="images/success.png" style="margin-top: 21px;" />
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12 visible-xs" style="text-align:center; margin-bottom:15px;">
-                                        <img src="images/success.png" />
-                                    </div>
-                                    <div class="col-md-9 col-sm-9 col-xs-12">
-                                        <p>¡Listo!</p>
-                                        <p>Hemos enviado un correo electronico a la cuenta asociada al usuario.</p>
-                                        <p>Gracias</p>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="modal-footer buttons-clave">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <span id="btnEnviar" class="btn btn-success" onclick="RestablecerPassword(&#39;txtDocumento&#39;); return false">Enviar</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
-            
+
         </div>
     </form>
 </body>
+
 </html>

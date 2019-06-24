@@ -11,7 +11,7 @@ session_destroy();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>M&oacute;dulo Corporativo - StarPer&uacute;</title>
+<title>Web Agencias - StarPeru</title>
 <link href="images/favicon_starperu.png" rel="shortcut icon" />
 <link href="css/font-face.css" rel="stylesheet" type="text/css" />
 <link href="css/modulo.css" rel="stylesheet" type="text/css" />
@@ -53,7 +53,7 @@ function PagInicio()
                 </a>
             </div>
             <div id="div-header-info-modulo">
-                M&oacute;dulo Corporativo            </div>
+			Web Agencias - StarPeru           </div>
         </div>
     </div> </td>
   </tr>

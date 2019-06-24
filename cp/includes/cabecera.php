@@ -16,7 +16,7 @@ $Tipo=$_SESSION['s_tipo'];
                         <div id="div-header-info-usuario">
                             <div id="div-info-usuario-content">
                                 <div style="float:left; margin:0 5px 0 0; text-align:right;">
-                                    <?php echo utf8_encode($RazonSocial);?><br/><?php echo utf8_encode($Nombres.' '.$ApellidoPaterno.' '.$ApellidoMaterno); ?><br/>[<?php if($Tipo=='G'){echo 'Gestor';}else{echo 'Delegado';} ?>]
+                                    <?php echo utf8_encode($RazonSocial);?><br/><?php echo utf8_encode($Nombres.' '.$ApellidoPaterno.' '.$ApellidoMaterno); ?><br/>[<?php if($Tipo=='G'){echo 'Administrador';}else{echo 'Delegado';} ?>]
                                 </div>
                                 <div style="float:left; margin:0 0 20px 0;">
                                     <img src="<?php echo $directorio;?>images/usuario.png">
