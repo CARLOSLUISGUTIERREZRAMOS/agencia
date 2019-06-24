@@ -210,6 +210,21 @@ class PersonalModelo{
         $obj_conexion->CerrarConexion($conexion);
         return $flag;
     }
+
+    public function GuardaGestor($CodigoEntidad,$DNI,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$Celular,$Password){
+        $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,Celular,CodigoTipo,CodigoUsuario,Password,EstadoRegistro)
+                   VALUES ($CodigoEntidad,'$DNI','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$Celular','G','$DNI','$Password',0)";
+        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $error=$obj_conexion->ErrorEjecucion($conexion);
+        if($error==1){
+            $flag=1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
+    }
     
     public function EditarDelegado($codigo_entidad,$dni,$apep,$apem,$nom,$email,$ofic,$anexo,$celular,$rpm,$rpc,$nextel,$estado,$cambio_contrasena,$contrasena){
         $flag=0; 
@@ -444,6 +459,26 @@ class PersonalModelo{
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         return $resultado;
      }
+
+    public function generaPassword()
+    {
+        //Se define una cadena de caractares. Te recomiendo que uses esta.
+        $cadena = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        //Obtenemos la longitud de la cadena de caracteres
+        $longitudCadena=strlen($cadena);
+        //Se define la variable que va a contener la contraseña
+        $pass = "";
+        //Se define la longitud de la contraseña, en mi caso 10, pero puedes poner la longitud que quieras
+        $longitudPass=6;
+        //Creamos la contraseña
+        for($i=1 ; $i<=$longitudPass ; $i++){
+            //Definimos numero aleatorio entre 0 y la longitud de la cadena de caracteres-1
+            $pos=rand(0,$longitudCadena-1);
+            //Vamos formando la contraseña en cada iteraccion del bucle, añadiendo a la cadena $pass la letra correspondiente a la posicion $pos en la cadena de caracteres definida.
+            $pass .= substr($cadena,$pos,1);
+        }
+        return $pass;
+    }
      
 }
 

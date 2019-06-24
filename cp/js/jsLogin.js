@@ -33,14 +33,22 @@ $(document).ready(function(){
    
 });
 
-function ajaxSubmitFormulario() {
-    return;
-    // body...
-}
-
 $(document).on('submit','#registrar-agencia',function (event) {
     event.preventDefault();
+    var data=$(this).serialize();
     debugger
-    alert('holi');
+    $.ajax({
+        type: 'POST',
+        url: 'cd/Controlador/RegistroAgencia.php',
+        data: data,
+        success: function (data) {
+            debugger
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert("Error: " + errorThrown);
+        }
+    });
+
     return false;
+    return;
 });

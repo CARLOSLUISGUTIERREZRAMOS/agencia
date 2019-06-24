@@ -260,12 +260,11 @@
                         </p>
                     </div>
                     <div class="modal-body">
-                        <!-- <form id="registrar-agencia" onsubmit="return false;">
-                        </form> -->
+                        <input type="hidden" name="registrar_agencia" value="1" form="registrar-agencia">
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon">RUC</span>
-                                <input type="text" class="form-control" placeholder="RUC" id="ruc" name="ruc" required="" form="registrar-agencia">
+                                <input type="text" class="form-control" placeholder="RUC" id="RUC" name="RUC" required="" form="registrar-agencia">
                             </div>
                         </div>
                         <div class="form-group">
@@ -377,7 +376,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-block btn-success" form="registrar-agencia">Registrarme</button>
                         </div>
-                        <form id="registrar-agencia"></form>
+                        <form id="registrar-agencia" onsubmit="return false"></form>
                         <form></form>
                     </div>
                 </div>
