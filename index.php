@@ -3,11 +3,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%">
 <head><meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <link href="cp/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="cp/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="cp/css/agencias.min.css" rel="stylesheet" type="text/css"/>
-<!--        <script src="cp/js/bootstrap_v3.3.5.min.js" type="text/javascript"></script>-->
+        <script src="cp/js/bootstrap.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="cp/js/jsLogin.js" type="text/javascript"></script>
         
@@ -16,11 +17,33 @@
 	 Web Agencias - StarPeru
 </title>
     <style>
-        #content > span { display: block; font-size: 20px; color: #b90007; line-height: 24px; } .col-submenu { text-align: center; transform: translateY(15%); }
-        .btn{ height: auto !important; font-size: 14px !important; } a { color: #e8e9ea; } a:hover { color: #c7c9cc; } .modal { overflow-x: hidden; overflow-y: auto; }
-        .modal-header .close { margin-top: -30px; } .modal-header { background-color: #b90007; border-radius: 5px 5px 0 0; }
-        button.close { color: #020202; } .modal-title { color:#f3f3f3; font-size: 18px; font-weight: bold; }
+        #content > span { display: block; font-size: 20px; color: #b90007; line-height: 24px; } 
+        .col-submenu { text-align: center; transform: translateY(15%); }
+        .btn{ height: auto !important; font-size: 14px !important; } 
+        a { color: #e8e9ea; } 
+        a:hover { color: #c7c9cc; } 
+        .modal { overflow-x: hidden; overflow-y: auto; }
+        #modalPassword .modal-header .close { margin-top: -30px; } 
+        #modalPassword .modal-header { 
+            background-color: #b90007; 
+            border-radius: 5px 5px 0 0; 
+        }
+        button.close { 
+            color: #020202; 
+        } 
+        #modalPassword .modal-title { 
+            color:#f3f3f3; 
+            font-size: 18px; 
+            font-weight: bold; 
+        }
         .btn-success { color: #fff; background-color: #28a745 !important; border-color: #28a745 !important; }
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        .text-muted {
+            color: #73818f !important;
+        }
     </style>
     <script>
         $(function () {
@@ -79,7 +102,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="Contactanos" target="_blank">
+                            <a data-toggle="modal" data-target="#modalNuevaAgencia" style="cursor: pointer;">
                                 <i class="fa fa-university fa-2x" aria-hidden="true"></i>
                                 <span class="span">REGISTRA TU</span>
                                 <span class="span span-bold span-font-medium">AGENCIA</span>
@@ -119,7 +142,7 @@
                                     <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
                                         <input type="password" maxlength="8"  placeholder="Ingrese contraseña" name="password" id="password"   class="form-control" value="ricardo"/>
                                         <!--<input name="txtpassword" type="password" id="txtpassword" class="form-control" placeholder="Contraseña" />-->
-                                        <span style="float: right; font-size: 13px; margin-top:2px;">
+                                        <span style="float: right; font-size: 13px; margin-top:2px; cursor: pointer;">
                                             <a class="links btn-reset-pass" data-toggle="modal" data-target="#modalPassword">¿Olvido su contraseña?</a>
                                         </span>
                                     </div>
@@ -144,7 +167,7 @@
                                     <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
                                     <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
                                         <p style="vertical-align: central">
-                                            <a style="font-weight: 100; color: white; font-size: large" href="solicitud.php">!REGISTRA TU AGENCIA!
+                                            <a style="font-weight: 100; color: white; font-size: large; cursor: pointer;" data-toggle="modal" data-target="#modalNuevaAgencia">!REGISTRA TU AGENCIA!
                                             </a>
                                             <br />
                                             <span style="font-weight: 900; color: white; font-size: large">COMIENZA A AHORRAR</span>
@@ -231,6 +254,137 @@
                             <div class="modal-footer buttons-clave">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 <span id="btnEnviar" class="btn btn-success" onclick="RestablecerPassword(&#39;txtDocumento&#39;); return false">Enviar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" tabindex="-1" role="dialog" id="modalNuevaAgencia">
+                    <div class="modal-dialog" style="width: 450px" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h2 class="modal-title">Registrar mi Agencia</h2>
+                                <p class="text-muted">Completa los campos con información válida</p>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">RUC</span>
+                                        <input type="text" class="form-control" placeholder="RUC" id="ruc" name="ruc">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                        <input type="text" class="form-control" placeholder="Razon Social" id="RazonSocial" name="RazonSocial">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                        <input type="text" class="form-control" placeholder="Nombre Comercial" id="NombreComercial" name="NombreComercial">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                        <select id="CodigoCiudad" name="CodigoCiudad" class="form-control" title="Seleccionar Ciudad">
+                                            <option value="ANC">ANCASH</option>
+                                            <option value="ANS">ANDAHUAYLAS</option>
+                                            <option value="APU">APURIMAC</option>
+                                            <option value="AQP">AREQUIPA</option>
+                                            <option value="AYP">AYACUCHO</option>
+                                            <option value="CJA">CAJAMARCA</option>
+                                            <option value="CIX">CHICLAYO</option>
+                                            <option value="CUZ">CUZCO</option>
+                                            <option value="ILQ">ILO</option>
+                                            <option value="IQT">IQUITOS</option>
+                                            <option value="JAU">JAUJA</option>
+                                            <option value="JUL">JULIACA</option>
+                                            <option value="JNN">JUNIN</option>
+                                            <option value="LIM" selected="">LIMA</option>
+                                            <option value="PSC">PASCO</option>
+                                            <option value="PIO">PISCO</option>
+                                            <option value="PIU">PIURA</option>
+                                            <option value="PCL">PUCALLPA</option>
+                                            <option value="PEM">PUERTO MALDONADO</option>
+                                            <option value="PUN">PUNO</option>
+                                            <option value="TCQ">TACNA</option>
+                                            <option value="TYL">TALARA</option>
+                                            <option value="TPP">TARAPOTO</option>
+                                            <option value="TRU">TRUJILLO</option>
+                                            <option value="TBP">TUMBES</option>
+                                            <option value="UCY">UCAYALI</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-bars"></i></span>
+                                        <input type="text" class="form-control" placeholder="Domicilio Fiscal" id="Direccion" name="Direccion">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
+                                        <input type="text" class="form-control" placeholder="Teléfono de Oficina" id="TelefoniaOficina" name="TelefoniaOficina">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                <input type="text" class="form-control" placeholder="Apellido Paterno" id="ApellidoPaterno" name="ApellidoPaterno">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                <input type="text" class="form-control" placeholder="Apellido Materno" id="ApellidoMaterno" name="ApellidoMaterno">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        <input type="text" class="form-control" placeholder="Nombres" id="Nombres" name="Nombres">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">DNI</span>
+                                                <input type="text" class="form-control" placeholder="DNI" id="DNIFuncionario" name="DNIFuncionario" maxlength="8" minlength="8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                <input type="text" class="form-control" placeholder="Celular" id="Celular" name="Celular" maxlength="8" minlength="8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                        <input type="email" class="form-control" placeholder="Email" id="Email" name="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-block btn-success">Registrarme</button>
+                                </div>
                             </div>
                         </div>
                     </div>
