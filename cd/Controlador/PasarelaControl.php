@@ -2654,7 +2654,7 @@ if($_POST['confirmacion']==1){
                     , 'Currency' => "USD"
                     , 'TourCode' => ""
                     , 'BookingID' => "$codigo_reserva_c"
-                    , 'InvoiceCode' =>"ACME"
+                    , 'InvoiceCode' =>"ACME"  
                     , 'VAT'=>"$ruc"
                     , 'Endorsement'=>"$endoso"
                     ),$err);
