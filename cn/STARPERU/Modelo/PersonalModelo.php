@@ -5,7 +5,7 @@ require_once("../../cn/STARPERU/Entidades/PersonalEntidad.php");
 
 class PersonalModelo{
     
-    private $basedatos='db_pasarela';
+    private $basedatos='db_agencia';
     
     
     public function AutentificarPersonal($usuario, $password){
