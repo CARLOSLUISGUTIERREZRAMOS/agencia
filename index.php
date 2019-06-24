@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>M&oacute;dulo Corporativo - StarPer&uacute;</title>
+<title>Web Agencias - StarPer&uacute;</title>
 <link href="cp/images/favicon_starperu.png" rel="shortcut icon" />
 <link href="cp/css/font-face.css" rel="stylesheet" type="text/css"/>
 <link href="cp/css/modulo.css" rel="stylesheet" type="text/css"/>
@@ -32,7 +32,7 @@
                 </a>
             </div>
             <div id="div-header-info-modulo">
-                M&oacute;dulo Corporativo
+                WEB AGENCIAS
             </div>
         </div>
     </div>    

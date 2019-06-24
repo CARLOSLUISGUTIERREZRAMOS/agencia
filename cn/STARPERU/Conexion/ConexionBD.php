@@ -3,7 +3,7 @@ class ConexionBD{
     
       private $servidor="localhost";
       private $usuario="root";
-      private $password="";
+      private $password="cL4v3";
  
       function CrearConexion(){
          $conexion= mysqli_connect($this->servidor, $this->usuario, $this->password);

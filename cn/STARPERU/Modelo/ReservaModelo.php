@@ -7,7 +7,7 @@ require_once("../../cn/STARPERU/Entidades/EmpresaEntidad.php");
 
 class ReservaModelo{
     
-    private $basedatos='db_pasarela';
+    private $basedatos='db_agencia';
     
     
     public function ObtenerDatosPasajero($tipo_doc,$num_doc){

@@ -5,7 +5,7 @@ require_once("../../cn/STARPERU/Entidades/EmpresaEntidad.php");
 
 class EmpresaModelo{
     
-    private $basedatos='db_pasarela';
+    private $basedatos='db_agencia';
    
     public function ObtenerNombreEntidad($codigo_entidad){
         
