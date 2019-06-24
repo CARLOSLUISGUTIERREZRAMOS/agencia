@@ -21,12 +21,12 @@ $objSessionVisa = json_decode($visa_res);
 $libreriaJsVisa = $visa->GetLibreriaJSVisa();
 
 ?>
-<form id="form_visa" action="Pasarela/ZonaPagos">
+<form id="form_visa" action="Pasarela/ZonaPagos" style="display: none">
 <script src='<?=$libreriaJsVisa?>'
         data-sessiontoken='<?= $objSessionVisa->sessionKey ?>'
         data-channel='web'
         data-merchantid='<?= $visa->getCodigo_comercio() ?>'
-        data-merchantlogo= 'images/metodos_pagos/logotipostarvisa.png'
+        data-merchantlogo= 'https://www.starperu.com/es/img/Logotipo.png'
         data-formbuttoncolor='#D80000'
         data-purchasenumber= 1234567
         data-amount=127.05
@@ -35,7 +35,7 @@ $libreriaJsVisa = $visa->GetLibreriaJSVisa();
 >
 </script>
 </form>
-<?php die;?>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -47,8 +47,7 @@ $libreriaJsVisa = $visa->GetLibreriaJSVisa();
 <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" language="javascript1.2" src="js/funciones.js"></script>
-<script type="text/javascript" src="js/checkout_test.js"></script>
-<script type="text/javascript" language="javascript1.2">
+<script type="text/javascript" src="js/visa.js"></script>
 <!--
 function EnviaValores()
 {

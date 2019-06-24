@@ -336,17 +336,17 @@ class PersonalModelo{
         $mail .='<div style="border: 1px solid #69778d;width:720px;padding-bottom: 10px;">';
         $mail .="<table width='700' border='0' align='center'>";
         $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td  colspan='2' align='center' style='font-size: 18px;'><font color='#4e99bf'><strong>NOTIFICACI&Oacute;N - SISTEMA CONVENIO MARCO</strong></font></td></tr>";
+        $mail .="<tr><td  colspan='2' align='center' style='font-size: 18px;'><font color='#4e99bf'><strong>NOTIFICACI&Oacute;N - SISTEMA Web Agencias</strong></font></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'><p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>DELEGADO</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha generado el registro correcto del Usuario <font color='#080897'><strong>DELEGADO: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - CONVENIO MARCO</strong></font>.</p></td></tr>";
+        $mail .="<tr><td colspan='2'><p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>DELEGADO</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha generado el registro correcto del Usuario <font color='#080897'><strong>DELEGADO: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.</p></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2'><font color='#080897'><strong>DELEGADO :</strong></font></td></tr>";
         $mail .=" <tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
-        $mail .="<tr><td width='178'><font color='#33333'><strong>Entidad:</strong></font></td><td width='512'><font color='#33333'><strong>Convenio Marco</strong></font></td></tr>";
+        $mail .="<tr><td width='178'><font color='#33333'><strong>Entidad:</strong></font></td><td width='512'><font color='#33333'><strong>Web Agencias</strong></font></td></tr>";
         $mail .="<tr><td><font color='#33333'><strong>Delegado:</strong></font></td><td><font color='#33333'><strong>$paterno $materno, $nombres</strong></font></td></tr>";
         $mail .="<tr><td><font color='#33333'><strong>Usuario de Acceso:</strong></font></td><td><font color='#080897'><strong>$usuario</strong></font></td></tr>";
         $mail .="<tr><td><font color='#33333'><strong>Password:</strong></font></td><td><font color='#080897'><strong>$clave</strong></font></td></tr>";
@@ -360,13 +360,13 @@ class PersonalModelo{
         $mail .="</body>";
         $mail .="</html>";
         
-        $email.= ", ".$_SESSION['s_email'].",perucompras@starperu.com";
+        $email.= ", ".$_SESSION['s_email'].",carlos.gutierrez@starperu.com";
         $remitente ="ecel@starperu.com";
         $to=$email;
-        $subject='Convenio Marco - Notificacion de Registro';
+        $subject='Web Agencias - Notificacion de Registro';
         $message=$mail;
         $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
-        $cabeceras.= "From: Convenio Marco <$remitente>\r\n";
+        $cabeceras.= "From: Web Agencias <$remitente>\r\n";
         mail($to, $subject,$message,$cabeceras ); 
    }
    
@@ -378,17 +378,17 @@ class PersonalModelo{
         $mail .='<div style="border: 1px solid #69778d;width:720px;padding-bottom: 10px;">';
         $mail .="<table width='700' border='0' align='center'>";
         $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td  colspan='2' align='center' style='font-size: 18px;'><font color='#4e99bf'><strong>NOTIFICACI&Oacute;N - SISTEMA CONVENIO MARCO</strong></font></td></tr>";
+        $mail .="<tr><td  colspan='2' align='center' style='font-size: 18px;'><font color='#4e99bf'><strong>NOTIFICACI&Oacute;N - SISTEMA Web Agencias</strong></font></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'><p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>DELEGADO</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha realizado correctamente el cambio de clave del Usuario <font color='#080897'><strong>DELEGADO: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - CONVENIO MARCO</strong></font>.</p></td></tr>";
+        $mail .="<tr><td colspan='2'><p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>DELEGADO</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha realizado correctamente el cambio de clave del Usuario <font color='#080897'><strong>DELEGADO: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.</p></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td colspan='2'><font color='#080897'><strong>DELEGADO :</strong></font></td></tr>";
         $mail .=" <tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
-        $mail .="<tr><td width='178'><font color='#33333'><strong>Entidad:</strong></font></td><td width='512'><font color='#33333'><strong>Convenio Marco</strong></font></td></tr>";
+        $mail .="<tr><td width='178'><font color='#33333'><strong>Entidad:</strong></font></td><td width='512'><font color='#33333'><strong>Web Agencias</strong></font></td></tr>";
         $mail .="<tr><td><font color='#33333'><strong>Delegado:</strong></font></td><td><font color='#33333'><strong>$paterno $materno, $nombres</strong></font></td></tr>";
         $mail .="<tr><td><font color='#33333'><strong>Usuario de Acceso:</strong></font></td><td><font color='#080897'><strong>$usuario</strong></font></td></tr>";
         $mail .="<tr><td><font color='#33333'><strong>Password:</strong></font></td><td><font color='#080897'><strong>$clave</strong></font></td></tr>";
@@ -402,13 +402,13 @@ class PersonalModelo{
         $mail .="</body>";
         $mail .="</html>";
 
-        $email.= ", "."perucompras@starperu.com";
+        $email.= ", "."carlos.gutierrez@starperu.com";
         $remitente ="ecel@starperu.com";
         $to=$email;
-        $subject='Convenio Marco - Notificacion de Cambio de Clave';
+        $subject='Web Agencias - Notificacion de Cambio de Clave';
         $message=$mail;
         $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
-        $cabeceras.= "From: Convenio Marco <$remitente>\r\n";
+        $cabeceras.= "From: Web Agencias <$remitente>\r\n";
         mail($to, $subject,$message,$cabeceras ); 
    }
    

@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 error_reporting(E_ALL);
@@ -254,14 +255,14 @@ if($_REQUEST['anular']==1){
                          $tabla_boletos_reserva='<p style="color:red;">Los boletos fueron anulados pero no se pudo recuperar el crédito. Comuníquese con StarPerú para solucionar el problema.</p>'; 
                     }
            $remitente = "ecel@starperu.com";
-           $mail="perucompras@starperu.com,ricardo.jaramillo@starperu.com";
+           $mail="carlos.gutierrez@starperu.com";
            $cabeceras = "Content-type: text/html\r\n";
-           $cabeceras.= "From: ALERTA ".utf8_decode("ANULACIÓN")." TICKETS - PERU COMPRAS <$remitente>\r\n";
-           $mensaje="La Entidad: ".$obj_personal->ObtenerNombreEntidad($codigo_entidad)."<br> RUC: ".$obj_personal->ObtenerRUCEntidad($codigo_entidad)." <br><br> ".utf8_decode("Intentó")." anular la Reserva: ".$pnr." y los siguientes boletos: <br><br> ";
+           $cabeceras.= "From: ALERTA ".utf8_decode("ANULACION")." TICKETS - WEB AGENCIAS <$remitente>\r\n";
+           $mensaje="La Agencia: ".$obj_personal->ObtenerNombreEntidad($codigo_entidad)."<br> RUC: ".$obj_personal->ObtenerRUCEntidad($codigo_entidad)." <br><br> ".utf8_decode("Intentó")." anular la Reserva: ".$pnr." y los siguientes boletos: <br><br> ";
            $mensaje.=$lista_boletos;
            $mensaje.="<br><br>Resultado: $msj_anulacion";
            $mensaje.="<br><br><b>Fecha/Hora (Emisi&oacute;n):</b> ".$partes_fecha_emision[0]." ".$partes_fecha_emision[1]."<br><br><b>Fecha/Hora (Intento):</b> ".date("Y-m-d H:i:s")." <br><br> Monto recuperado (&oacute; a recuperar): USD ".number_format($credito_recuperado, 2, '.', ',')."<br><br><br> <b>NOTA: Pasada la 23h 59m 59s del d&iacute;a de emisi&oacute;n, la Entidad se hace responsable del pago de los tickets emitidos.";
-           mail($mail, utf8_decode("Anulación")." Tickets - PERU COMPRAS", $mensaje , $cabeceras);
+           mail($mail, utf8_decode("Anulacion")." Tickets - WEB AGENCIAS", $mensaje , $cabeceras);
                }
 
         }else{

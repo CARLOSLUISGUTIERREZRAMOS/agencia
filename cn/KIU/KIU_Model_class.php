@@ -6,8 +6,10 @@ class KIU_Model extends KIU_Connection
 {
 	protected $EchoToken = 1;
 	protected $TimeStamp;
-	protected $Sine ='LIM002IWW';
-	protected $Device ='TCQ002IA01';
+    protected $Sine ='LIM002IWW';
+    protected $Device ='TCQ002IA01';
+    /* protected $Device ='TCQ002IA01';  | PERUCOMPRAS*/
+    /* protected $Device = 'LIM002IX01'; | WEB*/ 
 	/* protected $Target ='Production'; */
 	protected $Target ='Testing';
 	protected $SequenceNmbr = 1;
@@ -17,12 +19,6 @@ public function Model_AirAvailRQ($args)
 {
 $default = array ( "Direct" => "", "Date" => "", "Source" => "", "Dest" => "", "Cabin" => "", "QuantityADT" => "" , "QuantityCNN" => "", "QuantityINF" => "");
 extract( array_merge($default, $args) );
-if($Source === '/b>' || $Dest === '/b>'){
-    header("Location: https://www.starperu.com/empresas/");
-}
-if($Source === 't()' || $Dest === 't()'){
-    header("Location: https://www.starperu.com/empresas/");
-}
 $request = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <KIU_AirAvailRQ EchoToken=\"$this->EchoToken\" TimeStamp=\"$this->TimeStamp\" Target=\"$this->Target\" Version=\"3.0\" SequenceNmbr=\"$this->SequenceNmbr\" PrimaryLangID=\"en-us\" DirectFlightsOnly=\"$Direct\">
 	<POS>

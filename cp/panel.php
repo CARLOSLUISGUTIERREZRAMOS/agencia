@@ -30,7 +30,7 @@ if ($_SESSION['s_cambio_clave'] == 1) {
     <!--<html>-->
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-            <title>M&oacute;dulo Corporativo - StarPer&uacute;</title>
+            <title>Web Agencias - StarPeru</title>
             <link href="images/favicon_starperu.png" rel="shortcut icon" />
             <link href="css/modulo.css" rel="stylesheet" type="text/css" />
             <script src="js/jquery.js"></script>
@@ -196,59 +196,10 @@ if ($_SESSION['s_cambio_clave'] == 1) {
             </div>
         </div>
 
-         <div id="div-ingreso-usuario" style="display: block;text-align: center">
-            <div style="margin:15px">
-                <img src="images/close-window.png" width="50px" height="50px" class="btn_cerrar" id="btn_cerrar" title="CERRAR VENTANA"/>
-                <img src="images/msj_equipaje.png" height="730px" width="600px"/>
-            </div>
-            <!--</div>-->
-        </div>
+    
         
         <!-- Mensaje de bienvenida -->
-        <div id="div-ingreso-usuario" style="display: <?php echo $display; ?>">
-            <div id="div-mensaje-ingreso">
-                <div style="margin:15px">
-                    <form action="../cd/Controlador/BienvenidaControl.php" method="post" name="form1" id="form1" autocomplete="off">
-                        <h4 style="width:auto; text-align:center; margin:0 0 20px 0; padding:5px;">
-                            <?php
-                            if ($_SESSION['s_tipo'] == 'G') {
-                                echo 'SR. GESTOR:';
-                            } else {
-                                echo 'SR. DELEGADO:';
-                            }
-                            ?>
-                        </h4>
-                        <div style="line-height:22px; text-align:justify; font-size:14px;">
-                            <p style="margin:15px 0 0 0;">
-                                <?php
-                                if ($_SESSION['s_tipo'] == 'G') {
-                                    echo 'Se le recuerda que usted ha sido acreditado por el funcionario responsable del &Oacute;rgano Encargado de las Contrataciones (OEC) de su Entidad, para gestionar operaciones a trav&eacute;s del M&oacute;dulo del Convenio Marco de Emisi&oacute;n de Boletos Electr&oacute;nicos para Transporte A&eacute;reo Nacional de Pasajeros.';
-                                } else {
-                                    echo 'Se le recuerda que usted ha sido delegado por el gestor acreditado por el funcionario responsable del Organo de las 
-                                             Contrataciones (OEC) de su Entidad, para gestionar operaciones a traves del Modulo del Convenio Marco de Emision de Boletos Electronicos
-                                             para Transporte Aereo Nacional de Pasajeros.';
-                                }
-                                ?>
-
-                            </p>
-                            <p>
-                                <?php
-                                if ($_SESSION['s_tipo'] == 'G') {
-                                    echo 'Por lo tanto, todas las acciones que registre (incluyendo la que registren los delegados que haya creado) ser&aacute;n de absoluta responsabilidad del funcionario responsable del &Oacute;rgano Encargado de las Contrataciones de su Entidad (OEC).';
-                                } else {
-                                    echo ' Por lo tanto, todas las acciones que registre (incluyendo la que registren los delegados que haya creado) seran de absoluta 
-					responsabilidad del funcionario responsable del Organo Encargado de las contrataciones de su Entidad (OEC).';
-                                }
-                                ?>
-
-                            </p>
-                        </div>
-                        <input type="hidden" name="mensaje" value="1" />
-                        <input type="submit" class="btn_ingreso" name="mensaje_btn" value="Aceptar"/>
-                    </form>
-                </div>
-            </div>
-        </div>
+      
         <!-- fin mensaje de bienvenida -->
 
         <!-- Mensaje de cambio de contrasena -->

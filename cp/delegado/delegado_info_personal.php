@@ -13,7 +13,7 @@ $directorio_imagen='../';
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>M&oacute;dulo Corporativo</title>
+<title>Web Agencias - StarPeru</title>
 <link href="../css/modulo.css" rel="stylesheet" type="text/css" />
 <link href="../css/gestor.css" rel="stylesheet" type="text/css" />
 </head>

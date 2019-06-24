@@ -174,7 +174,7 @@ if($_REQUEST['excel']==1){
                 <TH class="excel">ID. Mov</TH>  
                 <TH class="excel" >RUC Entidad</TH>
                 <TH class="excel">Gestor</TH>
-                <TH class="excel">Delegado</TH>
+                <TH class="excel">Usuario</TH>
                 <TH class="excel">Tipo Oper.</TH>
                 <TH class="excel">Cant. Boletos</TH>
                 <TH class="excel">Tip. Serv.</TH>
@@ -302,7 +302,7 @@ if($_REQUEST['movimiento_detalle']==1){
             <td><?php echo number_format($movimiento[18]->getHW(),2);?></td>
         </tr>
         <tr>
-            <td align="right" class="lab_dmov"><strong>Usuario Delegado :</strong></td>
+            <td align="right" class="lab_dmov"><strong>Usuario :</strong></td>
             <td><?php echo $delegado;?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Escala Tarifa :</strong></td>

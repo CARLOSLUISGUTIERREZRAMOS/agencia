@@ -8,7 +8,7 @@ require_once '../../cd/Controlador/MovimientoControl.php';
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-            <title>Emision de Ticket - StarPer&uacute; - PER&uacute; COMPRAS</title>
+            <title>Emision de Ticket - StarPer&uacute; - WEB AGENCIAS</title>
             <link href="css/starperu.css" rel="stylesheet" type="text/css">
             <style type="text/css" media="print">
                 @media print {

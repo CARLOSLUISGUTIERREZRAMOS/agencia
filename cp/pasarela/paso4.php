@@ -17,6 +17,7 @@ require_once '../../cd/Controlador/PasarelaControl.php';
 <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
 <script type="text/javascript" language="javascript1.2" src="js/funciones.js"></script>
 <script type="text/javascript" src="js/paso4_principal.js"></script>
+<script type="text/javascript" src="js/visa.js"></script>
 <script type="text/javascript" language="javascript1.2">
 <!--
 
@@ -879,6 +880,10 @@ $(function()
 								<td align="left">
 									<select name="forma_pago">
 									<option value="TC">Tarjeta de Credito</option>
+									<option value="LC">Linea de Credito</option>
+									<option value="PP">PayPal</option>
+									<option value="SP">SafetyPay</option>
+									<option value="PE">PagoEfectivo</option>
 									</select>
 								</td>
                               </tr>

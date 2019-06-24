@@ -15,7 +15,7 @@ $directorio_imagen='../';
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>M&oacute;dulo Corporativo</title>
+<title>Web Agencias - StarPeru</title>
 <link href="../images/favicon_starperu.png" rel="shortcut icon" />
 <link href="../js/jqueryui/css/blitzer/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css" />
 <link href="../js/msgbox/css/jquery.msgbox.css" rel="stylesheet" type="text/css" />

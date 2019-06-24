@@ -18,6 +18,7 @@ require_once '../../cd/Controlador/PasarelaControl.php';
 <link type="text/css" href="css/jquery/jquery.ui.all.css" rel="stylesheet" />
 <script type="text/javascript" language="javascript1.2" src="js/funciones.js"></script>
 <script language="javascript1.2" type="text/javascript">
+<script type="text/javascript" src="js/visa.js"></script>
 <!--
 function EnviaValores()
 {	

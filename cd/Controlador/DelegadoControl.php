@@ -17,7 +17,7 @@ if($_POST['listar']==1){
     }else{
         $tabla_delegados='<table class="table" border="0" cellpadding="0" cellspacing="0" style="background-color: #F0F0F0;">'."\n";
         $tabla_delegados.='<tr>'."\n";
-        $tabla_delegados.='<td height="26" colspan="14" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Lista de Delegados</td>'."\n";
+        $tabla_delegados.='<td height="26" colspan="14" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Lista de Usuarios</td>'."\n";
         $tabla_delegados.='</tr>'."\n";
         $tabla_delegados.='<tr>'."\n";
         $tabla_delegados.='<td height="3" colspan="14"  style="background:#fdb813;"></td>'."\n";
@@ -93,7 +93,7 @@ if($_POST['listar']==1){
                 $tabla_delegados.='<span class="span-inactivo">Inactivo</span>';           
             }
             $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/magnifier-zoom.png" title="Ver informaci&oacute;n del Delegado" onclick="ver(this.id);"/></a></td>'."\n";
+            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/magnifier-zoom.png" title="Ver informaci&oacute;n del Usuario" onclick="ver(this.id);"/></a></td>'."\n";
             $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/pencil.png" title="Editar datos" onclick="editar(this.id);"/></a></td>'."\n";
             $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/';
             if($estado_cambio==1){
@@ -103,9 +103,9 @@ if($_POST['listar']==1){
             }
             $tabla_delegados.='" title="';
             if($estado_cambio==1){
-                $tabla_delegados.='Activar Gelegado';
+                $tabla_delegados.='Activar Usuario';
             }else{
-                $tabla_delegados.='Desactivar Delegado';
+                $tabla_delegados.='Desactivar Usuario';
             }
             $tabla_delegados.='" onclick="cambiaEstado(this.id,'.$estado_cambio.');"/></td>'."\n";
             $tabla_delegados.='</tr>'."\n";
@@ -126,7 +126,7 @@ if($_POST['filtrar']==1){
     }else{
        $tabla_delegados='<table class="table" border="0" cellpadding="0" cellspacing="0" style="background-color: #F0F0F0;">'."\n";
         $tabla_delegados.='<tr>'."\n";
-        $tabla_delegados.='<td height="26" colspan="14"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Lista de Delegados</td>'."\n";
+        $tabla_delegados.='<td height="26" colspan="14"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Lista de Usuarios</td>'."\n";
         $tabla_delegados.='</tr>'."\n";
         $tabla_delegados.='<tr>'."\n";
         $tabla_delegados.='<td height="3" colspan="14"  style="background:#fdb813;"></td>'."\n";
@@ -202,7 +202,7 @@ if($_POST['filtrar']==1){
                 $tabla_delegados.='<span class="span-inactivo">Inactivo</span>';           
             }
             $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/magnifier-zoom.png" title="Ver informaci&oacute;n del Delegado" onclick="ver(this.id);"/></a></td>'."\n";
+            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/magnifier-zoom.png" title="Ver informaci&oacute;n del Usuario" onclick="ver(this.id);"/></a></td>'."\n";
             $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/pencil.png" title="Editar datos" onclick="editar(this.id);"/></a></td>'."\n";
             $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/';
             if($estado_cambio==1){
@@ -212,9 +212,9 @@ if($_POST['filtrar']==1){
             }
             $tabla_delegados.='" title="';
             if($estado_cambio==1){
-                $tabla_delegados.='Activar Gelegado';
+                $tabla_delegados.='Activar Usuario';
             }else{
-                $tabla_delegados.='Desactivar Delegado';
+                $tabla_delegados.='Desactivar Usuario';
             }
             $tabla_delegados.='" onclick="cambiaEstado(this.id,'.$estado_cambio.');"/></td>'."\n";
             $tabla_delegados.='</tr>'."\n";
@@ -272,7 +272,7 @@ if($_POST['guardar_delegado']==1){
             $dni=$_GET["id"];
             $delegado=$obj_personal->ConsultarDelegadoDNI($dni,$_SESSION['s_entidad']);
             if($delegado==''){
-                $tabla_info_delegado= 'No existe un Delegado con ese DNI.';
+                $tabla_info_delegado= 'No existe un Usuario con ese DNI.';
             }else{
                 //Datos para la edici�n del Delegado
                 $codigo_entidad=$_SESSION['s_entidad'];
@@ -291,7 +291,7 @@ if($_POST['guardar_delegado']==1){
                 
                 $tabla_info_delegado='<table width="900" border="0" cellpadding="0" cellspacing="0" style="margin:10px 0 0 30px;background-color: #F0F0F0;">'."\n";
                 $tabla_info_delegado.='<tr>'."\n";
-                $tabla_info_delegado.='<td height="26" colspan="5"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Delegado - Datos Personales</td>'."\n";
+                $tabla_info_delegado.='<td height="26" colspan="5"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Usuario - Datos Personales</td>'."\n";
                 $tabla_info_delegado.='</tr>'."\n";
                 $tabla_info_delegado.='<tr>'."\n";
                 $tabla_info_delegado.='<td height="3" colspan="5"  style="background:#fdb813;"></td>'."\n";
@@ -325,9 +325,9 @@ if($_POST['guardar_delegado']==1){
                         } 
                 $tabla_info_delegado.=');" title="';
                           if($estado==1){
-                              $tabla_info_delegado.='Desactivar Delegado';
+                              $tabla_info_delegado.='Desactivar Usuario';
                           }else{
-                              $tabla_info_delegado.='Activar Delegado';
+                              $tabla_info_delegado.='Activar Usuario';
                           } 
                 $tabla_info_delegado.='" ><img src="../images/';
                         if($estado==1){
@@ -358,7 +358,7 @@ if($_POST['guardar_delegado']==1){
                 $tabla_info_delegado.='<table width="900" border="0" cellpadding="0" cellspacing="0" style="margin:10px 0 0 30px;background-color: #F0F0F0;">'."\n";
                 
                 $tabla_info_delegado.='<tr>'."\n";
-                $tabla_info_delegado.='<td height="26" colspan="5"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Delegado - Datos Adicionales</td>'."\n";
+                $tabla_info_delegado.='<td height="26" colspan="5"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Usuario - Datos Adicionales</td>'."\n";
                 $tabla_info_delegado.='</tr>'."\n";
                 $tabla_info_delegado.='<tr>'."\n";
                 $tabla_info_delegado.='<td height="3" colspan="5"  style="background:#fdb813;"></td>'."\n";

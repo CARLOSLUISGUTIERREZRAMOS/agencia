@@ -88,13 +88,13 @@ function EnvioMailCreacionUser($userLogin,$email,$paterno,$materno,$nombres,$usu
 	{
 		$mail ="<html><body style='font-family:Trebuchet MS;font-size:13px'>";
 		$mail.="<table width='700' border='0' align='center'>
-				  <tr><td bgcolor='#666666' colspan='2'><font color='#FFFFFF'><strong>NOTIFICACION - SISTEMA CONVENIO MARCO</strong></font></td></tr>
-		            <tr><td colspan='2'><p>Estimado Sr(a). $userLogin, envirtud de su acreditacion como GESTOR, se le informa que STARPERU ha generado el registro correcto del Usuario DELEGADO: $paterno $materno , $nombres, y el USUARIO: $usuario para el acceso al sistema de compra de pasajes - CONVENIO MARCO.</p></td></tr>
+				  <tr><td bgcolor='#666666' colspan='2'><font color='#FFFFFF'><strong>NOTIFICACION - SISTEMA WEB AGENCIAS</strong></font></td></tr>
+		            <tr><td colspan='2'><p>Estimado Sr(a). $userLogin, envirtud de su acreditacion como GESTOR, se le informa que STARPERU ha generado el registro correcto del Usuario DELEGADO: $paterno $materno , $nombres, y el USUARIO: $usuario para el acceso al sistema de compra de pasajes - WEB AGENCIAS.</p></td></tr>
 		            <tr><td colspan='2'></td></tr>
-		            <tr><td colspan='2'>DELEGADO</td></tr>
+		            <tr><td colspan='2'>USUAROI</td></tr>
 		            <tr><td colspan='2' bgcolor='#666666'>&nbsp;</td></tr>
-		            <tr><td width='178'>Entidad:</td><td width='512'>Convenio Marco</td></tr>
-		            <tr><td>Delegado:</td><td>$paterno $materno, $nombres</td></tr>
+		            <tr><td width='178'>Entidad:</td><td width='512'>WEB AGENCIAS</td></tr>
+		            <tr><td>Usuario:</td><td>$paterno $materno, $nombres</td></tr>
 		            <tr><td>Usuario de Acceso:</td><td>$usuario</td></tr>
 		            <tr><td>Password Default:</td><td>$clave</td></tr>
 	            </table>";
@@ -102,11 +102,11 @@ function EnvioMailCreacionUser($userLogin,$email,$paterno,$materno,$nombres,$usu
 	    $email.= ", "."ecel@starperu.com";
 	    $remitente ="ecel@starperu.com";
 		$to=$email;
-		$subject='Convenio Marco - Notificacion de Registro';
+		$subject='WEB AGENCIAS - Notificacion de Registro';
 		$mail.="</body></html>";
 		$message=$mail;
 		$cabeceras = "Content-type: text/html\r\n"; 
-		$cabeceras.= "From: Convenio Marco <$remitente>\r\n";
+		$cabeceras.= "From: WEB AGENCIAS <$remitente>\r\n";
 		mail($to, $subject,$message,$cabeceras );
 	}
 

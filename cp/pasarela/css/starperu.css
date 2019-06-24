@@ -31,7 +31,7 @@ div
 		border:1px solid #ccc;
 		height: 97px;
 		padding: 0 5px;
-		background: url(../imgs/corporativo.png) 700px 20px no-repeat;
+		background: url(../images/corporativo.png) 700px 20px no-repeat;
 	}
 		#Cabecera h1{
 			text-indent: -8000px;
@@ -40,7 +40,7 @@ div
 			line-height: 1em;
 			margin: 0;
 			padding: 0;
-			background: url(../imgs/LogoStar.png) bottom left no-repeat;
+			background: url(../images/LogoStar.png) bottom left no-repeat;
 		}
 		#Cabecera h2{
 			font-size:12px;

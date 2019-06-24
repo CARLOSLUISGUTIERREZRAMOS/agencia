@@ -1,6 +1,4 @@
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -380,6 +378,7 @@
                         <form></form>
                     </div>
                 </div>
+
             </div>
         </div>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
