@@ -31,4 +31,16 @@ $(document).ready(function(){
          }
     });
    
- });
+});
+
+function ajaxSubmitFormulario() {
+    return;
+    // body...
+}
+
+$(document).on('submit','#registrar-agencia',function (event) {
+    event.preventDefault();
+    debugger
+    alert('holi');
+    return false;
+});
