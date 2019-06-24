@@ -47,49 +47,49 @@ class PersonalModelo{
         }
         
     }
-    public function ListaDelegados($codigo_entidad, $dni,$apellido){
-        $lista_personal=array();
-        $obj_conexion=new ConexionBD();
-        $conexion=$obj_conexion->CrearConexion();
-        $consulta="SELECT *
-                   FROM Personal 
-                   WHERE CodigoEntidad=$codigo_entidad AND CodigoTipo='D'";
-             if($dni!=''){
-                  $consulta.=" AND DNI='$dni'";
-             }      
-             if($apellido!=''){
-                  $consulta.=" AND CONCAT(ApellidoPaterno,' ',ApellidoMaterno) LIKE '%$apellido%' ";
-             }      
-            
-        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
-        $numero_filas=$obj_conexion->ContarFilas($resultado);
-        if($numero_filas>0){
-            
-            while($fila=  $obj_conexion->ObtenerDatos($resultado)){
-                    $personal = new PersonalEntidad();
-                    $personal->setCodigoPersonal($fila['CodigoPersonal']);
-                    $personal->setNombres($fila['Nombres']);
-                    $personal->setApellidoPaterno($fila['ApellidoPaterno']);
-                    $personal->setApellidoMaterno($fila['ApellidoMaterno']);
-                    $personal->setCodigoEntidad($fila['CodigoEntidad']);
-                    $personal->setCambioClave($fila['CambioClave']);
-                    $personal->setCodigoTipo($fila['CodigoTipo']);
-                    $personal->setDNI($fila['DNI']);
-                    $personal->setEmail($fila['Email']);
-                    $personal->setTelefonoOficina($fila['TelefonoOficina']);
-                    $personal->setAnexo($fila['Anexo']);
-                    $personal->setCelular($fila['Celular']);
-                    $personal->setRPC($fila['RPC']);
-                    $personal->setRPM($fila['RPM']);
-                    $personal->setNextel($fila['Nextel']);
-                    $personal->setEstadoRegistro($fila['EstadoRegistro']);
-                    $lista_personal[]=$personal;
+    public function ListaDelegados($codigo_entidad, $dni, $apellido) {
+        $lista_personal = array();
+        $obj_conexion = new ConexionBD();
+        $conexion = $obj_conexion->CrearConexion();
+
+        $consulta = "SELECT P.CambioClave,P.CodigoTipo,P.CodigoEntidad,P.CodigoPersonal,P.DNI,P.ApellidoMaterno,P.ApellidoPaterno,P.Nombres,P.Email,P.TelefonoOficina,P.Anexo,P.Celular,E.RazonSocial,E.RUC,E.Direccion
+                    FROM Personal P,Entidad E
+                    WHERE  p.EstadoRegistro=1 AND e.EstadoRegistro=1 AND p.CodigoEntidad=e.CodigoEntidad AND P.CodigoEntidad='$codigo_entidad'"; 
+        if ($dni != '') {
+            $consulta .= " AND DNI='$dni'";
+        }
+        if ($apellido != '') {
+            $consulta .= " AND CONCAT(ApellidoPaterno,' ',ApellidoMaterno) LIKE '%$apellido%' ";
+        }
+
+        $resultado = $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
+        $numero_filas = $obj_conexion->ContarFilas($resultado);
+        if ($numero_filas > 0) {
+
+            while ($fila = $obj_conexion->ObtenerDatos($resultado)) {
+                $personal = new PersonalEntidad();
+                $personal->setCodigoPersonal($fila['CodigoPersonal']);
+                $personal->setNombres($fila['Nombres']);
+                $personal->setApellidoPaterno($fila['ApellidoPaterno']);
+                $personal->setApellidoMaterno($fila['ApellidoMaterno']);
+                $personal->setCodigoEntidad($fila['CodigoEntidad']);
+                $personal->setCambioClave($fila['CambioClave']);
+                $personal->setCodigoTipo($fila['CodigoTipo']);
+                $personal->setDNI($fila['DNI']);
+                $personal->setEmail($fila['Email']);
+                $personal->setTelefonoOficina($fila['TelefonoOficina']);
+                $personal->setAnexo($fila['Anexo']);
+                $personal->setCelular($fila['Celular']);
+                $personal->setRazonSocial($fila['RazonSocial']);
+                $personal->setDireccion($fila['Direccion']);
+                $personal->setRUC($fila['RUC']);
+
+                $personal->setEstadoRegistro($fila['EstadoRegistro']);
+                $lista_personal[] = $personal;
             }
             $obj_conexion->CerrarConexion($conexion);
-            
-          
         }
-           return $lista_personal;
+        return $lista_personal;
     }
     public function DNIValidar($dni,$codigo_entidad){
         $obj_conexion=new ConexionBD();

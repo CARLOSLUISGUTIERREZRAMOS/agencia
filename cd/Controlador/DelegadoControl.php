@@ -7,223 +7,184 @@ require_once("../../cn/STARPERU/Modelo/PersonalModelo.php");
 
 $obj_personal=new PersonalModelo();
 
+if ($_POST['listar'] == 1) {
 
-if($_POST['listar']==1){ 
-    
-    $lista_delegados=array();
-    $lista_delegados=$obj_personal->ListaDelegados($_SESSION['s_entidad']);
-    if(count($lista_delegados)==0){
+    $lista_delegados = array();
+    $lista_delegados = $obj_personal->ListaDelegados($_SESSION['s_entidad']);
+    if (count($lista_delegados) == 0) {
         echo '';
-    }else{
-        $tabla_delegados='<table class="table" border="0" cellpadding="0" cellspacing="0" style="background-color: #F0F0F0;">'."\n";
-        $tabla_delegados.='<tr>'."\n";
-        $tabla_delegados.='<td height="26" colspan="14" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Lista de Usuarios</td>'."\n";
-        $tabla_delegados.='</tr>'."\n";
-        $tabla_delegados.='<tr>'."\n";
-        $tabla_delegados.='<td height="3" colspan="14"  style="background:#fdb813;"></td>'."\n";
-        $tabla_delegados.='</tr>'."\n";
-        $tabla_delegados.='<tr >'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">DNI</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Apellidos</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Nombre</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Email</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Tel. Oficina</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Anexo</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Celular</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">RPM</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">RPC</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Nextel</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Estado</th>'."\n";
-        $tabla_delegados.='<th colspan="3" class="subtitleTabla">Opciones</th>'."\n";
-        $tabla_delegados.='</tr>'."\n";     
+    } else {
+        $tabla_delegados = '<table class="table" border="0" cellpadding="0" cellspacing="0" style="background-color: #F0F0F0;">' . "\n";
+        $tabla_delegados .= '<tr>' . "\n";
+        $tabla_delegados .= '<td height="26" colspan="14" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Datos de Agencia</td>' . "\n";
+        $tabla_delegados .= '</tr>' . "\n";
+        $tabla_delegados .= '<tr>' . "\n";
+        $tabla_delegados .= '<td height="3" colspan="14"  style="background:#fdb813;"></td>' . "\n";
+        $tabla_delegados .= '</tr>' . "\n";
+        $tabla_delegados .= '<tr >' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">DNI</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Razón Social</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Dirección</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">RUC</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Apellidos</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Nombre</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Email</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Tel. Oficina</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Anexo</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Celular</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Estado</th>' . "\n";
+        $tabla_delegados .= '<th colspan="3" class="subtitleTabla">Opciones</th>' . "\n";
+        $tabla_delegados .= '</tr>' . "\n";
         foreach ($lista_delegados as $delegado) {
-            $tabla_delegados.='<tr style="/*color: #333;*/">'."\n";
-            $tabla_delegados.='<td class="bgTable_data">'.utf8_encode($delegado->getDNI()).'</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">'.utf8_encode($delegado->getApellidoPaterno().' '.$delegado->getApellidoMaterno()).'</th>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">'.utf8_encode($delegado->getNombres()).'</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data email">'.utf8_encode($delegado->getEmail()).'</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getTelefonoOficina()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getTelefonoOficina());           
+            $tabla_delegados .= '<tr style="/*color: #333;*/">' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getDNI()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getRazonSocial()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getDireccion()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getRUC()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getApellidoPaterno() . ' ' . $delegado->getApellidoMaterno()) . '</th>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getNombres()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data email">' . utf8_encode($delegado->getEmail()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">';
+            if ($delegado->getTelefonoOficina() == '') {
+                $tabla_delegados .= '<span class="no-info">no-info</span>';
+            } else {
+                $tabla_delegados .= utf8_encode($delegado->getTelefonoOficina());
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getAnexo()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getAnexo());           
+            $tabla_delegados .= '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">';
+            if ($delegado->getAnexo() == '') {
+                $tabla_delegados .= '<span class="no-info">no-info</span>';
+            } else {
+                $tabla_delegados .= utf8_encode($delegado->getAnexo());
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getCelular()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getCelular());           
+            $tabla_delegados .= '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">';
+            if ($delegado->getCelular() == '') {
+                $tabla_delegados .= '<span class="no-info">no-info</span>';
+            } else {
+                $tabla_delegados .= utf8_encode($delegado->getCelular());
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getRPC()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getRPC());           
+            $tabla_delegados .= '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">';
+
+            if (utf8_encode($delegado->getEstadoRegistro()) == 1) {
+                $estado_cambio = 0;
+                $tabla_delegados .= '<span class="span-activo">Activo</span>';
+            } else {
+                $estado_cambio = 1;
+                $tabla_delegados .= '<span class="span-inactivo">Inactivo</span>';
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getRPM()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getRPM());           
+            $tabla_delegados .= '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data"><a href="javascript:void(0);"><img id="' . $delegado->getDNI() . '" width="16" src="../images/magnifier-zoom.png" title="Ver informaci&oacute;n del Usuario" onclick="ver(this.id);"/></a></td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data"><a href="javascript:void(0);"><img id="' . $delegado->getDNI() . '" width="16" src="../images/pencil.png" title="Editar datos" onclick="editar(this.id);"/></a></td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data"><a href="javascript:void(0);"><img id="' . $delegado->getDNI() . '" width="16" src="../images/';
+            if ($estado_cambio == 1) {
+                $tabla_delegados .= 'tick.png';
+            } else {
+                $tabla_delegados .= 'prohibition.png';
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getNextel()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getNextel());           
+            $tabla_delegados .= '" title="';
+            if ($estado_cambio == 1) {
+                $tabla_delegados .= 'Activar Usuario';
+            } else {
+                $tabla_delegados .= 'Desactivar Usuario';
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if(utf8_encode($delegado->getEstadoRegistro())==1){ 
-                $estado_cambio=0;
-                $tabla_delegados.='<span class="span-activo">Activo</span>';
-            }else{
-                $estado_cambio=1;
-                $tabla_delegados.='<span class="span-inactivo">Inactivo</span>';           
-            }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/magnifier-zoom.png" title="Ver informaci&oacute;n del Usuario" onclick="ver(this.id);"/></a></td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/pencil.png" title="Editar datos" onclick="editar(this.id);"/></a></td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/';
-            if($estado_cambio==1){
-                $tabla_delegados.='tick.png';
-            }else{
-                $tabla_delegados.='prohibition.png';
-            }
-            $tabla_delegados.='" title="';
-            if($estado_cambio==1){
-                $tabla_delegados.='Activar Usuario';
-            }else{
-                $tabla_delegados.='Desactivar Usuario';
-            }
-            $tabla_delegados.='" onclick="cambiaEstado(this.id,'.$estado_cambio.');"/></td>'."\n";
-            $tabla_delegados.='</tr>'."\n";
+            $tabla_delegados .= '" onclick="cambiaEstado(this.id,' . $estado_cambio . ');"/></td>' . "\n";
+            $tabla_delegados .= '</tr>' . "\n";
         }
-        $tabla_delegados.='</table>'."\n";
+        $tabla_delegados .= '</table>' . "\n";
         echo $tabla_delegados;
     }
-
 }
 
-if($_POST['filtrar']==1){
-    $dni=trim($_POST["dni"]);
-    $apellido=trim(strtoupper($_POST["apellido"]));
-    $lista_delegados=array();
-    $lista_delegados=$obj_personal->ListaDelegados($_SESSION['s_entidad'],$dni,$apellido);
-    if(count($lista_delegados)==0){
+if ($_POST['filtrar'] == 1) {
+    $dni = trim($_POST["dni"]);
+    $apellido = trim(strtoupper($_POST["apellido"]));
+    $lista_delegados = array();
+    $lista_delegados = $obj_personal->ListaDelegados($_SESSION['s_entidad'], $dni, $apellido);
+    if (count($lista_delegados) == 0) {
         echo '';
-    }else{
-       $tabla_delegados='<table class="table" border="0" cellpadding="0" cellspacing="0" style="background-color: #F0F0F0;">'."\n";
-        $tabla_delegados.='<tr>'."\n";
-        $tabla_delegados.='<td height="26" colspan="14"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Lista de Usuarios</td>'."\n";
-        $tabla_delegados.='</tr>'."\n";
-        $tabla_delegados.='<tr>'."\n";
-        $tabla_delegados.='<td height="3" colspan="14"  style="background:#fdb813;"></td>'."\n";
-        $tabla_delegados.='</tr>'."\n";
-        $tabla_delegados.='<tr >'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">DNI</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Apellidos</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Nombre</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Email</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Tel. Oficina</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Anexo</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Celular</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">RPM</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">RPC</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Nextel</th>'."\n";
-        $tabla_delegados.='<th class="subtitleTabla">Estado</th>'."\n";
-        $tabla_delegados.='<th colspan="3" class="subtitleTabla">Opciones</th>'."\n";
-        $tabla_delegados.='</tr>'."\n";     
+    } else {
+        $tabla_delegados = '<table class="table" border="0" cellpadding="0" cellspacing="0" style="background-color: #F0F0F0;">' . "\n";
+        $tabla_delegados .= '<tr>' . "\n";
+        $tabla_delegados .= '<td height="26" colspan="14"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Datos de Agencia</td>' . "\n";
+        $tabla_delegados .= '</tr>' . "\n";
+        $tabla_delegados .= '<tr>' . "\n";
+        $tabla_delegados .= '<td height="3" colspan="14"  style="background:#fdb813;"></td>' . "\n";
+        $tabla_delegados .= '</tr>' . "\n";
+        $tabla_delegados .= '<tr >' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">DNI</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Razón Social</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Dirección</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">RUC</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Apellidos</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Nombre</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Email</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Tel. Oficina</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Anexo</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Celular</th>' . "\n";
+        $tabla_delegados .= '<th class="subtitleTabla">Estado</th>' . "\n";
+        $tabla_delegados .= '<th colspan="3" class="subtitleTabla">Opciones</th>' . "\n";
+        $tabla_delegados .= '</tr>' . "\n";
         foreach ($lista_delegados as $delegado) {
-            $tabla_delegados.='<tr style="/*color: #333;*/">'."\n";
-            $tabla_delegados.='<td class="bgTable_data">'.utf8_encode($delegado->getDNI()).'</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">'.utf8_encode($delegado->getApellidoPaterno().' '.$delegado->getApellidoMaterno()).'</th>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">'.utf8_encode($delegado->getNombres()).'</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data email">'.utf8_encode($delegado->getEmail()).'</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getTelefonoOficina()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getTelefonoOficina());           
+            $tabla_delegados .= '<tr style="/*color: #333;*/">' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getDNI()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getRazonSocial()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getDireccion()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getRUC()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getApellidoPaterno() . ' ' . $delegado->getApellidoMaterno()) . '</th>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">' . utf8_encode($delegado->getNombres()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data email">' . utf8_encode($delegado->getEmail()) . '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">';
+            if ($delegado->getTelefonoOficina() == '') {
+                $tabla_delegados .= '<span class="no-info">no-info</span>';
+            } else {
+                $tabla_delegados .= utf8_encode($delegado->getTelefonoOficina());
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getAnexo()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getAnexo());           
+            $tabla_delegados .= '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">';
+            if ($delegado->getAnexo() == '') {
+                $tabla_delegados .= '<span class="no-info">no-info</span>';
+            } else {
+                $tabla_delegados .= utf8_encode($delegado->getAnexo());
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getCelular()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getCelular());           
+            $tabla_delegados .= '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">';
+            if ($delegado->getCelular() == '') {
+                $tabla_delegados .= '<span class="no-info">no-info</span>';
+            } else {
+                $tabla_delegados .= utf8_encode($delegado->getCelular());
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getRPC()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getRPC());           
+            $tabla_delegados .= '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data">';
+            if (utf8_encode($delegado->getEstadoRegistro()) == 1) {
+                $estado_cambio = 0;
+                $tabla_delegados .= '<span class="span-activo">Activo</span>';
+            } else {
+                $estado_cambio = 1;
+                $tabla_delegados .= '<span class="span-inactivo">Inactivo</span>';
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getRPM()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getRPM());           
+            $tabla_delegados .= '</td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data"><a href="javascript:void(0);"><img id="' . $delegado->getDNI() . '" width="16" src="../images/magnifier-zoom.png" title="Ver informaci&oacute;n del Delegado" onclick="ver(this.id);"/></a></td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data"><a href="javascript:void(0);"><img id="' . $delegado->getDNI() . '" width="16" src="../images/pencil.png" title="Editar datos" onclick="editar(this.id);"/></a></td>' . "\n";
+            $tabla_delegados .= '<td class="bgTable_data"><a href="javascript:void(0);"><img id="' . $delegado->getDNI() . '" width="16" src="../images/';
+            if ($estado_cambio == 1) {
+                $tabla_delegados .= 'tick.png';
+            } else {
+                $tabla_delegados .= 'prohibition.png';
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if($delegado->getNextel()==''){ 
-                $tabla_delegados.='<span class="no-info">no-info</span>';
-            }else{
-                $tabla_delegados.=utf8_encode($delegado->getNextel());           
+            $tabla_delegados .= '" title="';
+            if ($estado_cambio == 1) {
+                $tabla_delegados .= 'Activar Gelegado';
+            } else {
+                $tabla_delegados .= 'Desactivar Delegado';
             }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data">';
-            if(utf8_encode($delegado->getEstadoRegistro())==1){ 
-                $estado_cambio=0;
-                $tabla_delegados.='<span class="span-activo">Activo</span>';
-            }else{
-                $estado_cambio=1;
-                $tabla_delegados.='<span class="span-inactivo">Inactivo</span>';           
-            }
-            $tabla_delegados.='</td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/magnifier-zoom.png" title="Ver informaci&oacute;n del Usuario" onclick="ver(this.id);"/></a></td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/pencil.png" title="Editar datos" onclick="editar(this.id);"/></a></td>'."\n";
-            $tabla_delegados.='<td class="bgTable_data"><a href="javascript:void(0);"><img id="'.$delegado->getDNI().'" width="16" src="../images/';
-            if($estado_cambio==1){
-                $tabla_delegados.='tick.png';
-            }else{
-                $tabla_delegados.='prohibition.png';
-            }
-            $tabla_delegados.='" title="';
-            if($estado_cambio==1){
-                $tabla_delegados.='Activar Usuario';
-            }else{
-                $tabla_delegados.='Desactivar Usuario';
-            }
-            $tabla_delegados.='" onclick="cambiaEstado(this.id,'.$estado_cambio.');"/></td>'."\n";
-            $tabla_delegados.='</tr>'."\n";
+            $tabla_delegados .= '" onclick="cambiaEstado(this.id,' . $estado_cambio . ');"/></td>' . "\n";
+            $tabla_delegados .= '</tr>' . "\n";
         }
-        $tabla_delegados.='</table>'."\n";
+        $tabla_delegados .= '</table>' . "\n";
         echo $tabla_delegados;
     }
-   
-   
 }
 
 if($_POST['guardar_delegado']==1){ 

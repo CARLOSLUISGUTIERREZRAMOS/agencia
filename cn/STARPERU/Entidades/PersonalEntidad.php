@@ -26,6 +26,18 @@ class PersonalEntidad{
     private $estado_registro;
     
     
+   public function getRazonSocial(){
+       return $this->razon_social;
+   }
+   public function getDireccion(){
+       return $this->direccion;
+   }
+   public function getRUC(){
+       return $this->ruc;
+   }
+   public function getNombreAgencia(){
+       return $this->nombre_agencia;
+   }
    public function getCodigoPersonal(){
        return $this->codigo_personal;
    }
@@ -164,6 +176,15 @@ class PersonalEntidad{
    }
    public function setIdDistrito($idDistrito){
        $this->idDistrito=$idDistrito;
+   }
+   public function setRazonSocial($razon_social){
+       return $this->razon_social=$razon_social;
+   }
+   public function setDireccion($direccion){
+       return $this->direccion=$direccion;
+   }
+   public function setRUC($ruc){
+       return $this->ruc=$ruc;
    }
 }
 
