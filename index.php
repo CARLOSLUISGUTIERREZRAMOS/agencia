@@ -13,7 +13,7 @@
         
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
     <title>
-	LC Perú - Portal Agencias
+	 Web Agencias - StarPeru
 </title>
     <style>
         #content > span { display: block; font-size: 20px; color: #b90007; line-height: 24px; } .col-submenu { text-align: center; transform: translateY(15%); }
@@ -62,9 +62,6 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="http://corporativo.lcperu.pe" class="navbar-brand animated fadeInDown" style="padding-top: 0;">
-                        <img alt="logo StarPeru" class="logo" src="cp/images/LogoStar.png" />
-                    </a>
                 </div>
                 <div class="logo-22">
                     <!--<div id="content" class="hidden-xs">
