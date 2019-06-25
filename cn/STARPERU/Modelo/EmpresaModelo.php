@@ -97,6 +97,25 @@ class EmpresaModelo{
            return "";
         }
     }
+
+    public function VerificarRucEmpresa($ruc){
+        
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT RUC,RazonSocial FROM entidad WHERE RUC=$ruc";
+            
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        $fila=  $obj_conexion->ObtenerDatos($resultado);
+
+        if($numero_filas>0){
+            return $fila;
+            $obj_conexion->CerrarConexion($conexion);
+        }else{
+           return ['data'=>'vacio'];
+        }
+        
+    }
      
 }
 

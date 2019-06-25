@@ -7,7 +7,8 @@
         <link href="cp/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="cp/css/agencias.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
+        <link href="cp/css/toastr.css" rel="stylesheet" type="text/css"/>
         <title>Web Agencias - StarPeru</title>
         <style>
             #content > span { display: block; font-size: 20px; color: #b90007; line-height: 24px; } 
@@ -36,6 +37,10 @@
             }
             .text-muted {
                 color: #73818f !important;
+            }
+            .toast-top-right {
+                top: 30px;
+                right: 12px;
             }
         </style>
         <<!-- link href="App_Themes/PasarelaTheme/jquery-ui-1.8.16.custom.css" type="text/css" rel="stylesheet" />
@@ -383,6 +388,7 @@
         </div>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="cp/js/bootstrap.js" type="text/javascript"></script>
+        <script src="cp/js/toastr.js" type="text/javascript"></script>
         <script src="cp/js/jsLogin.js" type="text/javascript"></script>
         <script>
             $(function () {
