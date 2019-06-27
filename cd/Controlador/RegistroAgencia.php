@@ -21,13 +21,14 @@
 		$DNIFuncionario=$_REQUEST['DNIFuncionario'];
 		$Celular=$_REQUEST['Celular'];
 		$Email=$_REQUEST['Email'];
+		$Usuario=substr($RUC, 0,2).$DNIFuncionario;
 		$registro=$obj_empresa->RegistarEmpresa($RUC,$RazonSocial,$NombreComercial,$Direccion,$CodigoCiudad,$DNIFuncionario,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$TelefoniaOficina,$Celular);
 		if ($registro==1) {
 			$id=$obj_empresa->UltimaEmpresa();
 			if ($id) {
 				$pass=  $obj_personal->generaPassword();
-            	$Password=$obj_personal->encrypt($pass, "starperu");
-				$usuario=$obj_personal->GuardaGestor($id,$DNIFuncionario,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$Celular,$Password);
+            	$Password=$obj_personal->encrypt($pass, "s");
+				$usuario=$obj_personal->GuardaUsuario($id,$DNIFuncionario,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$Celular,$Password,$Usuario,'G');
 				if ($usuario==1) {
 					//entidad y usuario registrado y enviar correo a edita.gadea@starperu.com
 					$data['data']='ok';
@@ -55,5 +56,13 @@
 		$registro=$obj_empresa->VerificarRucEmpresa($RUC);
 		echo json_encode($registro);
 		return;
+	}
+
+	if (isset($_REQUEST['prueba']) && $_REQUEST['prueba']==1) {
+		$pass=  $obj_personal->generaPassword();
+        $p1=$obj_personal->encrypt($pass, "");
+        echo $p1;
+        echo '<br>------------<br>';
+        echo $obj_personal->decrypt($p1, "");
 	}
 ?>

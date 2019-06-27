@@ -211,12 +211,12 @@ class PersonalModelo{
         return $flag;
     }
 
-    public function GuardaGestor($CodigoEntidad,$DNI,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$Celular,$Password){
+    public function GuardaUsuario($CodigoEntidad,$DNI,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$Celular,$Password,$Usuario,$Tipo){
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,Celular,CodigoTipo,CodigoUsuario,Password,EstadoRegistro)
-                   VALUES ($CodigoEntidad,'$DNI','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$Celular','G','$DNI','$Password',0)";
+                   VALUES ($CodigoEntidad,'$DNI','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$Celular','$Tipo','$Usuario','$Password',0)";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
@@ -417,8 +417,9 @@ class PersonalModelo{
            $result = '';
            for($i=0; $i<strlen($string); $i++) {
               $char = substr($string, $i, 1);
-              $keychar = substr($key, ($i % strlen($key))-1, 1);
-              $char = chr(ord($char)+ord($keychar));
+              // $keychar = substr($key, ($i % strlen($key))-1, 1);
+              // $char = chr(ord($char)+ord($keychar));
+              $char = chr(ord($char));
               $result.=$char;
            }
            return base64_encode($result);
@@ -429,8 +430,9 @@ class PersonalModelo{
             $string = base64_decode($string);
             for($i=0; $i<strlen($string); $i++) {
                $char = substr($string, $i, 1);
-               $keychar = substr($key, ($i % strlen($key))-1, 1);
-               $char = chr(ord($char)-ord($keychar));
+               // $keychar = substr($key, ($i % strlen($key))-1, 1);
+               // $char = chr(ord($char)-ord($keychar));
+               $char = chr(ord($char));
                $result.=$char;
             }
             return $result;
