@@ -72,7 +72,7 @@ function LineaCredito(){
              <!-- fin div Credito Personal -->
        <div id="div-menu-opciones">
             <ul>
-                <li><div><a href="delegado_registro.php">Registrar Delegado</a></div></li>
+                <li><div><a href="delegado_registro.php">Registrar Usuario</a></div></li>
             </ul>
         </div>        
         <div style="margin:0px auto; width:1000px;">
