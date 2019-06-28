@@ -34,7 +34,8 @@ if ($_SESSION['s_cambio_clave'] == 1) {
             <link href="images/favicon_starperu.png" rel="shortcut icon" />
             <link href="css/modulo.css" rel="stylesheet" type="text/css" />
             <script src="js/jquery.js"></script>
-
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
             <style type="text/css">
 
                 body {
@@ -178,7 +179,204 @@ if ($_SESSION['s_cambio_clave'] == 1) {
                             </table>
                         </div>
                         <!-- fin div Credito Personal -->
-
+                        <div class="contenedor-modal">
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#miModal" style="background: -webkit-linear-gradient(#f01515, darkred) !important;">Condiciones Tarifarias</button>
+                        </div>
+                        <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                             <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3>Condiciones Tarifarias</h3>
+                                    </div>                                              
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active " data-toggle="tab" href="#promo" style="color: darkred;">PROMO</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link " data-toggle="tab" href="#simple" style="color: darkred;">SIMPLE</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link  " data-toggle="tab" href="#extra" style="color: darkred;">EXTRA</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link " data-toggle="tab" href="#full" style="color: darkred;">FULL</a>
+                                                </li>                                                       
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div id="promo" class="container tab-pane active"><br>
+                                                    <h5>PROMO(H, S y T)</h5>
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><strong>IDA</strong></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                                                    • Máximo de estadía 180 días.<br>
+                                                                    • Tarifa combinable con todas las clases.<br>
+                                                                    • Niños (2-11 años) pagan el 100% de la tarifa. Infantes (0-2 años) pagan el 100% de la tarifa.<br>
+                                                                    • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                                                    • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                                                    • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <thead>
+                                                            <tr>
+                                                                <th><strong>VUELTA</strong></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                                                    • Máximo de estadía 180 días.<br>
+                                                                    • Tarifa combinable con todas las clases.<br>
+                                                                    • Niños (2-11 años) pagan el 100% de la tarifa. Infantes (0-2 años) pagan el 100% de la tarifa.<br>
+                                                                    • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                                                    • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                                                    • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.<br>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="simple" class="container tab-pane fade"><br> 
+                                                        <h5>SIMPLE(A, B, D, E, O, P, R y Z)</h5>
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><strong>IDA</strong></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br> 
+                                                                        • Máximo de estadía 180 días.<br> 
+                                                                        • Tarifa combinable con todas las clases.<br> 
+                                                                        • Niños (2-11 años) pagan el 100% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa. <br> 
+                                                                        • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br> 
+                                                                        • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br> 
+                                                                        • Reembolsos permitidos sólo para futura transportación con cargo de $23.60. 
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><strong>VUELTA</strong></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                                                        • Máximo de estadía 180 días.<br>
+                                                                        • Tarifa combinable con todas las clases.<br>
+                                                                        • Niños (2-11 años) pagan el 100% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                                                        • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                                                        • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                                                        • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.<br>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                </div>
+                                                <div id="extra" class="container tab-pane fade"><br>
+                                                        <h5>EXTRA(J, M, N, Q, V, W y X)</h5>
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><strong>IDA</strong></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                                                        • Máximo de estadía 180 días.<br>
+                                                                        • Tarifa combinable con todas las clases.<br>
+                                                                        • Niños (2-11 años) pagan el 75% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                                                        • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                                                        • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                                                        • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><strong>VUELTA</strong></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                                                        • Máximo de estadía 180 días.<br>
+                                                                        • Tarifa combinable con todas las clases.<br>
+                                                                        • Niños (2-11 años) pagan el 75% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                                                        • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                                                        • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                                                        • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                </div>
+                                                <div id="full" class="container tab-pane fade"><br>
+                                                        <h5>FULL(K, L y Y)</h5>
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><strong>IDA</strong></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        • Totalmente gratis: Dos (2) piezas de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                                                        • Máximo de estadía 180 días.<br>
+                                                                        • Tarifa combinable con todas las clases.<br>
+                                                                        • Niños (2-11 años) pagan el 50% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                                                        • Cambio de vuelo, fecha, ruta o nombre sin cargo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                                                        • Reembolsos permitidos sin cargo
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><strong>VUELTA</strong></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        • Totalmente gratis: Dos (2) piezas de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                                                        • Máximo de estadía 180 días.<br>
+                                                                        • Tarifa combinable con todas las clases.<br>
+                                                                        • Niños (2-11 años) pagan el 50% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                                                        • Cambio de vuelo, fecha, ruta o nombre sin cargo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                                                        • Reembolsos permitidos sin cargo.
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="modal-footer">
+                                         <button type="button" class="btn btn-danger" data-dismiss="modal" style="background: -webkit-linear-gradient(#f01515, darkred) !important;">Cerrar</button>
+                                     </div>          
+                                 </div>           
+                             </div>           
+                        </div>            
 
                         <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr>
@@ -187,16 +385,10 @@ if ($_SESSION['s_cambio_clave'] == 1) {
                                 </td>
                             </tr>
                         </table>
-
-
                     </div>
-
                 </div>
-
             </div>
-        </div>
-
-    
+        </div>    
         
         <!-- Mensaje de bienvenida -->
       
