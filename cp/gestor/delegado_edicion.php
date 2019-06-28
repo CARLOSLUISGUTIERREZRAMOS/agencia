@@ -86,7 +86,7 @@ $directorio_imagen='../';
              <!-- fin div Credito Personal -->
             <div id="div-menu-opciones">
                 <ul>
-                    <li><div><a href="delegado_registro.php">Registrar Delegado</a></div></li>
+                    <li><div><a href="delegado_registro.php">Registrar Usuario</a></div></li>
                 </ul>
             </div>            
             <div style="width:1000px; margin:0 auto;">
@@ -94,7 +94,7 @@ $directorio_imagen='../';
                   <div id="div-delegado" style="width:1000px;margin: 0px auto;">
                        <table width="900" border="0" cellpadding="0" cellspacing="0" style="margin:10px 0 0 30px;background-color: #F0F0F0;">
                                 <tr>
-                                    <td height="26" colspan="5" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Delegado - Editar Datos Personales</td>
+                                    <td height="26" colspan="5" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Usuario - Editar Datos Personales</td>
                                 </tr>
                                 <tr>
                                     <td height="3" colspan="5"  style="background:#fdb813;"></td>
