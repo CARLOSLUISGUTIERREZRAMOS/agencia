@@ -235,6 +235,11 @@ function Focus(id_obj){
           <td></td>
         </tr>
         <tr>
+          <td height="20"></td>
+          <td align="center" style="color: darkred">El ticket solo se puede anular el mismo día de su emisión.</td>
+          <td></td>
+        </tr>
+        <tr>
           <td height="50"></td>
           <td></td>
           <td></td>
