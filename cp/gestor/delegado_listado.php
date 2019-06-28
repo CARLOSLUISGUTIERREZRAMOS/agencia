@@ -137,7 +137,7 @@ $directorio_imagen='../';
     <?php include('../includes/menu.php'); ?>
         <div id="div-menu-opciones">
             <ul>
-                <li><div><a href="delegado_registro.php">Registrar Delegado</a></div></li>
+                <li><div><a href="delegado_registro.php">Registrar Usuario</a></div></li>
             </ul>
         </div>
         <div style="width:1000px; margin:0px auto;">
