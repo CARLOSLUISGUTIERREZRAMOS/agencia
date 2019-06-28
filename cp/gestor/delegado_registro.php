@@ -91,7 +91,7 @@ $directorio_imagen='../';
                       
                             <table width="900" border="0" cellpadding="0" cellspacing="0" style="background-color: #F0F0F0;">
                                 <tr>
-                                    <td height="26" colspan="5"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Registro de Delegado</td>
+                                    <td height="26" colspan="5"  class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Registro de Usuario</td>
                                 </tr>
                                 <tr>
                                     <td height="3" colspan="5"  style="background:#fdb813;"></td>
