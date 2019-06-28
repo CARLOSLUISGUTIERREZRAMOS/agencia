@@ -178,8 +178,10 @@ if($_POST['paso2']==1){
                             $stop_vuelo='Si';
                         }
                         $duracion_vuelo=$datos_vuelo['@attributes']['JourneyDuration'];
-                        
-                        $vuelos_disponibles[$i]=array("Vuelo"=>$datos_vuelo['@attributes']['FlightNumber'],
+                        $cod_aerolinea = strlen($datos_vuelo['@attributes']['FlightNumber']);
+                        $cod_aerolinea = ($cod_aerolinea === 3) ? 'Peruvian' : 'StarPerú';
+                        $vuelo=$datos_vuelo['@attributes']['FlightNumber']."\n".$cod_aerolinea;
+                        $vuelos_disponibles[$i]=array("Vuelo"=>$vuelo,
                                                       "Salida"=>$datos_vuelo['@attributes']['DepartureDateTime'],
                                                       "Llegada"=>$datos_vuelo['@attributes']['ArrivalDateTime'],
                                                       "Escala"=>$stop_vuelo,
@@ -312,15 +314,18 @@ if($_POST['paso2']==1){
                             if($numero_escalas>0){
                                 $stop_vuelo='Si';
                             }
-                            $duracion_vuelo=$datos_vuelo['@attributes']['JourneyDuration'];    
-                                  $vuelos_disponibles[$i]=array("Vuelo"=>$datos_vuelo['@attributes']['FlightNumber'],
-                                                      "Salida"=>$datos_vuelo['@attributes']['DepartureDateTime'],
-                                                      "Llegada"=>$datos_vuelo['@attributes']['ArrivalDateTime'],
-                                                      "Escala"=>$stop_vuelo,
-                                                      "Duracion"=>$datos_vuelo['@attributes']['JourneyDuration'],
-                                                      "Clases"=>array()
-                                                    ); 
-                                $markeing_cabin=$datos_vuelo['MarketingCabin']['@attributes'];
+                            $duracion_vuelo=$datos_vuelo['@attributes']['JourneyDuration'];  
+                            $cod_aerolinea = strlen($datos_vuelo['@attributes']['FlightNumber']);
+                            $cod_aerolinea = ($cod_aerolinea === 3) ? 'Peruvian' : 'StarPerú';
+                            $vuelo=$datos_vuelo['@attributes']['FlightNumber']."\n".$cod_aerolinea;
+                            $vuelos_disponibles[$i] = array("Vuelo" => $vuelo,
+                                                    "Salida" => $datos_vuelo['@attributes']['DepartureDateTime'],
+                                                    "Llegada" => $datos_vuelo['@attributes']['ArrivalDateTime'],
+                                                    "Escala" => $stop_vuelo,
+                                                    "Duracion" => $datos_vuelo['@attributes']['JourneyDuration'],
+                                                    "Clases" => array()
+                                                   );
+                            $markeing_cabin=$datos_vuelo['MarketingCabin']['@attributes'];
                                 $tipo_cabina=$markeing_cabin['CabinType'];  
                                 $clases=$datos_vuelo['BookingClassAvail'];
                                 $numeros_clases=count($clases);
