@@ -133,7 +133,7 @@ $directorio_imagen='../';
                                         <input type="text" name="apem_d" id="apem_d" style="text-transform:uppercase;" value="<?php echo $apellido_materno;?>"/>
                                         <span class="span-requerido">*</span>
                                      </td>
-                                     <td  class="label_info" style="padding: 10px 10px 7px 0;">RPM:</td><td > <input type="text" name="rpm_d" id="rpm_d" maxlength="9" onKeyPress="javascript:return NumeroRPM(event);" value="<?php echo $RPM;?>"/></td>
+                                     <td  class="hidden" style="padding: 10px 10px 7px 0;"></td><td > <input type="hidden" name="rpm_d" id="rpm_d" maxlength="9" onKeyPress="javascript:return NumeroRPM(event);" value="<?php echo $RPM;?>"/></td>
                                 </tr>
                                 <tr>
                                     <td  class="label_info" style="padding: 10px 10px 7px 0;">nombres:</td><td >
@@ -141,8 +141,8 @@ $directorio_imagen='../';
                                        <input type="text" name="nom_d" id="nom_d" style="text-transform:uppercase;" value="<?php echo $nombres;?>"/>
                                        <span class="span-requerido">*</span>
                                     </td>
-                                   <td  class="label_info" style="padding: 10px 10px 7px 0;">RPC:</td><td >  <input type="text" name="rpc_d" id="rpc_d" maxlength="9" onKeyPress="javascript:return Numero(event);" value="<?php echo $RPC;?>"/></td>
-                                     <td  rowspan="2"><button style="cursor:pointer;" onClick="event.preventDefault();window.location.href='delegado_listado.php';" title="Volver al listado" ><img src="../images/table.png" /></button></td>
+                                    <td  class="hidden" style="padding: 10px 10px 7px 0;"></td><td >  <input type="hidden" name="rpc_d" id="rpc_d" maxlength="9" onKeyPress="javascript:return Numero(event);" value="<?php echo $RPC;?>"/></td>
+                                    <td  rowspan="2"><button style="cursor:pointer;" onClick="event.preventDefault();window.location.href='delegado_listado.php';" title="Volver al listado" ><img src="../images/table.png" /></button></td>
                                 </tr>
                                  <tr>
                                      <td  class="label_info" style="padding: 10px 10px 7px 0;">email:</td><td >
@@ -150,7 +150,7 @@ $directorio_imagen='../';
                                         <input type="text" name="email_d" id="email_d" value="<?php echo $email;?>"/>
                                         <span class="span-requerido">*</span>
                                      </td>
-                                    <td  class="label_info" style="padding: 10px 10px 7px 0;">nextel:</td><td > <input type="text" name="nextel_d" id="nextel_d" maxlength="8" onKeyPress="javascript:return NumeroNextel(event);" value="<?php echo $nextel;?>"/></td>
+                                    <td  class="hidden" style="padding: 10px 10px 7px 0;"></td><td > <input type="hidden" name="nextel_d" id="nextel_d" maxlength="8" onKeyPress="javascript:return NumeroNextel(event);" value="<?php echo $nextel;?>"/></td>
                                 </tr>
                                  <tr>
                                     <td height="10" colspan="5"  ></td>
