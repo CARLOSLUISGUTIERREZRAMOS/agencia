@@ -650,7 +650,7 @@ if($_POST['paso3']==1){
                            <td align="left" class="bgTable_data"><strong>'.$hora_llegada_ida.'</strong> '.$nombre_destino_price_ida.' ('.$destino_price_ida.')</td>
                            <td align="left" class="bgTable_data">'.$numero_vuelo_price_ida.'</td>
                            <td align="left" class="bgTable_data">'.$clase_price_ida.'</td>
-                           <td align="left" class="bgTable_data">25 KG</td>
+                           <td align="left" class="bgTable_data">23 KG</td>
                          </tr>
                          <tr>
                            <td align="left" class="subtitleTabla">Fecha de Regreso</td>
@@ -666,7 +666,7 @@ if($_POST['paso3']==1){
                            <td align="left" class="bgTable_data"><strong>'.$hora_llegada_vuelta.'</strong> '.$nombre_destino_price_vuelta.' ('.$destino_price_vuelta.')</td>
                            <td align="left" class="bgTable_data">'.$numero_vuelo_price_vuelta.'</td>
                            <td align="left" class="bgTable_data">'.$clase_price_vuelta.'</td>
-                            <td align="left" class="bgTable_data">25 KG</td>
+                            <td align="left" class="bgTable_data">23 KG</td>
                          </tr>
                  </table>';
    
@@ -732,7 +732,7 @@ if($_POST['paso3']==1){
                            <td align="left" class="bgTable_data"><strong>'.$hora_llegada_ida.'</strong> '.$nombre_destino_price_ida.' ('.$destino_price_ida.')</td>
                            <td align="left" class="bgTable_data">'.$numero_vuelo_price_ida.'</td>
                            <td align="left" class="bgTable_data">'.$clase_price_ida.'</td>
-                           <td align="left" class="bgTable_data">25 KG</td>
+                           <td align="left" class="bgTable_data">23 KG</td>
                          </tr>
 
                  </table>';
@@ -1175,7 +1175,7 @@ if($_POST['paso4']==1){
                   <td align="left" class="bgTable_data"><strong>'.$hora_llegada_ida_4.'</strong> '.$nombre_destino_4.' ('.$destino_ida_4.')</td>
                   <td align="left" class="bgTable_data">'.$numero_vuelo_ida_4.'</td>
                   <td align="left" class="bgTable_data">'.$clase_ida_4.'</td>
-                  <td align="left" class="bgTable_data">25 KG</td>
+                  <td align="left" class="bgTable_data">23 KG</td>
                 </tr>
                 <tr>
                   <td align="left" class="subtitleTabla">Fecha de Regreso</td>
@@ -1191,7 +1191,7 @@ if($_POST['paso4']==1){
                   <td align="left" class="bgTable_data"><strong>'.$hora_llegada_vuelta_4.'</strong> '.$nombre_destino_vuelta_4.' ('.$destino_vuelta_4.')</td>
                   <td align="left" class="bgTable_data">'.$numero_vuelo_vuelta_4.'</td>
                   <td align="left" class="bgTable_data">'.$clase_vuelta_4.'</td>
-                   <td align="left" class="bgTable_data">25 KG</td>
+                   <td align="left" class="bgTable_data">23 KG</td>
                 </tr>
         </table>';
    
@@ -1218,7 +1218,7 @@ if($_POST['paso4']==1){
                   <td align="left" class="bgTable_data"><strong>'.$hora_llegada_ida_4.'</strong> '.$nombre_destino_4.' ('.$destino_ida_4.')</td>
                   <td align="left" class="bgTable_data">'.$numero_vuelo_ida_4.'</td>
                   <td align="left" class="bgTable_data">'.$clase_ida_4.'</td>
-                  <td align="left" class="bgTable_data">25 KG</td>
+                  <td align="left" class="bgTable_data">23 KG</td>
                 </tr></table>';
  }
  
@@ -1847,7 +1847,7 @@ if($_POST['paso5']==1){
                   <td align="left" class="bgTable_data"><strong>'.$hora_llegada_ida_5.'</strong> '.$nombre_destino_5.' ('.$destino_ida_5.')</td>
                   <td align="left" class="bgTable_data">'.$numero_vuelo_ida_5.'</td>
                   <td align="left" class="bgTable_data">'.$clase_ida_5.'</td>
-                  <td align="left" class="bgTable_data">25 KG</td>
+                  <td align="left" class="bgTable_data">23 KG</td>
                 </tr>
                 <tr>
                   <td align="left" class="subtitleTabla">Fecha de Regreso</td>
@@ -1863,7 +1863,7 @@ if($_POST['paso5']==1){
                   <td align="left" class="bgTable_data"><strong>'.$hora_llegada_vuelta_5.'</strong> '.$nombre_destino_vuelta_5.' ('.$destino_vuelta_5.')</td>
                   <td align="left" class="bgTable_data">'.$numero_vuelo_vuelta_5.'</td>
                   <td align="left" class="bgTable_data">'.$clase_vuelta_5.'</td>
-                   <td align="left" class="bgTable_data">25 KG</td>
+                   <td align="left" class="bgTable_data">23 KG</td>
                 </tr>
         </table>';
    
@@ -1890,7 +1890,7 @@ if($_POST['paso5']==1){
                   <td align="left" class="bgTable_data"><strong>'.$hora_llegada_ida_5.'</strong> '.$nombre_destino_5.' ('.$destino_ida_5.')</td>
                   <td align="left" class="bgTable_data">'.$numero_vuelo_ida_5.'</td>
                   <td align="left" class="bgTable_data">'.$clase_ida_5.'</td>
-                  <td align="left" class="bgTable_data">25 KG</td>
+                  <td align="left" class="bgTable_data">23 KG</td>
                 </tr></table>';
  }
  
@@ -2829,7 +2829,7 @@ if($_POST['confirmacion']==1){
                   <td align="left" class="bgTable_data"><strong>'.$hora_llegada_ida_cc.'</strong> '.$nombre_destino_cc.' ('.$destino_ida_cc.')</td>
                   <td align="left" class="bgTable_data">'.$numero_vuelo_ida_cc.'</td>
                   <td align="left" class="bgTable_data">'.$clase_ida_cc.'</td>
-                  <td align="left" class="bgTable_data">25 KG</td>
+                  <td align="left" class="bgTable_data">23 KG</td>
                 </tr>
                 <tr>
                   <td align="left" class="subtitleTabla">Fecha de Regreso</td>
@@ -2845,7 +2845,7 @@ if($_POST['confirmacion']==1){
                   <td align="left" class="bgTable_data"><strong>'.$hora_llegada_vuelta_cc.'</strong> '.$nombre_destino_vuelta_cc.' ('.$destino_vuelta_cc.')</td>
                   <td align="left" class="bgTable_data">'.$numero_vuelo_vuelta_cc.'</td>
                   <td align="left" class="bgTable_data">'.$clase_vuelta_cc.'</td>
-                   <td align="left" class="bgTable_data">25 KG</td>
+                   <td align="left" class="bgTable_data">23 KG</td>
                 </tr>
         </table>';
    
@@ -2872,7 +2872,7 @@ if($_POST['confirmacion']==1){
                   <td align="left" class="bgTable_data"><strong>'.$hora_llegada_ida_cc.'</strong> '.$nombre_destino_cc.' ('.$destino_ida_cc.')</td>
                   <td align="left" class="bgTable_data">'.$numero_vuelo_ida_cc.'</td>
                   <td align="left" class="bgTable_data">'.$clase_ida_cc.'</td>
-                  <td align="left" class="bgTable_data">25 KG</td>
+                  <td align="left" class="bgTable_data">23 KG</td>
                 </tr></table>';
  }
  
