@@ -246,9 +246,6 @@ if($_POST['guardar_delegado']==1){
                 $telefono_oficina=utf8_encode($delegado->getTelefonoOficina());
                 $anexo=utf8_encode($delegado->getAnexo());
                 $celular=utf8_encode($delegado->getCelular());
-                $RPM=utf8_encode($delegado->getRPM());
-                $RPC=utf8_encode($delegado->getRPC());
-                $nextel=utf8_encode($delegado->getNextel());
                 
                 $tabla_info_delegado='<table width="900" border="0" cellpadding="0" cellspacing="0" style="margin:10px 0 0 30px;background-color: #F0F0F0;">'."\n";
                 $tabla_info_delegado.='<tr>'."\n";
@@ -352,37 +349,6 @@ if($_POST['guardar_delegado']==1){
                 }else{
                     $tabla_info_delegado.='<span style="font-style:italic;">[informaci&oacute;n no disponible]</span>'."\n";
                 }
-                $tabla_info_delegado.='</td>'."\n";
-                $tabla_info_delegado.='</tr>'."\n";
-                $tabla_info_delegado.='<tr>'."\n";
-                $tabla_info_delegado.='<td class="label_info">RPM:</td><td class="span_info">';
-                if($RPM!=''){
-                     $tabla_info_delegado.=$RPM;
-                }else{
-                    $tabla_info_delegado.='<span style="font-style:italic;">[informaci&oacute;n no disponible]</span>';
-                }
-                $tabla_info_delegado.='</td>'."\n";
-                $tabla_info_delegado.='</tr>'."\n";
-		$tabla_info_delegado.='<tr>'."\n";
-                
-                 $tabla_info_delegado.='<td class="label_info">RPC:</td><td class="span_info">';
-                if($RPC!=''){
-                     $tabla_info_delegado.=$RPC;
-                }else{
-                    $tabla_info_delegado.='<span style="font-style:italic;">[informaci&oacute;n no disponible]</span>';
-                }
-                $tabla_info_delegado.='</td>'."\n";
-                $tabla_info_delegado.='</tr>'."\n";
-                $tabla_info_delegado.='<tr>'."\n";
-                $tabla_info_delegado.='<td class="label_info">nextel:</td><td class="span_info">';
-                if($nextel!=''){
-                     $tabla_info_delegado.=$nextel;
-                }else{
-                    $tabla_info_delegado.='<span style="font-style:italic;">[informaci&oacute;n no disponible]</span>';
-                }
-                $tabla_info_delegado.='</td>'."\n";
-                $tabla_info_delegado.='</tr>'."\n";
-                $tabla_info_delegado.='</table>'."\n"; 
             }
             
         }else{

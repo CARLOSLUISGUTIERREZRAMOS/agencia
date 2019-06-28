@@ -122,7 +122,7 @@ function LineaCredito(){
                     <tr>
                            <td class="label_info">celular:</td><td class="span_info"><?php if($_SESSION['s_celular']!=''){ echo $_SESSION['s_celular'];}else{ echo '<span style="font-style:italic;">[informaci&oacute;n no disponible]</span>';}?></td>
                     </tr>
-                    <tr>
+<!--                    <tr>
                     	<td class="label_info">RPM:</td><td class="span_info"><?php if($_SESSION['s_rpm']!=''){ echo $_SESSION['s_rpm'];}else{ echo '<span style="font-style:italic;">[informaci&oacute;n no disponible]</span>';}?></td>
                     </tr>
 	            <tr>
@@ -130,7 +130,7 @@ function LineaCredito(){
                     </tr>
                     <tr>
                     	<td class="label_info">nextel:</td><td class="span_info"><?php if($_SESSION['s_nextel']!=''){ echo $_SESSION['s_nextel'];}else{ echo '<span style="font-style:italic;">[informaci&oacute;n no disponible]</span>';}?></td>
-                    </tr>
+                    </tr>-->
                      <tr>
                         <td height="10" colspan="4"  ></td>
                     </tr>
