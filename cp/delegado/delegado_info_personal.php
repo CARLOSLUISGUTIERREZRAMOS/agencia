@@ -11,7 +11,7 @@
 	require_once("../../config.php");
 ?>
 <?php ob_start(); ?>
-	<link href="<?=$url?>/cp/css/modulo.css" rel="stylesheet" type="text/css" />
+	<link href="<?=$url?>/cp/css/gestor.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
  		function getLineaCredito(){   
             var mensaje_linea_credito=0;

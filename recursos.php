@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <title>Web Agencias - StarPeru</title>
-        <link href="images/favicon_starperu.png" rel="shortcut icon" />
+        <link href="<?=$url?>/cp/images/favicon_starperu.png" rel="shortcut icon" />
         <link href="<?=$url?>/cp/css/modulo.css" rel="stylesheet" type="text/css" />
         <script src="<?=$url?>/cp/js/jquery.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"  crossorigin="anonymous" />
