@@ -180,8 +180,7 @@ if($_POST['paso2']==1){
                         $duracion_vuelo=$datos_vuelo['@attributes']['JourneyDuration'];
                         $cod_aerolinea = strlen($datos_vuelo['@attributes']['FlightNumber']);
                         $cod_aerolinea = ($cod_aerolinea === 3) ? 'Peruvian' : 'StarPerú';
-                        $vuelo=$datos_vuelo['@attributes']['FlightNumber']."\n".$cod_aerolinea;
-                        $vuelos_disponibles[$i]=array("Vuelo"=>$vuelo,
+                        $vuelos_disponibles[$i]=array("Vuelo"=>$datos_vuelo['@attributes']['FlightNumber'],
                                                       "Salida"=>$datos_vuelo['@attributes']['DepartureDateTime'],
                                                       "Llegada"=>$datos_vuelo['@attributes']['ArrivalDateTime'],
                                                       "Escala"=>$stop_vuelo,
@@ -245,16 +244,17 @@ if($_POST['paso2']==1){
 
                                 }
                                 $clases_vector=ordenar_tarifas_kiu($clases_vector, "tarifa",true);
-           
+//                                var_dump($cod_aerolinea);
                                   if(count($disponibles)>0){
                                   $filas.='<tr>'."\n";
-                                  $filas.='<td td height="40" class="bgTable-data" align="center"><strong>'.$vuelos_disponibles[$w]["Vuelo"].'</strong></td>'."\n";
+                                  $filas.='<td td height="40" class="bgTable-data" align="center"><strong>'.$vuelos_disponibles[$w]["Vuelo"]."\n".$cod_aerolinea.'</strong></td>'."\n";
                                   $filas.='<td class="bgTable-data" align="center">'.substr($vuelos_disponibles[$w]["Salida"], 11,17).'</td>'."\n";
                                   $filas.='<td class="bgTable-data" align="center">'.substr($vuelos_disponibles[$w]["Llegada"], 11,17).'</td>'."\n";
                                   $filas.='<td class="bgTable-data" align="center">'.$vuelos_disponibles[$w]["Duracion"].'</td>'."\n";
                                   $filas.='<td class="bgTable-data" align="center">'.$vuelos_disponibles[$w]["Escala"].'</td>'."\n";
 
-                                   for($p=0;$p<count($clases_vector);$p++){    
+                                   for($p=0;$p<count($clases_vector);$p++){                    
+
 
                                         $filas.='<td><table><tr><td width="70" class="subtitleTableSFlexi td_clase_B" align="center" style="background-color: #DEC8BF; color: #5A3F2F">'."\n";
                                         $filas.='<input type="radio" id="vuelo_ida" name="vuelo_ida" value="'.$clases_vector[$p]["tarifa"].'#'.$vuelos_disponibles[$w]["Vuelo"].'#'.$vuelos_disponibles[$w]["Salida"].'#'.$vuelos_disponibles[$w]["Llegada"].'#'.$clases_vector[$p]["clase"].'#'.$origen.'#'.$destino.'" onclick="EnviaImporteD()"><br/>Clase '.$clases_vector[$p]["clase"]."\n";
@@ -317,8 +317,7 @@ if($_POST['paso2']==1){
                             $duracion_vuelo=$datos_vuelo['@attributes']['JourneyDuration'];  
                             $cod_aerolinea = strlen($datos_vuelo['@attributes']['FlightNumber']);
                             $cod_aerolinea = ($cod_aerolinea === 3) ? 'Peruvian' : 'StarPerú';
-                            $vuelo=$datos_vuelo['@attributes']['FlightNumber']."\n".$cod_aerolinea;
-                            $vuelos_disponibles[$i] = array("Vuelo" => $vuelo,
+                            $vuelos_disponibles[$i] = array("Vuelo" => $datos_vuelo['@attributes']['FlightNumber'],
                                                     "Salida" => $datos_vuelo['@attributes']['DepartureDateTime'],
                                                     "Llegada" => $datos_vuelo['@attributes']['ArrivalDateTime'],
                                                     "Escala" => $stop_vuelo,
@@ -380,7 +379,7 @@ if($_POST['paso2']==1){
                                 if(count($disponibles)>0){
 
                                 $filas1.='<tr>'."\n";
-                                $filas1.='<td td height="40" class="bgTable-data" align="center"><strong>'.$vuelos_disponibles[$w]["Vuelo"].'</strong></td>'."\n";
+                                $filas1.='<td td height="40" class="bgTable-data" align="center"><strong>'.$vuelos_disponibles[$w]["Vuelo"]."\n".$cod_aerolinea.'</strong></td>'."\n";
                                 $filas1.='<td class="bgTable-data" align="center">'.substr($vuelos_disponibles[$w]["Salida"], 11,17).'</td>'."\n";
                                 $filas1.='<td class="bgTable-data" align="center">'.substr($vuelos_disponibles[$w]["Llegada"], 11,17).'</td>'."\n";
                                 $filas1.='<td class="bgTable-data" align="center">'.$vuelos_disponibles[$w]["Duracion"].'</td>'."\n";
@@ -597,7 +596,7 @@ if($_POST['paso3']==1){
             , 'DocType'=>'DNI'
             , 'Remark'=>'Pasajero necesita silla de ruedas'
             ),$err); 
-    
+
             $cabecera=$res_price['PricedItineraries']['PricedItinerary']['AirItinerary'];
             $ida_vuelta=$cabecera['OriginDestinationOptions']['OriginDestinationOption']['FlightSegment'];
 
@@ -692,7 +691,6 @@ if($_POST['paso3']==1){
                 , 'Remark'=>'Pasajero necesita silla de ruedas'
                 ),$err); 
 
-    
             $cabecera=$res_price['PricedItineraries']['PricedItinerary']['AirItinerary'];
             $ida_vuelta=$cabecera['OriginDestinationOptions']['OriginDestinationOption']['FlightSegment'];
 
@@ -1394,7 +1392,7 @@ $table_pasajeros=' <table width="898" border="0" cellpadding="0" cellspacing="0"
                                 <td width="140" align="left">Apellido Paterno <span class="colorRed">* </span>:</td>
                                 <td width="1" style="background-color: #FFFFFF"></td>
                                 <td width="8"></td>
-                                <td width="140" align="left">Apellido Materno <span class="colorRed">* </span>:</td>
+                                <td width="140" align="left">Apellido Materno:</td>
                                 <td width="1" style="background-color: #FFFFFF"></td>
                                 <td width="8"></td>
                                 <td colspan="4" align="left">Documento de Identidad <span class="colorRed">* </span>:</td>
@@ -1501,7 +1499,7 @@ $table_pasajeros=' <table width="898" border="0" cellpadding="0" cellspacing="0"
                                         <td width="140" align="left">Apellido Paterno <span class="colorRed">* </span>:</td>
                                         <td width="1" style="background-color: #FFFFFF"></td>
                                         <td width="8"></td>
-                                        <td width="140" align="left">Apellido Materno <span class="colorRed">* </span>:</td>
+                                        <td width="140" align="left">Apellido Materno :</td>
                                         <td width="1" style="background-color: #FFFFFF"></td>
                                         <td width="8"></td>
                                         <td colspan="4" align="left">Documento de Identidad <span class="colorRed">* </span>:</td>
@@ -1633,7 +1631,7 @@ $table_pasajeros=' <table width="898" border="0" cellpadding="0" cellspacing="0"
                                 <td width="140" align="left">Apellido Paterno <span class="colorRed">* </span>:</td>
                                 <td width="1" style="background-color: #FFFFFF"></td>
                                 <td width="8"></td>
-                                <td width="140" align="left">Apellido Materno <span class="colorRed">* </span>:</td>
+                                <td width="140" align="left">Apellido Materno :</td>
                                 <td width="1" style="background-color: #FFFFFF"></td>
                                 <td width="8"></td>
                                 <td colspan="4" align="left">Documento de Identidad <span class="colorRed">* </span>:</td>
