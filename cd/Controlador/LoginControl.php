@@ -46,7 +46,6 @@ if(isset($_POST['login'])){
                 $_SESSION["s_cambio_clave"] = $Personal->getCambioClave();
                 $_SESSION["s_tipo"] = $Personal->getCodigoTipo();
                 $_SESSION["email_gestor"] = $obj_personal->ObtenerEmailGestor($_SESSION["s_entidad"]);
-
                 header('Location:../../cp/panel.php');
 
 
