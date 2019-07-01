@@ -1392,7 +1392,7 @@ $table_pasajeros=' <table width="898" border="0" cellpadding="0" cellspacing="0"
                                 <td width="140" align="left">Apellido Paterno <span class="colorRed">* </span>:</td>
                                 <td width="1" style="background-color: #FFFFFF"></td>
                                 <td width="8"></td>
-                                <td width="140" align="left">Apellido Materno <span class="colorRed">* </span>:</td>
+                                <td width="140" align="left">Apellido Materno:</td>
                                 <td width="1" style="background-color: #FFFFFF"></td>
                                 <td width="8"></td>
                                 <td colspan="4" align="left">Documento de Identidad <span class="colorRed">* </span>:</td>
@@ -1499,7 +1499,7 @@ $table_pasajeros=' <table width="898" border="0" cellpadding="0" cellspacing="0"
                                         <td width="140" align="left">Apellido Paterno <span class="colorRed">* </span>:</td>
                                         <td width="1" style="background-color: #FFFFFF"></td>
                                         <td width="8"></td>
-                                        <td width="140" align="left">Apellido Materno <span class="colorRed">* </span>:</td>
+                                        <td width="140" align="left">Apellido Materno :</td>
                                         <td width="1" style="background-color: #FFFFFF"></td>
                                         <td width="8"></td>
                                         <td colspan="4" align="left">Documento de Identidad <span class="colorRed">* </span>:</td>
@@ -1631,7 +1631,7 @@ $table_pasajeros=' <table width="898" border="0" cellpadding="0" cellspacing="0"
                                 <td width="140" align="left">Apellido Paterno <span class="colorRed">* </span>:</td>
                                 <td width="1" style="background-color: #FFFFFF"></td>
                                 <td width="8"></td>
-                                <td width="140" align="left">Apellido Materno <span class="colorRed">* </span>:</td>
+                                <td width="140" align="left">Apellido Materno :</td>
                                 <td width="1" style="background-color: #FFFFFF"></td>
                                 <td width="8"></td>
                                 <td colspan="4" align="left">Documento de Identidad <span class="colorRed">* </span>:</td>

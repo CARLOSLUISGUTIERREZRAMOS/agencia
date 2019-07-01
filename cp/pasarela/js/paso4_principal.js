@@ -30,10 +30,7 @@ function  ValidarCamposDetalle(){
                 alert("El DNI del Adulto N° "+i+" debe contener 8 dígitos");
                 return false;
              }
-            if ($.trim($('#materno_a_' + i).val()) == "") {
-                alert("Por favor ingrese el Apellido Materno del Adulto N° " + i);
-                return false;
-            }
+
             if (ComprobarCaractValido($('#materno_a_' + i).val()) != 1) {
                 alert("El Apellido Materno del Adulto N° " + i + " contiene caracteres incorrectos");
                 return false;
@@ -107,10 +104,10 @@ function  ValidarCamposDetalle(){
                 alert("El DNI del Niño N° "+j+" debe contener 8 dígitos");
                 return false;
              }
-            if ($.trim($('#materno_m_' + j).val()) == "") {
-                alert("Por favor ingrese el Apellido Materno del Niño N° " + j);
-                return false;
-            }
+//            if ($.trim($('#materno_m_' + j).val()) == "") {
+//                alert("Por favor ingrese el Apellido Materno del Niño N° " + j);
+//                return false;
+//            }
             if (ComprobarCaractValido($('#materno_m_' + i).val()) != 1) {
                 alert("El Apellido Materno del Niño N° " + i + " contiene caracteres incorrectos");
                 return false;
@@ -181,10 +178,10 @@ function  ValidarCamposDetalle(){
                 alert("El DNI del Infante N° "+k+" debe contener 8 dígitos");
                 return false;
              }
-            if ($.trim($('#materno_i_' + k).val()) == "") {
-                alert("Por favor ingrese el Apellido Materno del Infante N° " + k);
-                return false;
-            }
+//            if ($.trim($('#materno_i_' + k).val()) == "") {
+//                alert("Por favor ingrese el Apellido Materno del Infante N° " + k);
+//                return false;
+//            }
             if (ComprobarCaractValido($('#materno_i_' + i).val()) != 1) {
                 alert("El Apellido Materno del Infante N° " + i + " contiene caracteres incorrectos");
                 return false;
