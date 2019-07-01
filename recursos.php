@@ -13,6 +13,26 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"  crossorigin="anonymous" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+			function getLineaCredito(){   
+	            var mensaje_linea_credito=0;
+	            var codigo_entidad=<?php echo $_SESSION["s_entidad"];?>;
+	            $.ajax({
+	                url:"<?=$url?>/cd/Controlador/MovimientoControl.php",
+	                type: "POST", 
+	                data:"obtener_linea_credito=1&codigo_entidad"+codigo_entidad,
+	                success: function(mensaje){
+	                      mensaje_linea_credito=parseFloat($.trim(mensaje)).toFixed(2); 
+	                      $("#loadLinea").html('USD '+mensaje_linea_credito);  
+	                },
+	            });
+	        }
+
+			function LineaCredito(){    
+			    getLineaCredito();
+			    setInterval("getLineaCredito()", 1000);   
+			}
+		</script>
         <?php 
         	if (isset($style_script_contenido)) {
         		echo $style_script_contenido;

@@ -15,24 +15,6 @@
 <?php ob_start(); ?>
 	<link href="<?=$url?>/cp/css/gestor.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
-		function getLineaCredito(){   
-            var mensaje_linea_credito=0;
-            var codigo_entidad=<?php echo $_SESSION["s_entidad"];?>;
-            $.ajax({
-                url:"../../cd/Controlador/MovimientoControl.php",
-                type: "POST", 
-                data:"obtener_linea_credito=1&codigo_entidad"+codigo_entidad,
-                success: function(mensaje){
-                      mensaje_linea_credito=parseFloat($.trim(mensaje)).toFixed(2); 
-                      $("#loadLinea").html('USD '+mensaje_linea_credito);  
-                },
-            });
-        }
-
-		function LineaCredito(){    
-		    getLineaCredito();
-		    setInterval("getLineaCredito()", 1000);   
-		}
 	</script>
 	<?php $style_script_contenido = ob_get_contents(); ?>
 <?php ob_end_clean(); ?>

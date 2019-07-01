@@ -57,29 +57,6 @@
                 cerrarAvisoIngreso();
             })
         });
-        function getLineaCredito() {
-            var mensaje_linea_credito = 0;
-            var codigo_entidad =<?php echo $_SESSION["s_entidad"]; ?>;
-
-            $.ajax({
-                url: "<?=$url?>/cd/Controlador/PasarelaControl.php",
-                type: "POST",
-                data: "obtener_linea_credito=1&codigo_entidad=" + codigo_entidad,
-
-                success: function (mensaje) {
-
-                    mensaje_linea_credito = parseFloat($.trim(mensaje)).toFixed(2);
-                    $("#loadLinea").html('USD ' + mensaje_linea_credito);
-                },
-            });
-        }
-
-
-        function LineaCredito()
-        {
-            getLineaCredito();
-            setInterval("getLineaCredito()", 1000);
-        }
 
         function enviaFormSeguridad()
         {
