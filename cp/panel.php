@@ -62,7 +62,7 @@
             var codigo_entidad =<?php echo $_SESSION["s_entidad"]; ?>;
 
             $.ajax({
-                url: "../cd/Controlador/PasarelaControl.php",
+                url: "<?=$url?>/cd/Controlador/PasarelaControl.php",
                 type: "POST",
                 data: "obtener_linea_credito=1&codigo_entidad=" + codigo_entidad,
 
