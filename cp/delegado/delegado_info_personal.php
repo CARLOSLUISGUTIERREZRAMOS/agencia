@@ -11,10 +11,12 @@
 	require_once("../../config.php");
 ?>
 <?php ob_start(); ?>
-	<link href="<?= CSS_PATH?>css/modulo.css" rel="stylesheet" type="text/css" />
+	<link href="<?=$url?>/cp/css/modulo.css" rel="stylesheet" type="text/css" />
 	<?php $style_script_contenido = ob_get_contents(); ?>
 <?php ob_end_clean(); ?>
+
 <?php require_once(HTML_RECURSO_PATH); ?>
+
 <div style="margin: 0px auto;width: 1000px;height: 350px;">
     <br>
     <br>
