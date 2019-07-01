@@ -8,4 +8,8 @@
      
 	defined("FOOTER_PATH")
     	or define("FOOTER_PATH", realpath(dirname(__FILE__) . '/footer.php'));
+    defined("CSS_PATH")
+    	or define("CSS_PATH", realpath(dirname(__FILE__) . '/cp/css/'));
+    defined("JS_PATH")
+    	or define("JS_PATH", realpath(dirname(__FILE__) . '/cp/js/'));
 ?>

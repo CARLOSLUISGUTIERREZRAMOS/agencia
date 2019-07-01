@@ -37,7 +37,7 @@ $Tipo=$_SESSION['s_tipo'];
             <a href="<?php echo $directorio;?>panel.php">
                 <img src="<?php echo $directorio;?>images/LogoStar.png" title="" border="0" />
             </a>
-            <!-- <div class="logoEntidadCambiar _23fv">
+            <div class="logoEntidadCambiar _23fv">
                 <div class="_156n _23fw _1o59" data-ft="{&quot;tn&quot;:&quot;+B&quot;}">
                     <a href="#" class="_156p _1o5e" ajaxify="/profile/picture/menu_dialog/?context_id=u_0_11&amp;profile_id=100003814295686" rel="dialog" role="button" id="u_0_1d" tabindex="0">
                         <div class="_3-95">
@@ -45,7 +45,7 @@ $Tipo=$_SESSION['s_tipo'];
                         </div>Actualizar
                     </a>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div id="div-header-info-usuario">
             <div id="div-info-usuario-content">
