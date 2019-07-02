@@ -62,7 +62,6 @@
 		    });
 
 		    $(document).on('change','#LogoEntidad',function (ar) {
-		        debugger
 		        var files = this.files; // FileList object
 		        var frame=$("#div-header-logo img");
 		        if (files.length==0) {
@@ -90,15 +89,19 @@
 		        formData.append('CodigoEntidad',codigo_entidad);
 		        formData.append('cambiar_logo',1);
 		        $.ajax({
-		            url:"<?=$url?>/cd/Controlador/MovimientoControl.php",
+		            url:"<?=$url?>/cd/Controlador/AgenciaControl.php",
 		            type: "POST", 
 		            data:formData,
 		            contentType: false,
         			processData: false,
 		            success: function(mensaje){
-		                debugger
-		                // mensaje_linea_credito=parseFloat($.trim(mensaje)).toFixed(2); 
-		                // $("#loadLinea").html('USD '+mensaje_linea_credito);  
+		            	var data=JSON.parse(mensaje);
+		            	if (data.success) {
+		            		console.log(data.success);
+		            	}
+		            	else{
+		            		console.log(data.error)
+		            	}
 		            },
 		        });
 		    }
@@ -111,8 +114,8 @@
 	                type: "POST", 
 	                data:"obtener_linea_credito=1&codigo_entidad"+codigo_entidad,
 	                success: function(mensaje){
-	                      mensaje_linea_credito=parseFloat($.trim(mensaje)).toFixed(2); 
-	                      $("#loadLinea").html('USD '+mensaje_linea_credito);  
+	                    mensaje_linea_credito=parseFloat($.trim(mensaje)).toFixed(2); 
+	                    $("#loadLinea").html('USD '+mensaje_linea_credito);  
 	                },
 	            });
 	        }

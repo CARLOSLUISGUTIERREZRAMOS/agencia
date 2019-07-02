@@ -113,6 +113,56 @@ class EmpresaModelo{
         return $flag;
     }
 
+    public function ObtenerEmpresa($Limit=null)
+    {
+        $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT * FROM entidad ORDER BY CodigoEntidad ASC ";
+        if ($Limit) {
+            $consulta.=" LIMIT  $Limit";
+        }
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        if($numero_filas>0){
+            $dato=array();
+            while($fila = $obj_conexion->ObtenerDatos($resultado)){
+                $obj = new stdClass();
+                foreach ($fila as $name => $value) {
+                    $obj->{$name}=$value;
+                }
+                $dato[]=$obj;
+            }
+            $obj_conexion->CerrarConexion($conexion);
+            return $dato;
+        }else{
+           return 'Sin datos';
+        }
+    }
+
+    public function ObtenerEmpresaFindID($CodigoEntidad)
+    {
+        $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT * FROM entidad WHERE CodigoEntidad=$CodigoEntidad";
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        $filas=$obj_conexion->ObtenerDatos($resultado);
+        if($numero_filas>0){
+            $obj = new stdClass();
+            foreach ($filas as $name => $value) {
+                $obj->{$name}=$value;
+            }
+            $obj_conexion->CerrarConexion($conexion);
+            return $obj;
+        }else{
+           return 'Sin datos';
+        }
+    }
+
+
+
     public function VerificarRucEmpresa($ruc){
         
         $obj_conexion=new ConexionBD();

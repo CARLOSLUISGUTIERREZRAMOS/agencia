@@ -3,14 +3,13 @@ session_start();
 require_once("../../cn/STARPERU/Modelo/PersonalModelo.php");
 require_once("../../cn/STARPERU/Modelo/EmpresaModelo.php");
 
-$obj_personal=new PersonalModelo();
 
 
 if(isset($_POST['login'])){
+
+    $obj_personal=new PersonalModelo();
+    $obj_agencia=new EmpresaModelo();
     if($_POST['login']==1){
-
-
-
         if (isset($_POST['usuario'])) {
             $usuario = (get_magic_quotes_gpc()) ? $_POST['usuario'] : addslashes($_POST['usuario']);
         }
@@ -39,6 +38,8 @@ if(isset($_POST['login'])){
                 $_SESSION["s_nextel"] = $Personal->getNextel();
                 $_SESSION["s_entidad"] = $Personal->getCodigoEntidad();
                 $razon_social= $obj_personal->ObtenerNombreEntidad($_SESSION["s_entidad"]);
+                $agencia=$obj_agencia->ObtenerEmpresaFindID($_SESSION["s_entidad"]);
+                $_SESSION["s_logo_entidad"] = $agencia->LogoEntidad;
                 if($razon_social!=""){
                     $_SESSION["nombre_entidad"] =$razon_social;
                 }
@@ -58,13 +59,12 @@ if(isset($_POST['login'])){
 }
 
 if(isset($_POST['deuda'])){
-if ($_POST['deuda']==1){
+    if ($_POST['deuda']==1){
         $usuario = (get_magic_quotes_gpc()) ? $_POST['usuario'] : addslashes($_POST['usuario']);
         $empresa = new EmpresaModelo();
 
         $deuda = $empresa->ObtenerEmpresaPermitida($usuario);
         echo $deuda.'*3';
-        
     }
 }
 

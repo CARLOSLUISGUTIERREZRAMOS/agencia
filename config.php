@@ -19,5 +19,4 @@
     	or define("MENU_PATH", realpath(dirname(__FILE__) . '/menu.php'));
 	defined("FOOTER_PATH")
     	or define("FOOTER_PATH", realpath(dirname(__FILE__) . '/footer.php'));
-    	echo strtolower(pathinfo('HOLA.COM', PATHINFO_EXTENSION));die;
 ?>

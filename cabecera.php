@@ -5,12 +5,15 @@ $Nombres=$_SESSION['s_nombre'];
 $ApellidoPaterno=$_SESSION['s_apellido_paterno'];
 $ApellidoMaterno=$_SESSION['s_apellido_materno'];
 $Tipo=$_SESSION['s_tipo'];
+$LogoEntidad=$_SESSION['s_logo_entidad'];
+// echo "$LogoEntidad";die;
 ?>
 <div id="div-header">
     <div id="div-header-content">
         <div id="div-header-logo">
             <a href="<?php echo $directorio;?>panel.php" class="a-logo">
-                <img src="<?=$url?>/cp/images/LogoStar.png" title="" border="0" style="width: 181px;height: 60px;">
+                <?php $img = $url.($LogoEntidad ? $LogoEntidad : '/cp/images/LogoStar.png')  ?>
+                <img src="<?=$img?>" title="" border="0" style="width: 181px;height: 60px;">
             </a>
             <div class="_icon_logo">
                 <div class="_156n">
