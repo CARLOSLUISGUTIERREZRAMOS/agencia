@@ -98,6 +98,21 @@ class EmpresaModelo{
         }
     }
 
+    public function ActualizarLogoEmpresa($CodigoEntidad,$LogoEntidad)
+    {
+        $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="UPDATE entidad SET LogoEntidad='$LogoEntidad' WHERE CodigoEntidad=$CodigoEntidad";
+        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $error=$obj_conexion->ErrorEjecucion($conexion);
+        if($error==1){
+            $flag=1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
+    }
+
     public function VerificarRucEmpresa($ruc){
         
         $obj_conexion=new ConexionBD();
