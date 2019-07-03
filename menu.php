@@ -1,7 +1,12 @@
 <?php if ($Tipo=='G'): ?>
     <div id="div-menu-principal">
         <ul>
-            
+            <li onClick="javascript:window.location = '<?php echo $url;?>/cp/gestor/agencia_info.php';" >
+                <div onMouseOver="javascript:this.className = 'div_hover';" onMouseOut="javascript:this.className = ''" style="width:180px;">
+                    <img src="<?php echo $directorio_imagen;?>images/datospersonales.png" style="position:relative;top:5px;">
+                    <a title="Ver Datos Personales del Gestor" href="<?php echo $url;?>/cp/gestor/agencia_info.php" style="top: 7px;left:5px;position: relative;"> datos agencia</a>
+                </div>
+            </li>
             <li onClick="javascript:window.location = '<?php echo $directorio_personal;?>gestor_info_personal.php';" >
                 <div onMouseOver="javascript:this.className = 'div_hover';" onMouseOut="javascript:this.className = ''" style="width:180px;">
                     <img src="<?php echo $directorio_imagen;?>images/datospersonales.png" style="position:relative;top:5px;">

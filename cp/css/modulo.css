@@ -87,25 +87,28 @@ img{ border:0; }
 #div-menu-principal{
 	width:100%; 
 /*	height:30px; */
-        height:40px;  
+    height:40px;  
 	background:url(../images/bg_menu.png);
-        border-top: 1px solid #c01c1e;
+    border-top: 1px solid #c01c1e;
+    display: flex;
+    align-items: center;
 }
 #div-menu-principal ul{
 /*	width:auto;
 	height:30px;
 	padding:0;
 	margin:0;*/
-        width: 930px;
-        height: 40px;
-        padding: 0;
-        margin: 0px auto;
+    /*width: 930px;*/
+    max-width: 1200px;
+    min-width: 600px;
+    height: 40px;
+    padding: 0;
+    margin: 0px auto;
 	list-style-type:none;
 	font-size:11px;
 	color:#FFF;
 	text-align:center;
 	text-transform:uppercase;
-       
 }
 #div-menu-principal ul li{
 	width:auto;
