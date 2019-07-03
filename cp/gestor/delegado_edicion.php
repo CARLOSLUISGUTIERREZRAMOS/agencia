@@ -139,4 +139,14 @@
      	</div>
     </form>
 </div>
+
+<div id="div-panel-reset">
+    <div id="div-reset-password">
+        <p style="height:auto; margin:10px 0;">
+            &iquest;Ha solicitado el 'reset' del password?. <img src="../images/unlock.png" width="32" height="32" alt="Reset Password" title="Reset Password">
+        </p>
+        <a class="aceptar" href="javascript:void(0);"><span onClick="resetPasswordDelegado(1);">Aceptar</span></a>
+        <a class="cancelar" href="javascript:void(0);"><span onClick="resetPasswordDelegado(0);">Cancelar</span></a>
+    </div>
+</div>
 <?php include(FOOTER_PATH); ?>
