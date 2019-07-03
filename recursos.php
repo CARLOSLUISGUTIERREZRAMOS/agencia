@@ -8,10 +8,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <title>Web Agencias - StarPeru</title>
         <link href="<?=$url?>/cp/images/favicon_starperu.png" rel="shortcut icon" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"  crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="<?=$url?>/cp/css/modulo.css" rel="stylesheet" type="text/css" />
         <script src="<?=$url?>/cp/js/jquery.js"></script>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"  crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
         <style type="text/css">
 		    #div-header-logo .a-logo,.logoEntidadCambiar,._icon_logo{
 		        position: absolute;
@@ -45,66 +45,69 @@
 		        margin-bottom: -8px;
 		    }
 		</style>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script type="text/javascript">
         	URLs="<?=$url?>";
-        	$(document).on('mouseover','._icon_logo',function (arg) {
-		        $(this).addClass('logoEntidadCambiar');
-		        this.previousElementSibling.style.cssText='opacity:0.5';
-		    });
-		    $(document).on('mouseout','._icon_logo',function (arg) {
-		        $(this).removeClass('logoEntidadCambiar');
-		        this.previousElementSibling.style.cssText='';
-		    });
-		    
-		    $(document).on('click','.logoEntidadCambiar',function (arg) {
-		        $("#LogoEntidad").trigger("click");
-		    });
+	        <?php if ($Tipo=='G'): ?>
+	        	$(document).on('mouseover','._icon_logo',function (arg) {
+			        $(this).addClass('logoEntidadCambiar');
+			        this.previousElementSibling.style.cssText='opacity:0.5';
+			    });
+			    $(document).on('mouseout','._icon_logo',function (arg) {
+			        $(this).removeClass('logoEntidadCambiar');
+			        this.previousElementSibling.style.cssText='';
+			    });
+			    
+			    $(document).on('click','.logoEntidadCambiar',function (arg) {
+			        $("#LogoEntidad").trigger("click");
+			    });
 
-		    $(document).on('change','#LogoEntidad',function (ar) {
-		        var files = this.files; // FileList object
-		        var frame=$("#div-header-logo img");
-		        if (files.length==0) {
-		            frame.attr('src',URLs+'/cp/images/LogoStar.png');
-		            $("#LogoEntidad").val('');
-		        }
-		        else{
-		            if (files[0].type =="image/jpeg" || files[0].type =="image/png" || files[0].type =="image/jpeg") {
-		                imgfile_url=URL.createObjectURL(files[0]);
-		                frame.attr('src',imgfile_url);
-		                cambiarLogo();
-		            }
-		            else{
-		                frame.attr('src',URLs+'/cp/images/LogoStar.png');
-		                $("#LogoEntidad").val('');
-		                // mostrarMsgError('No se aceptan archivos solo imagenes en formato PNG,JPG y JPEG.',1);
-		            }
-		        }
+			    $(document).on('change','#LogoEntidad',function (ar) {
+			        var files = this.files; // FileList object
+			        var frame=$("#div-header-logo img");
+			        if (files.length==0) {
+			            frame.attr('src',URLs+'/cp/images/LogoStar.png');
+			            $("#LogoEntidad").val('');
+			        }
+			        else{
+			            if (files[0].type =="image/jpeg" || files[0].type =="image/png" || files[0].type =="image/jpeg") {
+			                imgfile_url=URL.createObjectURL(files[0]);
+			                frame.attr('src',imgfile_url);
+			                cambiarLogo();
+			            }
+			            else{
+			                frame.attr('src',URLs+'/cp/images/LogoStar.png');
+			                $("#LogoEntidad").val('');
+			                // mostrarMsgError('No se aceptan archivos solo imagenes en formato PNG,JPG y JPEG.',1);
+			            }
+			        }
 
-		    });
+			    });
 
-		    function cambiarLogo() {
-		        var codigo_entidad=<?php echo $_SESSION["s_entidad"];?>;
-		        var formData = new FormData($("#form-logo")[0]);
-		        formData.append('CodigoEntidad',codigo_entidad);
-		        formData.append('cambiar_logo',1);
-		        $.ajax({
-		            url:"<?=$url?>/cd/Controlador/AgenciaControl.php",
-		            type: "POST", 
-		            data:formData,
-		            contentType: false,
-        			processData: false,
-		            success: function(mensaje){
-		            	var data=JSON.parse(mensaje);
-		            	if (data.success) {
-		            		console.log(data.success);
-		            	}
-		            	else{
-		            		console.log(data.error)
-		            	}
-		            },
-		        });
-		    }
+			    function cambiarLogo() {
+			        var codigo_entidad=<?php echo $_SESSION["s_entidad"];?>;
+			        var formData = new FormData($("#form-logo")[0]);
+			        formData.append('CodigoEntidad',codigo_entidad);
+			        formData.append('cambiar_logo',1);
+			        $.ajax({
+			            url:"<?=$url?>/cd/Controlador/AgenciaControl.php",
+			            type: "POST", 
+			            data:formData,
+			            contentType: false,
+	        			processData: false,
+			            success: function(mensaje){
+			            	var data=JSON.parse(mensaje);
+			            	if (data.success) {
+			            		console.log(data.success);
+			            	}
+			            	else{
+			            		console.log(data.error)
+			            	}
+			            },
+			        });
+			    }
+	        <?php endif ?>
+
 
 			function getLineaCredito(){   
 	            var mensaje_linea_credito=0;

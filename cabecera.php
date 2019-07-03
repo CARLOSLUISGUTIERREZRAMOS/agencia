@@ -15,17 +15,19 @@ $LogoEntidad=$_SESSION['s_logo_entidad'];
                 <?php $img = $url.($LogoEntidad ? $LogoEntidad : '/cp/images/LogoStar.png')  ?>
                 <img src="<?=$img?>" title="" border="0" style="width: 181px;height: 60px;">
             </a>
-            <div class="_icon_logo">
-                <div class="_156n">
-                    <div class="icon">
-                        <i class="fa fa-camera"></i>
+            <?php if ($Tipo=='G'): ?>
+                <div class="_icon_logo">
+                    <div class="_156n">
+                        <div class="icon">
+                            <i class="fa fa-camera"></i>
+                        </div>
+                        <span>Actualizar</span>
                     </div>
-                    <span>Actualizar</span>
                 </div>
-            </div>
-            <form id="form-logo" enctype="multipart/form-data">
-                <input type="file" id="LogoEntidad" name="LogoEntidad" accept=".png,.jpeg,.jpg" style="display: none">
-            </form>
+                <form id="form-logo" enctype="multipart/form-data">
+                    <input type="file" id="LogoEntidad" name="LogoEntidad" accept=".png,.jpeg,.jpg" style="display: none">
+                </form>
+            <?php endif ?>
         </div>
         <div id="div-header-info-usuario">
             <div id="div-info-usuario-content">
