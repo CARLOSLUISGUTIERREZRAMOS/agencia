@@ -269,4 +269,38 @@ img{ border:0; }
 #div-reset-password .cancelar{ background-color:#336699; }
 /*=================================== FIN DIV SEGURIDAD ======================================*/
 
+/*================================ DIV LOGO =================================================*/
+#div-header-logo .a-logo,.logoEntidadCambiar,._icon_logo{
+    position: absolute;
+}
+#div-header-logo .a-logo{
+    z-index: 0;
+}
+._icon_logo,.logoEntidadCambiar{
+    margin: 25px 10px 0 10px;
+    text-align: center;
+    width: 170px;
+    z-index: 1;
+    cursor: pointer;
+}
+._icon_logo ._156n{
+    opacity: 0;
+}
+.logoEntidadCambiar {
+    border-radius: 15px;
+    background-color: #000000;
+    opacity: 0.8;
+}
+.logoEntidadCambiar ._156n{
+    opacity: 1;
+}
+._156n {
+    text-align: center;
+    color: #ffffff;
+}
+._156n .icon{
+    margin-bottom: -8px;
+}
+/*=========================== FIN DIV LOGO =============================================*/
+
 

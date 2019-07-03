@@ -80,11 +80,11 @@ label{
 }
 input{ 
 	width:180px;
-	height:14px;
+	/*height:14px;*/
 	margin:0 5px 5px 10px;
 	padding:4px 4px;
 	float:left;
-	font-size:11px;
+	font-size:14px;
 	color:#333;
 	/*background:#eeeeee;*/
 	border:#e2e2e2 1px solid;

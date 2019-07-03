@@ -12,39 +12,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="<?=$url?>/cp/css/modulo.css" rel="stylesheet" type="text/css" />
         <script src="<?=$url?>/cp/js/jquery.js"></script>
-        <style type="text/css">
-		    #div-header-logo .a-logo,.logoEntidadCambiar,._icon_logo{
-		        position: absolute;
-		    }
-		    #div-header-logo .a-logo{
-		        z-index: 0;
-		    }
-		    ._icon_logo,.logoEntidadCambiar{
-		        margin: 25px 10px 0 10px;
-		        text-align: center;
-		        width: 170px;
-		        z-index: 1;
-		        cursor: pointer;
-		    }
-		    ._icon_logo ._156n{
-		        opacity: 0;
-		    }
-		    .logoEntidadCambiar {
-		        border-radius: 15px;
-		        background-color: #000000;
-		        opacity: 0.8;
-		    }
-		    .logoEntidadCambiar ._156n{
-		        opacity: 1;
-		    }
-		    ._156n {
-		        text-align: center;
-		        color: #ffffff;
-		    }
-		    ._156n .icon{
-		        margin-bottom: -8px;
-		    }
-		</style>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script type="text/javascript">
         	URLs="<?=$url?>";
@@ -142,7 +109,7 @@
             		<!-- Menu principal -->
                     <?php include(MENU_PATH); ?>
                     <!-- fin menu principal -->
-                    <div>
+                    <div class="div-contenido-body">
                         <!-- Div Credito Personal -->
                         <div style="position: absolute; height: 60px; top: 0px; left: 42%; right: 42%">
                             <table width="160" cellpadding="0" cellspacing="0" border="0" style=" background-color: #F0F0F0;/*font-family: Arial, Helvetica, sans-serif; */color: #dd1414">
