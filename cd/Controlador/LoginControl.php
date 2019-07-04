@@ -38,8 +38,6 @@ if(isset($_POST['login'])){
                 $_SESSION["s_nextel"] = $Personal->getNextel();
                 $_SESSION["s_entidad"] = $Personal->getCodigoEntidad();
                 $razon_social= $obj_personal->ObtenerNombreEntidad($_SESSION["s_entidad"]);
-                $agencia=$obj_agencia->ObtenerEmpresaFindID($_SESSION["s_entidad"]);
-                $_SESSION["s_logo_entidad"] = $agencia->LogoEntidad;
                 if($razon_social!=""){
                     $_SESSION["nombre_entidad"] =$razon_social;
                 }
@@ -47,6 +45,16 @@ if(isset($_POST['login'])){
                 $_SESSION["s_cambio_clave"] = $Personal->getCambioClave();
                 $_SESSION["s_tipo"] = $Personal->getCodigoTipo();
                 $_SESSION["email_gestor"] = $obj_personal->ObtenerEmailGestor($_SESSION["s_entidad"]);
+                
+                $agencia=$obj_agencia->ObtenerEmpresaFindID($_SESSION["s_entidad"]);
+                // $_SESSION["s_logo_entidad"] = $agencia->LogoEntidad;
+                // $_SESSION["s_ruc_entidad"] = $agencia->RUC;
+                // $_SESSION["s_razon_social_entidad"] = $agencia->RazonSocial;
+                // $_SESSION["s_nombre_comercial_entidad"] = $agencia->NombreComercial;
+                // $_SESSION["s_abreviatura_entidad"] = $agencia->Abreviatura;
+                // $_SESSION["s_direccion_entidad"] = $agencia->Direccion;
+                // $_SESSION["s_codigo_ciudad_entidad"] = $agencia->CodigoCiudad;
+                $_SESSION["s_agencia"] = $agencia;
                 header('Location:../../cp/panel.php');
 
 
