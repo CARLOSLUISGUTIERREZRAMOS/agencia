@@ -71,10 +71,6 @@ function EnviaValores()
 		var v_ofic_a=trim(dgEBI('ofic_a_' + a.toString()));
 		var v_ofic_ane_a=trim(dgEBI('ofic_ane_a_' + a.toString()));
 		var v_celular_a=trim(dgEBI('celular_a_' + a.toString()));
-		var v_rpm_a=trim(dgEBI('rpm_a_' + a.toString()));
-		var v_rpc_a=trim(dgEBI('rpc_a_' + a.toString()));
-		var v_nextel_a_1=trim(dgEBI('rpc_a_' + a.toString() + '_1'));
-		var v_nextel_a_2=trim(dgEBI('rpc_a_' + a.toString() + '_2'));
 		if(a==1)
 		{
 			
@@ -85,10 +81,6 @@ function EnviaValores()
 				 && (v_ofic_a.length<=0 || (v_ofic_a.length>0 && ComprobarNumeroInt(v_ofic_a)==1))
 				 && (v_ofic_ane_a.length<=0 || (v_ofic_ane_a.length>0 && ComprobarNumeroInt(v_ofic_ane_a)==1))
 				 && (v_celular_a.length<=0 || (v_celular_a.length>0 && ComprobarNumeroInt(v_celular_a)==1))
-				 && (v_rpm_a.length<=0 || (v_rpm_a.length>0 && ComprobarNumeroInt(v_rpm_a)==1))
-				 && (v_rpc_a.length<=0 || (v_rpc_a.length>0 && ComprobarNumeroInt(v_rpc_a)==1))
-				 && (v_nextel_a_1.length<=0 || (v_nextel_a_1.length>0 && ComprobarNumeroInt(v_nextel_a_1)==1))
-				 && (v_nextel_a_2.length<=0 || (v_nextel_a_2.length>0 && ComprobarNumeroInt(v_nextel_a_2)==1))
 				)
 				{
 					ok_a=1;
@@ -131,26 +123,6 @@ function EnviaValores()
 					{
 						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El celular del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
 						Focus('celular_a_' + a.toString());
-					}
-					else if(v_rpm_a.length>0 && ComprobarNumeroInt(v_rpm_a)!=1)
-					{
-						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El n&uacute;mero RPM del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
-						Focus('rpm_a_' + a.toString());
-					}
-					else if(v_rpc_a.length>0 && ComprobarNumeroInt(v_rpc_a)!=1)
-					{
-						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El n&uacute;mero RPC del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
-						Focus('rpc_a_' + a.toString());
-					}
-					else if(v_nextel_a_1.length>0 && ComprobarNumeroInt(v_nextel_a_1)!=1)
-					{
-						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El nextel del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
-						Focus('nextel_a_' + a.toString() + '_1');
-					}
-					else if(v_nextel_a_2.length>0 && ComprobarNumeroInt(v_nextel_a_2)!=1)
-					{
-						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El nextel del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
-						Focus('nextel_a_' + a.toString() + '_2');
 					}
 					else if(v_email_a.length<=0)
 					{
@@ -203,10 +175,6 @@ function EnviaValores()
 				 && (v_ofic_a.length<=0 || (v_ofic_a.length>0 && ComprobarNumeroInt(v_ofic_a)==1))
 				 && (v_ofic_ane_a.length<=0 || (v_ofic_ane_a.length>0 && ComprobarNumeroInt(v_ofic_ane_a)==1))
 				 && (v_celular_a.length<=0 || (v_celular_a.length>0 && ComprobarNumeroInt(v_celular_a)==1))
-				 && (v_rpm_a.length<=0 || (v_rpm_a.length>0 && ComprobarNumeroInt(v_rpm_a)==1))
-				 && (v_rpc_a.length<=0 || (v_rpc_a.length>0 && ComprobarNumeroInt(v_rpc_a)==1))
-				 && (v_nextel_a_1.length<=0 || (v_nextel_a_1.length>0 && ComprobarNumeroInt(v_nextel_a_1)==1))
-				 && (v_nextel_a_2.length<=0 || (v_nextel_a_2.length>0 && ComprobarNumeroInt(v_nextel_a_2)==1))
 				)
 				{
 					ok_a=1;
@@ -249,26 +217,6 @@ function EnviaValores()
 					{
 						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El celular del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
 						Focus('celular_a_' + a.toString());
-					}
-					else if(v_rpm_a.length>0 && ComprobarNumeroInt(v_rpm_a)!=1)
-					{
-						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El n&uacute;mero RPM del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
-						Focus('rpm_a_' + a.toString());
-					}
-					else if(v_rpc_a.length>0 && ComprobarNumeroInt(v_rpc_a)!=1)
-					{
-						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El n&uacute;mero RPC del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
-						Focus('rpc_a_' + a.toString());
-					}
-					else if(v_nextel_a_1.length>0 && ComprobarNumeroInt(v_nextel_a_1)!=1)
-					{
-						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El nextel del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
-						Focus('nextel_a_' + a.toString() + '_1');
-					}
-					else if(v_nextel_a_2.length>0 && ComprobarNumeroInt(v_nextel_a_2)!=1)
-					{
-						document.getElementById('resultado_a_' + a.toString()).innerHTML='* El nextel del pasajero adulto N&ordm; 0' + a.toString() + ' es incorrecto.';
-						Focus('nextel_a_' + a.toString() + '_2');
 					}
 					else if(v_email_a.length<=0)
 					{
