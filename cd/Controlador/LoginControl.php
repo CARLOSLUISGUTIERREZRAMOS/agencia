@@ -3,14 +3,13 @@ session_start();
 require_once("../../cn/STARPERU/Modelo/PersonalModelo.php");
 require_once("../../cn/STARPERU/Modelo/EmpresaModelo.php");
 
-$obj_personal=new PersonalModelo();
 
 
 if(isset($_POST['login'])){
+
+    $obj_personal=new PersonalModelo();
+    $obj_agencia=new EmpresaModelo();
     if($_POST['login']==1){
-
-
-
         if (isset($_POST['usuario'])) {
             $usuario = (get_magic_quotes_gpc()) ? $_POST['usuario'] : addslashes($_POST['usuario']);
         }
@@ -46,7 +45,16 @@ if(isset($_POST['login'])){
                 $_SESSION["s_cambio_clave"] = $Personal->getCambioClave();
                 $_SESSION["s_tipo"] = $Personal->getCodigoTipo();
                 $_SESSION["email_gestor"] = $obj_personal->ObtenerEmailGestor($_SESSION["s_entidad"]);
-
+                
+                $agencia=$obj_agencia->ObtenerEmpresaFindID($_SESSION["s_entidad"]);
+                // $_SESSION["s_logo_entidad"] = $agencia->LogoEntidad;
+                // $_SESSION["s_ruc_entidad"] = $agencia->RUC;
+                // $_SESSION["s_razon_social_entidad"] = $agencia->RazonSocial;
+                // $_SESSION["s_nombre_comercial_entidad"] = $agencia->NombreComercial;
+                // $_SESSION["s_abreviatura_entidad"] = $agencia->Abreviatura;
+                // $_SESSION["s_direccion_entidad"] = $agencia->Direccion;
+                // $_SESSION["s_codigo_ciudad_entidad"] = $agencia->CodigoCiudad;
+                $_SESSION["s_agencia"] = $agencia;
                 header('Location:../../cp/panel.php');
 
 
@@ -59,13 +67,12 @@ if(isset($_POST['login'])){
 }
 
 if(isset($_POST['deuda'])){
-if ($_POST['deuda']==1){
+    if ($_POST['deuda']==1){
         $usuario = (get_magic_quotes_gpc()) ? $_POST['usuario'] : addslashes($_POST['usuario']);
         $empresa = new EmpresaModelo();
 
         $deuda = $empresa->ObtenerEmpresaPermitida($usuario);
         echo $deuda.'*3';
-        
     }
 }
 

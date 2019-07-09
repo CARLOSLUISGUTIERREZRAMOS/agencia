@@ -43,6 +43,10 @@ function editar(id)
 	window.location='delegado_edicion.php' + '?id='+id;
 }
 
+function editar_agencia(id) {
+  window.location='agencia_edicion.php' + '?id='+id;
+}
+
 function cambiaEstado(dni,estado)
 {
 	var consulta;
