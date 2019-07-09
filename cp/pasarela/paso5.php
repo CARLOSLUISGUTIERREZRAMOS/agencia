@@ -175,7 +175,7 @@ function EnviaValores()
             <?php if($codigo_reserva!=''){?>
             <td align="right">
                   
-                <input name="btnAceptar" id="btnAceptar" value="Confirmar" class="btn-red" type="submit"/>
+                <input name="btnAceptar" id="btnAceptar" value="Emisión" class="btn-red" type="submit"/>
                 <input type="hidden" name="confirmacion" id="confirmacion" value="1"/>
                 <input type="hidden" name="codigo_reserva" id="codigo_reserva" value="<?php echo $codigo_reserva;?>"/>
                 <input type="hidden" name="adultos_confirmacion" id="adultos_confirmacion" value="<?php echo $adultos_5;?>"/>
