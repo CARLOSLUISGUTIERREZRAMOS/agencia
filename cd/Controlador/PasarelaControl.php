@@ -1389,13 +1389,13 @@ if (isset($_POST['paso4'])) {
                               </tr>
                               <tr class="pasajeros">
                                 <td height="36"></td>
-                                <td align="left"><input type="text" name="nombre_a_' . $i . '" id="nombre_a_' . $i . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); " value="ADULTO" /></td>
+                                <td align="left"><input type="text" name="nombre_a_' . $i . '" id="nombre_a_' . $i . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); " value="" /></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input type="text" name="paterno_a_' . $i . '" id="paterno_a_' . $i . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value="ADULTO"/></td>
+                                <td align="left"><input type="text" name="paterno_a_' . $i . '" id="paterno_a_' . $i . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input type="text" name="materno_a_' . $i . '" id="materno_a_' . $i . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value="ADULTO"/></td>
+                                <td align="left"><input type="text" name="materno_a_' . $i . '" id="materno_a_' . $i . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
                                 <td width="140" align="left">
@@ -1447,7 +1447,7 @@ if (isset($_POST['paso4'])) {
                                 </td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input name="celular_a_' . $i . '" type="text" id="celular_a_' . $i . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)"  value="321456987"/></td>
+                                <td align="left"><input name="celular_a_' . $i . '" type="text" id="celular_a_' . $i . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)"  value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
                                 ' . (($i == 1) ? '<td align="left"><input name="ruc_a_' . $i . '" type="text" id="ruc_a_' . $i . '" maxlength="11" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" /></td>
@@ -1503,13 +1503,13 @@ if (isset($_POST['paso4'])) {
                                       </tr>
                                       <tr class="pasajeros">
                                         <td height="36"></td>
-                                        <td align="left"><input type="text" name="nombre_m_' . $j . '" id="nombre_m_' . $j . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); " value="NINO" /></td>
+                                        <td align="left"><input type="text" name="nombre_m_' . $j . '" id="nombre_m_' . $j . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); " value="" /></td>
                                         <td style="background-color: #FFFFFF"></td>
                                         <td></td>
-                                        <td align="left"><input type="text" name="paterno_m_' . $j . '" id="paterno_m_' . $j . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value="NINO"/></td>
+                                        <td align="left"><input type="text" name="paterno_m_' . $j . '" id="paterno_m_' . $j . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value=""/></td>
                                         <td style="background-color: #FFFFFF"></td>
                                         <td></td>
-                                        <td align="left"><input type="text" name="materno_m_' . $j . '" id="materno_m_' . $j . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value="NINO"/></td>
+                                        <td align="left"><input type="text" name="materno_m_' . $j . '" id="materno_m_' . $j . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value=""/></td>
                                         <td style="background-color: #FFFFFF"></td>
                                         <td></td>
                                         <td width="140" align="left">
@@ -1560,10 +1560,10 @@ if (isset($_POST['paso4'])) {
                                         </td>
                                         <td style="background-color: #FFFFFF"></td>
                                         <td></td>
-                                        <td align="left"><input name="celular_m_' . $j . '" type="text" id="celular_m_' . $j . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" value="321456369" /></td>
+                                        <td align="left"><input name="celular_m_' . $j . '" type="text" id="celular_m_' . $j . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" value="" /></td>
                                         <td style="background-color: #FFFFFF"></td>
                                         <td></td>
-                                        <td align="left"><input name="fecNac_m_' . $j . '" type="date" id="fecNac_m_' . $j . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" value="2015-07-31" /></td>
+                                        <td align="left"><input name="fecNac_m_' . $j . '" type="date" id="fecNac_m_' . $j . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" value="" /></td>
                                         <td style="background-color: #FFFFFF"></td>
                                         <td></td>
                                         <td align="left" colspan="17"></td>
@@ -1619,13 +1619,13 @@ if (isset($_POST['paso4'])) {
                               </tr>
                               <tr class="pasajeros">
                                 <td height="36"></td>
-                                <td align="left"><input type="text" name="nombre_i_' . $k . '" id="nombre_i_' . $k . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); " value="INFANTE" /></td>
+                                <td align="left"><input type="text" name="nombre_i_' . $k . '" id="nombre_i_' . $k . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); " value="" /></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input type="text" name="paterno_i_' . $k . '" id="paterno_i_' . $k . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value="INFANTE"/></td>
+                                <td align="left"><input type="text" name="paterno_i_' . $k . '" id="paterno_i_' . $k . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input type="text" name="materno_i_' . $k . '" id="materno_i_' . $k . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value="INFANTE"/></td>
+                                <td align="left"><input type="text" name="materno_i_' . $k . '" id="materno_i_' . $k . '" class="frmInput" style="width: 124px; text-transform: uppercase" onKeyPress="Change(); "  value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
                                 <td width="140" align="left">
@@ -1676,10 +1676,10 @@ if (isset($_POST['paso4'])) {
                                 </td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input name="celular_i_' . $k . '" type="text" id="celular_i_' . $k . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)"  value="369603263"/></td>
+                                <td align="left"><input name="celular_i_' . $k . '" type="text" id="celular_i_' . $k . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)"  value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input name="fecNac_i_' . $k . '" type="date" id="fecNac_i_' . $k . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" value="2019-01-25"/></td>
+                                <td align="left"><input name="fecNac_i_' . $k . '" type="date" id="fecNac_i_' . $k . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
                                 <td align="left" colspan="17"></td>
