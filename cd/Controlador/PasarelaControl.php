@@ -928,6 +928,7 @@ if(($adultos>0 and $menores==0 and $infantes==0)){
    }
 }
 }
+
 $total_pagar_tabla=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i;
 $table_precio.='<tr>
                   <td colspan="4" align="left" class="subtitleTabla">Total a pagar:</td>
@@ -992,8 +993,8 @@ $table_precio.='<tr>
                             <input type="hidden" name="tuua_bb" id="tuua_bb" value="' . $tuua_bb . '"/>
                             <input type="hidden" name="igv_bb" id="igv_bb" value="' . $igv_bb . '"/>
                             <input type="hidden" name="subtotal_bb" id="subtotal_bb" value="' . $subtotal_bb . '"/>';
-    }
-}
+    
+
 
 if (isset($_POST['paso4'])) {
     if ($_POST['paso4'] == 1) {
@@ -2765,4 +2766,4 @@ if($_POST['confirmacion']==1){
         }
         $tabla_pasajeros .= '</table>';
     }
-}
+}}
