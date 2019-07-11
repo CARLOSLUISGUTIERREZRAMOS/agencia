@@ -1318,7 +1318,7 @@ $table_precio_4.='<tr>
                                 <td align="left">Celular <span class="colorRed">* </span> :</td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                ' . (($i == 1) ? '<td align="left">RUC <span class="colorRed">* </span> :</td>
+                                ' . (($i == 1) ? '<td align="left">RUC :</td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>' : ' ') . '
                                 <td align="left" colspan="17"></td>
