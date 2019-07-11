@@ -20,6 +20,7 @@ function Focus(id_obj)
 
 function Change()
 {
+
 	if(document.getElementById('resultado'))
 	{
 		document.getElementById('resultado').innerHTML='';

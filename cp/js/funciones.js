@@ -20,6 +20,7 @@ function Focus(id_obj)
 
 function Change()
 {
+
 	if(document.getElementById('resultado'))
 	{
 		document.getElementById('resultado').innerHTML='';
@@ -40,6 +41,7 @@ function dgEBI(obj)
 	}
 	return val;
 }
+
 
 function formatCurrency(num) 
 { 

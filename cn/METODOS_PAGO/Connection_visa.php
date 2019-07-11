@@ -91,7 +91,6 @@ class Connection_visa {
             CURLOPT_HTTPHEADER => array(
                 "Authorization: $tokenSeguridad",
                 "Content-Type: application/json",
-                "Postman-Token: c562e97f-b0af-4b26-8405-6271a1611feb",
                 "cache-control: no-cache"
             ),
         ));

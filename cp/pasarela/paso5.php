@@ -9,32 +9,8 @@ if($_SESSION['s_entra']==0){
     header('Location:../../index.php');
 }
 require_once '../../cd/Controlador/PasarelaControl.php';
-require_once '../../cn/METODOS_PAGO/Connection_visa.php';
-
-
-$visa = new Connection_visa();
-$token = $visa->Connection();
-$IP = $_SERVER['REMOTE_ADDR'];
-$request_body = $visa->GenerarBody('125.00', $IP);
-$visa_res = $visa->GenerarSesion($token, $request_body);
-$objSessionVisa = json_decode($visa_res);
-$libreriaJsVisa = $visa->GetLibreriaJSVisa();
-
 ?>
-<form id="form_visa" action="Pasarela/ZonaPagos" style="display: none">
-<script src='<?=$libreriaJsVisa?>'
-        data-sessiontoken='<?= $objSessionVisa->sessionKey ?>'
-        data-channel='web'
-        data-merchantid='<?= $visa->getCodigo_comercio() ?>'
-        data-merchantlogo= 'https://www.starperu.com/es/img/Logotipo.png'
-        data-formbuttoncolor='#D80000'
-        data-purchasenumber= 1234567
-        data-amount=127.05
-        data-expirationminutes= 5
-        data-timeouturl = 'html/tiempo_limite.html'
->
-</script>
-</form>
+
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -46,8 +22,8 @@ $libreriaJsVisa = $visa->GetLibreriaJSVisa();
 <!--[if lt IE 9]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen, projection"><![endif]-->
 <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-ui-1.10.4.custom.js"></script>
-<script type="text/javascript" language="javascript1.2" src="js/funciones.js"></script>
-<script type="text/javascript" src="js/visa.js"></script>
+<script type="text/javascript" language="javascript1.2" src="js/funciones.js?v1.0"></script>
+<script type="text/javascript" src="js/metodos_pago.js?v1.0"></script>
 <!--
 function EnviaValores()
 {
@@ -174,8 +150,11 @@ function EnviaValores()
           <tr>
             <?php if($codigo_reserva!=''){?>
             <td align="right">
+       
                   
-                <input name="btnAceptar" id="btnAceptar" value="Confirmar" class="btn-red" type="submit"/>
+                  <input style="display: none;" name="btnAceptar" id="btnAceptar" value="Confirmar" class="btn-red" type="submit"/>
+             
+
                 <input type="hidden" name="confirmacion" id="confirmacion" value="1"/>
                 <input type="hidden" name="codigo_reserva" id="codigo_reserva" value="<?php echo $codigo_reserva;?>"/>
                 <input type="hidden" name="adultos_confirmacion" id="adultos_confirmacion" value="<?php echo $adultos_5;?>"/>
@@ -223,6 +202,31 @@ function EnviaValores()
         </table>
         <br>
       </form>
+              
+                  <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+      
+                  
+                 <?php
+                 $_SESSION['registro_id'] = $registro;
+                 $_SESSION['token_seguridad_visa'] = $token;
+                 ?> 
+      <form  action="metodos_pago.php" id="form_visa" method='post' style="display: none">
+      <script src='<?=$libreriaJsVisa?>'
+              data-sessiontoken='<?= $objSessionVisa->sessionKey ?>'
+              data-channel='web'
+              data-merchantid='<?= $visa->getCodigo_comercio() ?>'
+              data-merchantlogo= 'https://www.starperu.com/es/img/Logotipo.png'
+              data-formbuttoncolor='#D80000'
+              data-purchasenumber= <?=$registro?>
+              data-amount=<?=$total_pagar_tabla_5?>
+              data-expirationminutes= 5
+              data-timeouturl = 'html/tiempo_limite.html'
+      >
+      
+      </script>
+      </form>
+
+
 	</td>
   </tr>
 </table>
