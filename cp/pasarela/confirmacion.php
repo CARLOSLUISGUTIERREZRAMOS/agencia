@@ -30,7 +30,8 @@ function EnviaValores()
 {
 	if(document.getElementById('terms').checked==true)
 	{
-		document.getElementById('confirma').value='1';
+    document.getElementById('confirma').value='1';
+    
 		document.form1.submit();
 	}
 	else

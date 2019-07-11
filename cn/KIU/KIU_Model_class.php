@@ -7,7 +7,7 @@ class KIU_Model extends KIU_Connection
 	protected $EchoToken = 1;
 	protected $TimeStamp;
     protected $Sine ='LIM002IWW';
-    protected $Device ='TCQ002IA01';
+    protected $Device ='LIM002IV01'; //TerminalID
     /* protected $Device ='TCQ002IA01';  | PERUCOMPRAS*/
     /* protected $Device = 'LIM002IX01'; | WEB*/ 
 	/* protected $Target ='Production'; */

@@ -9,6 +9,15 @@ class ReservaModelo{
     
     private $basedatos='db_agencia';
     
+    public function ObtenerDataRerservaVisa($id_reserva){
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT * FROM reserva WHERE Registro = $id_reserva";
+        
+        $resultado = $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        return $resultado;
+
+    }
     
     public function ObtenerDatosPasajero($tipo_doc,$num_doc){
         $obj_conexion=new ConexionBD();
@@ -778,7 +787,7 @@ public function UpdateReservaDetalleTicket($ticket,$i,$registro){
         return $flag;
         
     }
-public function UpdateReservaTicket($codigo_reserva_c,$campos_consulta){
+public function UpdateReservaTicket($codigo_reserva_c,$campos_consulta,$cc_code=NULL){
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();

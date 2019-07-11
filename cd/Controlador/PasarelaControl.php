@@ -12,6 +12,7 @@ require_once("../../cn/STARPERU/Modelo/EmpresaModelo.php");
 include "../../cn/KIU/KIU_Controller_class.php";
 //include "../Funciones/funciones.php";
 $KIU = new KIU_Controller();
+
 $obj_persona = new PersonalModelo();
 $obj_ciudad = new CiudadModelo();
 $obj_tarifa = new TarifaModelo();
@@ -592,7 +593,7 @@ if($_POST['paso3']==1){
             , 'DocType'=>'DNI'
             , 'Remark'=>'Pasajero necesita silla de ruedas'
             ),$err); 
-    
+      
             $cabecera=$res_price['PricedItineraries']['PricedItinerary']['AirItinerary'];
             $ida_vuelta=$cabecera['OriginDestinationOptions']['OriginDestinationOption']['FlightSegment'];
 
@@ -789,24 +790,12 @@ if($_POST['paso3']==1){
                   <td width="171" class="subtitleTabla">Cantidad de Pasajeros</td>
                   <td width="191" align="center" class="subtitleTabla">Tarifa</td>
                   <td width="173" align="center" class="subtitleTabla">Impuesto</td>
-                  <td width="202" align="center" class="subtitleTabla">Sub Total</td>
                   <td width="161" align="center" class="subtitleTabla">TUUA</td>
+                  <td width="202" align="center" class="subtitleTabla">Sub Total</td>
                  
                 </tr>';
-    $ciudad_exonerada_origen=$obj_tarifa->IgvExonerado($origen_ida);
-    $ciudad_exonerada_destino=$obj_tarifa->IgvExonerado($destino_ida);
-    $ciudad_exonerada=$ciudad_exonerada_origen+$ciudad_exonerada_destino;
-    $ciudad_exonerada_TUUA_origen=0;
-    $ciudad_exonerada_TUUA_destino=0;
-//    if($origen_price_ida=='HUU'){
-//        $ciudad_exonerada_TUUA_origen=1;
-//    }
-    
-//    echo $destino_ida;
-    if($origen_ida=='HUU' && $tipo_viaje_3==0){
-        $ciudad_exonerada_TUUA_destino=1;
-    }
-    $ciudad_TUUA_exonerada=$ciudad_exonerada_TUUA_origen+$ciudad_exonerada_TUUA_destino;
+
+
 
 if(($adultos>0 and $menores==0 and $infantes==0)){
     
@@ -827,26 +816,16 @@ if(($adultos>0 and $menores==0 and $infantes==0)){
             $tuua_adulto=$detalle['PTC_FareBreakdowns']['PTC_FareBreakdown']['PassengerFare']['Taxes']['Tax']['@attributes']['Amount'];
         }
     }
-    if($ciudad_exonerada>0){
-        $igv_adl=0.00;
-    }else{
-        $igv_adl=$igv_adulto;
-    }
 
-    if($ciudad_TUUA_exonerada>0){
-        $tuua_adl=0.00;
-    }else{
-        $tuua_adl=$tuua_adulto;
-    }
 
-    $subtotal_adulto=$igv_adl+$tuua_adl+$tarifa_adulto;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
-    $subtotal_tabla_adl=$igv_adl+$tarifa_adulto;//VALOR MOSTRADO AL USUARIO
+    $subtotal_adulto=$igv_adulto+$tuua_adulto+$tarifa_adulto;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
+    $subtotal_tabla_adl=$igv_adulto+$tarifa_adulto+$tuua_adulto;//VALOR MOSTRADO AL USUARIO
     $table_precio.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_adult.') Pasajeros Adultos </td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_adulto,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_adl,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($igv_adulto,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($tuua_adulto,2,'.',',').'</td>
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_adl,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_adl,2,'.',',').'</td>
                     </tr>';
     
 }else{
@@ -869,26 +848,16 @@ if(($adultos>0 and $menores==0 and $infantes==0)){
                 $tuua_adulto=$detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][0]['PassengerFare']['Taxes']['Tax']['@attributes']['Amount'];
             }
         }
-        if($ciudad_exonerada>0){
-            $igv_adl=0.00;
-        }else{
-            $igv_adl=$igv_adulto;
-        }
-        
-        if($ciudad_TUUA_exonerada>0){
-            $tuua_adl=0.00;
-        }else{
-            $tuua_adl=$tuua_adulto;
-        }
+       
 
-        $subtotal_adulto=$igv_adl+$tuua_adl+$tarifa_adulto;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
-        $subtotal_tabla_adl=$igv_adl+$tarifa_adulto;//VALOR MOSTRADO AL USUARIO
+        $subtotal_adulto=$igv_adulto+$tuua_adulto+$tarifa_adulto;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
+        $subtotal_tabla_adl=$igv_adulto+$tarifa_adulto+$tuua_adulto;//VALOR MOSTRADO AL USUARIO
         $table_precio.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_adult.') Pasajeros Adultos</td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_adulto,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_adl,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($igv_adulto,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($tuua_adulto,2,'.',',').'</td>
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_adl,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_adl,2,'.',',').'</td>
                     </tr>'; 
    }
    if($menores>0){
@@ -907,24 +876,15 @@ if(($adultos>0 and $menores==0 and $infantes==0)){
                 $tuua_chil=$detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][1]['PassengerFare']['Taxes']['Tax']['@attributes']['Amount'];
             }
         }
-         if ($ciudad_exonerada > 0) {
-                $igv_ch = 0.00;
-         } else {
-                $igv_ch = $igv_chil;
-         }
-         if ($ciudad_TUUA_exonerada > 0) {
-                $tuua_ch = 0.00;
-         } else {
-                $tuua_ch = $tuua_chil;
-         }
-        $subtotal_chil=$igv_ch+$tuua_ch+$tarifa_chil;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
-        $subtotal_tabla_ch=$igv_ch+$tarifa_chil;//VALOR MOSTRADO AL USUARIO
+     
+        $subtotal_chil=$igv_chil+$tuua_chil+$tarifa_chil;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
+        $subtotal_tabla_ch=$igv_chil+$tarifa_chil+$tuua_chil;//VALOR MOSTRADO AL USUARIO
         $table_precio.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_chil.') Pasajeros Niños</td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_chil,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_ch,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($igv_chil,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($tuua_chil,2,'.',',').'</td>
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_ch,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_ch,2,'.',',').'</td>
                     </tr>'; 
         if($infantes>0){
             $cant_bb=$detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][2]['PassengerTypeQuantity']['@attributes']['Quantity'];
@@ -942,24 +902,16 @@ if(($adultos>0 and $menores==0 and $infantes==0)){
                      $tuua_bb=$detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][2]['PassengerFare']['Taxes']['Tax']['@attributes']['Amount']; 
                 }
             }
-            if ($ciudad_exonerada > 0) {
-                $igv_i = 0.00;
-            } else {
-                $igv_i = $igv_bb;
-            }
-            if ($ciudad_TUUA_exonerada > 0) {
-                $tuua_i = 0.00;
-            } else {
-                $tuua_i = $tuua_bb;
-            }
-            $subtotal_bb=$igv_i+$tuua_i+$tarifa_bb;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
-            $subtotal_tabla_i=$igv_i+$tarifa_bb;//VALOR MOSTRADO AL USUARIO
+          
+            $subtotal_bb=$igv_bb+$tuua_bb+$tarifa_bb;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
+                $igv_bb=$detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][2]['PassengerFare']['Taxes']['Tax'][1]['@attributes']['Amount'];
+            $subtotal_tabla_i=$igv_bb+$tarifa_bb+$tuua_bb;//VALOR MOSTRADO AL USUARIO
             $table_precio.='<tr style="background: #F0F0F0">
                             <td height="18" align="left" class="bgTable_data">('.$cant_bb.') Pasajeros Infantes</td>
                             <td align="center" class="bgTable_data">'.number_format($tarifa_bb,2,'.',',').'</td>
-                             <td align="center" class="bgTable_data">'.number_format($igv_i,2,'.',',').'</td>
+                             <td align="center" class="bgTable_data">'.number_format($igv_bb,2,'.',',').'</td>
+                             <td align="center" class="bgTable_data">'.number_format($tuua_bb,2,'.',',').'</td>    
                             <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_i,2,'.',',').'</td>
-                            <td align="center" class="bgTable_data">'.number_format($tuua_i,2,'.',',').'</td>    
                         </tr>'; 
        }
    }
@@ -980,29 +932,20 @@ if(($adultos>0 and $menores==0 and $infantes==0)){
                 $tuua_bb=$detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][1]['PassengerFare']['Taxes']['Tax']['@attributes']['Amount']; 
             }
         }
-        if ($ciudad_exonerada > 0) {
-                $igv_i = 0.00;
-        } else {
-                $igv_i = $igv_bb;
-        }
-        if ($ciudad_TUUA_exonerada > 0) {
-                $tuua_i = 0.00;
-        } else {
-                $tuua_i = $tuua_bb;
-        }
-        $subtotal_bb=$igv_i+$tuua_i+$tarifa_bb;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
-        $subtotal_tabla_i=$igv_i+$tarifa_bb;//VALOR MOSTRADO AL USUARIO
+    
+        $subtotal_bb=$igv_bb+$tuua_bb+$tarifa_bb;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
+        $subtotal_tabla_i=$igv_bb+$tarifa_bb+$tuua_bb;//VALOR MOSTRADO AL USUARIO
         $table_precio.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_bb.') Pasajeros Infantes</td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_bb,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_i,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($igv_bb,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($tuua_bb,2,'.',',').'</td>    
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_i,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_i,2,'.',',').'</td>    
                     </tr>'; 
    }
 }
 }
-$total_pagar_tabla=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$tuua_adl+$tuua_ch+$tuua_i;
+$total_pagar_tabla=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i;
 $table_precio.='<tr>
                   <td colspan="4" align="left" class="subtitleTabla">Total a pagar:</td>
                   <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda.' '.number_format($total_pagar_tabla,2,'.',',').'</td>
@@ -1228,21 +1171,15 @@ if($_POST['paso4']==1){
                   <td width="171" class="subtitleTabla">Cantidad de Pasajeros</td>
                   <td width="191" align="center" class="subtitleTabla">Tarifa</td>
                   <td width="173" align="center" class="subtitleTabla">Impuesto</td>
-                  <td width="202" align="center" class="subtitleTabla">Sub Total</td>
                   <td width="161" align="center" class="subtitleTabla">TUUA</td>   
+                  <td width="202" align="center" class="subtitleTabla">Sub Total</td>
                 </tr>';
-$ciudad_exonerada_origen=$obj_tarifa->IgvExonerado($origen_ida_4);
-$ciudad_exonerada_destino=$obj_tarifa->IgvExonerado($destino_ida_4);
-$ciudad_exonerada=$ciudad_exonerada_origen+$ciudad_exonerada_destino;
-$ciudad_exonerada_TUUA_origen=0;
-$ciudad_exonerada_TUUA_destino=0;
+
 //if($origen_ida_4=='HUU'){
 //    $ciudad_exonerada_TUUA_origen=1;
 //}
-if($origen_ida_4=='HUU' && $tipo_viaje_4==0){
-    $ciudad_exonerada_TUUA_destino=1;
-}
-$ciudad_TUUA_exonerada=$ciudad_exonerada_TUUA_origen+$ciudad_exonerada_TUUA_destino;
+
+
 
 if(($adultos_4>0 and $menores_4==0 and $infantes_4==0)){
     
@@ -1251,24 +1188,14 @@ if(($adultos_4>0 and $menores_4==0 and $infantes_4==0)){
     $tuua_adulto=$tuua_adulto_4;
     $igv_adulto=$igv_adulto_4;
     
-    if($ciudad_exonerada>0){
-        $igv_adl=0.00;
-    }else{
-        $igv_adl=$igv_adulto;
-    }
-    if($ciudad_TUUA_exonerada>0){
-        $tuua_adl=0.00;
-    }else{
-        $tuua_adl=$tuua_adulto;
-    }
-    $subtotal_adulto=$igv_adl+$tuua_adl+$tarifa_adulto;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
-    $subtotal_tabla_adl=$igv_adl+$tarifa_adulto;//VALOR MOSTRADO AL USUARIO
+    $subtotal_adulto=$igv_adulto+$tuua_adulto+$tarifa_adulto;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
+    $subtotal_tabla_adl=$igv_adulto+$tarifa_adulto+$tuua_adulto;//VALOR MOSTRADO AL USUARIO
     $table_precio_4.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_adult.') Pasajeros Adultos </td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_adulto,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_adl,2,'.',',').'</td>    
+                        <td align="center" class="bgTable_data">'.number_format($igv_adulto,2,'.',',').'</td>    
+                        <td align="center" class="bgTable_data">'.number_format($tuua_adulto,2,'.',',').'</td>
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_adl,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_adl,2,'.',',').'</td>
                         
                     </tr>';
     
@@ -1280,24 +1207,15 @@ if(($adultos_4>0 and $menores_4==0 and $infantes_4==0)){
         $tuua_adulto=$tuua_adulto_4;
         $igv_adulto=$igv_adulto_4;
         
-        if($ciudad_exonerada>0){
-            $igv_adl=0.00;
-        }else{
-            $igv_adl=$igv_adulto;
-        }
-        if($ciudad_TUUA_exonerada>0){
-            $tuua_adl=0.00;
-        }else{
-            $tuua_adl=$tuua_adulto;
-        }
-        $subtotal_adulto=$igv_adl+$tuua_adl+$tarifa_adulto;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
-        $subtotal_tabla_adl=$igv_adl+$tarifa_adulto;//VALOR MOSTRADO AL USUARIO
+  
+        $subtotal_adulto=$igv_adulto+$tuua_adulto+$tarifa_adulto;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
+        $subtotal_tabla_adl=$igv_adulto+$tarifa_adulto+$tuua_adulto;//VALOR MOSTRADO AL USUARIO
         $table_precio_4.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_adult.') Pasajeros Adultos</td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_adulto,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_adl,2,'.',',').'</td>                        
+                        <td align="center" class="bgTable_data">'.number_format($igv_adulto,2,'.',',').'</td>                        
+                        <td align="center" class="bgTable_data">'.number_format($tuua_adulto,2,'.',',').'</td>    
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_adl,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_adl,2,'.',',').'</td>    
                     </tr>'; 
    }
    if($menores_4>0){
@@ -1306,26 +1224,16 @@ if(($adultos_4>0 and $menores_4==0 and $infantes_4==0)){
         $tarifa_chil=$tarifa_chil_4;
         $tuua_chil=$tuua_chil_4;
         $igv_chil=$igv_chil_4;
-        
-        if ($ciudad_exonerada > 0) {
-             $igv_ch = 0.00;
-        } else{
-             $igv_ch = $igv_chil;
-        }
-        if ($ciudad_TUUA_exonerada > 0) {
-             $tuua_ch = 0.00;
-        } else{
-             $tuua_ch = $tuua_chil;
-        }
+    
 
-        $subtotal_chil=$igv_ch+$tuua_ch+$tarifa_chil;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
-        $subtotal_tabla_ch=$igv_ch+$tarifa_chil;//VALOR MOSTRADO AL USUARIO
+        $subtotal_chil=$igv_chil+$tuua_chil+$tarifa_chil;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
+        $subtotal_tabla_ch=$igv_chil+$tarifa_chil+$tuua_chil;//VALOR MOSTRADO AL USUARIO
         $table_precio_4.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_chil.') Pasajeros Niños</td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_chil,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_ch,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($igv_chil,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($tuua_chil,2,'.',',').'</td>
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_ch,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_ch,2,'.',',').'</td>
                     </tr>'; 
    }
 
@@ -1335,29 +1243,19 @@ if(($adultos_4>0 and $menores_4==0 and $infantes_4==0)){
         $tarifa_bb=$tarifa_bb_4;
         $tuua_bb=$tuua_bb_4;
         $igv_bb=$igv_bb_4;
-        
-        if ($ciudad_exonerada > 0) {
-            $igv_i = 0.00;
-        }else{
-            $igv_i= $igv_bb;
-        }
-        if ($ciudad_TUUA_exonerada > 0) {
-            $tuua_i = 0.00;
-        }else{
-            $tuua_i = $tuua_bb;
-        }    
-        $subtotal_bb=$igv_i+$tuua_i+$tarifa_bb;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
-        $subtotal_tabla_i=$igv_i+$tarifa_bb;//VALOR MOSTRADO AL USUARIO
+      
+        $subtotal_bb=$igv_bb+$tuua_bb+$tarifa_bb;//VALOR REAL SE GUARDA EN AL BASE DE DATOS
+        $subtotal_tabla_i=$igv_bb+$tarifa_bb+$tuua_bb;//VALOR MOSTRADO AL USUARIO
         $table_precio_4.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_bb.') Pasajeros Infantes</td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_bb,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_i,2,'.',',').'</td>    
+                        <td align="center" class="bgTable_data">'.number_format($igv_bb,2,'.',',').'</td>    
+                        <td align="center" class="bgTable_data">'.number_format($tuua_bb,2,'.',',').'</td>     
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_i,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_i,2,'.',',').'</td>     
                     </tr>'; 
    }
 }
-$total_pagar_tabla_4=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$tuua_adl+$tuua_ch+$tuua_i;
+$total_pagar_tabla_4=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i;
 $table_precio_4.='<tr>
                   <td colspan="4" align="left" class="subtitleTabla">Total a pagar:</td>
                   <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_4.' '.number_format($total_pagar_tabla_4,2,'.',',').'</td>
@@ -1900,23 +1798,11 @@ if($_POST['paso5']==1){
                   <td width="171" class="subtitleTabla">Cantidad de Pasajeros</td>
                   <td width="191" align="center" class="subtitleTabla">Tarifa</td>
                   <td width="173" align="center" class="subtitleTabla">Impuesto</td>
-                  <td width="202" align="center" class="subtitleTabla">Sub Total</td>
                   <td width="161" align="center" class="subtitleTabla">TUUA</td>
+                  <td width="202" align="center" class="subtitleTabla">Sub Total</td>
                   
                 </tr>';
- 
-$ciudad_exonerada_origen=$obj_tarifa->IgvExonerado($origen_ida_5);
-$ciudad_exonerada_destino=$obj_tarifa->IgvExonerado($destino_ida_5);
-$ciudad_exonerada=$ciudad_exonerada_origen+$ciudad_exonerada_destino;
-$ciudad_exonerada_TUUA_origen=0;
-$ciudad_exonerada_TUUA_destino=0;
-//if($origen_ida_5=='HUU'){
-//    $ciudad_exonerada_TUUA_origen=1;
-//}
-if($origen_ida_5=='HUU' && $tipo_viaje_5==0){
-    $ciudad_exonerada_TUUA_destino=1;
-}
-$ciudad_TUUA_exonerada=$ciudad_exonerada_TUUA_origen+$ciudad_exonerada_TUUA_destino;
+
 
 if(($adultos_5>0 and $menores_5==0 and $infantes_5==0)){
     
@@ -1925,24 +1811,15 @@ if(($adultos_5>0 and $menores_5==0 and $infantes_5==0)){
     $tuua_adulto=$tuua_adulto_5;
     $igv_adulto=$igv_adulto_5;
     
-    if ($ciudad_exonerada > 0) {
-        $igv_adl = 0.00;
-    }else{
-        $igv_adl= $igv_adulto;
-    }
-    if($ciudad_TUUA_exonerada>0){
-        $tuua_adl=0.00;
-    }else{
-        $tuua_adl=$tuua_adulto;
-    }
+ 
     $subtotal_adulto=$subtotal_adulto_5;
-    $subtotal_tabla_adl=$igv_adl+$tarifa_adulto;
+    $subtotal_tabla_adl=$igv_adulto+$tarifa_adulto+$tuua_adulto;
     $table_precio_5.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_adult.') Pasajeros Adultos </td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_adulto,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_adl,2,'.',',').'</td>    
+                        <td align="center" class="bgTable_data">'.number_format($igv_adulto,2,'.',',').'</td>    
+                        <td align="center" class="bgTable_data">'.number_format($tuua_adulto,2,'.',',').'</td>
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_adl,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_adl,2,'.',',').'</td>
                     </tr>';
     
 }else{
@@ -1953,25 +1830,16 @@ if(($adultos_5>0 and $menores_5==0 and $infantes_5==0)){
         $tuua_adulto=$tuua_adulto_5;
         $igv_adulto=$igv_adulto_5;
         
-        if ($ciudad_exonerada > 0) {
-            $igv_adl = 0.00;
-        } else {
-            $igv_adl= $igv_adulto;
-        }
-        if($ciudad_TUUA_exonerada>0){
-            $tuua_adl=0.00;
-        }else{
-            $tuua_adl=$tuua_adulto;
-        }
+  
         $subtotal_adulto=$subtotal_adulto_5;
-        $subtotal_tabla_adl=$igv_adl+$tarifa_adulto;
+        $subtotal_tabla_adl=$igv_adulto+$tarifa_adulto+$tuua_adulto;
         
         $table_precio_5.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_adult.') Pasajeros Adultos</td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_adulto,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_adl,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($igv_adulto,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($tuua_adulto,2,'.',',').'</td>    
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_adl,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_adl,2,'.',',').'</td>    
                     </tr>'; 
    }
    if($menores_5>0){
@@ -1979,24 +1847,15 @@ if(($adultos_5>0 and $menores_5==0 and $infantes_5==0)){
         $tarifa_chil=$tarifa_chil_5;
         $tuua_chil=$tuua_chil_5;
         $igv_chil=$igv_chil_5;
-         if ($ciudad_exonerada > 0) {
-            $igv_ch = 0.00;
-        } else {
-            $igv_ch= $igv_chil;
-        }
-        if($ciudad_TUUA_exonerada>0){
-            $tuua_ch=0.00;
-        }else{
-            $tuua_ch=$tuua_chil;
-        }
+     
         $subtotal_chil=$subtotal_chil_5;
-        $subtotal_tabla_ch=$igv_ch+$tarifa_chil;
+        $subtotal_tabla_ch=$igv_chil+$tarifa_chil+$tuua_chil;
         $table_precio_5.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_chil.') Pasajeros Niños</td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_chil,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_ch,2,'.',',').'</td>     
+                        <td align="center" class="bgTable_data">'.number_format($igv_chil,2,'.',',').'</td>     
+                        <td align="center" class="bgTable_data">'.number_format($tuua_chil,2,'.',',').'</td>    
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_ch,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_ch,2,'.',',').'</td>    
                     </tr>'; 
    }
 
@@ -2007,28 +1866,18 @@ if(($adultos_5>0 and $menores_5==0 and $infantes_5==0)){
         $tuua_bb=$tuua_bb_5;
         $igv_bb=$igv_bb_5;
         
-        if($ciudad_exonerada > 0){
-            $igv_i= 0.00;
-        } else {
-            $igv_i= $igv_bb;
-        }
-        if($ciudad_TUUA_exonerada>0){
-            $tuua_i=0.00;
-        }else{
-            $tuua_i=$tuua_bb;
-        }
         $subtotal_bb=$subtotal_bb_5;
-        $subtotal_tabla_i=$igv_i+$tarifa_bb;
+        $subtotal_tabla_i=$igv_bb+$tarifa_bb+$tuua_bb;
         $table_precio_5.='<tr style="background: #F0F0F0">
                         <td height="18" align="left" class="bgTable_data">('.$cant_bb.') Pasajeros Infantes</td>
                         <td align="center" class="bgTable_data">'.number_format($tarifa_bb,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($igv_i,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($igv_bb,2,'.',',').'</td>
+                        <td align="center" class="bgTable_data">'.number_format($tuua_bb,2,'.',',').'</td>    
                         <td align="center" class="bgTable_data">'.number_format($subtotal_tabla_i,2,'.',',').'</td>
-                        <td align="center" class="bgTable_data">'.number_format($tuua_i,2,'.',',').'</td>    
                     </tr>'; 
    }
 }
-$total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$tuua_adl+$tuua_ch+$tuua_i;
+$total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$tuua_adulto+$tuua_chil+$tuua_bb+$igv_adulto+$igv_chil+$igv_bb;
 //$table_precio_5.='<tr>
 //                    <td colspan="4" align="left" class="subtitleTabla">Total a pagar:</td>
 //                    <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.number_format($total_pagar_tabla_5,2,'.',',').'</td>
@@ -2309,7 +2158,7 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
 //  echo "</pre>";
   
     
-  if($tipo_viaje_5==1){
+  if($tipo_viaje_5==1){ // R
     
     $res = $KIU->AirBookRQ(array(
 	  'City' => 'LIM'
@@ -2330,9 +2179,9 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
         $pais='PE';
         $ciudad=', DEMO';
         $ip=$_SERVER["REMOTE_ADDR"];
-        $flete=round(($tarifa_adulto_5+$tarifa_chil_5+$tarifa_bb_5)*0.97,2);//SUMA TOTAL DE TARIFAS
+        $flete=round($tarifa_adulto_5+$tarifa_chil_5+$tarifa_bb_5,2);//SUMA TOTAL DE TARIFAS
         $tuua_reserva=$tuua_adulto_5+$tuua_chil_5+$tuua_bb_5;//SUMA TOTAL DE TUUAS
-        $igv_reserva=round(($igv_adulto_5+$igv_chil_5+$igv_bb_5)*0.97,2);//SUMA TOTAL DE IGVS
+        $igv_reserva=round($igv_adulto_5+$igv_chil_5+$igv_bb_5,2);//SUMA TOTAL DE IGVS
         $total_reserva=$flete+$tuua_reserva+$igv_reserva;//SUMA TOTAL NO IMPORTA LA EXONERACION
         $codigo_reserva=$res['BookingReferenceID']['@attributes']['ID'];
         
@@ -2350,8 +2199,8 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
         $tarifa_con_imp = $res['TravelItinerary']['ItineraryInfo']['ItineraryPricing']['Cost']['@attributes']['AmountAfterTax'];
         
         
-        //$total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$tuua_adl+$tuua_ch+$tuua_i;
-        $total_pagar_tabla_5= $subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$tuua_adl+$tuua_ch+$tuua_i;
+        //$total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$tuua_adulto+$tuua_ch+$tuua_i;
+        $total_pagar_tabla_5= $subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i;
         $total_pagar_5 = $tarifa_con_imp;
         $descuento = floatval($total_pagar_tabla_5) - floatval($tarifa_con_imp);
         
@@ -2376,8 +2225,8 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                 for($i=0;$i<$numero_de_vueltas;$i++){
                      if($arrayPersonas[$i]['Tipo_Pasajero']=='ADT'){
                             $tipo_pax='A';
-                            $tarifa_unitaria=  number_format($tarifa_adulto_5*0.97/$adultos_5,2,'.','');
-                            $igv_unitaria=  number_format($igv_adulto_5*0.97/$adultos_5,2,'.','');
+                            $tarifa_unitaria=  number_format($tarifa_adulto_5/$adultos_5,2,'.','');
+                            $igv_unitaria=  number_format($igv_adulto_5/$adultos_5,2,'.','');
                             $tuua_unitaria=  number_format($tuua_adulto_5/$adultos_5,2,'.','');
                             $total=$tarifa_unitaria+$igv_unitaria+$tuua_unitaria;
                             if($ciudad_exonerada>0){
@@ -2389,8 +2238,8 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                             }
                      }elseif($arrayPersonas[$i]['Tipo_Pasajero']=='CNN'){
                             $tipo_pax='N';
-                            $tarifa_unitaria=  number_format($tarifa_chil_5*0.97/$menores_5,2,'.','');
-                            $igv_unitaria=  number_format($igv_chil_5*0.97/$menores_5,2,'.','');
+                            $tarifa_unitaria=  number_format($tarifa_chil_5/$menores_5,2,'.','');
+                            $igv_unitaria=  number_format($igv_chil_5/$menores_5,2,'.','');
                             $tuua_unitaria=  number_format($tuua_chil_5/$menores_5,2,'.','');
                             $total=$tarifa_unitaria+$igv_unitaria+$tuua_unitaria;
                             if($ciudad_exonerada>0){
@@ -2402,8 +2251,8 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                             }
                      }elseif($arrayPersonas[$i]['Tipo_Pasajero']=='INF'){
                             $tipo_pax='B';
-                            $tarifa_unitaria=  number_format($tarifa_bb_5*0.97/$infantes_5,2,'.','');
-                            $igv_unitaria=  number_format($igv_bb_5*0.97/$infantes_5,2,'.','');
+                            $tarifa_unitaria=  number_format($tarifa_bb_5/$infantes_5,2,'.','');
+                            $igv_unitaria=  number_format($igv_bb_5/$infantes_5,2,'.','');
                             $tuua_unitaria=  number_format($tuua_bb_5/$infantes_5,2,'.','');
                             $total=$tarifa_unitaria+$igv_unitaria+$tuua_unitaria;
                             if($ciudad_exonerada>0){
@@ -2451,9 +2300,9 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
             $pais='PE';
             $ciudad=', DEMO';
             $ip=$_SERVER["REMOTE_ADDR"];
-            $flete=round(($tarifa_adulto_5+$tarifa_chil_5+$tarifa_bb_5)*0.97,2);//SUMA TOTAL DE TARIFAS
+            $flete=round($tarifa_adulto_5+$tarifa_chil_5+$tarifa_bb_5,2);//SUMA TOTAL DE TARIFAS
             $tuua_reserva=$tuua_adulto_5+$tuua_chil_5+$tuua_bb_5;//SUMA TOTAL DE TUUAS
-            $igv_reserva=round(($igv_adulto_5+$igv_chil_5+$igv_bb_5)*0.97,2);//SUMA TOTAL DE IGVS
+            $igv_reserva=round($igv_adulto_5+$igv_chil_5+$igv_bb_5,2);//SUMA TOTAL DE IGVS
             $total_reserva=$flete+$tuua_reserva+$igv_reserva;//SUMA TOTAL NO IMPORTA LA EXONERACION
             $codigo_reserva=$res['BookingReferenceID']['@attributes']['ID'];
 
@@ -2466,7 +2315,7 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
               $tarifa_con_imp = $res['TravelItinerary']['ItineraryInfo']['ItineraryPricing']['Cost']['@attributes']['AmountAfterTax'];      
 
   
-            $total_pagar_tabla_5= $subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$tuua_adl+$tuua_ch+$tuua_i;
+            $total_pagar_tabla_5= $subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i;
             $total_pagar_5 = $tarifa_con_imp;
           
             
@@ -2483,13 +2332,13 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
 //            echo $registro;
 //            die;
             $numero_de_vueltas=$adultos_5+$menores_5+$infantes_5;
-
+            $_SESSION['id_registro'] = $registro;
             $j=0;
             for($i=0;$i<$numero_de_vueltas;$i++){
                  if($arrayPersonas[$i]['Tipo_Pasajero']=='ADT'){
                      $tipo_pax='A';
-                     $tarifa_unitaria=  number_format($tarifa_adulto_5*0.97/$adultos_5,2);
-                     $igv_unitaria=  number_format($igv_adulto_5*0.97/$adultos_5,2);
+                     $tarifa_unitaria=  number_format($tarifa_adulto_5/$adultos_5,2);
+                     $igv_unitaria=  number_format($igv_adulto_5/$adultos_5,2);
                      $tuua_unitaria=  number_format($tuua_adulto_5/$adultos_5,2);
                      $total=$tarifa_unitaria+$igv_unitaria+$tuua_unitaria;
                      if($ciudad_exonerada>0){
@@ -2501,8 +2350,8 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                      }
                  }elseif($arrayPersonas[$i]['Tipo_Pasajero']=='CNN'){
                      $tipo_pax='N';
-                     $tarifa_unitaria=  number_format($tarifa_chil_5*0.97/$menores_5,2);
-                     $igv_unitaria=  number_format($igv_chil_5*0.97/$menores_5,2);
+                     $tarifa_unitaria=  number_format($tarifa_chil_5/$menores_5,2);
+                     $igv_unitaria=  number_format($igv_chil_5/$menores_5,2);
                      $tuua_unitaria=  number_format($tuua_chil_5/$menores_5,2);
                      if($ciudad_exonerada>0){
                         $total_pagar=$tarifa_unitaria+$tuua_unitaria;
@@ -2514,8 +2363,8 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
 
                  }elseif($arrayPersonas[$i]['Tipo_Pasajero']=='INF'){
                      $tipo_pax='B';
-                     $tarifa_unitaria=  number_format($tarifa_bb_5*0.97/$infantes_5,2);
-                     $igv_unitaria=  number_format($igv_bb_5*0.97/$infantes_5,2);
+                     $tarifa_unitaria=  number_format($tarifa_bb_5/$infantes_5,2);
+                     $igv_unitaria=  number_format($igv_bb_5/$infantes_5,2);
                      $tuua_unitaria=  number_format($tuua_bb_5/$infantes_5,2);
                      if($ciudad_exonerada>0){
                         $total_pagar=$tarifa_unitaria+$tuua_unitaria;
@@ -2533,25 +2382,57 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
             $_SESSION['pasajeros']=$arrayPersonas;
             }
         }
-        
+      
+
+
+
         $table_precio_5.='<tr>
-                    <td colspan="4" align="left" class="subtitleTabla">Total:</td>
-                    <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.number_format($total_pagar_tabla_5,2,'.',',').'</td>
-                  </tr>
-                  <!--<tr>
-                        <td colspan="4" align="left" class="subtitleTabla">Descuento (Perú Compras):</td>
-                    <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.$descuentoFormat.'</td>
-                  </tr>-->
-                  <tr>
                     <td colspan="4" align="left" class="subtitleTabla">Total a pagar:</td>
-                    <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.number_format(floatval($total_pagar_5),2,'.',',').'</td>
+                    <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.number_format($total_pagar_tabla_5,2,'.',',').'</td>
                   </tr>';
+                  
+  $table_precio_5.='<table width="900" border="0" cellpadding="0" cellspacing="0" class="bgTable_data">
+                <tr>
+                  <td colspan="5" align="left" class="titleTable gradiante" style="color:white;">Forma de pago</td>
+                </tr>
+                <tr>
+                    <td height="3" colspan="7"  style="background:#fdb813;"></td>
+               </tr>
+                <tr>
+                  <td colspan="5" class="subtitleTabla">
+                  <select name="forma_pago" id="forma_pago">
+                  <option value="" selected disabled hidden>SELECCIONE</option>
+									<option value="TC">Tarjeta de Credito</option>
+									<option value="LC">Linea de Credito</option>
+									</select>
+                  </td>
+                </tr>';
+
         $table_precio_5.='</table>';
-        
+          // if($_POST['forma_pago'] == 'TC'){
+            include '../../cn/METODOS_PAGO/Connection_visa.php';
+          $visa = new Connection_visa();
+            
+            $token = $visa->Connection();
+            
+            $IP = $_SERVER['REMOTE_ADDR'];
+            $request_body = $visa->GenerarBody($total_pagar_tabla_5, $IP);
+            $visa_res = $visa->GenerarSesion($token, $request_body);
+            $objSessionVisa = json_decode($visa_res);
+            // var_dump($objSessionVisa);
+            
+            $libreriaJsVisa = $visa->GetLibreriaJSVisa();
+            // require_once '../../cp/bloques_formas_pagos/visa_form.php';
+            $forma_pago = 'TC';
+       
+          // }
 }
 }
 
-if(isset($_POST['confirmacion'])){
+
+
+if(isset($_POST['confirmacion']) ){
+  
 if($_POST['confirmacion']==1){
     if($_SESSION['s_idusuario']=='' || $_SESSION['s_entidad']==''){
         $tabla_error.='<center >'."\n";
@@ -2565,12 +2446,17 @@ if($_POST['confirmacion']==1){
         echo $tabla_error;
         die;
     }
+ 
+
+
+
     $correo_gestor=$_SESSION["s_email"];
     $codigo_reserva_c=$_POST['codigo_reserva'];
     $adultos_confirmacion=$_POST['adultos_confirmacion'];
     $menores_confirmacion=$_POST['menores_confirmacion'];
     $infantes_confirmacion=$_POST['infantes_confirmacion'];
-    $registro=$_POST['registro'];
+    $registro = $_POST['registro'];
+    
     $total_pagar_cc=$_POST['total_pagar_cc'];
     $tipo_moneda_cc=$_POST['tipo_moneda_cc'];
     $tipo_viaje_cc=$_POST['tipo_viaje_cc'];
@@ -2609,6 +2495,7 @@ if($_POST['confirmacion']==1){
  
     $numero_documento=$obj_empresa->ObtenerRucEmpresa($_SESSION['s_entidad']);
     $ruc=trim($numero_documento->getRuc());
+    
 
         $cantidad_pasajeros_c=$adultos_confirmacion+$menores_confirmacion+$infantes_confirmacion;
         $tickets=array();
@@ -2640,7 +2527,7 @@ if($_POST['confirmacion']==1){
       $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
       // Cabeceras adicionales
       $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET WEB AGENCIAS") . ' <ecel@starperu.com>' . "\r\n";
-      $cabeceras .= 'Bcc: diego.cortes@starperu.com,ricardo.jaramillo@starperu.com' . "\r\n";
+      $cabeceras .= 'Bcc: carlos.gutierrez@starperu.com' . "\r\n";
       $cabeceras .= 'Reply-To: ecel@starperu.com' . "\r\n" .
                    'X-Mailer: PHP/' . phpversion();
       mail($para, $asunto, $mensaje, $cabeceras);    
@@ -2696,16 +2583,9 @@ if($_POST['confirmacion']==1){
                         $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                           // Cabeceras adicionales
                         $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET WEB AGENCIAS") . ' <ecel@starperu.com>' . "\r\n";
-                        $cabeceras .= 'Bcc: diego.cortes@starperu.com,ricardo.jaramillo@starperu.com' . "\r\n";
+                        $cabeceras .= 'Bcc: carlos.gutierrez@starperu.com' . "\r\n";
                         $cabeceras .= 'Reply-To: ecel@starperu.com' . "\r\n" .
                                        'X-Mailer: PHP/' . phpversion();
-                        
-//                            echo '<pre>';
-//                            print_r($request);
-//                            echo '</pre>';
-//                            echo '<pre>';
-//                            print_r($response);
-//                            echo '</pre>';
                         
                         mail($para, $asunto, $mensaje, $cabeceras);
                     }else{
@@ -2714,10 +2594,10 @@ if($_POST['confirmacion']==1){
                         $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                           // Cabeceras adicionales
                         $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET WEB AGENCIAS") . ' <ecel@starperu.com>' . "\r\n";
-                        $cabeceras .= 'Bcc: ricardo.jaramillo@starperu.com' . "\r\n";
+                        $cabeceras .= 'Bcc: carlos.gutierrez@starperu.com' . "\r\n";
                         $cabeceras .= 'Reply-To: ecel@starperu.com' . "\r\n" .
                                        'X-Mailer: PHP/' . phpversion();
-                        $para = 'ricardo.jaramillos@starperu.com';
+                        $para = 'carlos.gutierrez@starperu.com';
                         mail($para, $asunto, $mensaje, $cabeceras);
                     }
                     
@@ -2779,7 +2659,7 @@ if($_POST['confirmacion']==1){
                                 $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                                   // Cabeceras adicionales
                                 $cabeceras .= 'From:' . utf8_decode("XML DE EMISION DE TICKET WEB AGENCIAS") . ' <ecel@starperu.com>' . "\r\n";
-                                $cabeceras .= 'Bcc: diego.cortes@starperu.com,ricardo.jaramillo@starperu.com' . "\r\n";
+                                $cabeceras .= 'Bcc: carlos.gutierrez@starperu.com' . "\r\n";
                                 $cabeceras .= 'Reply-To: ecel@starperu.com' . "\r\n" .
                                                'X-Mailer: PHP/' . phpversion();
                                 mail($para, $asunto, $mensaje, $cabeceras);

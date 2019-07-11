@@ -17,7 +17,7 @@ require_once '../../cd/Controlador/PasarelaControl.php';
 <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
 <script type="text/javascript" language="javascript1.2" src="js/funciones.js"></script>
 <script type="text/javascript" src="js/paso4_principal.js"></script>
-<script type="text/javascript" src="js/visa.js"></script>
+
 <script type="text/javascript" language="javascript1.2">
 <!--
 
@@ -32,11 +32,11 @@ function ComboAdultos()
 		{
 			var v_nombre_a=trim(dgEBI('nombre_a_' + i));
 			var v_paterno_a=trim(dgEBI('paterno_a_' + i));
-			var v_materno_a=trim(dgEBI('materno_a_' + </select	var v_tipo_doc_a=trim(dgEBI('tipo_doc_a_' + i));
+			var v_materno_a=trim(dgEBI('materno_a_' + i));
 			var v_num_doc_a=trim(dgEBI('num_doc_a_' + i));
 			if(v_nombre_a.length>0 && v_paterno_a.length>0 && v_materno_a.length>0 && v_num_doc_a.length>0)
 			{
-				t+='<option value="' +  v_nombre_a + '|' + v_paterno_a + '|' + v_materno_a + '|' + v_tipo_doc_a + '|' + v_num_doc_a + '" style="text-transform: uppercase">' + v_nombre_a + ' ' + v_paterno_a + ' ' + v_materno_a + '</option>';
+				t += '<option value="' +  v_nombre_a + '|' + v_paterno_a + '|' + v_materno_a + '|' + v_tipo_doc_a + '|' + v_num_doc_a + '" style="text-transform: uppercase">' + v_nombre_a + ' ' + v_paterno_a + ' ' + v_materno_a + '"</option>';
 			}
 		}
 		t+='</select>';
@@ -852,59 +852,7 @@ $(function()
                     </td>
 				  </tr>   
 
-				  <tr>
-                    <td align="center">
-                         <!-- aqui va la las tablas que se generan -->
-						  <table width="898" border="0" cellpadding="0" cellspacing="0">
-						 	<tbody>
-						  		<tr>
-                          			<td align="left" class="titleTable gradiante" style="color:white;">Formas de Pago</td>
-                        		</tr>
-                         		<tr>
-                            		<td height="3" colspan="5" style="background:#fdb813;"></td>
-                       			</tr>
-                        		<tr>
-								<td height="1" style="background-color: #FFFFFF"></td>
-								</tr>
-                        <tr>
-                          <td height="30" align="center">
-                         <table width="898" cellpadding="0" cellspacing="0" border="0">
-							  <tbody>
-							  <tr class="pasajeros">
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
-                              </tr>
-                              <tr class="pasajeros">
-								<td align="left">
-									<select name="forma_pago">
-									<option value="TC">Tarjeta de Credito</option>
-									<option value="LC">Linea de Credito</option>
-									<option value="PP">PayPal</option>
-									<option value="SP">SafetyPay</option>
-									<option value="PE">PagoEfectivo</option>
-									</select>
-								</td>
-                              </tr>
-                              <tr>
-                                <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
-                              </tr>
-                            
-                              <tr>
-                                <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
-                              </tr>
-                              <tr class="pasajeros">
-                                <td height="30"></td>
-                                <td colspan="16" align="left" id="resultado_a_1" style="color: #CC0033"></td>
-                              </tr>
-                            </tbody></table>
-                          </td>
-                        </tr>
-				</tbody>
-				</table>                    
-				</td>
-				  </tr>
+				
                   <tr>
                     <td align="right"><input name="btnAceptar" id="btnAceptar" value="Continuar" class="btn-red" type="submit" /></td>
                     <input type='hidden' value="1" name='paso5' id='paso5'/>
