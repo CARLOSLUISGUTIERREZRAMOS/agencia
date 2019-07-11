@@ -152,7 +152,7 @@ function EnviaValores()
             <td align="right">
        
                   
-                  <input style="display: none;" name="btnAceptar" id="btnAceptar" value="Confirmar" class="btn-red" type="submit"/>
+                  <input style="display: none;" name="btnAceptar" id="btnAceptar" value="Emisión" class="btn-red" type="submit"/>
              
 
                 <input type="hidden" name="confirmacion" id="confirmacion" value="1"/>

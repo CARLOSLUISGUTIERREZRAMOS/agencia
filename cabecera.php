@@ -5,47 +5,29 @@ $Nombres=$_SESSION['s_nombre'];
 $ApellidoPaterno=$_SESSION['s_apellido_paterno'];
 $ApellidoMaterno=$_SESSION['s_apellido_materno'];
 $Tipo=$_SESSION['s_tipo'];
+$LogoEntidad=$_SESSION['s_logo_entidad'];
+// echo "$LogoEntidad";die;
 ?>
-<style type="text/css">
-    ._23fv {
-        bottom: 21px;
-        left: 20px;
-        overflow: hidden;
-        width: 160px;
-    }
-    .logoEntidadCambiar {
-        bottom: 30px;
-        left: 15px;
-        text-align: center;
-        top: auto;
-        width: 170px;
-    }
-    .logoEntidadCambiar{
-        position: absolute;
-        z-index: 5;
-    }
-    ._156n {
-        display: block;
-        overflow: hidden;
-        position: relative;
-        text-align: left;
-    }
-</style>
 <div id="div-header">
     <div id="div-header-content">
         <div id="div-header-logo">
-            <a href="<?php echo $directorio;?>panel.php">
-                <img src="<?php echo $directorio;?>images/LogoStar.png" title="" border="0" />
+            <a href="<?php echo $directorio;?>panel.php" class="a-logo">
+                <?php $img = $url.($LogoEntidad ? $LogoEntidad : '/cp/images/LogoStar.png')  ?>
+                <img src="<?=$img?>" title="" border="0" style="width: 181px;height: 60px;">
             </a>
-            <!-- <div class="logoEntidadCambiar _23fv">
-                <div class="_156n _23fw _1o59" data-ft="{&quot;tn&quot;:&quot;+B&quot;}">
-                    <a href="#" class="_156p _1o5e" ajaxify="/profile/picture/menu_dialog/?context_id=u_0_11&amp;profile_id=100003814295686" rel="dialog" role="button" id="u_0_1d" tabindex="0">
-                        <div class="_3-95">
-                            <i class="fa fa-camera _1din _156q _1o6f img sp_C-eevkKqVp7 sx_fc264a"></i>
-                        </div>Actualizar
-                    </a>
+            <?php if ($Tipo=='G'): ?>
+                <div class="_icon_logo">
+                    <div class="_156n">
+                        <div class="icon">
+                            <i class="fa fa-camera"></i>
+                        </div>
+                        <span>Actualizar</span>
+                    </div>
                 </div>
-            </div> -->
+                <form id="form-logo" enctype="multipart/form-data">
+                    <input type="file" id="LogoEntidad" name="LogoEntidad" accept=".png,.jpeg,.jpg" style="display: none">
+                </form>
+            <?php endif ?>
         </div>
         <div id="div-header-info-usuario">
             <div id="div-info-usuario-content">

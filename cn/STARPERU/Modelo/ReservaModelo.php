@@ -720,7 +720,7 @@ function EnviaAlertaNinoEmail($registro){
 public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$email,
                     $tipo_documento,$numero_documento,$telefono,
                     $anexo,$celular,$nextel,$rpm,
-                    $rpc,$fecha_registro,$fecha_registro,$adultos_5,$menores_5,$infantes_5,$origen_ida_5,$destino_ida_5,$numero_vuelo_ida_5,
+                    $rpc,$pasajero_ruc,$fecha_registro,$fecha_registro,$adultos_5,$menores_5,$infantes_5,$origen_ida_5,$destino_ida_5,$numero_vuelo_ida_5,
                     $clase_ida_5,$fecha_salida_ida_5,$hora_salida_ida_5,$numero_vuelo_vuelta_5,$clase_vuelta_5,$fecha_salida_vuelta_5,$hora_salida_vuelta_5,
                     $pais,$ciudad,$ip,$flete,$tuua_5,$igv_5,$total_pagar_5,$usuario,$entidad,$tipo_vuelo_letras){
         $flag=0;
@@ -728,36 +728,32 @@ public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$emai
         $conexion=$obj_conexion->CrearConexion();
         
         $consulta="INSERT INTO Reserva(CodigoReserva,Apellidos,Nombres,Tipo_Doc,Documento,Telefono,Celular,Email,FechaRegistro,FechaLimite,TipoVuelo,Adultos,Ninos,Bebes,Origen,"
-                . "                     Destino,Vuelo_Salida,Clase_Salida,Fecha_Salida,Hora_Salida,Vuelo_Retorno,Clase_Retorno,Fecha_Retorno,Hora_Retorno,Pais,Ciudad,IP,Flete,TUA,"
-                . "                     Impuesto,Total,CodigoEntidad,CodigoPersonal) "
-                . "                     VALUES('$codigo_reserva','$apellidos','$nombres','$tipo_documento','$numero_documento','$telefono','$celular','$email','$fecha_registro','$fecha_registro','$tipo_vuelo_letras',$adultos_5,$menores_5,$infantes_5,"
-                . "                     '$origen_ida_5','$destino_ida_5','$numero_vuelo_ida_5','$clase_ida_5','$fecha_salida_ida_5','$hora_salida_ida_5','$numero_vuelo_vuelta_5','$clase_vuelta_5','$fecha_salida_vuelta_5','$hora_salida_vuelta_5','$pais','$ciudad',"
-                . "                     '$ip',$flete,$tuua_5,$igv_5,$total_pagar_5,$entidad,$usuario)";
-//        echo $consulta;
-//        die;
+                . "Destino,Vuelo_Salida,Clase_Salida,Fecha_Salida,Hora_Salida,Vuelo_Retorno,Clase_Retorno,Fecha_Retorno,Hora_Retorno,Pais,Ciudad,IP,Flete,TUA,"
+                . "Impuesto,Total,CodigoEntidad,CodigoPersonal,RUC) "
+                . "VALUES('$codigo_reserva','$apellidos','$nombres','$tipo_documento','$numero_documento','$telefono','$celular','$email','$fecha_registro','$fecha_registro','$tipo_vuelo_letras',$adultos_5,$menores_5,$infantes_5,"
+                . "'$origen_ida_5','$destino_ida_5','$numero_vuelo_ida_5','$clase_ida_5','$fecha_salida_ida_5','$hora_salida_ida_5','$numero_vuelo_vuelta_5','$clase_vuelta_5','$fecha_salida_vuelta_5','$hora_salida_vuelta_5','$pais','$ciudad',"
+                . "'$ip',$flete,$tuua_5,$igv_5,$total_pagar_5,$entidad,$usuario,'$pasajero_ruc')";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $registro=  mysqli_insert_id($conexion);
-//        $error=$obj_conexion->ErrorEjecucion();
-//        $obj_conexion->CerrarConexion($conexion);
-//        if($error==1){
+        $error=$obj_conexion->ErrorEjecucion();
+        $obj_conexion->CerrarConexion($conexion);
+
+//       if($error==1){
 //            $flag=1;
-//            return $flag;
+//           return $flag;
 //        }else{
             return $registro;
-//        }
-        
-        
+//        }        
     }
-public function GuardarReservaDetalle($registro,$j,$tipo_documento,$numero_documento,$apellidos,
+    public function GuardarReservaDetalle($registro,$j,$tipo_documento,$numero_documento,$apellidos,
                     $nombres,$tipo_pax,$celular,$telefono,$anexo,$rpc,
-                    $rpm,$email,$tarifa_unitaria,$igv_unitaria,$tuua_unitaria,$total,$total_pagar){
+                    $rpm,$email,$tarifa_unitaria,$igv_unitaria,$tuua_unitaria,$total,$total_pagar,$fecNac){
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
+        $consulta="INSERT INTO Reserva_Detalle(Registro,Detalle,Tipo_Doc,Documento,Apellidos,Nombres,Tipo_Pax,Celular,Telefono,Anexo,RPM,RPC,Email,EQ,FA,MS,PE,HW,Total,TotalPagar,FechaNacimiento)"
+                . " VALUES('$registro',$j,'$tipo_documento','$numero_documento','$apellidos','$nombres','$tipo_pax','$celular','$telefono','$anexo','$rpm','$rpc','$email',$tarifa_unitaria,$tarifa_unitaria,$total_pagar,$igv_unitaria,$tuua_unitaria,$total,$total_pagar,'$fecNac')";
         
-        $consulta="INSERT INTO Reserva_Detalle(Registro,Detalle,Tipo_Doc,Documento,Apellidos,Nombres,Tipo_Pax,Celular,Telefono,Anexo,RPM,RPC,Email,EQ,FA,MS,PE,HW,Total,TotalPagar)"
-                . " VALUES($registro,$j,'$tipo_documento','$numero_documento','$apellidos','$nombres','$tipo_pax','$celular','$telefono','$anexo','$rpm','$rpc','$email',$tarifa_unitaria,$tarifa_unitaria,$total_pagar,$igv_unitaria,$tuua_unitaria,$total,$total_pagar)";
-
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        
         $error=$obj_conexion->ErrorEjecucion($conexion);
@@ -767,7 +763,6 @@ public function GuardarReservaDetalle($registro,$j,$tipo_documento,$numero_docum
         $obj_conexion->CerrarConexion($conexion);
       
             return $flag;
-        
     }
     
 public function UpdateReservaDetalleTicket($ticket,$i,$registro){
