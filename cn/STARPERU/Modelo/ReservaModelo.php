@@ -775,7 +775,6 @@ public function UpdateReservaDetalleTicket($ticket,$i,$registro){
         $conexion=$obj_conexion->CrearConexion();
         
         $consulta="UPDATE Reserva_Detalle SET Ticket='$ticket' WHERE Registro=$registro AND Detalle=$i";
-        return $consulta;
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        
         $error=$obj_conexion->ErrorEjecucion($conexion);
