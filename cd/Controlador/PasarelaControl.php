@@ -2094,13 +2094,12 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
         /*************************************************************************************/
         
         if($codigo_reserva!=''){
-                $registro=$obj_reserva->GuardarReservaCabecera($codigo_reserva,$arrayPersonas[0]['Nombres'],$arrayPersonas[0]['Apellidos'],$arrayPersonas[0]['Email'],
-                            $arrayPersonas[0]['Tipo_Documento'],$arrayPersonas[0]['Numero_Documento'],$arrayPersonas[0]['Telefono_Oficina'],
-                            $arrayPersonas[0]['Telefono_Anex'],$arrayPersonas[0]['Celular'],$arrayPersonas[0]['Nextel'],$arrayPersonas[0]['RPM'],
-                            $arrayPersonas[0]['RPC'],$fecha_registro,$fecha_registro,$adultos_5,$menores_5,$infantes_5,$origen_ida_5,$destino_ida_5,$numero_vuelo_ida_5,
-                            $clase_ida_5,$fecha_salida_ida_5,$hora_salida_ida_5,$numero_vuelo_vuelta_5,$clase_vuelta_5,$fecha_salida_vuelta_5,$hora_salida_vuelta_5,
-                            $pais,$ciudad,$ip,$flete,$tuua_reserva,$igv_reserva,$total_reserva,$_SESSION['s_idusuario'],$_SESSION['s_entidad'],$tipo_vuelo_letras);
-//                echo '<br/>';
+          $registro=$obj_reserva->GuardarReservaCabecera($codigo_reserva,$arrayPersonas[0]['Nombres'],$arrayPersonas[0]['Apellidos'],$arrayPersonas[0]['Email'],
+          $arrayPersonas[0]['Tipo_Documento'],$arrayPersonas[0]['Numero_Documento'],$arrayPersonas[0]['Telefono_Oficina'],
+          $arrayPersonas[0]['Telefono_Anex'],$arrayPersonas[0]['Celular'],$arrayPersonas[0]['Nextel'],$arrayPersonas[0]['RPM'],
+          $arrayPersonas[0]['RPC'],$fecha_registro,$fecha_registro,$adultos_5,$menores_5,$infantes_5,$origen_ida_5,$destino_ida_5,$numero_vuelo_ida_5,
+          $clase_ida_5,$fecha_salida_ida_5,$hora_salida_ida_5,$numero_vuelo_vuelta_5,$clase_vuelta_5,$fecha_salida_vuelta_5,$hora_salida_vuelta_5,
+          $pais,$ciudad,$ip,$flete,$tuua_reserva,$igv_reserva,$total_reserva,$_SESSION['s_idusuario'],$_SESSION['s_entidad'],$tipo_vuelo_letras);
 //                echo $codigo_reserva.'<br/>';
 //                die;
                 $numero_de_vueltas=$adultos_5+$menores_5+$infantes_5;
@@ -2112,45 +2111,27 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                             $igv_unitaria=  number_format($igv_adulto_5/$adultos_5,2,'.','');
                             $tuua_unitaria=  number_format($tuua_adulto_5/$adultos_5,2,'.','');
                             $total=$tarifa_unitaria+$igv_unitaria+$tuua_unitaria;
-                            if($ciudad_exonerada>0){
-                                $total_pagar=$tarifa_unitaria+$tuua_unitaria;
-                            }else if($ciudad_TUUA_exonerada>0){
-                                $total_pagar=$tarifa_unitaria+$igv_unitaria;
-                            }else{
-                                $total_pagar=$total;
-                            }
+                         
                      }elseif($arrayPersonas[$i]['Tipo_Pasajero']=='CNN'){
                             $tipo_pax='N';
                             $tarifa_unitaria=  number_format($tarifa_chil_5/$menores_5,2,'.','');
                             $igv_unitaria=  number_format($igv_chil_5/$menores_5,2,'.','');
                             $tuua_unitaria=  number_format($tuua_chil_5/$menores_5,2,'.','');
                             $total=$tarifa_unitaria+$igv_unitaria+$tuua_unitaria;
-                            if($ciudad_exonerada>0){
-                                $total_pagar=$tarifa_unitaria+$tuua_unitaria;
-                            }else if($ciudad_TUUA_exonerada>0){
-                                $total_pagar=$tarifa_unitaria+$igv_unitaria;
-                            }else{
-                                $total_pagar=$total;
-                            }
+                        
                      }elseif($arrayPersonas[$i]['Tipo_Pasajero']=='INF'){
                             $tipo_pax='B';
                             $tarifa_unitaria=  number_format($tarifa_bb_5/$infantes_5,2,'.','');
                             $igv_unitaria=  number_format($igv_bb_5/$infantes_5,2,'.','');
                             $tuua_unitaria=  number_format($tuua_bb_5/$infantes_5,2,'.','');
                             $total=$tarifa_unitaria+$igv_unitaria+$tuua_unitaria;
-                            if($ciudad_exonerada>0){
-                                $total_pagar=$tarifa_unitaria+$tuua_unitaria;
-                            }else if($ciudad_TUUA_exonerada>0){
-                                $total_pagar=$tarifa_unitaria+$igv_unitaria;
-                            }else{
-                                $total_pagar=$total;
-                            }
+                         
                      }
                      $j++;
                      $consulta= $obj_reserva->GuardarReservaDetalle($registro,$j,$arrayPersonas[$i]['Tipo_Documento'],$arrayPersonas[$i]['Numero_Documento'],$arrayPersonas[$i]['Apellidos'],
                             $arrayPersonas[$i]['Nombres'],$tipo_pax,$arrayPersonas[$i]['Celular'],$arrayPersonas[$i]['Telefono'],$arrayPersonas[$i]['Telefono_Anex'],$arrayPersonas[$i]['RPC'],
                             $arrayPersonas[$i]['RPM'],$arrayPersonas[$i]['Email'],$tarifa_unitaria,$igv_unitaria,$tuua_unitaria,$total,$total_pagar);
-
+                  
                 $numero_de_vueltas = $adultos_5 + $menores_5 + $infantes_5;
                 $j = 0;
                 for ($i = 0; $i < $numero_de_vueltas; $i++) {

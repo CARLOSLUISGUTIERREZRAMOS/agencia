@@ -52,6 +52,7 @@ class KIU_Controller extends KIU_Model
         $salida[]=$array;
         $salida[]=$respuesta_model[1];
         $salida[]=$respuesta_model[2];
+        $salida[]=$respuesta_model[3];
 		return $salida;
                  
                  

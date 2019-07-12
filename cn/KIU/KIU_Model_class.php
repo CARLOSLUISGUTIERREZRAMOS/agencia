@@ -272,6 +272,7 @@ $array=array();
 $array[]=simplexml_load_string($response);
 $array[]=htmlspecialchars($request,ENT_QUOTES);
 $array[]=htmlspecialchars($response,ENT_QUOTES);
+$array[] = new SimpleXMLElement($response);
 return $array;
 //return simplexml_load_string($response);
 //return $request;
