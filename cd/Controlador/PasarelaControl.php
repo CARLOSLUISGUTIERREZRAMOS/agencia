@@ -2097,7 +2097,7 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                 $registro=$obj_reserva->GuardarReservaCabecera($codigo_reserva,$arrayPersonas[0]['Nombres'],$arrayPersonas[0]['Apellidos'],$arrayPersonas[0]['Email'],
                             $arrayPersonas[0]['Tipo_Documento'],$arrayPersonas[0]['Numero_Documento'],$arrayPersonas[0]['Telefono_Oficina'],
                             $arrayPersonas[0]['Telefono_Anex'],$arrayPersonas[0]['Celular'],$arrayPersonas[0]['Nextel'],$arrayPersonas[0]['RPM'],
-                            $arrayPersonas[0]['RPC'],$fecha_registro,$fecha_registro,$adultos_5,$menores_5,$infantes_5,$origen_ida_5,$destino_ida_5,$numero_vuelo_ida_5,
+                            $arrayPersonas[0]['RPC'],$pasajero_ruc,$fecha_registro,$fecha_registro,$adultos_5,$menores_5,$infantes_5,$origen_ida_5,$destino_ida_5,$numero_vuelo_ida_5,
                             $clase_ida_5,$fecha_salida_ida_5,$hora_salida_ida_5,$numero_vuelo_vuelta_5,$clase_vuelta_5,$fecha_salida_vuelta_5,$hora_salida_vuelta_5,
                             $pais,$ciudad,$ip,$flete,$tuua_reserva,$igv_reserva,$total_reserva,$_SESSION['s_idusuario'],$_SESSION['s_entidad'],$tipo_vuelo_letras);
 //                echo '<br/>';
@@ -2149,7 +2149,7 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                      $j++;
                      $consulta= $obj_reserva->GuardarReservaDetalle($registro,$j,$arrayPersonas[$i]['Tipo_Documento'],$arrayPersonas[$i]['Numero_Documento'],$arrayPersonas[$i]['Apellidos'],
                             $arrayPersonas[$i]['Nombres'],$tipo_pax,$arrayPersonas[$i]['Celular'],$arrayPersonas[$i]['Telefono'],$arrayPersonas[$i]['Telefono_Anex'],$arrayPersonas[$i]['RPC'],
-                            $arrayPersonas[$i]['RPM'],$arrayPersonas[$i]['Email'],$tarifa_unitaria,$igv_unitaria,$tuua_unitaria,$total,$total_pagar);
+                            $arrayPersonas[$i]['RPM'],$arrayPersonas[$i]['Email'],$tarifa_unitaria,$igv_unitaria,$tuua_unitaria,$total,$total_pagar,$arrayPersonas[$i]['Fecha_Nacimiento']);
 
                 $numero_de_vueltas = $adultos_5 + $menores_5 + $infantes_5;
                 $j = 0;
@@ -2302,7 +2302,7 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
                 $j++;
                $consulta= $obj_reserva->GuardarReservaDetalle($registro,$j,$arrayPersonas[$i]['Tipo_Documento'],$arrayPersonas[$i]['Numero_Documento'],$arrayPersonas[$i]['Apellidos'],
                         $arrayPersonas[$i]['Nombres'],$tipo_pax,$arrayPersonas[$i]['Celular'],$arrayPersonas[$i]['Telefono'],$arrayPersonas[$i]['Telefono_Anex'],$arrayPersonas[$i]['RPC'],
-                        $arrayPersonas[$i]['RPM'],$arrayPersonas[$i]['Email'],$tarifa_unitaria,$igv_unitaria,$tuua_unitaria,$total,$total_pagar);
+                        $arrayPersonas[$i]['RPM'],$arrayPersonas[$i]['Email'],$tarifa_unitaria,$igv_unitaria,$tuua_unitaria,$total,$total_pagar,$arrayPersonas[$i]['Fecha_Nacimiento']);
             }
             $_SESSION['pasajeros']=$arrayPersonas;
             }
