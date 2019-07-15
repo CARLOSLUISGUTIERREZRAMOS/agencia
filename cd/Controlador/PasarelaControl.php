@@ -181,8 +181,6 @@ if (isset($_POST['paso2'])) {
                         $stop_vuelo = 'Si';
                     }
                     $duracion_vuelo = $datos_vuelo['@attributes']['JourneyDuration'];
-                    $cod_aerolinea = strlen($datos_vuelo['@attributes']['FlightNumber']);
-                    $cod_aerolinea = ($cod_aerolinea === 3) ? 'Peruvian' : 'StarPerú';
                     $vuelos_disponibles[$i] = array("Vuelo" => $datos_vuelo['@attributes']['FlightNumber'],
                         "Salida" => $datos_vuelo['@attributes']['DepartureDateTime'],
                         "Llegada" => $datos_vuelo['@attributes']['ArrivalDateTime'],
@@ -243,10 +241,10 @@ if (isset($_POST['paso2'])) {
                     $clases_vector[] = $vector;
                 }
                 $clases_vector = ordenar_tarifas_kiu($clases_vector, "tarifa", true);
-//                                var_dump($cod_aerolinea);
+                
                 if (count($disponibles) > 0) {
                     $filas .= '<tr>' . "\n";
-                    $filas .= '<td td height="40" class="bgTable-data" align="center"><strong>' . $vuelos_disponibles[$w]["Vuelo"] . "\n" . $cod_aerolinea . '</strong></td>' . "\n";
+                    $filas .= '<td td height="40" class="bgTable-data" align="center"><strong>' . $vuelos_disponibles[$w]["Vuelo"] . "\n" . (strlen($vuelos_disponibles[$w]["Vuelo"])==3? 'Peruvian':'StarPerú') . '</strong></td>' . "\n";
                     $filas .= '<td class="bgTable-data" align="center">' . substr($vuelos_disponibles[$w]["Salida"], 11, 17) . '</td>' . "\n";
                     $filas .= '<td class="bgTable-data" align="center">' . substr($vuelos_disponibles[$w]["Llegada"], 11, 17) . '</td>' . "\n";
                     $filas .= '<td class="bgTable-data" align="center">' . $vuelos_disponibles[$w]["Duracion"] . '</td>' . "\n";
@@ -312,8 +310,7 @@ if (isset($_POST['paso2'])) {
                             $stop_vuelo = 'Si';
                         }
                         $duracion_vuelo = $datos_vuelo['@attributes']['JourneyDuration'];
-                        $cod_aerolinea = strlen($datos_vuelo['@attributes']['FlightNumber']);
-                        $cod_aerolinea = ($cod_aerolinea === 3) ? 'Peruvian' : 'StarPerú';
+//    
                         $vuelos_disponibles[$i] = array("Vuelo" => $datos_vuelo['@attributes']['FlightNumber'],
                             "Salida" => $datos_vuelo['@attributes']['DepartureDateTime'],
                             "Llegada" => $datos_vuelo['@attributes']['ArrivalDateTime'],
@@ -347,8 +344,6 @@ if (isset($_POST['paso2'])) {
                 }
                 $clases_tarifas_disponibles = $obj_tarifa->ObtenerTarifaClaseFamilia($fecha_vuelta, $destino, $origen, $tipo_vuelo, $estadia);
 
-
-
                 $tabla_disponibilidades1 = '<table class="tabla_vuelos_de_retorno">' . "\n";
                 $tabla_disponibilidades1 .= '<tr><td width="50" class="subtitleTable">Vuelo</td>' . "\n";
                 $tabla_disponibilidades1 .= '<td width="50" class="subtitleTable">Salida</td>' . "\n";
@@ -374,7 +369,7 @@ if (isset($_POST['paso2'])) {
                     if (count($disponibles) > 0) {
 
                         $filas1 .= '<tr>' . "\n";
-                        $filas1 .= '<td td height="40" class="bgTable-data" align="center"><strong>' . $vuelos_disponibles[$w]["Vuelo"] . "\n" . $cod_aerolinea . '</strong></td>' . "\n";
+                        $filas1 .= '<td td height="40" class="bgTable-data" align="center"><strong>' . $vuelos_disponibles[$w]["Vuelo"] . "\n" . (strlen($vuelos_disponibles[$w]["Vuelo"])==3? 'Peruvian':'StarPerú') . '</strong></td>' . "\n";
                         $filas1 .= '<td class="bgTable-data" align="center">' . substr($vuelos_disponibles[$w]["Salida"], 11, 17) . '</td>' . "\n";
                         $filas1 .= '<td class="bgTable-data" align="center">' . substr($vuelos_disponibles[$w]["Llegada"], 11, 17) . '</td>' . "\n";
                         $filas1 .= '<td class="bgTable-data" align="center">' . $vuelos_disponibles[$w]["Duracion"] . '</td>' . "\n";
