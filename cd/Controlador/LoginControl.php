@@ -10,6 +10,8 @@ if(isset($_POST['login'])){
     $obj_personal=new PersonalModelo();
     $obj_agencia=new EmpresaModelo();
     if($_POST['login']==1){
+        echo "asassa";
+        die;
         if (isset($_POST['usuario'])) {
             $usuario = (get_magic_quotes_gpc()) ? $_POST['usuario'] : addslashes($_POST['usuario']);
         }
