@@ -2317,7 +2317,7 @@ $total_pagar_tabla_5=$subtotal_tabla_adl+$subtotal_tabla_ch+$subtotal_tabla_i+$t
 
         $table_precio_5.='</table>';
           // if($_POST['forma_pago'] == 'TC'){
-            include '../../cn/METODOS_PAGO/Connection_visa.php';
+         include '../../cn/METODOS_PAGO/Connection_visa.php';
           $visa = new Connection_visa();
             
             $token = $visa->Connection();
@@ -2353,9 +2353,6 @@ if($_POST['confirmacion']==1){
         echo $tabla_error;
         die;
     }
- 
-
-
 
     $correo_gestor=$_SESSION["s_email"];
     $codigo_reserva_c=$_POST['codigo_reserva'];
@@ -2363,12 +2360,14 @@ if($_POST['confirmacion']==1){
     $menores_confirmacion=$_POST['menores_confirmacion'];
     $infantes_confirmacion=$_POST['infantes_confirmacion'];
     $registro = $_POST['registro'];
-    
     $total_pagar_cc=$_POST['total_pagar_cc'];
     $tipo_moneda_cc=$_POST['tipo_moneda_cc'];
     $tipo_viaje_cc=$_POST['tipo_viaje_cc'];
     $total_pagar_tabla_5=$_POST['total_pagar_tabla_5'];
  
+
+
+    
     // datos del vuelo ida
     $numero_vuelo_ida_cc=$_POST['numero_vuelo_ida_cc'];
     $fecha_hora_salida_ida_cc=$_POST['fecha_hora_salida_ida_cc'];
@@ -2560,7 +2559,8 @@ if($_POST['confirmacion']==1){
                         mail($para, $asunto, $mensaje, $cabeceras);
                     }
                     
-        }else{
+        }
+        else{
             $respuesta_kiu = $KIU->AirDemandTicketRQ(array(
                 'PaymentType' => "37"
                 , 'MiscellaneousCode' => "SR"

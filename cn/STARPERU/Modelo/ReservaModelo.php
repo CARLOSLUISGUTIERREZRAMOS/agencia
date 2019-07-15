@@ -791,7 +791,7 @@ public function UpdateReservaTicket($codigo_reserva_c,$campos_consulta,$cc_code=
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="UPDATE Reserva SET $campos_consulta EstadoRegistro=1 WHERE CodigoReserva='$codigo_reserva_c'";
+        $consulta="UPDATE Reserva SET $campos_consulta forma_pago = '$cc_code' ,EstadoRegistro=1 WHERE CodigoReserva='$codigo_reserva_c'";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        
         $error=$obj_conexion->ErrorEjecucion($conexion);
