@@ -1452,7 +1452,7 @@ $table_precio_4.='<tr>
                                         <td align="left"><input name="celular_m_' . $j . '" type="text" id="celular_m_' . $j . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" value="" /></td>
                                         <td style="background-color: #FFFFFF"></td>
                                         <td></td>
-                                        <td align="left"><input name="fecNac_m_' . $j . '" type="date" id="fecNac_m_' . $j . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" value="" /></td>
+                                        <td align="left"><input name="fecNac_m_' . $j . '" type="date" id="fecNac_m_' . $j . '" maxlength="9" class="frmInput" style="width: 120px" onKeyPress="return NumeroInt(event)" value="" /></td>
                                         <td style="background-color: #FFFFFF"></td>
                                         <td></td>
                                         <td align="left" colspan="17"></td>
@@ -1568,7 +1568,7 @@ $table_precio_4.='<tr>
                                 <td align="left"><input name="celular_i_' . $k . '" type="text" id="celular_i_' . $k . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)"  value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input name="fecNac_i_' . $k . '" type="date" id="fecNac_i_' . $k . '" maxlength="9" class="frmInput" style="width: 96px" onKeyPress="return NumeroInt(event)" value=""/></td>
+                                <td align="left"><input name="fecNac_i_' . $k . '" type="date" id="fecNac_i_' . $k . '" maxlength="9" class="frmInput" style="width: 120px" onKeyPress="return NumeroInt(event)" value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
                                 <td align="left" colspan="17"></td>
