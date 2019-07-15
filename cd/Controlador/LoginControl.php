@@ -18,7 +18,7 @@ if(isset($_POST['login'])){
             $clave = (get_magic_quotes_gpc()) ? $_POST['password'] : addslashes($_POST['password']);
         }
 
-            $clave_encrypt= $obj_personal->encrypt($clave,"$starperu");
+            $clave_encrypt= $obj_personal->encrypt($clave,"starperu");
             $Personal= $obj_personal->AutentificarPersonal($usuario,$clave_encrypt);
             var_dump($Personal);
             die;
