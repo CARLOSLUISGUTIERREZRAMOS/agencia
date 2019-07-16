@@ -18,6 +18,8 @@ class PersonalModelo{
                    WHERE p.CodigoUsuario='$usuario' AND p.Password='$password' AND p.EstadoRegistro=1 AND e.EstadoRegistro=1 AND p.CodigoEntidad=e.CodigoEntidad";//e.EstadoRegistro=1 AND
         
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        var_dump($resultado);
+            die;
         $numero_filas=$obj_conexion->ContarFilas($resultado);
 
         if($numero_filas==1){

@@ -43,7 +43,7 @@
                 right: 12px;
             }
         </style>
-        <<!-- link href="App_Themes/PasarelaTheme/jquery-ui-1.8.16.custom.css" type="text/css" rel="stylesheet" />
+        <!-- link href="App_Themes/PasarelaTheme/jquery-ui-1.8.16.custom.css" type="text/css" rel="stylesheet" />
         <link href="App_Themes/PasarelaTheme/style.css" type="text/css" rel="stylesheet" /> -->
     </head>
     <body class="fondo_panel">
@@ -386,7 +386,8 @@
 
             </div>
         </div>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
         <script src="cp/js/bootstrap.js" type="text/javascript"></script>
         <script src="cp/js/toastr.js" type="text/javascript"></script>
         <script src="cp/js/jsLogin.js" type="text/javascript"></script>
