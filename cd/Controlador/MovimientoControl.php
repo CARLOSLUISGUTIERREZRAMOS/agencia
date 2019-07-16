@@ -66,7 +66,7 @@ if($_REQUEST['movimientos']==1){
                                     }
                                    $cant++;
 
-                                    $data['rows'][] = array(
+                                     $data['rows'][] = array(
                                       'view' => $movimiento[7]->getRegistro(),
                                       'cell' => array('<div class="Consulta" style="text-align: center;">
                                           <a href="javascript:void(0);" onClick=" Detalle_movimiento(\''.$movimiento[7]->getRegistro().'\',\''.$movimiento[8]->getDetalle().'\',\''.$movimiento[7]->getCodigoReserva().'\',\''.$movimiento[0]->getRUC().'\',\''
@@ -76,7 +76,7 @@ if($_REQUEST['movimientos']==1){
                                           $icono_ticket,
                                           $movimiento[7]->getRegistro(),
                                           $movimiento[7]->getCodigoReserva(),
-                                          $movimiento[0]->getRUC(),
+                                          $movimiento[7]->getRUCPasajero(),
                                           $movimiento[3],
                                           $movimiento[7]->getFechaRegistro(),
                                           $movimiento[8]->getTicket(),
@@ -172,7 +172,7 @@ if($_REQUEST['excel']==1){
                     </TR>
                 <TR>
                 <TH class="excel">ID. Mov</TH>  
-                <TH class="excel" >RUC Entidad</TH>
+                <TH class="excel" >RUC</TH>
                 <TH class="excel">Gestor</TH>
                 <TH class="excel">Usuario</TH>
                 <TH class="excel">Tipo Oper.</TH>
@@ -197,7 +197,7 @@ if($_REQUEST['excel']==1){
                 foreach ($lista_movimientos as $movimiento){
                 echo '<tr '.$color.'>
                 <td>'.$movimiento[7]->getCodigoReserva()."</td>
-                <td>".$movimiento[0]->getRUC()."</td>
+                <td>".$movimiento[7]->getRUCPasajero()."</td>
                 <td>".$movimiento[1]."</td>
                 <td>".$movimiento[2]."</td>
                 <td>".$movimiento[3]."</td>
@@ -372,9 +372,9 @@ if($_REQUEST['movimiento_detalle']==1){
             <td align="right" class="lab_dmov"><strong>Referencia Boleto :</strong></td>
             <td><?php echo $movimiento[18]->getReferencia();?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Telf. RPM Pasajero :</strong></td>
+<!--            <td align="right" class="lab_dmov"><strong>Telf. RPM Pasajero :</strong></td>
             <td><?php echo $movimiento[18]->getRPM();?></td>
-            <td></td>
+            <td></td>-->
             <td align="right" class="lab_dmov"><strong>Descuento Tarifa :</strong></td>
             <td><?php echo number_format($movimiento[15],2);?></td>
         </tr>
@@ -382,9 +382,9 @@ if($_REQUEST['movimiento_detalle']==1){
             <td align="right" class="lab_dmov"><strong>Tramo :</strong></td>
             <td><?php echo $tramo; ?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Telf. RPC Pasajero :</strong></td>
+<!--            <td align="right" class="lab_dmov"><strong>Telf. RPC Pasajero :</strong></td>
             <td><?php echo $movimiento[18]->getRPC();?></td>
-            <td></td>
+            <td></td>-->
             <td align="right" class="lab_dmov"><strong>Desc Acu. :</strong></td>
             <td><?php echo $movimiento[16];?></td>
         </tr>
@@ -392,9 +392,9 @@ if($_REQUEST['movimiento_detalle']==1){
             <td align="right" class="lab_dmov"><strong>Nº Vuelo :</strong></td>
             <td><?php echo $numero_vuelo;?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Telf. Nextel Pasajero :</strong></td>
+<!--            <td align="right" class="lab_dmov"><strong>Telf. Nextel Pasajero :</strong></td>
             <td><?php echo $movimiento[18]->getNextel();?></td>
-            <td></td>
+            <td></td>-->
             <td align="right" class="lab_dmov"><strong>Costo Tramo :</strong></td>
             <td><?php echo number_format($total_pagar,2); ?></td>
         </tr>

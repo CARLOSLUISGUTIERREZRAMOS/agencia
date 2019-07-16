@@ -44,6 +44,7 @@ class ReservaEntidad{
     private $codigo_entidad;
     private $codigo_personal;
     private $estado_registro;
+    private $ruc_pasajero;
 
    // METODOS GET 
    public function getRegistro(){
@@ -175,6 +176,9 @@ class ReservaEntidad{
    }
    public function getEstadoRegistro(){
        return $this->estado_registro;
+   }
+   public function getRUCPasajero(){
+      return $this->ruc_pasajero;
    }
 
   // METODOS SET
@@ -308,6 +312,9 @@ class ReservaEntidad{
    }
    public function setEstadoRegistro($estado_registro){
        $this->estado_registro=$estado_registro;
+   }
+   public function setRUCPasajero($ruc_pasajero){
+       $this->ruc_pasajero=$ruc_pasajero;
    }
 }
 

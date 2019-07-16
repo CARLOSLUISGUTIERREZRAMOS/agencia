@@ -174,6 +174,7 @@ class ReservaModelo{
         
         $consulta="(SELECT Reserva.Registro,
                            Reserva_Detalle.Detalle, 
+                           Reserva.RUC as ruc_pasajero,
                            Reserva.CodigoReserva,
                            E.RUC,  
                            'EM' Tipo_Operacion,     
@@ -202,6 +203,7 @@ class ReservaModelo{
 
                     (SELECT Reserva.Registro,
                          Reserva_Detalle.Detalle, 
+                         Reserva.RUC as ruc_pasajero,
                          Reserva.CodigoReserva,
                           E.RUC,  
                           'EM' Tipo_Operacion,
@@ -231,6 +233,7 @@ class ReservaModelo{
                     (SELECT Reserva.Registro,
                          Reserva_Detalle.Detalle, 
                           Reserva.CodigoReserva,
+                          Reserva.RUC as ruc_pasajero,
                           E.RUC,  
                           'SA' Tipo_Operacion,
                           Reserva.FechaRegistro,
@@ -258,6 +261,7 @@ class ReservaModelo{
 
                     (SELECT Reserva.Registro,
                           Reserva_Detalle.Detalle, 
+                          Reserva.RUC as ruc_pasajero,
                           Reserva.CodigoReserva,
                           E.RUC,  
                           'SA' Tipo_Operacion,
@@ -291,7 +295,6 @@ class ReservaModelo{
         if($numero_filas>0){
           
             while($fila=  $obj_conexion->ObtenerDatos($resultado)){
-                    
                     $movimiento=array();
                     $reserva = new ReservaEntidad();
                     $reserva_detalle = new ReservaDetalleEntidad();
@@ -302,12 +305,12 @@ class ReservaModelo{
                     $documento='';
                     $dni_gestor='';
                     $dni_delegago='';
-            
                     $reserva->setRegistro($fila['Registro']);
                     $reserva_detalle->setRegistro($fila['Registro_detalle']);
                     $reserva_detalle->setDetalle($fila['Detalle']);
                     $reserva->setRegistro($fila['Registro']);
                     $reserva->setCodigoReserva($fila['CodigoReserva']);
+                    $reserva->setRUCPasajero($fila['ruc_pasajero']);
                     $empresa->setRUC($fila['RUC']);
                     $tipo_operacion=$fila['Tipo_Operacion'];
                     $reserva->setFechaRegistro($fila['FechaRegistro']);
