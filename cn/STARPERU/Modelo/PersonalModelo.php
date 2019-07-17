@@ -13,37 +13,39 @@ class PersonalModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="SELECT p.CodigoPersonal, p.Nombres, p.ApellidoPaterno, p.ApellidoMaterno, p.CodigoEntidad, p.CambioClave,p.CodigoTipo,p.DNI,p.Email,p.TelefonoOficina,p.Anexo,p.Celular,p.RPC,p.RPM,p.Nextel 
+        $consulta="SELECT p.CodigoPersonal, p.Nombres, p.ApellidoPaterno, p.ApellidoMaterno, p.CodigoEntidad, p.CambioClave,p.CodigoTipo,p.DNI,p.Email,p.TelefonoOficina,p.Anexo,p.Celular,p.RPC,p.RPM,p.Nextel,p.Tipo,e.RazonSocial 
                    FROM Personal p, Entidad e 
                    WHERE p.CodigoUsuario='$usuario' AND p.Password='$password' AND p.EstadoRegistro=1 AND e.EstadoRegistro=1 AND p.CodigoEntidad=e.CodigoEntidad";//e.EstadoRegistro=1 AND
         
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
-        var_dump($resultado);
-            die;
         $numero_filas=$obj_conexion->ContarFilas($resultado);
 
         if($numero_filas==1){
             
-            $fila=  $obj_conexion->ObtenerDatos($resultado);
-            $personal = new PersonalEntidad();
-            $personal->setCodigoPersonal($fila['CodigoPersonal']);
-            $personal->setNombres($fila['Nombres']);
-            $personal->setApellidoPaterno($fila['ApellidoPaterno']);
-            $personal->setApellidoMaterno($fila['ApellidoMaterno']);
-            $personal->setCodigoEntidad($fila['CodigoEntidad']);
-            $personal->setCambioClave($fila['CambioClave']);
-            $personal->setCodigoTipo($fila['CodigoTipo']);
-            $personal->setDNI($fila['DNI']);
-            $personal->setEmail($fila['Email']);
-            $personal->setTelefonoOficina($fila['TelefonoOficina']);
-            $personal->setAnexo($fila['Anexo']);
-            $personal->setCelular($fila['Celular']);
-            $personal->setRPC($fila['RPC']);
-            $personal->setRPM($fila['RPM']);
-            $personal->setNextel($fila['Nextel']);
+            $fila=  (object) $obj_conexion->ObtenerDatos($resultado);
+            // echo '<pre>';
+            // var_dump($fila);
+            // echo '</pre>';die;
+            // $personal = new PersonalEntidad();
+            // $personal->setCodigoPersonal($fila['CodigoPersonal']);
+            // $personal->setNombres($fila['Nombres']);
+            // $personal->setApellidoPaterno($fila['ApellidoPaterno']);
+            // $personal->setApellidoMaterno($fila['ApellidoMaterno']);
+            // $personal->setCodigoEntidad($fila['CodigoEntidad']);
+            // $personal->setCambioClave($fila['CambioClave']);
+            // $personal->setCodigoTipo($fila['CodigoTipo']);
+            // $personal->setDNI($fila['DNI']);
+            // $personal->setEmail($fila['Email']);
+            // $personal->setTelefonoOficina($fila['TelefonoOficina']);
+            // $personal->setAnexo($fila['Anexo']);
+            // $personal->setCelular($fila['Celular']);
+            // $personal->setRPC($fila['RPC']);
+            // $personal->setRPM($fila['RPM']);
+            // $personal->setNextel($fila['Nextel']);
             $obj_conexion->CerrarConexion($conexion);
             
-           return $personal;
+            // return $personal;
+            return $fila;
         }else{
            return "";
         }
@@ -213,12 +215,12 @@ class PersonalModelo{
         return $flag;
     }
 
-    public function GuardaUsuario($CodigoEntidad,$DNI,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$Celular,$Password,$Usuario,$Tipo){
+    public function GuardaUsuario($CodigoEntidad,$DNI,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$Celular,$Password,$Usuario,$CodigoTipo,$Tipo){
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,Celular,CodigoTipo,CodigoUsuario,Password,EstadoRegistro)
-                   VALUES ($CodigoEntidad,'$DNI','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$Celular','$Tipo','$Usuario','$Password',0)";
+        $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,Celular,CodigoTipo,Tipo,CodigoUsuario,Password,EstadoRegistro)
+                   VALUES ($CodigoEntidad,'$DNI','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$Celular','$CodigoTipo','$Tipo','$Usuario','$Password',0)";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
