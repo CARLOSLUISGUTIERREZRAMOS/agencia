@@ -63,6 +63,7 @@
                     {display: "Tipo Oper.", name : "ope_tipo", width : 60, align: 'center',sortable : false},
                     {display: "Fec. Hora Oper.", name : "fecha_ope", width : 120, align: 'center',sortable : false},
                     {display: "Boleto", name : "boleto", width : 100,  align: 'center',sortable : false},
+                    {display: "Tarjeta", name : "tarjeta", width : 100,  align: 'center',sortable : false},
                     {display: "Ap. Paterno", name : "apepa_pas", width : 100,  align: 'left',sortable : false},
                     {display: "Ap. Materno", name : "apema_pas", width : 100,  align: 'left',sortable : false},
                     {display: "Nombres", name : "nom_pas", width : 120,  align: 'left',sortable : false},
@@ -149,13 +150,13 @@
             return texto.replace(/^\s+|\s+$/g,"");
         }
 
-        function Detalle_movimiento(registro,detalle,codigo_reserva,ruc_entidad,tipo_operacion,fecha_registro,ticket,nombres_pasajero,gestor,delegado,cantidad_boleto,tipo_vuelo,tramo,numero_vuelo,origen,fecha_hora_salida,destino,fecha_hora_retorno,nro_documento,total_pagar){
+        function Detalle_movimiento(registro,detalle,codigo_reserva,ruc_entidad,tipo_operacion,fecha_registro,ticket,tarjeta,num_tarjeta,nombres_pasajero,gestor,delegado,cantidad_boleto,tipo_vuelo,tramo,numero_vuelo,origen,fecha_hora_salida,destino,fecha_hora_retorno,nro_documento,total_pagar){
              
             $.ajax({
                 url: "<?=$url?>/cd/Controlador/MovimientoControl.php",
                 data: "movimiento_detalle=1&registro="+registro+"&detalle="+detalle+"&codigo_reserva="+codigo_reserva+"&ruc_entidad="+ruc_entidad+
                         "&tipo_operacion="+tipo_operacion+"&fecha_registro="+fecha_registro+"&nombres_pasajero="+nombres_pasajero+
-                        "&gestor="+gestor+"&delegado="+delegado+"&ticket="+ticket+"&cantidad_boleto="+cantidad_boleto+"&tipo_vuelo="+tipo_vuelo+
+                        "&gestor="+gestor+"&delegado="+delegado+"&ticket="+ticket+"&tarjeta="+tarjeta+"&num_tarjeta="+num_tarjeta+"&cantidad_boleto="+cantidad_boleto+"&tipo_vuelo="+tipo_vuelo+
                         "&tramo="+tramo+"&numero_vuelo="+numero_vuelo+"&origen="+origen+"&fecha_hora_salida="+fecha_hora_salida+
                         "&destino="+destino+"&fecha_hora_retorno="+fecha_hora_retorno+"&nro_documento="+nro_documento+"&total_pagar="+total_pagar,
                 type: "POST",
