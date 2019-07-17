@@ -66,21 +66,22 @@ if($_REQUEST['movimientos']==1){
                                     }
                                    $cant++;
 
-                                    $data['rows'][] = array(
+                                     $data['rows'][] = array(
                                       'view' => $movimiento[7]->getRegistro(),
                                       'cell' => array('<div class="Consulta" style="text-align: center;">
                                           <a href="javascript:void(0);" onClick=" Detalle_movimiento(\''.$movimiento[7]->getRegistro().'\',\''.$movimiento[8]->getDetalle().'\',\''.$movimiento[7]->getCodigoReserva().'\',\''.$movimiento[0]->getRUC().'\',\''
-                                          .$movimiento[3].'\',\''.$movimiento[7]->getFechaRegistro().'\',\''.$movimiento[8]->getTicket().'\',\''.$movimiento[8]->getNombres().' '.$movimiento[8]->getApellidos().' '.trim($movimiento[8]->getApellidos2()).'\',\''.$movimiento[1].'\',\''.$movimiento[2].'\',\''.$movimiento[4].'\',\''.$movimiento[7]->getTipoVuelo().'\',\''.$movimiento[5].'\',\''.$movimiento[7]->getVueloSalida().'\',\''
+                                          .$movimiento[3].'\',\''.$movimiento[7]->getFechaRegistro().'\',\''.$movimiento[8]->getTicket().'\',\''.$movimiento[9].'\',\''.$movimiento[10].'\',\''.$movimiento[8]->getNombres().' '.$movimiento[8]->getApellidos().' '.trim($movimiento[8]->getApellidos2()).'\',\''.$movimiento[1].'\',\''.$movimiento[2].'\',\''.$movimiento[4].'\',\''.$movimiento[7]->getTipoVuelo().'\',\''.$movimiento[5].'\',\''.$movimiento[7]->getVueloSalida().'\',\''
                                           .$movimiento[7]->getOrigen().'\',\''.$movimiento[7]->getFechaSalida().'\',\''.$movimiento[7]->getDestino().'\',\''.$movimiento[7]->getHoraRetorno().'\',\''.$movimiento[6].'\',\''.$total_pagar.'\');"  
                                            ><img src="../images/icono_ver.png"/></a></div>',
                                           $icono_ticket,
                                           $movimiento[7]->getRegistro(),
                                           $movimiento[7]->getCodigoReserva(),
-                                          $movimiento[0]->getRUC(),
+                                          $movimiento[7]->getRUCPasajero(),
                                           $movimiento[3],
                                           $movimiento[7]->getFechaRegistro(),
                                           $movimiento[8]->getTicket(),
-                                          $movimiento[8]->getApellidos(),
+                                          $movimiento[9],
+                                           $movimiento[8]->getApellidos(),
                                           trim($movimiento[8]->getApellidos2()),
                                           $movimiento[8]->getNombres(),
                                           $movimiento[1],
@@ -95,6 +96,7 @@ if($_REQUEST['movimientos']==1){
                                           $movimiento[7]->getHoraRetorno(),
                                           $movimiento[6],
                                           $total_pagar,
+                                         
                                           )
                                       ); 
 
@@ -172,7 +174,7 @@ if($_REQUEST['excel']==1){
                     </TR>
                 <TR>
                 <TH class="excel">ID. Mov</TH>  
-                <TH class="excel" >RUC Entidad</TH>
+                <TH class="excel" >RUC</TH>
                 <TH class="excel">Gestor</TH>
                 <TH class="excel">Usuario</TH>
                 <TH class="excel">Tipo Oper.</TH>
@@ -180,6 +182,7 @@ if($_REQUEST['excel']==1){
                 <TH class="excel">Tip. Serv.</TH>
                 <TH class="excel">Fec. Hora Operacion</TH>
                 <TH class="excel" style="width: 150px;">Boleto</TH>
+                <TH class="excel">Tarjeta</TH>
                 <TH class="excel">Tramo</TH>
                 <TH class="excel">Nro Vuelo</TH>
                 <TH class="excel">Origen</TH>
@@ -197,7 +200,7 @@ if($_REQUEST['excel']==1){
                 foreach ($lista_movimientos as $movimiento){
                 echo '<tr '.$color.'>
                 <td>'.$movimiento[7]->getCodigoReserva()."</td>
-                <td>".$movimiento[0]->getRUC()."</td>
+                <td>".$movimiento[7]->getRUCPasajero()."</td>
                 <td>".$movimiento[1]."</td>
                 <td>".$movimiento[2]."</td>
                 <td>".$movimiento[3]."</td>
@@ -205,6 +208,7 @@ if($_REQUEST['excel']==1){
                 <td>".$movimiento[7]->getTipoVuelo()."</td>
                 <td>".$movimiento[7]->getFechaRegistro()."</td>
                 <td class='xl65'>".$movimiento[8]->getTicket()."</td>
+                <td>".$movimiento[9]."</td>
                 <td>".$movimiento[5]."</td>
                 <td>".$movimiento[7]->getVueloSalida()."</td>
                 <td>".$movimiento[7]->getOrigen()."</td>
@@ -238,6 +242,8 @@ if($_REQUEST['movimiento_detalle']==1){
           $tipo_vuelo=trim($_REQUEST['tipo_vuelo']);
           $tramo=trim($_REQUEST['tramo']);
           $ticket=trim($_REQUEST['ticket']);
+          $tarjeta=trim($_REQUEST['tarjeta']);
+          $num_tarjeta=trim($_REQUEST['num_tarjeta']);
           $numero_vuelo=trim($_REQUEST['numero_vuelo']);
           $origen=trim($_REQUEST['origen']);
           $fecha_hora_salida=trim($_REQUEST['fecha_hora_salida']);
@@ -372,9 +378,12 @@ if($_REQUEST['movimiento_detalle']==1){
             <td align="right" class="lab_dmov"><strong>Referencia Boleto :</strong></td>
             <td><?php echo $movimiento[18]->getReferencia();?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Telf. RPM Pasajero :</strong></td>
-            <td><?php echo $movimiento[18]->getRPM();?></td>
+            <td align="right" class="lab_dmov"><strong>Tarjeta :</strong></td>
+            <td><?php echo $tarjeta;?></td>
             <td></td>
+<!--            <td align="right" class="lab_dmov"><strong>Telf. RPM Pasajero :</strong></td>
+            <td><?php echo $movimiento[18]->getRPM();?></td>
+            <td></td>-->
             <td align="right" class="lab_dmov"><strong>Descuento Tarifa :</strong></td>
             <td><?php echo number_format($movimiento[15],2);?></td>
         </tr>
@@ -382,9 +391,12 @@ if($_REQUEST['movimiento_detalle']==1){
             <td align="right" class="lab_dmov"><strong>Tramo :</strong></td>
             <td><?php echo $tramo; ?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Telf. RPC Pasajero :</strong></td>
-            <td><?php echo $movimiento[18]->getRPC();?></td>
+            <td align="right" class="lab_dmov"><strong>Número de tarjeta  :</strong></td>
+            <td><?php echo $num_tarjeta;?></td>
             <td></td>
+<!--            <td align="right" class="lab_dmov"><strong>Telf. RPC Pasajero :</strong></td>
+            <td><?php echo $movimiento[18]->getRPC();?></td>
+            <td></td>-->
             <td align="right" class="lab_dmov"><strong>Desc Acu. :</strong></td>
             <td><?php echo $movimiento[16];?></td>
         </tr>
@@ -392,8 +404,8 @@ if($_REQUEST['movimiento_detalle']==1){
             <td align="right" class="lab_dmov"><strong>Nº Vuelo :</strong></td>
             <td><?php echo $numero_vuelo;?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Telf. Nextel Pasajero :</strong></td>
-            <td><?php echo $movimiento[18]->getNextel();?></td>
+            <td align="right" class="lab_dmov"><strong></strong></td>
+            <td></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Costo Tramo :</strong></td>
             <td><?php echo number_format($total_pagar,2); ?></td>

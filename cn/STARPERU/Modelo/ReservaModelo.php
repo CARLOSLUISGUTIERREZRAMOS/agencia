@@ -174,7 +174,10 @@ class ReservaModelo{
         
         $consulta="(SELECT Reserva.Registro,
                            Reserva_Detalle.Detalle, 
+                           Reserva.RUC as ruc_pasajero,
                            Reserva.CodigoReserva,
+                           Visa.brand,
+                           Visa.card,
                            E.RUC,  
                            'EM' Tipo_Operacion,     
                            Reserva.FechaRegistro,
@@ -195,14 +198,17 @@ class ReservaModelo{
                           CONCAT(Reserva_Detalle.Documento) Documento,
                             ROUND(Reserva_Detalle.TotalPagar, 2) TotalPagar,
                             Reserva_Detalle.EstadoRegistro		
-                      FROM Reserva_Detalle, Reserva, Personal, Entidad E 
-                      WHERE Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
+                      FROM Reserva_Detalle, Reserva, Personal, Entidad E ,Visa
+                      WHERE Visa.reserva_id= Reserva.Registro AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
 
                     UNION ALL
 
                     (SELECT Reserva.Registro,
                          Reserva_Detalle.Detalle, 
+                         Reserva.RUC as ruc_pasajero,
                          Reserva.CodigoReserva,
+                         Visa.brand,
+                         Visa.card,
                           E.RUC,  
                           'EM' Tipo_Operacion,
                           Reserva.FechaRegistro,
@@ -223,14 +229,17 @@ class ReservaModelo{
                           CONCAT(Reserva_Detalle.Documento) Documento,
                           ROUND(Reserva_Detalle.TotalPagar, 2) TotalPagar,
                           Reserva_Detalle.EstadoRegistro	
-                    FROM Reserva_Detalle, Reserva, Personal, Entidad E 
-                    WHERE Reserva.TipoVuelo = 'R' AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
+                    FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
+                    WHERE Visa.reserva_id= Reserva.Registro AND Reserva.TipoVuelo = 'R' AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
 
                     UNION ALL
 
                     (SELECT Reserva.Registro,
                          Reserva_Detalle.Detalle, 
                           Reserva.CodigoReserva,
+                          Reserva.RUC as ruc_pasajero,
+                          Visa.brand,
+                          Visa.card,
                           E.RUC,  
                           'SA' Tipo_Operacion,
                           Reserva.FechaRegistro,
@@ -251,14 +260,17 @@ class ReservaModelo{
                            Reserva_Detalle.Documento,
                           ROUND(Reserva_Detalle.TotalPagar, 2) * (-1),
                           Reserva_Detalle.EstadoRegistro		
-                    FROM Reserva_Detalle, Reserva, Personal, Entidad E 
-                    WHERE Reserva_Detalle.EstadoRegistro = 0 AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad  $filtro)
+                    FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
+                    WHERE Visa.reserva_id= Reserva.Registro AND Reserva_Detalle.EstadoRegistro = 0 AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad  $filtro)
 
                     UNION ALL
 
                     (SELECT Reserva.Registro,
                           Reserva_Detalle.Detalle, 
+                          Reserva.RUC as ruc_pasajero,
                           Reserva.CodigoReserva,
+                          Visa.brand,
+                          Visa.card,
                           E.RUC,  
                           'SA' Tipo_Operacion,
                           Reserva.FechaRegistro,
@@ -279,8 +291,8 @@ class ReservaModelo{
                            Reserva_Detalle.Documento ,
                           ROUND(Reserva_Detalle.TotalPagar, 2) * (-1),
                           Reserva_Detalle.EstadoRegistro	
-                    FROM Reserva_Detalle, Reserva, Personal, Entidad E 
-                    WHERE Reserva.TipoVuelo = 'R' AND Reserva_Detalle.EstadoRegistro = 0 AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
+                    FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
+                    WHERE Visa.reserva_id= Reserva.Registro AND Reserva.TipoVuelo = 'R' AND Reserva_Detalle.EstadoRegistro = 0 AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
                     ORDER BY Registro ,Detalle, Tramo   $limite";
 
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
@@ -291,7 +303,6 @@ class ReservaModelo{
         if($numero_filas>0){
           
             while($fila=  $obj_conexion->ObtenerDatos($resultado)){
-                    
                     $movimiento=array();
                     $reserva = new ReservaEntidad();
                     $reserva_detalle = new ReservaDetalleEntidad();
@@ -302,12 +313,14 @@ class ReservaModelo{
                     $documento='';
                     $dni_gestor='';
                     $dni_delegago='';
-            
+                    $brand='';
+                    $card='';
                     $reserva->setRegistro($fila['Registro']);
                     $reserva_detalle->setRegistro($fila['Registro_detalle']);
                     $reserva_detalle->setDetalle($fila['Detalle']);
                     $reserva->setRegistro($fila['Registro']);
                     $reserva->setCodigoReserva($fila['CodigoReserva']);
+                    $reserva->setRUCPasajero($fila['ruc_pasajero']);
                     $empresa->setRUC($fila['RUC']);
                     $tipo_operacion=$fila['Tipo_Operacion'];
                     $reserva->setFechaRegistro($fila['FechaRegistro']);
@@ -328,6 +341,8 @@ class ReservaModelo{
                     $documento=$fila['Documento'];
                     $reserva_detalle->setTotalPagar($fila['TotalPagar']);
                     $reserva_detalle->setEstadoRegistro($fila['EstadoRegistro']);
+                    $brand=$fila['brand'];
+                    $card=$fila['card'];
                     
                     $movimiento[]=$empresa;
                     $movimiento[]=$dni_gestor;
@@ -338,6 +353,8 @@ class ReservaModelo{
                     $movimiento[]=$documento;
                     $movimiento[]=$reserva;
                     $movimiento[]=$reserva_detalle;
+                    $movimiento[]=$brand;
+                    $movimiento[]=$card;
                     $lista_movimientos[]=$movimiento;
             }
             $obj_conexion->CerrarConexion($conexion);
