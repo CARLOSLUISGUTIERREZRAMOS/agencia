@@ -63,7 +63,7 @@
                     {display: "Tipo Oper.", name : "ope_tipo", width : 60, align: 'center',sortable : false},
                     {display: "Fec. Hora Oper.", name : "fecha_ope", width : 120, align: 'center',sortable : false},
                     {display: "Boleto", name : "boleto", width : 100,  align: 'center',sortable : false},
-                    {display: "Tarjeta", name : "tarjeta", width : 100,  align: 'center',sortable : false},
+                    {display: "Tarjeta", name : "tarjeta", width : 85,  align: 'center',sortable : false},
                     {display: "Ap. Paterno", name : "apepa_pas", width : 100,  align: 'left',sortable : false},
                     {display: "Ap. Materno", name : "apema_pas", width : 100,  align: 'left',sortable : false},
                     {display: "Nombres", name : "nom_pas", width : 120,  align: 'left',sortable : false},
@@ -78,7 +78,9 @@
                     {display: "Destino", name : "aero_dest", width : 40,  align: 'center',sortable : false},
                     {display: "Fec. Hora Destino", name : "f_h_destino", width : 120,  align: 'center',sortable : false}, 
                     {display: "Doc. Id. Pasajero", name : "pas_doc", width : 100, align: 'center',sortable : false},    
-                    {display: "Importe Tramo", name : "costo_tramo", width : 80,  align: 'right',sortable : false}  
+                    {display: "Total sin descuento", name : "total_sin_descuento", width : 100, align: 'center',sortable : false},    
+                    {display: "Total", name : "costo_tramo", width : 100, align: 'center',sortable : false},    
+                    {display: "Ganancias", name : "ganancias", width : 80,  align: 'right',sortable : false}  
                 ],  
                 // indicamos que columnas se pueden usar para filtrar las busquedas
                 /*searchitems : [
