@@ -59,10 +59,6 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
 			$data_vista_error['pnr_reserva'] = $pnr;
 			$data_vista_error['TarjetaHabiente'] = $nombres.' '.$apellidos;
 			$_SESSION['error_visa']=(object)$data_vista_error;
-			// echo "<pre>";
-			// var_dump($_SESSION['error_visa']);
-			// echo "</pre>";
-			// die;
 			include '../../cp/bloques/views/block_confirmation/error_metodo_pago.php';
         }
         else {
