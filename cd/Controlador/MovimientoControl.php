@@ -192,14 +192,14 @@ if($_REQUEST['excel']==1){
                 <TR>
                 <TH class="excel">ID. Mov</TH>  
                 <TH class="excel" >RUC</TH>
-                <TH class="excel">Gestor</TH>
+                <TH class="excel">DNI Usuario</TH>
                 <TH class="excel">Usuario</TH>
                 <TH class="excel">Tipo Oper.</TH>
                 <TH class="excel">Cant. Boletos</TH>
                 <TH class="excel">Tip. Serv.</TH>
                 <TH class="excel">Fec. Hora Operacion</TH>
                 <TH class="excel" style="width: 150px;">Boleto</TH>
-                <TH class="excel">Tarjeta</TH>
+                <TH class="excel">Forma de Pago</TH>
                 <TH class="excel">Tramo</TH>
                 <TH class="excel">Nro Vuelo</TH>
                 <TH class="excel">Origen</TH>
