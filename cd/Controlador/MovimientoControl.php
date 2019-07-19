@@ -66,6 +66,16 @@ if($_REQUEST['movimientos']==1){
 //                                        $igv=number_format($movimiento[8]->getPE()-$movimiento[8]->getPE()*$descuento, 2);
 //                                        $tuua=$movimiento[8]->getHW();
                                         $ganancias=number_format($movimiento[8]->getEQ()*$descuento,2);
+                                        $tarjeta=$movimiento[9];
+                                        if($tarjeta=='visa'){
+                                            $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_vi.png' style='height:30px;'>";
+                                        }else if($tarjeta=='amex'){
+                                            $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_ax.png' style='height:30px;'>";
+                                        }else if($tarjeta=='dinersclub'){
+                                            $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_dc.jpg' style='height:30px;'>";
+                                        }else if($tarjeta=='mastercard'){
+                                            $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_mc.png' style='height:30px;'>";
+                                        }
                                     }else{
                                         $icono_ticket='';
                                         $total_pagar="0.00";
@@ -86,7 +96,7 @@ if($_REQUEST['movimientos']==1){
                                           $movimiento[3],
                                           $movimiento[7]->getFechaRegistro(),
                                           $movimiento[8]->getTicket(),
-                                          $movimiento[9],
+                                          $tarjeta_imagen,
                                            $movimiento[8]->getApellidos(),
                                           trim($movimiento[8]->getApellidos2()),
                                           $movimiento[8]->getNombres(),
