@@ -327,6 +327,7 @@ function EnviaValores()
 		{
 			$("#fecha1").hide();
 			$("#fregreso").hide();
+			$("#fec_regreso").hide();
 			$("#fecha1").datepicker('destroy');
 		});
 	
@@ -407,7 +408,7 @@ function EnviaValores()
                             <td width="220" align="left" valign="bottom">Ciudad de origen:</td>
                             <td width="220" align="left" valign="bottom">Fecha de Ida:</td>
                             <td width="220" align="left" valign="bottom">Ciudad de Destino:</td>
-                            <td width="220" align="left" valign="bottom">Fecha de Regreso:</td>
+                            <td width="220" align="left" valign="bottom" id="fec_regreso">Fecha de Regreso:</td>
                           </tr>
                           <tr>
                             <td height="30"></td>
