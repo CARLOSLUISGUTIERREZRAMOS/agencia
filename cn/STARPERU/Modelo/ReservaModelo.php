@@ -196,6 +196,9 @@ class ReservaModelo{
                           Reserva.Destino,
                           DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR), ' ' , Reserva.Hora_Salida) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Origen AND CodigoCiudadDestino = Reserva.Destino) MINUTE)  HoraVueloRetorno,
                           CONCAT(Reserva_Detalle.Documento) Documento,
+                          ROUND(Reserva_Detalle.EQ, 2) Tarifa,
+                            ROUND(Reserva_Detalle.PE, 2) IGV,
+                            ROUND(Reserva_Detalle.HW, 2) TUUA,
                             ROUND(Reserva_Detalle.TotalPagar, 2) TotalPagar,
                             Reserva_Detalle.EstadoRegistro		
                       FROM Reserva_Detalle, Reserva, Personal, Entidad E ,Visa
@@ -227,6 +230,9 @@ class ReservaModelo{
                           Reserva.Origen,
                           DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME), INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Destino AND CodigoCiudadDestino = Reserva.Origen) MINUTE),
                           CONCAT(Reserva_Detalle.Documento) Documento,
+                          ROUND(Reserva_Detalle.EQ, 2) Tarifa,
+                          ROUND(Reserva_Detalle.PE, 2) IGV,
+                          ROUND(Reserva_Detalle.HW, 2) TUUA,
                           ROUND(Reserva_Detalle.TotalPagar, 2) TotalPagar,
                           Reserva_Detalle.EstadoRegistro	
                     FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
@@ -258,6 +264,9 @@ class ReservaModelo{
                           Reserva.Destino,
                           DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR),' ', Reserva.Hora_Salida) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Origen AND CodigoCiudadDestino = Reserva.Destino) MINUTE)  HoraVueloRetorno,
                            Reserva_Detalle.Documento,
+                           ROUND(Reserva_Detalle.EQ, 2) Tarifa,
+                          ROUND(Reserva_Detalle.PE, 2) IGV,
+                          ROUND(Reserva_Detalle.HW, 2) TUUA,
                           ROUND(Reserva_Detalle.TotalPagar, 2) * (-1),
                           Reserva_Detalle.EstadoRegistro		
                     FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
@@ -289,6 +298,9 @@ class ReservaModelo{
                           Reserva.Origen,
                           DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Destino AND CodigoCiudadDestino = Reserva.Origen) MINUTE) HoraVueloRetorno,      
                            Reserva_Detalle.Documento ,
+                          ROUND(Reserva_Detalle.EQ, 2) Tarifa,
+                          ROUND(Reserva_Detalle.PE, 2) IGV,
+                          ROUND(Reserva_Detalle.HW, 2) TUUA,
                           ROUND(Reserva_Detalle.TotalPagar, 2) * (-1),
                           Reserva_Detalle.EstadoRegistro	
                     FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
@@ -339,6 +351,9 @@ class ReservaModelo{
                     $reserva->setDestino($fila['Destino']);
                     $reserva->setHoraRetorno($fila['HoraVueloRetorno']);
                     $documento=$fila['Documento'];
+                    $reserva_detalle->setEQ($fila['Tarifa']);
+                    $reserva_detalle->setPE($fila['IGV']);
+                    $reserva_detalle->setHW($fila['TUUA']);
                     $reserva_detalle->setTotalPagar($fila['TotalPagar']);
                     $reserva_detalle->setEstadoRegistro($fila['EstadoRegistro']);
                     $brand=$fila['brand'];
