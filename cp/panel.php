@@ -3,6 +3,7 @@
     error_reporting(E_ALL);
     ini_set("display_errors", 0);
     date_default_timezone_set('America/Lima');
+    // date_default_timezone_set('UTC-5');
 
 	include '../cd/Navegador/index.php';
 	if ($_SESSION['s_entra'] == 0) {
@@ -101,11 +102,8 @@
 
 <?php require_once(HTML_RECURSO_PATH); ?>
 	<!-- fin div Credito Personal -->
-    <div class="contenedor-modal">
-        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#miModal" style="background: -webkit-linear-gradient(#f01515, darkred) !important;">Condiciones Tarifarias</button>
-    </div>
     <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document">
              <div class="modal-content">
                 <div class="modal-header">
                     <h3>Condiciones Tarifarias</h3>
@@ -298,39 +296,28 @@
                  </div>          
              </div>           
          </div>           
-    </div>            
+    </div>
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td height="15" align="center" style="background-color: #FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <table width="900" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#miModal" style="background: -webkit-linear-gradient(#f01515, darkred) !important;">Condiciones Tarifarias</button>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
         <tr>
             <td id="secciones">
                 <iframe id="frame_principal" width="100%"  src="pasarela/paso1.php" allowtransparency="true" frameborder="0" scrolling="auto"></iframe>
             </td>
         </tr>
     </table>
-    <!-- Mensaje de cambio de contrasena -->
-    <div id="div-seguridad" style="display:<?php echo $contra; ?>" >
-        <div id="div-panel-cambio-password">
-            <div style="margin:20px">
-                <form id="form1_cambio" name="form1" autocomplete="off" action="../cd/Controlador/BienvenidaControl.php" method="post">
-                    <h3 style="width:210px;">Medida de Seguridad:</h3>
-                    <label style="text-align:right; width:205px; display:block; float:left; margin:0 10px 20px 0;">Nuevo password (máx 8):</label>
-                    <input id="txtseguridad" name="txtseguridad" type="password" maxlength="8" style="width:200px; float:left; margin:0 10px 20px 0;" onKeyPress="limpiaAlerta();"/>
-                    <br>
-                        <label style="text-align:right; width:200px;display:block; float:left; margin:0 10px 0 0;">Confirme su password:</label>
-                        <input id="txtconfirma" name="txtconfirma" type="password" maxlength="8" style="width:200px; float:left;"  onKeyPress="limpiaAlerta();"/>
-                        <input type="hidden" name="cambio" value="1" />
-                        <input type="submit" style="float:left; margin:0 0 0 10px;" name="cambio_btn" 
-                               value="Aceptar"/>
-                        <div id="div-alerta"></div>
-                        <div style="clear:both; margin:20px; padding:10px; font-style:italic; font-weight:bold; font-size:12px; text-align:justify; line-height:18px; background:#FFC; border:#FC0 1px solid;">
-                            Este proceso s&oacute;lo es para Usuarios Nuevos y/o Usuarios que <br>
-                                hayan solicitado el RESET de su PASSWORD.<br>
-                                    Recuerde, su PASSWORD es personal e intransferible.
-                        </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- fin mensaje de cambio de contrasena -->
 
 <?php include(FOOTER_PATH); ?>

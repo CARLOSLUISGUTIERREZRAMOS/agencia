@@ -1,4 +1,5 @@
 <?php
+use ___PHPSTORM_HELPERS\object;
 
 session_start();
 
@@ -23,7 +24,6 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
     $campos = 'Tipo_Doc,Documento,Total,CodigoReserva,RUC,FechaRegistro,Nombres,Apellidos,Email';
     $data_reserva = $obj_reserva->ObtenerDataRerservaVisa($id_registro);
     // var_dump($sess_token_seguridad_visa);
-
     while ($fila = mysqli_fetch_object($data_reserva)) {
         $tipo_documento = $fila->Tipo_Doc;
         $num_documento = $fila->Documento;
@@ -38,7 +38,9 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
         $numero_vuelo_ida_cc = $fila->Vuelo_Salida;
         $numero_vuelo_vuelta_cc = $fila->Vuelo_Retorno;
         $clase_ida_cc = $fila->Clase_Salida;
-        $clase_vuelta_cc = $fila->Clase_Retorno;
+		$clase_vuelta_cc = $fila->Clase_Retorno;
+		$apellidos=$fila->Apellidos;
+		$nombres=$fila->Nombres;
     }
   
     $body = $visa_proceso->GenerarBody_AutorizacionTransaccion($num_documento, 0, $total_pagar, $id_registro, $tokenFormulario);
@@ -53,11 +55,15 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
 
         if (isset($DataJsonVisa->errorCode) && $DataJsonVisa->errorCode === 400) {
             $data_vista_error['cod_error_visa'] = $DataJsonVisa->errorCode;
-            $data_vista_error['dataVisa'] = $DataJsonVisa;
-            $data_vista_error['dataVisa_reserva'] = $data_reserva;
-            var_dump($DataJsonVisa);
-            die;
-            // $this->load->view('templates/v_error_proceso_pago', $data_vista_error);
+            $data_vista_error['dataVisa'] = $DataJsonVisa->data;
+			$data_vista_error['pnr_reserva'] = $pnr;
+			$data_vista_error['TarjetaHabiente'] = $nombres.' '.$apellidos;
+			$_SESSION['error_visa']=(object)$data_vista_error;
+			// echo "<pre>";
+			// var_dump($_SESSION['error_visa']);
+			// echo "</pre>";
+			// die;
+			include '../../cp/bloques/views/block_confirmation/error_metodo_pago.php';
         }
         else {
             //TODO OK
