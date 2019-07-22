@@ -101,7 +101,7 @@ if($_REQUEST['movimientos']==1){
                                           trim($movimiento[8]->getApellidos2()),
                                           $movimiento[8]->getNombres(),
                                           $movimiento[1],
-                                          $movimiento[2],
+                                          $movimiento[11],
                                           $movimiento[4],
                                           $movimiento[7]->getTipoVuelo(),
                                           $movimiento[5],

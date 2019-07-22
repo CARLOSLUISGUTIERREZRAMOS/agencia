@@ -68,7 +68,7 @@
                     {display: "Ap. Materno", name : "apema_pas", width : 100,  align: 'center',sortable : false},
                     {display: "Nombres", name : "nom_pas", width : 120,  align: 'center',sortable : false},
                     {display: "DNI Usuario", name : "ges_user", width : 80, align: 'center',sortable : false},
-                    {display: "Usuario", name : "del_user", width : 80, align: 'center',sortable : false},         
+                    {display: "Usuario", name : "del_user", width : 200, align: 'center',sortable : false},         
                     {display: "Cant. Boletos", name : "cant_boletos", width : 70,  align: 'center',sortable : false},
                     {display: "Tipo Serv.", name : "ser_tipo", width : 60,  align: 'center',sortable : false},          
                     {display: "Tramo", name : "tramo", width : 40,  align: 'center',sortable : false},

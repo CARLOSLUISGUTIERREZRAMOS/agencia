@@ -187,6 +187,7 @@ class ReservaModelo{
                            Reserva_Detalle.Nombres PAS_NOMB,
                           (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
                           (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
+                          CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',
                           '1' Cantidad,	
                           CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '1' Tramo,
@@ -221,6 +222,7 @@ class ReservaModelo{
                             Reserva_Detalle.Nombres PAS_NOMB,
                           (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
                           (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
+                          CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',                          
                           '1' Cantidad,	
                           CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '2' Tramo,
@@ -255,6 +257,7 @@ class ReservaModelo{
                             Reserva_Detalle.Nombres PAS_NOMB,
                           (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) 'Gestor',
                           (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
+                          CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',
                           '1' Cantidad,	
                           CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '1' Tramo,
@@ -289,6 +292,7 @@ class ReservaModelo{
                             Reserva_Detalle.Nombres PAS_NOMB,
                           (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) 'Gestor',
                           (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
+                          CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',
                           '1' Cantidad,	
                           CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '2' Tramo,
@@ -327,6 +331,7 @@ class ReservaModelo{
                     $dni_delegago='';
                     $brand='';
                     $card='';
+                    $nom_usuario='';
                     $reserva->setRegistro($fila['Registro']);
                     $reserva_detalle->setRegistro($fila['Registro_detalle']);
                     $reserva_detalle->setDetalle($fila['Detalle']);
@@ -358,7 +363,7 @@ class ReservaModelo{
                     $reserva_detalle->setEstadoRegistro($fila['EstadoRegistro']);
                     $brand=$fila['brand'];
                     $card=$fila['card'];
-                    
+                    $nom_usuario=$fila['NomUsuario'];
                     $movimiento[]=$empresa;
                     $movimiento[]=$dni_gestor;
                     $movimiento[]=$dni_delegado;
@@ -370,6 +375,7 @@ class ReservaModelo{
                     $movimiento[]=$reserva_detalle;
                     $movimiento[]=$brand;
                     $movimiento[]=$card;
+                    $movimiento[]=$nom_usuario;
                     $lista_movimientos[]=$movimiento;
             }
             $obj_conexion->CerrarConexion($conexion);
