@@ -152,13 +152,16 @@
             return texto.replace(/^\s+|\s+$/g,"");
         }
 
-        function Detalle_movimiento(registro,detalle,codigo_reserva,ruc_entidad,tipo_operacion,fecha_registro,ticket,tarjeta,num_tarjeta,nombres_pasajero,gestor,delegado,cantidad_boleto,tipo_vuelo,tramo,numero_vuelo,origen,fecha_hora_salida,destino,fecha_hora_retorno,nro_documento,total_pagar){
+        function Detalle_movimiento(registro,detalle,codigo_reserva,ruc_entidad,tipo_operacion,fecha_registro,ticket,tarjeta,num_tarjeta,nombres_pasajero,
+							gestor,delegado,nom_usuario,cantidad_boleto,tipo_vuelo,tramo,numero_vuelo,origen,fecha_hora_salida,
+							destino,fecha_hora_retorno,nro_documento,total_pagar){
              
             $.ajax({
                 url: "<?=$url?>/cd/Controlador/MovimientoControl.php",
                 data: "movimiento_detalle=1&registro="+registro+"&detalle="+detalle+"&codigo_reserva="+codigo_reserva+"&ruc_entidad="+ruc_entidad+
-                        "&tipo_operacion="+tipo_operacion+"&fecha_registro="+fecha_registro+"&nombres_pasajero="+nombres_pasajero+
-                        "&gestor="+gestor+"&delegado="+delegado+"&ticket="+ticket+"&tarjeta="+tarjeta+"&num_tarjeta="+num_tarjeta+"&cantidad_boleto="+cantidad_boleto+"&tipo_vuelo="+tipo_vuelo+
+                        "&tipo_operacion="+tipo_operacion+"&fecha_registro="+fecha_registro+"&ticket="+ticket+"&tarjeta="+tarjeta+"&num_tarjeta="+num_tarjeta+
+                        "&nombres_pasajero="+nombres_pasajero+
+                        "&gestor="+gestor+"&delegado="+delegado+"&nom_usuario="+nom_usuario+"&cantidad_boleto="+cantidad_boleto+"&tipo_vuelo="+tipo_vuelo+
                         "&tramo="+tramo+"&numero_vuelo="+numero_vuelo+"&origen="+origen+"&fecha_hora_salida="+fecha_hora_salida+
                         "&destino="+destino+"&fecha_hora_retorno="+fecha_hora_retorno+"&nro_documento="+nro_documento+"&total_pagar="+total_pagar,
                 type: "POST",
