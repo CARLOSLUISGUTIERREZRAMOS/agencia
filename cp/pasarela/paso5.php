@@ -185,6 +185,9 @@
                             $_SESSION['token_seguridad_visa'] = $token;
                         ?> 
                         <form  action="metodos_pago.php" id="form_visa" method='post' style="display: none">
+                            <?php
+                                require_once("../../config.php");
+                            ?>
                             <script src='<?=$libreriaJsVisa?>'
                                 data-sessiontoken='<?= $objSessionVisa->sessionKey ?>'
                                 data-channel='web'
@@ -194,7 +197,7 @@
                                 data-purchasenumber= <?=$registro?>
                                 data-amount=<?=$total_pagar_tabla_5?>
                                 data-expirationminutes= 5
-                                data-timeouturl = 'html/tiempo_limite.html'></script>
+                                data-timeouturl = '<?= $url?>/cp/pasarela/html/tiempo_limite.php'></script>
                         </form>
                     </td>
                 </tr>

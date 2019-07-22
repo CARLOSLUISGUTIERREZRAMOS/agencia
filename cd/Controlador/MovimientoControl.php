@@ -85,9 +85,30 @@ if($_REQUEST['movimientos']==1){
                                      $data['rows'][] = array(
                                       'view' => $movimiento[7]->getRegistro(),
                                       'cell' => array('<div class="Consulta" style="text-align: center;">
-                                          <a href="javascript:void(0);" onClick=" Detalle_movimiento(\''.$movimiento[7]->getRegistro().'\',\''.$movimiento[8]->getDetalle().'\',\''.$movimiento[7]->getCodigoReserva().'\',\''.$movimiento[0]->getRUC().'\',\''
-                                          .$movimiento[3].'\',\''.$movimiento[7]->getFechaRegistro().'\',\''.$movimiento[8]->getTicket().'\',\''.$movimiento[9].'\',\''.$movimiento[10].'\',\''.$movimiento[8]->getNombres().' '.$movimiento[8]->getApellidos().' '.trim($movimiento[8]->getApellidos2()).'\',\''.$movimiento[1].'\',\''.$movimiento[2].'\',\''.$movimiento[4].'\',\''.$movimiento[7]->getTipoVuelo().'\',\''.$movimiento[5].'\',\''.$movimiento[7]->getVueloSalida().'\',\''
-                                          .$movimiento[7]->getOrigen().'\',\''.$movimiento[7]->getFechaSalida().'\',\''.$movimiento[7]->getDestino().'\',\''.$movimiento[7]->getHoraRetorno().'\',\''.$movimiento[6].'\',\''.$total_pagar.'\');"  
+                                          <a href="javascript:void(0);" onClick=" Detalle_movimiento(
+									\''.$movimiento[7]->getRegistro().'\',  
+									\''.$movimiento[8]->getDetalle().'\',	
+									\''.$movimiento[7]->getCodigoReserva().'\',	
+									\''.$movimiento[0]->getRUC().'\',	
+									\''.$movimiento[3].'\',
+									\''.$movimiento[7]->getFechaRegistro().'\',
+									\''.$movimiento[8]->getTicket().'\',
+									\''.$movimiento[9].'\',
+									\''.$movimiento[10].'\',
+									\''.$movimiento[8]->getNombres().' '.$movimiento[8]->getApellidos().' '.trim($movimiento[8]->getApellidos2()).'\',
+									\''.$movimiento[1].'\',
+									\''.$movimiento[2].'\',
+									\''.$movimiento[11].'\',
+									\''.$movimiento[4].'\',
+									\''.$movimiento[7]->getTipoVuelo().'\',
+									\''.$movimiento[5].'\',
+									\''.$movimiento[7]->getVueloSalida().'\',
+									\''.$movimiento[7]->getOrigen().'\',
+									\''.$movimiento[7]->getFechaSalida().'\',
+									\''.$movimiento[7]->getDestino().'\',
+									\''.$movimiento[7]->getHoraRetorno().'\',
+									\''.$movimiento[6].'\',
+									\''.$total_pagar.'\');"  
                                            ><img src="../images/icono_ver.png"/></a></div>',
                                           $icono_ticket,
                                           $movimiento[7]->getRegistro(),
@@ -101,7 +122,7 @@ if($_REQUEST['movimientos']==1){
                                           trim($movimiento[8]->getApellidos2()),
                                           $movimiento[8]->getNombres(),
                                           $movimiento[1],
-                                          $movimiento[2],
+                                          $movimiento[11],
                                           $movimiento[4],
                                           $movimiento[7]->getTipoVuelo(),
                                           $movimiento[5],
@@ -268,6 +289,7 @@ if($_REQUEST['movimiento_detalle']==1){
           $fecha_hora_retorno=trim($_REQUEST['fecha_hora_retorno']);
           $nro_documento=trim($_REQUEST['nro_documento']);
           $total_pagar=trim($_REQUEST['total_pagar']);
+          $nom_usuario=trim($_REQUEST['nom_usuario']);
           $descuento=0.02;
             
           $lista_movimientos=array();
@@ -331,11 +353,11 @@ if($_REQUEST['movimiento_detalle']==1){
             <td><?php echo $movimiento[14];?></td>
         </tr>
         <tr>
-            <td align="right" class="lab_dmov"><strong>Usuario Gestor :</strong></td>
+            <td align="right" class="lab_dmov"><strong>DNI Usuario:</strong></td>
             <td><?php echo $gestor;?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Duración :</strong></td>
-            <td><?php echo $movimiento[6];?></td>
+            <td><?php echo $movimiento[7];?></td>
             <td align="right" class=""></td>
             <td></td>
             <td></td>
@@ -345,7 +367,7 @@ if($_REQUEST['movimiento_detalle']==1){
         </tr>
         <tr>
             <td align="right" class="lab_dmov"><strong>Usuario :</strong></td>
-            <td><?php echo $delegado;?></td>
+            <td><?php echo $nom_usuario;?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Escala Tarifa :</strong></td>
             <td><?php echo $movimiento[17]->getClaseSalida();?></td>
@@ -423,7 +445,7 @@ if($_REQUEST['movimiento_detalle']==1){
             <td align="right" class="lab_dmov"><strong>Referencia Boleto :</strong></td>
             <td><?php echo $movimiento[18]->getReferencia();?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Tarjeta :</strong></td>
+            <td align="right" class="lab_dmov"><strong>Forma de pago :</strong></td>
             <td><?php echo $tarjeta;?></td>
         </tr>
         <tr>
