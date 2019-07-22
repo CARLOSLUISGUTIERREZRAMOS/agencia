@@ -3,19 +3,23 @@
 
 class Connection_visa {
 
-    //<editor-fold defaultstate="collapsed" desc="PARAMETROS DE PRODUCCION">
-        /* protected $endpoint = 'https://apiprod.vnforapps.com/api.security/v1/security';
-        protected $endpoint_sesion = 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/';
-        protected $endpoint_genera_autorizacion_transaccion = 'https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/';
-        protected $user = 'carlos.gutierrez@starperu.com';
-        protected $pass = '@92e-xCK'; 
-        protected $url_post = '/api.security/v1/security';
-        protected $host = 'apiprod.vnforapps.com';
-        protected $codigo_comercio = 342868825;
-        protected $Credentials;
-        protected $libreria_checkout = 'https://static-content.vnforapps.com/v2/js/checkout.js'; */
-    //</editor-fold>
 
+        /*
+        CREDENCIALES DE PRODUCCION
+         */
+        // protected $endpoint = 'https://apiprod.vnforapps.com/api.security/v1/security';
+        // protected $endpoint_sesion = 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/';
+        // protected $endpoint_genera_autorizacion_transaccion = 'https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/';
+        // protected $user = 'carlos.gutierrez@starperu.com';
+        // protected $pass = '@92e-xCK'; 
+        // protected $url_post = '/api.security/v1/security';
+        // protected $host = 'apiprod.vnforapps.com';
+        // protected $codigo_comercio =  650029979;
+        // protected $Credentials;
+        // protected $libreria_checkout = 'https://static-content.vnforapps.com/v2/js/checkout.js';
+    /*
+    CRENENCIALES SANDBOX
+    */
         protected $endpoint = 'https://apitestenv.vnforapps.com/api.security/v1/security';
         protected $endpoint_sesion = 'https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/';
         protected $endpoint_genera_autorizacion_transaccion = 'https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/';
