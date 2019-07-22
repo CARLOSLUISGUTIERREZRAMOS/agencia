@@ -369,7 +369,7 @@ if (isset($_POST['paso2'])) {
                     if (count($disponibles) > 0) {
 
                         $filas1 .= '<tr>' . "\n";
-                        $filas1 .= '<td td height="40" class="bgTable-data" align="center"><strong>' . $vuelos_disponibles[$w]["Vuelo"] . "\n" . (strlen($vuelos_disponibles[$w]["Vuelo"]) == 3 ? 'Peruvian' : 'StarPerú') . '</strong></td>' . "\n";
+                        $filas1 .= '<td height="40" class="bgTable-data" align="center"><strong>' . $vuelos_disponibles[$w]["Vuelo"] . "\n" . (strlen($vuelos_disponibles[$w]["Vuelo"]) == 3 ? 'Peruvian' : 'StarPerú') . '</strong></td>' . "\n";
                         $filas1 .= '<td class="bgTable-data" align="center">' . substr($vuelos_disponibles[$w]["Salida"], 11, 17) . '</td>' . "\n";
                         $filas1 .= '<td class="bgTable-data" align="center">' . substr($vuelos_disponibles[$w]["Llegada"], 11, 17) . '</td>' . "\n";
                         $filas1 .= '<td class="bgTable-data" align="center">' . $vuelos_disponibles[$w]["Duracion"] . '</td>' . "\n";
