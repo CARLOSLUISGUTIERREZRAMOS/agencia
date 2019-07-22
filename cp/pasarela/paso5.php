@@ -194,7 +194,7 @@
                                 data-purchasenumber= <?=$registro?>
                                 data-amount=<?=$total_pagar_tabla_5?>
                                 data-expirationminutes= 5
-                                data-timeouturl = 'html/tiempo_limite.html'></script>
+                                data-timeouturl = 'localhost/agencia/cp/pasarela/html/tiempo_limite.html'></script>
                         </form>
                     </td>
                 </tr>
