@@ -335,7 +335,7 @@ if($_REQUEST['movimiento_detalle']==1){
             <td><?php echo $gestor;?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Duración :</strong></td>
-            <td><?php echo $movimiento[6];?></td>
+            <td><?php echo $movimiento[7];?></td>
             <td align="right" class=""></td>
             <td></td>
             <td></td>
@@ -423,7 +423,7 @@ if($_REQUEST['movimiento_detalle']==1){
             <td align="right" class="lab_dmov"><strong>Referencia Boleto :</strong></td>
             <td><?php echo $movimiento[18]->getReferencia();?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Tarjeta :</strong></td>
+            <td align="right" class="lab_dmov"><strong>Forma de pago :</strong></td>
             <td><?php echo $tarjeta;?></td>
         </tr>
         <tr>
