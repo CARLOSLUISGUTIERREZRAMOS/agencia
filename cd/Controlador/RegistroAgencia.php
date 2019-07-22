@@ -28,7 +28,7 @@
 			if ($id) {
 				$pass=  $obj_personal->generaPassword();
             	$Password=$obj_personal->encrypt($pass, "s");
-				$usuario=$obj_personal->GuardaUsuario($id,$DNIFuncionario,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$Celular,$Password,$Usuario,'G');
+				$usuario=$obj_personal->GuardaUsuario($id,$DNIFuncionario,$ApellidoPaterno,$ApellidoMaterno,$Nombres,$Email,$Celular,$Password,$Usuario,'G','administrador');
 				if ($usuario==1) {
 					//entidad y usuario registrado y enviar correo a edita.gadea@starperu.com
 					$data['data']='ok';

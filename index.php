@@ -1,8 +1,10 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
         <link href="cp/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="cp/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="cp/css/agencias.min.css" rel="stylesheet" type="text/css"/>
@@ -43,165 +45,163 @@
                 right: 12px;
             }
         </style>
-        <<!-- link href="App_Themes/PasarelaTheme/jquery-ui-1.8.16.custom.css" type="text/css" rel="stylesheet" />
-        <link href="App_Themes/PasarelaTheme/style.css" type="text/css" rel="stylesheet" /> -->
     </head>
     <body class="fondo_panel">
-        <form action="cd/Controlador/LoginControl.php" method="post" name="form1" id="form1" autocomplete="off">
-            <div class="aspNetHidden">
-                <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMzQ3NzUxNTQ2D2QWAgIDD2QWAgITDxYCHgdvbmNsaWNrBTFSZXN0YWJsZWNlclBhc3N3b3JkKCd0eHREb2N1bWVudG8nKTsgcmV0dXJuIGZhbHNlZGTjGgS6O/IhFWd9uM9DqQ3xa0BiEREs7md8KicUpQdvSA==" />
-            </div>
-
-            <div class="aspNetHidden">
-            	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="BC02C6D9" />
-            	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAXc8vSV1MnZTqq+wYAXNOFuy96dWkumrXzDckADywQ75JxpWckI3qdmfEJVCu2f5cGzbZAChv7dk9rhe3bMi6TgQOrX9gIP1cj7j7QB658SkzzsIRf0FOHLz8iJw2J1SAL9UH9wmu+Bvn398ayRKOlc" />
-            </div>
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="top-bar">
-                    <div class="container">
-                        <ul class="top-nav">
-                            <li style="margin-left: 0px;">
-                                <span style="font-size: 17px;">&nbsp;</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="top-bar">
                 <div class="container">
-                    <div class="navbar-header" style="margin-top: 6px;">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-top">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="logo-22">
-                        <!--<div id="content" class="hidden-xs">
-                            <span>PORTAL</span>
-                            <span style="font-weight: bold;">EMPRESAS</span>
-                        </div>-->
-                    </div>
-                    <div class="collapse navbar-collapse" id="navbar-top">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a target="_blank">
-                                    <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                                    <span class="span">INFORMACIÓN AL</span>
-                                    <span class="span span-bold span-font-medium">PASAJERO</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a data-toggle="modal" data-target="#modalNuevaAgencia" style="cursor: pointer;">
-                                    <i class="fa fa-university fa-2x" aria-hidden="true"></i>
-                                    <span class="span">REGISTRA TU</span>
-                                    <span class="span span-bold span-font-medium">AGENCIA</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="top-nav">
+                        <li style="margin-left: 0px;">
+                            <span style="font-size: 17px;">&nbsp;</span>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-            <div id="shadow"></div>
-            <div class="content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12 col-xs-12" id="carrito" >
-                            <div class="carrito-seccion">
-                                <div class="row quick-search">
-                                    <div class="row form-group" style="margin-top: 40px;">
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
-                                            <i class="fa fa-user" style="color: white;"></i>
-                                            <span style="font-weight: bold; color: white; font-size: larger">INICIA SESIÓN AQUI</span>
-                                        </div>
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+            </div>
+            <div class="container">
+                <div class="navbar-header" style="margin-top: 6px;">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-top">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="logo-22">
+                    <!--<div id="content" class="hidden-xs">
+                        <span>PORTAL</span>
+                        <span style="font-weight: bold;">EMPRESAS</span>
+                    </div>-->
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-top">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a target="_blank">
+                                <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                                <span class="span">INFORMACIÓN AL</span>
+                                <span class="span span-bold span-font-medium">PASAJERO</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a data-toggle="modal" data-target="#modalNuevaAgencia" style="cursor: pointer;">
+                                <i class="fa fa-university fa-2x" aria-hidden="true"></i>
+                                <span class="span">REGISTRA TU</span>
+                                <span class="span span-bold span-font-medium">AGENCIA</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="shadow"></div>
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12" id="carrito" >
+                        <div class="carrito-seccion">
+                            <div class="row quick-search">
+                                <?php if (isset($_SESSION["s_entra"]) && $_SESSION["s_entra"]==1): ?>
+                                    <div style="height: 210px;align-items: center;text-align: center;display: flex;justify-content: center;">
+                                        <a href="cp/panel.php" style="text-decoration: none;">
+                                            <i class="fa fa-university fa-2x" aria-hidden="true"></i>
+                                            <span class="span" style="color: #ffffff;">IR A MI</span>
+                                            <span class="span span-bold span-font-medium" style="color: #ffffff;">AGENCIA</span>
+                                        </a>
                                     </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
-                                            <input type="text" maxlength="8" placeholder="Ingrese usuario" name="usuario" id="usuario"  class="form-control" value="46516152"/>
-                                            <!--<input name="txtusuario" type="text" id="txtusuario" class="form-control" placeholder="Usuario" />-->
-                                        </div>
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                    </div> 
-                                    <div class="row form-group">
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
-                                            <input type="password" maxlength="8"  placeholder="Ingrese contraseña" name="password" id="password"   class="form-control" value="ricardo"/>
-                                            <!--<input name="txtpassword" type="password" id="txtpassword" class="form-control" placeholder="Contraseña" />-->
-                                            <span style="float: right; font-size: 13px; margin-top:2px; cursor: pointer;">
-                                                <a class="links btn-reset-pass" data-toggle="modal" data-target="#modalPassword">¿Olvido su contraseña?</a>
-                                            </span>
-                                        </div>
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
-                                            <!--<input title="click para ingresar" type="button" class="btn_login gradiante" id="btn_login" name="btn_login" value="Ingresar"/>-->
-                                            <input type="submit" name="btn_login" value="Iniciar Sesion" id="btn_login" class="btn btn-lg btn-secondary"  />
-                                        </div>
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <div style="border: solid; border-width: 0.5px; border-color: white;"></div>
-                                        </div>
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
-                                            <p style="vertical-align: central">
-                                                <a style="font-weight: 100; color: white; font-size: large; cursor: pointer;" data-toggle="modal" data-target="#modalNuevaAgencia">!REGISTRA TU AGENCIA!
-                                                </a>
-                                                <br />
-                                                <span style="font-weight: 900; color: white; font-size: large">COMIENZA A AHORRAR</span>
-                                            </p>
-                                        </div>
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                        <div class="col-md-10 col-sm-10 col-xs-10">
-                                            <span id="lblError"></span>
-                                        </div>
-                                        <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12 avisos-seccion">
-                            <div style="background-color: initial;">
-                                <div class="row quick-search-white" style="text-align: center;">
-                                    <div class="row form-group">
-                                        <div class="col-md-6 col-sm-6 col-xs-6">
-                                            <i class="fa fa-trophy fa-5x" aria-hidden="true" style="font-weight: 900"></i>
-                                            <p>
-                                                <span style="font-weight: 900; color: #ffffff; font-size: large">FÁCIL Y RÁPIDO</span>
-                                                <br />
-                                                <span style="color: #ffffff;">Gestione la reservas y compras de los pasajes desde un solo lugar.</span>
-                                            </p>
-                                        </div>
+                                <?php else: ?>
+                                    <form action="cd/Controlador/LoginControl.php" method="post" name="form1" id="form1" autocomplete="off">
                                         <input type="hidden"  name="login" value="1"/>
-                                        <div class="col-md-6 col-sm-6 col-xs-6">
-                                            <i class="fa fa-piggy-bank fa-5x" aria-hidden="true" style="font-weight: 900"></i>
-                                            <p>
-                                                <span style="font-weight: 900; color: #ffffff; font-size: large">AHORRA</span>
-                                                <br />
-                                                <span style="color: #ffffff;">Ahorre tiempo y dinero sin costos o comisiones adicionales.</span>
-                                            </p>
+                                        <div class="row form-group" style="margin-top: 40px;">
+                                            <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                            <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
+                                                <i class="fa fa-user" style="color: white;"></i>
+                                                <span style="font-weight: bold; color: white; font-size: larger">INICIA SESIÓN AQUI</span>
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
                                         </div>
+                                        <div class="row form-group">
+                                            <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                            <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
+                                                <input type="text" maxlength="10" placeholder="Ingrese usuario" name="usuario" id="usuario"  class="form-control"/>
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                        </div> 
+                                        <div class="row form-group">
+                                            <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                            <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
+                                                <input type="password" maxlength="8"  placeholder="Ingrese contraseña" name="password" id="password"   class="form-control"/>
+                                                <span style="float: right; font-size: 13px; margin-top:2px; cursor: pointer;">
+                                                    <a class="links btn-reset-pass" data-toggle="modal" data-target="#modalPassword">¿Olvido su contraseña?</a>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                            <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
+                                                <input type="submit" name="btn_login" value="Iniciar Sesion" id="btn_login" class="btn btn-lg btn-secondary"  />
+                                            </div>
+                                            <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                        </div>
+                                    </form>
+                                <?php endif ?>
+                                
+                                <div class="row form-group">
+                                    <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                        <div style="border: solid; border-width: 0.5px; border-color: white;"></div>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                    <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
+                                        <p style="vertical-align: central">
+                                            <a style="font-weight: 100; color: white; font-size: large; cursor: pointer;" data-toggle="modal" data-target="#modalNuevaAgencia">!REGISTRA TU AGENCIA!
+                                            </a>
+                                            <br />
+                                            <span style="font-weight: 900; color: white; font-size: large">COMIENZA A AHORRAR</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                        <span id="lblError"></span>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 avisos-seccion">
+                        <div style="background-color: initial;">
+                            <div class="row quick-search-white" style="text-align: center;">
+                                <div class="row form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <i class="fa fa-trophy fa-5x" aria-hidden="true" style="font-weight: 900"></i>
+                                        <p>
+                                            <span style="font-weight: 900; color: #ffffff; font-size: large">FÁCIL Y RÁPIDO</span>
+                                            <br />
+                                            <span style="color: #ffffff;">Gestione la reservas y compras de los pasajes desde un solo lugar.</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <i class="fa fa-piggy-bank fa-5x" aria-hidden="true" style="font-weight: 900"></i>
+                                        <p>
+                                            <span style="font-weight: 900; color: #ffffff; font-size: large">AHORRA</span>
+                                            <br />
+                                            <span style="color: #ffffff;">Ahorre tiempo y dinero sin costos o comisiones adicionales.</span>
+                                        </p>
                                     </div>
                                 </div>
-                                
                             </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
         <div class="modal" tabindex="-1" role="dialog" id="modalPassword">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -267,7 +267,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon">RUC</span>
-                                <input type="text" class="form-control" placeholder="RUC" id="RUC" name="RUC" required="" form="registrar-agencia">
+                                <input type="text" class="form-control" placeholder="RUC" id="RUC" name="RUC" required="" form="registrar-agencia" maxlength="11">
                             </div>
                         </div>
                         <div class="form-group">
@@ -386,7 +386,8 @@
 
             </div>
         </div>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
         <script src="cp/js/bootstrap.js" type="text/javascript"></script>
         <script src="cp/js/toastr.js" type="text/javascript"></script>
         <script src="cp/js/jsLogin.js" type="text/javascript"></script>

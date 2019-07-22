@@ -205,7 +205,7 @@ if($_POST['guardar_delegado']==1){
             $codigo_entidad=$_SESSION['s_entidad'];
             $pass=  generaPass();
             
-            $password=$obj_personal->encrypt($pass, "$starperu");
+            $password=$obj_personal->encrypt($pass, "starperu");
             if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/',$email)) {
                         echo "4_|_";
                         die;
