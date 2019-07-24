@@ -529,8 +529,8 @@ class ReservaModelo{
         $conexion=$obj_conexion->CrearConexion();
         
         $consulta="SELECT Visa.*,Reserva.*
-                FROM Reserva, Reserva_Detalle ,Visa
-                WHERE  Visa.reserva_id = Reserva_Detalle.Registro AND Reserva.Registro = Reserva_Detalle.Registro AND Reserva_Detalle.Registro = $registro";
+                FROM Reserva ,Visa
+                WHERE  Visa.reserva_id = Reserva.Registro AND Reserva.Registro = $registro";
 
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
