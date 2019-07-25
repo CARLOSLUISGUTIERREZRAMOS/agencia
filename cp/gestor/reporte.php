@@ -112,6 +112,8 @@
 
             $( ".detalle" ).dialog({ width: 960 });
             $( ".detalle" ).dialog('close');
+            $( ".detalle2" ).dialog({ width: 600});
+            $( ".detalle2" ).dialog('close');
 
             $( ".datepicker" ).datepicker({
                 showOn: "button",
@@ -177,6 +179,23 @@
                 }
             });
         }
+        function Forma_pago(registro){
+            $.ajax({
+                url: "<?=$url?>/cd/Controlador/MovimientoControl.php",
+                data: "forma_pago=1&registro="+registro,
+                type: "POST",
+                cache: false,
+                success: function(html) {
+                    if (html !=''){
+                       $('.detalle2').html(html);
+                       $('.detalle2').dialog({open:true,resizable: false,modal:true});
+                    }
+                    else{
+                        alert('No hubo conexion, o hay una falla en la sentencia SQL!');
+                    }
+                }
+            });
+        }
 
         function dgEBI(obj){
             var val='';
@@ -224,7 +243,6 @@
             }
             
         }
-
         function ExportarExcelMov(){
             window.open('<?=$url?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio;?>&fecha_final=<?php echo $fecha_fin;?>&usuario=<?php echo $usuario;?>&excel=1', '_blank', '');
         }
@@ -284,5 +302,7 @@
 <div id="div_flex1" style="width:1100px;margin:0px auto;">
   <table id="flex2" style="display:none"></table>
 </div>
+
 <div class="detalle" title="Detalle del Movimiento"></div>
-<?php include(FOOTER_PATH); ?>
+<div class="detalle2" title="Forma de Pago"></div>
+<?php include(FOOTER_PATH); ?> 
