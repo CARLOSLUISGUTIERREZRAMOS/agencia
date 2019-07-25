@@ -176,8 +176,7 @@ class ReservaModelo{
                            Reserva_Detalle.Detalle, 
                            Reserva.RUC as ruc_pasajero,
                            Reserva.CodigoReserva,
-                           Visa.brand,
-                           Visa.card,
+                           Visa.*,
                            E.RUC,  
                            'EM' Tipo_Operacion,     
                            Reserva.FechaRegistro,
@@ -211,8 +210,7 @@ class ReservaModelo{
                          Reserva_Detalle.Detalle, 
                          Reserva.RUC as ruc_pasajero,
                          Reserva.CodigoReserva,
-                         Visa.brand,
-                         Visa.card,
+                         Visa.*,
                           E.RUC,  
                           'EM' Tipo_Operacion,
                           Reserva.FechaRegistro,
@@ -246,8 +244,7 @@ class ReservaModelo{
                          Reserva_Detalle.Detalle, 
                           Reserva.CodigoReserva,
                           Reserva.RUC as ruc_pasajero,
-                          Visa.brand,
-                          Visa.card,
+                          Visa.*,
                           E.RUC,  
                           'SA' Tipo_Operacion,
                           Reserva.FechaRegistro,
@@ -281,8 +278,7 @@ class ReservaModelo{
                           Reserva_Detalle.Detalle, 
                           Reserva.RUC as ruc_pasajero,
                           Reserva.CodigoReserva,
-                          Visa.brand,
-                          Visa.card,
+                          Visa.*,
                           E.RUC,  
                           'SA' Tipo_Operacion,
                           Reserva.FechaRegistro,
@@ -332,6 +328,10 @@ class ReservaModelo{
                     $brand='';
                     $card='';
                     $nom_usuario='';
+                    $num_compra='';
+                    $monto='';
+                    $num_cuotas='';
+                    $fec_hora_transaccion='';
                     $reserva->setRegistro($fila['Registro']);
                     $reserva_detalle->setRegistro($fila['Registro_detalle']);
                     $reserva_detalle->setDetalle($fila['Detalle']);
@@ -364,6 +364,11 @@ class ReservaModelo{
                     $brand=$fila['brand'];
                     $card=$fila['card'];
                     $nom_usuario=$fila['NomUsuario'];
+                    $num_compra=$fila['purchase_number'];
+                    $fec_hora_transaccion=$fila['fechahora_transaccion'];
+                    $monto=$fila['amount'];
+                    $num_cuotas=$fila['quota_number'];
+                    
                     $movimiento[]=$empresa;
                     $movimiento[]=$dni_gestor;
                     $movimiento[]=$dni_delegado;
@@ -376,14 +381,16 @@ class ReservaModelo{
                     $movimiento[]=$brand;
                     $movimiento[]=$card;
                     $movimiento[]=$nom_usuario;
+                    $movimiento[]=$num_compra;
+                    $movimiento[]=$fec_hora_transaccion;
+                    $movimiento[]=$monto;
+                    $movimiento[]=$num_cuotas;
                     $lista_movimientos[]=$movimiento;
             }
             $obj_conexion->CerrarConexion($conexion);
-            
         }
            return $lista_movimientos;
     }
-     
     
     public function TotalMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr){
         $filtro='';
@@ -516,8 +523,51 @@ class ReservaModelo{
        
            return $numero_filas;
     }
- 
-     public function DetalleMovimiento($registro,$detalle){
+    public function FormaPago($registro){
+        $formaPago=array();
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        
+        $consulta="SELECT Visa.*,Reserva.*
+                FROM Reserva ,Visa
+                WHERE  Visa.reserva_id = Reserva.Registro AND Reserva.Registro = $registro";
+
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+      
+        $cant=0;
+        if($numero_filas>0){
+          
+          while($fila=  $obj_conexion->ObtenerDatos($resultado)){
+                    $forma_pago=array();
+                    $brand='';
+                    $card='';
+                    $num_compra='';
+                    $monto='';
+                    $num_cuotas='';
+                    $fec_hora_transaccion='';
+                   
+                    $brand=$fila['brand'];
+                    $card=$fila['card'];
+                    $num_compra=$fila['purchase_number'];
+                    $fec_hora_transaccion=$fila['fechahora_transaccion'];
+                    $monto=$fila['amount'];
+                    $num_cuotas=$fila['quota_number'];
+                                        
+                    $forma_pago[]=$brand;
+                    $forma_pago[]=$card;
+                    $forma_pago[]=$num_compra;
+                    $forma_pago[]=$fec_hora_transaccion;
+                    $forma_pago[]=$monto;
+                    $forma_pago[]=$num_cuotas;
+                    $formaPago[]=$forma_pago;
+            }
+            $obj_conexion->CerrarConexion($conexion);
+           return $formaPago;
+    }
+}
+
+public function DetalleMovimiento($registro,$detalle){
         $lista_movimientos=array();
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();

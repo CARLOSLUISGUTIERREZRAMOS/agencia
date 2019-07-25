@@ -33,10 +33,7 @@ class CiudadModelo{
             
         }
         return $lista_ciudades;
-    }
- 
-    
-     
+    }    
 }
 
 
