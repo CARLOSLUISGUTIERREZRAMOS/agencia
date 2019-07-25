@@ -10,7 +10,10 @@
 	$project_name=basename(dirname(__FILE__));
 	//url
 	$url = "${protocol}://${domain}${disp_port}/${project_name}";
-	
+	defined("URL_PROYECTO")
+		or define("URL_PROYECTO", $url);
+	defined("PATH_PROYECTO")
+		or define("PATH_PROYECTO", realpath(dirname(__FILE__)));
 	defined("HTML_RECURSO_PATH")
     	or define("HTML_RECURSO_PATH", realpath(dirname(__FILE__) . '/recursos.php')); 
 	defined("CABECERA_PATH")

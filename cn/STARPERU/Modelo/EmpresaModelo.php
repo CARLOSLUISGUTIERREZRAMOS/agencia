@@ -71,7 +71,22 @@ class EmpresaModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="INSERT INTO entidad (RUC,RazonSocial,NombreComercial,Direccion,CodigoCiudad,DNIFuncionario,ApellidoPaterno,ApellidoMaterno,Nombres,Email,TelefoniaOficina,Celular,EstadoRegistro)
-                   VALUES ('$RUC','$RazonSocial','$NombreComercial','$Direccion','$CodigoCiudad','$DNIFuncionario','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$TelefoniaOficina','$Celular',0)";
+                   VALUES ('$RUC','$RazonSocial','$NombreComercial','$Direccion','$CodigoCiudad','$DNIFuncionario','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$TelefoniaOficina','$Celular',1)";
+        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $error=$obj_conexion->ErrorEjecucion($conexion);
+        if($error==1){
+            $flag=1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
+    }
+
+    public function RegistarTokenEmpresa($token,$empresa,$usuario){
+        $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="INSERT INTO confirmacion_token (token,entidad_id,user_id)
+                   VALUES ('$token',$empresa,$usuario)";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
