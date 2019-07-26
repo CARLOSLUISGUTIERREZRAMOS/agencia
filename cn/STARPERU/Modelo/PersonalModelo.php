@@ -1,7 +1,12 @@
 <?php
+if (isset($url_proyecto)) {
+    require_once(PATH_PROYECTO."/cn/STARPERU/Conexion/ConexionBD.php");
+    require_once(PATH_PROYECTO."/cn/STARPERU/Entidades/PersonalEntidad.php");
+} else {
+    require_once("../../cn/STARPERU/Conexion/ConexionBD.php");
+    require_once("../../cn/STARPERU/Entidades/PersonalEntidad.php");
+}
 
-require_once("../../cn/STARPERU/Conexion/ConexionBD.php");
-require_once("../../cn/STARPERU/Entidades/PersonalEntidad.php");
 
 class PersonalModelo{
     
@@ -220,7 +225,7 @@ class PersonalModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,Celular,CodigoTipo,Tipo,CodigoUsuario,Password,EstadoRegistro)
-                   VALUES ($CodigoEntidad,'$DNI','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$Celular','$CodigoTipo','$Tipo','$Usuario','$Password',1)";
+                   VALUES ($CodigoEntidad,'$DNI','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$Celular','$CodigoTipo','$Tipo','$Usuario','$Password',0)";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
@@ -230,9 +235,7 @@ class PersonalModelo{
         return $flag;
     }
 
-    public function UltimoUsuario()
-    {
-        $flag=0;
+    public function UltimoUsuario(){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="SELECT CodigoPersonal FROM personal ORDER BY CodigoPersonal DESC LIMIT 1";
@@ -245,6 +248,20 @@ class PersonalModelo{
         }else{
            return "";
         }
+    }
+
+    public function ActualizarEstadoUsuario($CodigoPersonal){
+        $flag=1;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="UPDATE personal SET EstadoRegistro=1 WHERE CodigoPersonal=$CodigoPersonal";
+        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $error=$obj_conexion->ErrorEjecucion($conexion);
+        if($error==1){
+            $flag=0;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
     }
     
     public function EditarDelegado($codigo_entidad,$dni,$apep,$apem,$nom,$email,$ofic,$anexo,$celular,$rpm,$rpc,$nextel,$estado,$cambio_contrasena,$contrasena){

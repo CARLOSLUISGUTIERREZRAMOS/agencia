@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
         <link href="cp/css/chosen.css" rel="stylesheet" type="text/css"/>
         <link href="cp/css/toastr.css" rel="stylesheet" type="text/css"/>
+        <!-- <link href="cp/css/sweetalert.min.css" rel="stylesheet" type="text/css"/> -->
         <title>Web Agencias - StarPeru</title>
         <style>
             #content > span { 
@@ -68,6 +69,12 @@
             .toast-top-right {
                 top: 30px;
                 right: 12px;
+            }
+            .swal-footer{
+                text-align: center;
+            }
+            .alert{
+                margin-bottom: 0;
             }
         </style>
     </head>
@@ -124,6 +131,16 @@
                     <div class="col-md-6 col-sm-12 col-xs-12" id="carrito" >
                         <div class="carrito-seccion">
                             <div class="row quick-search">
+                                <div class="row mensaje-usuario">
+                                    <!-- <div class="col-md-10 col-md-offset-1">
+                                        <div class="alert alert-success alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <strong>¡Cuenta verificada!</strong> Ahora puede iniciar sesión y disfrutar de la plataforma.
+                                        </div>
+                                    </div> -->
+                                </div>
                                 <?php if (isset($_SESSION["s_entra"]) && $_SESSION["s_entra"]==1): ?>
                                     <div style="height: 210px;align-items: center;text-align: center;display: flex;justify-content: center;">
                                         <a href="cp/panel.php" style="text-decoration: none;">
@@ -435,6 +452,7 @@
         <script src="cp/js/bootstrap.js" type="text/javascript"></script>
         <script src="cp/js/toastr.js" type="text/javascript"></script>
         <script src="cp/js/chosen.js" type="text/javascript"></script>
+        <script src="cp/js/sweetalert.min.js" type="text/javascript"></script>
         <script src="cp/js/jsLogin.js" type="text/javascript"></script>
         <script>
             $(function () {

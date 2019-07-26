@@ -1,7 +1,14 @@
 <?php
+use ___PHPSTORM_HELPERS\object;
+if (isset($url_proyecto)) {
+    require_once(PATH_PROYECTO."/cn/STARPERU/Conexion/ConexionBD.php");
+    require_once(PATH_PROYECTO."/cn/STARPERU/Entidades/EmpresaEntidad.php");
+} 
+else {
+    require_once("../../cn/STARPERU/Conexion/ConexionBD.php");
+    require_once("../../cn/STARPERU/Entidades/EmpresaEntidad.php");
+}
 
-require_once("../../cn/STARPERU/Conexion/ConexionBD.php");
-require_once("../../cn/STARPERU/Entidades/EmpresaEntidad.php");
 
 class EmpresaModelo{
     
@@ -71,7 +78,7 @@ class EmpresaModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="INSERT INTO entidad (RUC,RazonSocial,NombreComercial,Direccion,CodigoCiudad,DNIFuncionario,ApellidoPaterno,ApellidoMaterno,Nombres,Email,TelefoniaOficina,Celular,EstadoRegistro)
-                   VALUES ('$RUC','$RazonSocial','$NombreComercial','$Direccion','$CodigoCiudad','$DNIFuncionario','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$TelefoniaOficina','$Celular',1)";
+                   VALUES ('$RUC','$RazonSocial','$NombreComercial','$Direccion','$CodigoCiudad','$DNIFuncionario','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$TelefoniaOficina','$Celular',0)";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
@@ -85,8 +92,7 @@ class EmpresaModelo{
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="INSERT INTO confirmacion_token (token,entidad_id,user_id)
-                   VALUES ('$token',$empresa,$usuario)";
+        $consulta="INSERT INTO confirmacion_token (token,entidad_id,user_id) VALUES ('$token',$empresa,$usuario)";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
@@ -96,9 +102,50 @@ class EmpresaModelo{
         return $flag;
     }
 
-    public function UltimaEmpresa()
-    {
+    public function ObtenerTokenEmpresa($token,$empresa,$usuario){
         $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT * FROM confirmacion_token WHERE token='$token' AND entidad_id=$empresa AND user_id=$usuario";
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        // $fila=  $obj_conexion->ObtenerDatos($resultado);
+        if($numero_filas>0){
+            $flag=1;
+            $obj_conexion->CerrarConexion($conexion);
+        }
+        return $flag;
+    }
+
+    public function EliminarTokenEmpresa($token,$empresa,$usuario){
+        $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="DELETE FROM confirmacion_token WHERE token='$token' AND entidad_id=$empresa AND user_id=$usuario";
+        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $error=$obj_conexion->ErrorEjecucion($conexion);
+        if($error==1){
+            $flag=1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
+    }
+
+    public function ActualizarEstadoEmpresa($CodigoEntidad){
+        $flag=1;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="UPDATE entidad SET EstadoRegistro=1 WHERE CodigoEntidad=$CodigoEntidad";
+        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $error=$obj_conexion->ErrorEjecucion($conexion);
+        if($error==1){
+            $flag=0;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
+    }
+
+    public function UltimaEmpresa(){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="SELECT CodigoEntidad FROM entidad ORDER BY CodigoEntidad DESC LIMIT 1";

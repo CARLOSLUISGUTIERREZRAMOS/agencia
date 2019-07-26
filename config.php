@@ -10,6 +10,7 @@
 	$project_name=basename(dirname(__FILE__));
 	//url
 	$url = "${protocol}://${domain}${disp_port}/${project_name}";
+	$url_proyecto = "${protocol}://${domain}${disp_port}/${project_name}";
 	defined("URL_PROYECTO")
 		or define("URL_PROYECTO", $url);
 	defined("PATH_PROYECTO")

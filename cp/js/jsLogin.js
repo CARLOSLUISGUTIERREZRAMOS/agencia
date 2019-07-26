@@ -14,7 +14,66 @@ $(document).ready(function() {
         "hideMethod": "fadeOut"
     }
 
-    // $('#CodigoCiudad').select2();
+    if (location.search) {
+        var pathname = location.pathname;
+        var q = location.search.split('=');
+        var html;
+        if (q[1] == 'procesado') {
+            html = '<div class="alert alert-success alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '<strong>¡Cuenta verificada!</strong> Ahora puede iniciar sesión y empezar a vender pasajes por nuestra web agencias.' +
+                '</div>';
+        } else if (q[1] == 'no-procesado') {
+            html = '<div class="alert alert-warning alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '<strong>Opss!</strong> Hubo un error al momento de procesar la confirmación de la cuenta, vuelva intentar de nuevo.' +
+                '</div>';
+        } else if (q[1] == 'not-found') {
+            html = '<div class="alert alert-info alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '<strong>Opss!</strong> Su cuenta ya esta verificada, ingrese los accesos enviados a su correo.' +
+                '</div>';
+        } else if (q[1] == 'no-token') {
+            html = '<div class="alert alert-danger alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '<strong>Opss!</strong> Token invalido, por favor dar click en el boton <b>Verificar ahora</b> o copie correctamente el link enviado a su correo para poder verificar su cuenta.' +
+                '</div>';
+        } else if (q[1] == 'sin-confirmar') {
+            html = '<div class="alert alert-danger alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '<strong>¡Su cuenta no está verificada!</strong> Confirme su correo electrónico.' +
+                '</div>';
+        } else if (q[1] == 'incorrectos') {
+            html = '<div class="alert alert-danger alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '<strong>¡Datos incorrectos!</strong> Usuario o contraseña incorrectos' +
+                '</div>';
+        } else if (q[1] == 0) {
+            html = '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '<strong>¡Usuario cancelado!</strong> Por favor pongase en contacto con el Administrador del sistema.' +
+                '</div>';
+        }
+        $(".mensaje-usuario").html('<div class="col-md-10 col-md-offset-1">' + html + '</div>');
+        window.history.pushState('', document.title, pathname)
+        setTimeout(function() {
+            $(".mensaje-usuario").html('');
+        }, 20000);
+    }
 
     $('#btn_login').click(function() {
         var usuario = $.trim($('#usuario').val());
@@ -135,7 +194,19 @@ $(document).on('blur', 'input[name=RUC]', function(arg) {
                 toastr.options.timeOut = "10000";
                 if (data.data == undefined) {
                     CambiarInputs(true);
-                    toastr.warning("El RUC <strong>" + data.RUC + "</strong> ya existe y esta registrado con la siguiente razón social <strong>" + data.RazonSocial + "</strong>", "Mensaje de Alerta");
+                    // var contenido="El RUC <strong>" + data.RUC + "</strong> ya existe y esta registrado con la siguiente razón social <strong>" + data.RazonSocial + "</strong>";
+                    var contenido = "El RUC " + data.RUC + " ya existe y esta registrado en nuestro web de Agencias con la siguiente razón social " + data.RazonSocial + ", por favor verifique su correo electrónico";
+                    swal({
+                        title: "Mensaje de Alerta",
+                        text: contenido,
+                        icon: "warning",
+                        timer: 4000,
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-warning'
+                            }
+                        },
+                    });
                 }
             },
             error: function(xhr, textStatus, errorThrown) {

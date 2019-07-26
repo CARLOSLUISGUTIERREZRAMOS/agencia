@@ -13,7 +13,7 @@
                         </td>
                     </tr>
                     <tr><td colspan='2'></td></tr>
-                    <tr><td colspan='2'>$tipo</td></tr>
+                    <tr><td colspan='2'>INFORMACIÓN DE LA CUENTA :</td></tr>
                     <tr><td colspan='2' bgcolor='#fce8e6'>&nbsp;</td></tr>
                     <tr>
                         <td width='178'>WEB AGENCIAS:</td>
@@ -33,7 +33,7 @@
                     </tr>
                 </table>";
         
-        $email= "ecel@starperu.com,grupos@starperu.com,maría.marrou@starperu.com,carlos.flores@starperu.com,jhonatta.bernal@starperu.com,karinna.ruiz@starperu.com,henrry.cachicatari@starperu.com,carlos.gutierrez@starperu.com";
+        $email= "ecel@starperu.com,grupos@starperu.com,maria.marrou@starperu.com,carlos.flores@starperu.com,jhonatta.bernal@starperu.com,karinna.ruiz@starperu.com,henrry.cachicatari@starperu.com,carlos.gutierrez@starperu.com";
         $remitente ="ecel@starperu.com";
         $to=$email;
         $subject='WEB AGENCIAS - Notificacion de Registro - Ejecutivos';
@@ -78,7 +78,7 @@
                                     <tr>
                                         <td colspan='2'>
                                             <p>
-                                                Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, gracias en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>$tipo</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha generado el registro correcto del Usuario <font color='#080897'><strong>$tipo: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.
+                                                Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>$tipo</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha generado el registro correcto del Usuario <font color='#080897'><strong>$tipo: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.
                                             </p>
                                         </td>
                                     </tr>
@@ -109,7 +109,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan='2'>
-                                            <p>Si el enlace no funciona copia y pega manualmente en tu navegador:</p>".URL_PROYECTO."verificar.php?token=$token
+                                            <p>Si el enlace no funciona copia y pega manualmente en tu navegador:</p>".URL_PROYECTO."/verificar.php?token=$token
                                         </td>
                                     </tr>
                                     <tr>
