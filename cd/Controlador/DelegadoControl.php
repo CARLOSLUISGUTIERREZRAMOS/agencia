@@ -213,7 +213,7 @@ if($_POST['guardar_delegado']==1){
         if($dni_duplicado==0){
             $filas_afectadas=$obj_personal->GuardaDelegado($codigo_entidad,$dni,$apep,$apem,$nom,$email,$ofic,$anexo,$celular,$password);
                 if($filas_afectadas==1){
-                    $obj_personal->EnvioMailCreacionUser($email,$apep,$apem,$nom,$dni,$pass);
+                    $obj_personal->EnvioMailCreacionUser($email,$apep,$apem,$nom,$dni,$pass,$_SESSION["s_agencia"]);
                     echo '1_|_';
             }else{
                 echo '2_|_';

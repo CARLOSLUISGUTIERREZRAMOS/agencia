@@ -209,8 +209,8 @@ class PersonalModelo{
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,TelefonoOficina,Anexo,Celular,CodigoTipo,CambioClave,CodigoUsuario,Password,EstadoRegistro)
-                   VALUES ($codigo_entidad,'$dni','$apep','$apem','$nom','$email','$ofic','$anexo','$celular','D',1,'$dni','$password',1)";
+        $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,TelefonoOficina,Anexo,Celular,CodigoTipo,CambioClave,CodigoUsuario,Password,EstadoRegistro,Tipo)
+                   VALUES ($codigo_entidad,'$dni','$apep','$apem','$nom','$email','$ofic','$anexo','$celular','D',1,'$dni','$password',1,'counter')";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
@@ -367,7 +367,7 @@ class PersonalModelo{
         return $flag;
     }
     
-    public function EnvioMailCreacionUser($email,$paterno,$materno,$nombres,$usuario,$clave){
+    public function EnvioMailCreacionUser($email,$paterno,$materno,$nombres,$usuario,$clave,$agencia){
         $mail ="<html>
                     <body style='font-family:Trebuchet MS;font-size:13px'>
                         <center>
@@ -396,7 +396,7 @@ class PersonalModelo{
                                         </tr>
                                         <tr>
                                             <td colspan='2'>
-                                                <p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>COUNTER</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha generado el registro correcto del Usuario <font color='#080897'><strong>DELEGADO: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.</p>
+                                                <p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>COUNTER</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha generado el registro correcto del Usuario <font color='#080897'><strong>COUNTER: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -407,7 +407,7 @@ class PersonalModelo{
                                         </tr>
                                         <tr>
                                             <td colspan='2'>
-                                                <font color='#080897'><strong>DELEGADO :</strong></font>
+                                                <font color='#080897'><strong>INFORMACIÓN DE TU CUENTA :</strong></font>
                                             </td>
                                         </tr>
                                         <tr>
@@ -415,15 +415,23 @@ class PersonalModelo{
                                         </tr>
                                         <tr>
                                             <td width='178'>
-                                                <font color='#33333'><strong>Entidad:</strong></font>
+                                                <font color='#33333'><strong>Web Agencias:</strong></font>
                                             </td>
                                             <td width='512'>
-                                                <font color='#33333'><strong>Web Agencias</strong></font>
+                                                <font color='#33333'><strong>$agencia->RazonSocial</strong></font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width='178'>
+                                                <font color='#33333'><strong>RUC:</strong></font>
+                                            </td>
+                                            <td width='512'>
+                                                <font color='#33333'><strong>$agencia->RUC</strong></font>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <font color='#33333'><strong>Delegado:</strong></font>
+                                                <font color='#33333'><strong>Usuario:</strong></font>
                                             </td>
                                             <td>
                                                 <font color='#33333'><strong>$paterno $materno, $nombres</strong></font>
@@ -470,7 +478,7 @@ class PersonalModelo{
         $remitente ="ecel@starperu.com";
         $to=$email;
         $subject='Web Agencias - Notificacion de Registro';
-        $message=$mail;
+        $message=utf8_decode($mail);
         $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
         $cabeceras.= "From: Web Agencias <$remitente>\r\n";
         mail($to, $subject,$message,$cabeceras ); 
