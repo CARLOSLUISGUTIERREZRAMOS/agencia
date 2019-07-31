@@ -43,11 +43,6 @@
 	                // $.msgbox().open();
 	                return false;
 	            }
-	            
-	//            var data = new FormData();
-	//            data.append('filtrar',1);
-	//            data.append('dni',dni);
-	//            data.append('apellido',apellido);
 
 	            $.ajax({
 	                url:"../../cd/Controlador/DelegadoControl.php",
@@ -72,9 +67,6 @@
 	           });
 	        });
 	   
-	//            var data = new FormData();
-	//            data.append('listar',1);
-
 	        $.ajax({
 	            url:"../../cd/Controlador/DelegadoControl.php",
 	            type: "POST", 

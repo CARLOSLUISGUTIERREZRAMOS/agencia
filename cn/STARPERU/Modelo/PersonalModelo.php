@@ -56,11 +56,11 @@ class PersonalModelo{
         }
         
     }
-    public function ListaDelegados($codigo_entidad, $dni,$apellido){
+    public function ListaDelegados($codigo_entidad, $dni=null,$apellido=null){
         $lista_personal=array();
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta = "SELECT P.CambioClave,P.CodigoTipo,P.CodigoEntidad,P.CodigoPersonal,P.DNI,P.ApellidoMaterno,P.ApellidoPaterno,P.Nombres,P.Email,P.TelefonoOficina,P.Anexo,P.Celular,E.RazonSocial,E.RUC,E.Direccion
+        $consulta = "SELECT P.CambioClave,P.CodigoTipo,P.CodigoEntidad,P.CodigoPersonal,P.DNI,P.ApellidoMaterno,P.ApellidoPaterno,P.Nombres,P.Email,P.TelefonoOficina,P.Anexo,p.EstadoRegistro,P.Celular,E.RazonSocial,E.RUC,E.Direccion
                     FROM Personal P,Entidad E
                     WHERE  p.EstadoRegistro=1 AND e.EstadoRegistro=1 AND p.CodigoEntidad=e.CodigoEntidad AND P.CodigoEntidad='$codigo_entidad'"; 
              if($dni!=''){
@@ -205,12 +205,12 @@ class PersonalModelo{
         $obj_conexion->CerrarConexion($conexion);
         return $flag;
     }
-    public function GuardaDelegado($codigo_entidad,$dni,$apep,$apem,$nom,$email,$ofic,$anexo,$celular,$rpm,$depa,$prov,$dist,$password){
+    public function GuardaDelegado($codigo_entidad,$dni,$apep,$apem,$nom,$email,$ofic,$anexo,$celular,$password){
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,TelefonoOficina,Anexo,Celular,RPC,RPM,Nextel,CodigoTipo,CambioClave,CodigoUsuario,Password,EstadoRegistro,IdDepartamento, IdProvincia, IdDistrito)
-                   VALUES ($codigo_entidad,'$dni','$apep','$apem','$nom','$email','$ofic','$anexo','$celular','','$rpm','','D',1,'$dni','$password',1,'$depa','$prov','$dist')";
+        $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,TelefonoOficina,Anexo,Celular,CodigoTipo,CambioClave,CodigoUsuario,Password,EstadoRegistro)
+                   VALUES ($codigo_entidad,'$dni','$apep','$apem','$nom','$email','$ofic','$anexo','$celular','D',1,'$dni','$password',1)";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
@@ -368,35 +368,103 @@ class PersonalModelo{
     }
     
     public function EnvioMailCreacionUser($email,$paterno,$materno,$nombres,$usuario,$clave){
-        $mail ="<html>";
-        $mail .="<body style='font-family:Trebuchet MS;font-size:13px'>";
-        $mail .="<center>";
-        $mail .='<div style="border: 1px solid #69778d;width:720px;padding-bottom: 10px;">';
-        $mail .="<table width='700' border='0' align='center'>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td  colspan='2' align='center' style='font-size: 18px;'><font color='#4e99bf'><strong>NOTIFICACI&Oacute;N - SISTEMA Web Agencias</strong></font></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'><p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>DELEGADO</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha generado el registro correcto del Usuario <font color='#080897'><strong>DELEGADO: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.</p></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'><font color='#080897'><strong>DELEGADO :</strong></font></td></tr>";
-        $mail .=" <tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
-        $mail .="<tr><td width='178'><font color='#33333'><strong>Entidad:</strong></font></td><td width='512'><font color='#33333'><strong>Web Agencias</strong></font></td></tr>";
-        $mail .="<tr><td><font color='#33333'><strong>Delegado:</strong></font></td><td><font color='#33333'><strong>$paterno $materno, $nombres</strong></font></td></tr>";
-        $mail .="<tr><td><font color='#33333'><strong>Usuario de Acceso:</strong></font></td><td><font color='#080897'><strong>$usuario</strong></font></td></tr>";
-        $mail .="<tr><td><font color='#33333'><strong>Password:</strong></font></td><td><font color='#080897'><strong>$clave</strong></font></td></tr>";
-        $mail .="<tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2' style='font-size: 14px;'><font color='#000000'><strong>Se le recuerda que al ingresar por primera vez al SISTEMA se le solicitar&aacute; el cambio de su password.</strong></font></td></tr>";
-        $mail .="</table>";
-        $mail .="</div>";
-        $mail .="</center>";
-        $mail .="</body>";
-        $mail .="</html>";
+        $mail ="<html>
+                    <body style='font-family:Trebuchet MS;font-size:13px'>
+                        <center>
+                            <div style='border: 1px solid #69778d;width:720px;padding-bottom: 10px;'>
+                                <table width='700' border='0' align='center'>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan='2'></td>
+                                        </tr>
+                                        <tr>
+                                            <td  colspan='2' align='center' style='font-size: 18px;'>
+                                                <font color='#4e99bf'><strong>NOTIFICACI&Oacute;N - SISTEMA Web Agencias</strong></font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2' bgcolor='#4e99bf'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'>
+                                                <p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>COUNTER</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha generado el registro correcto del Usuario <font color='#080897'><strong>DELEGADO: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'>
+                                                <font color='#080897'><strong>DELEGADO :</strong></font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2' bgcolor='#4e99bf'></td>
+                                        </tr>
+                                        <tr>
+                                            <td width='178'>
+                                                <font color='#33333'><strong>Entidad:</strong></font>
+                                            </td>
+                                            <td width='512'>
+                                                <font color='#33333'><strong>Web Agencias</strong></font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <font color='#33333'><strong>Delegado:</strong></font>
+                                            </td>
+                                            <td>
+                                                <font color='#33333'><strong>$paterno $materno, $nombres</strong></font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <font color='#33333'><strong>Usuario de Acceso:</strong></font>
+                                            </td>
+                                            <td>
+                                                <font color='#080897'><strong>$usuario</strong></font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <font color='#33333'><strong>Password:</strong></font>
+                                            </td>
+                                            <td>
+                                                <font color='#080897'><strong>$clave</strong></font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2' bgcolor='#4e99bf'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2' style='font-size: 14px;'>
+                                                <font color='#000000'><strong>Se le recuerda que al ingresar por primera vez al SISTEMA se le solicitar&aacute; el cambio de su password.</strong></font>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </center>
+                    </body>
+                </html>";
         
         $email.= ", ".$_SESSION['s_email'].",carlos.gutierrez@starperu.com";
         $remitente ="ecel@starperu.com";
@@ -413,7 +481,7 @@ class PersonalModelo{
         $mail ="<html>";
         $mail .="<body style='font-family:Trebuchet MS;font-size:13px'>";
         $mail .="<center>";
-        $mail .='<div style="border: 1px solid #69778d;width:720px;padding-bottom: 10px;">';
+        $mail .="<div style='border: 1px solid #69778d;width:720px;padding-bottom: 10px;'>";
         $mail .="<table width='700' border='0' align='center'>";
         $mail .="<tr><td colspan='2'></td></tr>";
         $mail .="<tr><td  colspan='2' align='center' style='font-size: 18px;'><font color='#4e99bf'><strong>NOTIFICACI&Oacute;N - SISTEMA Web Agencias</strong></font></td></tr>";
@@ -451,30 +519,30 @@ class PersonalModelo{
    }
    
 
-   public function encrypt($string, $key) {
-           $result = '';
-           for($i=0; $i<strlen($string); $i++) {
-              $char = substr($string, $i, 1);
-              // $keychar = substr($key, ($i % strlen($key))-1, 1);
-              // $char = chr(ord($char)+ord($keychar));
-              $char = chr(ord($char));
-              $result.=$char;
-           }
-           return base64_encode($result);
-   }
+    public function encrypt($string, $key) {
+        $result = '';
+        for($i=0; $i<strlen($string); $i++) {
+            $char = substr($string, $i, 1);
+            // $keychar = substr($key, ($i % strlen($key))-1, 1);
+            // $char = chr(ord($char)+ord($keychar));
+            $char = chr(ord($char));
+            $result.=$char;
+        }
+        return base64_encode($result);
+    }
 
-   public function decrypt($string, $key) {
-            $result = '';
-            $string = base64_decode($string);
-            for($i=0; $i<strlen($string); $i++) {
-               $char = substr($string, $i, 1);
-               // $keychar = substr($key, ($i % strlen($key))-1, 1);
-               // $char = chr(ord($char)-ord($keychar));
-               $char = chr(ord($char));
-               $result.=$char;
-            }
-            return $result;
-     }
+    public function decrypt($string, $key) {
+        $result = '';
+        $string = base64_decode($string);
+        for($i=0; $i<strlen($string); $i++) {
+            $char = substr($string, $i, 1);
+            // $keychar = substr($key, ($i % strlen($key))-1, 1);
+            // $char = chr(ord($char)-ord($keychar));
+            $char = chr(ord($char));
+            $result.=$char;
+        }
+        return $result;
+    }
     
      public function obtenerDepartamentos(){
         $obj_conexion=new ConexionBD();
@@ -509,7 +577,7 @@ class PersonalModelo{
         //Se define la variable que va a contener la contraseña
         $pass = "";
         //Se define la longitud de la contraseña, en mi caso 10, pero puedes poner la longitud que quieras
-        $longitudPass=6;
+        $longitudPass=8;
         //Creamos la contraseña
         for($i=1 ; $i<=$longitudPass ; $i++){
             //Definimos numero aleatorio entre 0 y la longitud de la cadena de caracteres-1

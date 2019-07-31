@@ -11,7 +11,7 @@ $obj_personal=new PersonalModelo();
 if ($_POST['listar'] == 1) {
 
     $lista_delegados = array();
-    $lista_delegados = $obj_personal->ListaDelegados($_SESSION['s_entidad']);
+    $lista_delegados = $obj_personal->ListaDelegados($_SESSION["s_entidad"]);
     if (count($lista_delegados) == 0) {
         echo '';
     } else {
@@ -189,41 +189,39 @@ if ($_POST['filtrar'] == 1) {
 
 if($_POST['guardar_delegado']==1){ 
         require_once '../Funciones/funciones.php';
-          
-            $dni=trim($_POST['dni']);
-            $apep=  utf8_decode(caracter_especial(addslashes(trim($_POST['apep']))));
-            $apem=  utf8_decode(caracter_especial(addslashes(trim($_POST['apem']))));
-            $nom=  utf8_decode(caracter_especial(addslashes(trim($_POST['nom']))));
-            $email= strtolower(trim($_POST['email']));
-            $ofic= trim($_POST['ofic']);
-            $anexo= trim($_POST['anexo']);
-            $celular= trim($_POST['celular']);
-            $rpm= trim($_POST['rpm']);
-            $depa= trim($_POST['depa']);
-            $prov= trim($_POST['prov']);
-            $dist= trim($_POST['dist']);
-            $codigo_entidad=$_SESSION['s_entidad'];
-            $pass=  generaPass();
-            
-            $password=$obj_personal->encrypt($pass, "starperu");
-            if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/',$email)) {
-                        echo "4_|_";
-                        die;
-              }
-            $dni_duplicado=$obj_personal->DNIValidar($dni,$codigo_entidad);
-            if($dni_duplicado==0){
-                    $filas_afectadas=$obj_personal->GuardaDelegado($codigo_entidad,$dni,$apep,$apem,$nom,$email,$ofic,$anexo,$celular,$rpm,$depa,$prov,$dist,$password);
-                     if($filas_afectadas==1){
-                          $obj_personal->EnvioMailCreacionUser($email,$apep,$apem,$nom,$dni,$pass);
-                          echo '1_|_';
-                   }else{
-                        echo '2_|_';
-                       
-                    }
+        $dni=trim($_POST['dni']);
+        $apep=  utf8_decode(caracter_especial(addslashes(trim($_POST['apep']))));
+        $apem=  utf8_decode(caracter_especial(addslashes(trim($_POST['apem']))));
+        $nom=  utf8_decode(caracter_especial(addslashes(trim($_POST['nom']))));
+        $email= strtolower(trim($_POST['email']));
+        $ofic= trim($_POST['ofic']);
+        $anexo= trim($_POST['anexo']);
+        $celular= trim($_POST['celular']);
+        // $rpm= trim($_POST['rpm']);
+        // $depa= trim($_POST['depa']);
+        // $prov= trim($_POST['prov']);
+        // $dist= trim($_POST['dist']);
+        $codigo_entidad=$_SESSION['s_entidad'];
+        $pass=  generaPass();
+        
+        $password=$obj_personal->encrypt($pass, "starperu");
+        if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/',$email)) {
+            echo "4_|_";
+            die;
+        }
+        $dni_duplicado=$obj_personal->DNIValidar($dni,$codigo_entidad);
+        if($dni_duplicado==0){
+            $filas_afectadas=$obj_personal->GuardaDelegado($codigo_entidad,$dni,$apep,$apem,$nom,$email,$ofic,$anexo,$celular,$password);
+                if($filas_afectadas==1){
+                    $obj_personal->EnvioMailCreacionUser($email,$apep,$apem,$nom,$dni,$pass);
+                    echo '1_|_';
             }else{
-                echo '3_|_';
+                echo '2_|_';
                 
             }
+        }else{
+            echo '3_|_';
+        }
     }
     
     
