@@ -1707,7 +1707,8 @@ if (isset($_POST['paso5'])) {
                    <td align="left" class="bgTable_data">23 KG</td>
                 </tr>
         </table>';
-        } elseif ($tipo_viaje_5 == 0) {
+        } 
+        elseif ($tipo_viaje_5 == 0) {
 
             $table_cabecera_5 .= '<table width="900" border="0" cellpadding="0" cellspacing="0">
                 <tr>
@@ -1768,7 +1769,8 @@ if (isset($_POST['paso5'])) {
                         <td align="center" class="bgTable_data">' . number_format($tuua_adulto, 2, '.', ',') . '</td>
                         <td align="center" class="bgTable_data">' . number_format($subtotal_tabla_adl, 2, '.', ',') . '</td>
                     </tr>';
-        } else {
+        } 
+        else {
             if ($adultos_5 > 0) {
 
                 $cant_adult = $adultos_5;
@@ -1824,11 +1826,11 @@ if (isset($_POST['paso5'])) {
             }
         }
         $total_pagar_tabla_5 = $subtotal_tabla_adl + $subtotal_tabla_ch + $subtotal_tabla_i + $tuua_adulto + $tuua_chil + $tuua_bb + $igv_adulto + $igv_chil + $igv_bb;
-//$table_precio_5.='<tr>
-//                    <td colspan="4" align="left" class="subtitleTabla">Total a pagar:</td>
-//                    <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.number_format($total_pagar_tabla_5,2,'.',',').'</td>
-//                  </tr>
-//                </table>';
+        // $table_precio_5.='<tr>
+        //                 <td colspan="4" align="left" class="subtitleTabla">Total a pagar:</td>
+        //                 <td align="center" class="subtitleTabla gradiante" style="color:white;">'.$tipo_moneda_5.' '.number_format($total_pagar_tabla_5,2,'.',',').'</td>
+        //                 </tr>
+        //             </table>';
         // construyendo el array de personas
         require_once '../../cd/Funciones/funciones.php';
         $arrayPersonas = array();
@@ -1856,7 +1858,7 @@ if (isset($_POST['paso5'])) {
                 'Telefono_Anex' => $telf_ane,
                 'Celular' => $celular,
                 'Tipo_Pasajero' => $tipo_pasajero);
-//                               'Fecha_Nacimiento'=>$fecNac
+                // 'Fecha_Nacimiento'=>$fecNac
             $p++;
 
             $nombres = utf8_decode(caracter_especial2(addslashes(trim($_POST['nombre_i_' . $i]))));
@@ -2023,12 +2025,12 @@ if (isset($_POST['paso5'])) {
         }
 
 
-//  echo "<pre>";
-//  print_r($arrayPersonasKiu);
-//  echo "</pre>";
-//  echo "<pre>";
-//  print_r($arrayPersonas);
-//  echo "</pre>";
+        // echo "<pre>";
+        // print_r($arrayPersonasKiu);
+        // echo "</pre>";
+        // echo "<pre>";
+        // print_r($arrayPersonas);
+        // echo "</pre>";
 
 
         if ($tipo_viaje_5 == 1) { // R
@@ -2040,10 +2042,9 @@ if (isset($_POST['paso5'])) {
                     array('DepartureDateTime' => "$fecha_hora_salida_ida_5", 'ArrivalDateTime' => "$fecha_hora_llegada_ida_5", 'FlightNumber' => "$numero_vuelo_ida_5", 'ResBookDesigCode' => "$clase_ida_5", 'DepartureAirport' => "$origen_ida_5", 'ArrivalAirport' => "$destino_ida_5", 'MarketingAirline' => '2I')
                     , array('DepartureDateTime' => "$fecha_hora_salida_vuelta_5", 'ArrivalDateTime' => "$fecha_hora_llegada_vuelta_5", 'FlightNumber' => "$numero_vuelo_vuelta_5", 'ResBookDesigCode' => "$clase_vuelta_5", 'DepartureAirport' => "$origen_vuelta_5", 'ArrivalAirport' => "$destino_vuelta_5", 'MarketingAirline' => '2I')
                 )
-//	, 'Passengers' => $arrayPersonas
+	            // , 'Passengers' => $arrayPersonas
                 , 'Passengers' => $arrayPersonasKiu
-                , 'Remark' => 'STARPERU'
-                    ), $err);
+                , 'Remark' => 'STARPERU'), $err);
             if ($err['ErrorCode'] != 0) {
                 echo $err['ErrorMsg'];
             }
@@ -2066,9 +2067,9 @@ if (isset($_POST['paso5'])) {
                     ), $err);
             if ($err['ErrorCode'] != 0)
                 echo $err['ErrorMsg'];
-//                    echo "<pre>";
-//                    print_r($res);
-//                    echo "</pre>";
+                // echo "<pre>";
+                // print_r($res);
+                // echo "</pre>";
             //$tarifa_sin_imp = $res[1]['TravelItinerary']['ItineraryInfo']['ItineraryPricing']['Cost']['@attributes']['AmountBeforeTax'];
             $tarifa_con_imp = $res['TravelItinerary']['ItineraryInfo']['ItineraryPricing']['Cost']['@attributes']['AmountAfterTax'];
 
@@ -2085,9 +2086,9 @@ if (isset($_POST['paso5'])) {
 
             if ($codigo_reserva != '') {
                 $registro = $obj_reserva->GuardarReservaCabecera($codigo_reserva, $arrayPersonas[0]['Nombres'], $arrayPersonas[0]['Apellidos'], $arrayPersonas[0]['Email'], $arrayPersonas[0]['Tipo_Documento'], $arrayPersonas[0]['Numero_Documento'], $arrayPersonas[0]['Telefono_Oficina'], $arrayPersonas[0]['Telefono_Anex'], $arrayPersonas[0]['Celular'], $arrayPersonas[0]['Nextel'], $arrayPersonas[0]['RPM'], $arrayPersonas[0]['RPC'], $pasajero_ruc, $fecha_registro, $fecha_registro, $adultos_5, $menores_5, $infantes_5, $origen_ida_5, $destino_ida_5, $numero_vuelo_ida_5, $clase_ida_5, $fecha_salida_ida_5, $hora_salida_ida_5, $numero_vuelo_vuelta_5, $clase_vuelta_5, $fecha_salida_vuelta_5, $hora_salida_vuelta_5, $pais, $ciudad, $ip, $flete, $tuua_reserva, $igv_reserva, $total_reserva, $_SESSION['s_idusuario'], $_SESSION['s_entidad'], $tipo_vuelo_letras);
-//                echo '<br/>';
-//                echo $codigo_reserva.'<br/>';
-//                die;
+                // echo '<br/>';
+                // echo $codigo_reserva.'<br/>';
+                // die;
                 $numero_de_vueltas = $adultos_5 + $menores_5 + $infantes_5;
                 $j = 0;
                 for ($i = 0; $i < $numero_de_vueltas; $i++) {
@@ -2161,7 +2162,8 @@ if (isset($_POST['paso5'])) {
                     }
                     $_SESSION['pasajeros'] = $arrayPersonas;
                 }
-            } else {
+            } 
+            else {
 
                 $res = $KIU->AirBookRQ(array(
                     'City' => 'LIM'
@@ -2171,22 +2173,21 @@ if (isset($_POST['paso5'])) {
                         array('DepartureDateTime' => "$fecha_hora_salida_ida_5", 'ArrivalDateTime' => "$fecha_hora_llegada_ida_5", 'FlightNumber' => "$numero_vuelo_ida_5", 'ResBookDesigCode' => "$clase_ida_5", 'DepartureAirport' => "$origen_ida_5", 'ArrivalAirport' => "$destino_ida_5", 'MarketingAirline' => '2I')
                     )
                     , 'Passengers' => $arrayPersonasKiu
-//            , 'Passengers' => $arrayPersonas
-                    , 'Remark' => 'STARPERU'
-                        ), $err);
-//        echo "<pre>";    
-//    print_r($arrayPersonas);
-//         echo "</pre>";   
-//            echo "<pre>";
-//            print_r($res);
-//            echo "</pre>";
+                    // , 'Passengers' => $arrayPersonas
+                    , 'Remark' => 'STARPERU'), $err);
+                // echo "<pre>";    
+                // print_r($arrayPersonas);
+                // echo "</pre>";   
+                // echo "<pre>";
+                // print_r($res);
+                // echo "</pre>";
 
                 if ($err['ErrorCode'] != 0) {
                     echo $err['ErrorMsg'];
                 }
 
                 $fecha_registro = date('Y-m-d H:i:s');
-//            echo $fecha_registro;
+                // echo $fecha_registro;
                 $tipo_vuelo_letras = 'O';
                 $pais = 'PE';
                 $ciudad = ', DEMO';
@@ -2210,14 +2211,12 @@ if (isset($_POST['paso5'])) {
                 $total_pagar_tabla_5 = $subtotal_tabla_adl + $subtotal_tabla_ch + $subtotal_tabla_i;
                 $total_pagar_5 = $tarifa_con_imp;
 
-
-
                 /*                 * ************************************************************************************* */
 
                 if ($codigo_reserva != '') {
                     $registro = $obj_reserva->GuardarReservaCabecera($codigo_reserva, $arrayPersonas[0]['Nombres'], $arrayPersonas[0]['Apellidos'], $arrayPersonas[0]['Email'], $arrayPersonas[0]['Tipo_Documento'], $arrayPersonas[0]['Numero_Documento'], $arrayPersonas[0]['Telefono_Oficina'], $arrayPersonas[0]['Telefono_Anex'], $arrayPersonas[0]['Celular'], $arrayPersonas[0]['Nextel'], $arrayPersonas[0]['RPM'], $arrayPersonas[0]['RPC'], $arrayPersonas[0]['Pasajero_RUC'], $fecha_registro, $fecha_registro, $adultos_5, $menores_5, $infantes_5, $origen_ida_5, $destino_ida_5, $numero_vuelo_ida_5, $clase_ida_5, $fecha_salida_ida_5, $hora_salida_ida_5, $numero_vuelo_vuelta_5, $clase_vuelta_5, $fecha_salida_vuelta_5, $hora_salida_vuelta_5, $pais, $ciudad, $ip, $flete, $tuua_reserva, $igv_reserva, $total_reserva, $_SESSION['s_idusuario'], $_SESSION['s_entidad'], $tipo_vuelo_letras);
-//            echo $registro;
-//            die;
+                    // echo $registro;
+                    // die;
                     $numero_de_vueltas = $adultos_5 + $menores_5 + $infantes_5;
                     $_SESSION['id_registro'] = $registro;
                     $j = 0;
@@ -2266,9 +2265,6 @@ if (isset($_POST['paso5'])) {
                     $_SESSION['pasajeros'] = $arrayPersonas;
                 }
             }
-
-
-
 
             $table_precio_5 .= '<tr>
                     <td colspan="4" align="left" class="subtitleTabla">Total a pagar:</td>
@@ -2320,8 +2316,6 @@ if (isset($_POST['paso5'])) {
         }
     }
 
-
-
     if (isset($_POST['confirmacion'])) {
 
         if ($_POST['confirmacion'] == 1) {
@@ -2348,9 +2342,6 @@ if (isset($_POST['paso5'])) {
             $tipo_moneda_cc = $_POST['tipo_moneda_cc'];
             $tipo_viaje_cc = $_POST['tipo_viaje_cc'];
             $total_pagar_tabla_5 = $_POST['total_pagar_tabla_5'];
-
-
-
 
             // datos del vuelo ida
             $numero_vuelo_ida_cc = $_POST['numero_vuelo_ida_cc'];
@@ -2543,7 +2534,8 @@ if (isset($_POST['paso5'])) {
                     $para = 'carlos.gutierrez@starperu.com';
                     mail($para, $asunto, $mensaje, $cabeceras);
                 }
-            } else {
+            } 
+            else {
                 $respuesta_kiu = $KIU->AirDemandTicketRQ(array(
                     'PaymentType' => "37"
                     , 'MiscellaneousCode' => "SR"
@@ -2556,7 +2548,7 @@ if (isset($_POST['paso5'])) {
                     , 'VAT' => "$ruc"
                     , 'Endorsement' => "$endoso"
                         ), $err);
-//                        if($err['ErrorCode']!=0) echo $err['ErrorMsg'];
+                // if($err['ErrorCode']!=0) echo $err['ErrorMsg'];
 
                 $res = $respuesta_kiu[0];
                 $request = $respuesta_kiu[1];
@@ -2659,7 +2651,7 @@ if (isset($_POST['paso5'])) {
                   <td align="left" class="bgTable_data">' . $clase_vuelta_cc . '</td>
                    <td align="left" class="bgTable_data">23 KG</td>
                 </tr>
-        </table>';
+                </table>';
             } elseif ($tipo_viaje_cc == 0) {
 
                 $table_cabecera_cc .= '<table width="900" border="0" cellpadding="0" cellspacing="0">

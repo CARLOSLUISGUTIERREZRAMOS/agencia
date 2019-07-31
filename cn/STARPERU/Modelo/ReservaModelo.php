@@ -827,7 +827,7 @@ public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$emai
                 . "'$ip',$flete,$tuua_5,$igv_5,$total_pagar_5,$entidad,$usuario,'$pasajero_ruc')";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $registro=  mysqli_insert_id($conexion);
-        $error=$obj_conexion->ErrorEjecucion();
+        // $error=$obj_conexion->ErrorEjecucion();
         $obj_conexion->CerrarConexion($conexion);
 
 //       if($error==1){
