@@ -183,11 +183,9 @@
                         <?php
                             $_SESSION['registro_id'] = $registro;
                             $_SESSION['token_seguridad_visa'] = $token;
-                        ?> 
-                            <?php
-                                require_once("../../config.php");
-                                ?>
-                            <form  action="<?=$url?>/cp/pasarela/metodos_pago.php" id="form_visa" method='post' style="display: none">
+                            require_once("../../config.php");
+                        ?>
+                        <form  action="<?=$url?>/cp/pasarela/metodos_pago.php" id="form_visa" method='post' style="display: none">
                             <script src='<?=$libreriaJsVisa?>'
                                 data-sessiontoken='<?= $objSessionVisa->sessionKey ?>'
                                 data-channel='web'

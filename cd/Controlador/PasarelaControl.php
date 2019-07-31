@@ -2294,14 +2294,14 @@ if (isset($_POST['paso5'])) {
 
             $table_precio_5 .= '</table>';
             // if($_POST['forma_pago'] == 'TC'){
-            include '../../cn/METODOS_PAGO/Connection_visa.php';
             if (isset($_SESSION['registro_id'])) {
                 unset($_SESSION['registro_id']);
             }
             if (isset($_SESSION['token_seguridad_visa'])) {
                 unset($_SESSION['token_seguridad_visa']);
             }
-
+                
+            include '../../cn/METODOS_PAGO/Connection_visa.php';
             $visa = new Connection_visa();
 
             $token = $visa->Connection();
