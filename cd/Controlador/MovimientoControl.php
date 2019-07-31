@@ -240,7 +240,7 @@ if($_REQUEST['excel']==1){
                 <td>'.$movimiento[7]->getCodigoReserva()."</td>
                 <td>".$movimiento[7]->getRUCPasajero()."</td>
                 <td>".$movimiento[1]."</td>
-                <td>".$movimiento[2]."</td>
+                <td>".$movimiento[11]."</td>
                 <td>".$movimiento[3]."</td>
                 <td>".$movimiento[4]."</td>
                 <td>".$movimiento[7]->getTipoVuelo()."</td>
