@@ -857,12 +857,12 @@ public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$emai
             return $flag;
     }
     
-public function UpdateReservaDetalleTicket($ticket,$i,$registro){
+public function UpdateReservaDetalleTicket($ticket,$i,$registro,$ComisionTarifa){
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="UPDATE Reserva_Detalle SET Ticket='$ticket' WHERE Registro=$registro AND Detalle=$i";
+        $consulta="UPDATE Reserva_Detalle SET Ticket='$ticket',ComisionTarifa=$ComisionTarifa WHERE Registro=$registro AND Detalle=$i";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        
         $error=$obj_conexion->ErrorEjecucion($conexion);
@@ -874,12 +874,12 @@ public function UpdateReservaDetalleTicket($ticket,$i,$registro){
         return $flag;
         
     }
-public function UpdateReservaTicket($codigo_reserva_c,$campos_consulta,$cc_code=NULL){
+public function UpdateReservaTicket($codigo_reserva_c,$campos_consulta,$porcentaje,$cc_code=NULL){
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="UPDATE Reserva SET $campos_consulta forma_pago = '$cc_code' ,EstadoRegistro=1 WHERE CodigoReserva='$codigo_reserva_c'";
+        $consulta="UPDATE Reserva SET $campos_consulta forma_pago = '$cc_code' ,EstadoRegistro=1, Porcentaje=$porcentaje WHERE CodigoReserva='$codigo_reserva_c'";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        
         $error=$obj_conexion->ErrorEjecucion($conexion);

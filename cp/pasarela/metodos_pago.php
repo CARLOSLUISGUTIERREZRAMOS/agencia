@@ -81,25 +81,30 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
                 default:
                     header("Location: " . base_url());
             }
-            $trama_enviar_metodo_demandKiu = ArmarTramaTipoCredito_DemandTicket($miscellaneous, $PaymentType, $id_registro, $pnr, $ruc, $DataJsonVisa->order->transactionId, $DataJsonVisa->dataMap->CARD);
+            $ruc_agencia=$_SESSION["s_agencia"]->RUC;
+            $porcentaje=(double)$_SESSION["s_agencia"]->PorcentajeComision;
+            $trama_enviar_metodo_demandKiu = ArmarTramaTipoCredito_DemandTicket($miscellaneous, $PaymentType, $id_registro, $pnr, $ruc, $DataJsonVisa->order->transactionId, $DataJsonVisa->dataMap->CARD,$ruc_agencia,$porcentaje);
 
             $ResDemandTicket['dataVisa'] = $DataJsonVisa;
             $ResDemandTicket['data'] = $kiu->AirDemandTicketRQ($trama_enviar_metodo_demandKiu, $err)[3];
             $ResDemandTicket['data_reserva'] = $data_reserva;
+            // echo "<pre>";
             // var_dump($ResDemandTicket['data']);die;
+            // echo "</pre>";
             $j = 1;
             $tickets = [];
             $campos_consulta = '';
             foreach ($ResDemandTicket['data']->TicketItemInfo as $row) {
                 $ticket_number = $row->attributes()->TicketNumber;
+                $ComisionTarifa= (double)$row->attributes()->CommissionAmount;
                 $tickets[$j-1] =  $ticket_number;
-                $res_update_tbl_reserva_detalle = $obj_reserva->UpdateReservaDetalleTicket($ticket_number, $j, $id_registro);
+                $res_update_tbl_reserva_detalle = $obj_reserva->UpdateReservaDetalleTicket($ticket_number, $j, $id_registro,$ComisionTarifa);
                 $campos_consulta .= " Ticket0" . $j . "='$ticket_number', ";
                 $j++;
             }
             if ($res_update_tbl_reserva_detalle) {
                 $miscellaneous = ($miscellaneous === 'CA') ? 'MC' : $miscellaneous;
-                $consulta = $obj_reserva->UpdateReservaTicket($pnr, $campos_consulta,$miscellaneous);
+                $consulta = $obj_reserva->UpdateReservaTicket($pnr, $campos_consulta,$porcentaje,$miscellaneous);
                 include '../../cp/bloques/views/block_confirmation/plantilla.php';
             }
             
