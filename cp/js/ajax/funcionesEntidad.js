@@ -367,6 +367,11 @@ $(document).ready(function () {
             $.msgbox().open();
             return false;
         }
+        if (nom_comercial == '' || nom_comercial == null) {
+            $.msgbox().content('El campo nombre comercial es un campo requerido');
+            $.msgbox().open();
+            return false;
+        }
         if (domicilio == '' || domicilio == null) {
             $.msgbox().content('El campo domicilio fiscal es un campo requerido');
             $.msgbox().open();
