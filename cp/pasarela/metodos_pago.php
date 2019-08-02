@@ -81,12 +81,15 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
                 default:
                     header("Location: " . base_url());
             }
-            $trama_enviar_metodo_demandKiu = ArmarTramaTipoCredito_DemandTicket($miscellaneous, $PaymentType, $id_registro, $pnr, $ruc, $DataJsonVisa->order->transactionId, $DataJsonVisa->dataMap->CARD);
+            $ruc_agencia=$_SESSION["s_agencia"]->RUC;
+            $trama_enviar_metodo_demandKiu = ArmarTramaTipoCredito_DemandTicket($miscellaneous, $PaymentType, $id_registro, $pnr, $ruc, $DataJsonVisa->order->transactionId, $DataJsonVisa->dataMap->CARD,$ruc_agencia);
 
             $ResDemandTicket['dataVisa'] = $DataJsonVisa;
             $ResDemandTicket['data'] = $kiu->AirDemandTicketRQ($trama_enviar_metodo_demandKiu, $err)[3];
             $ResDemandTicket['data_reserva'] = $data_reserva;
+            // echo "<pre>";
             // var_dump($ResDemandTicket['data']);die;
+            // echo "</pre>";
             $j = 1;
             $tickets = [];
             $campos_consulta = '';

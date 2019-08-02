@@ -1,5 +1,5 @@
 <?php
-function ArmarTramaTipoCredito_DemandTicket($miscellaneous, $PaymentType, $reserva_id, $pnr, $ruc, $cod_autcard, $card_number) {
+function ArmarTramaTipoCredito_DemandTicket($miscellaneous, $PaymentType, $reserva_id, $pnr, $ruc, $cod_autcard, $card_number,$ruc_agencia) {
 
 $trama = array(
     'PaymentType' => "$PaymentType",
@@ -12,7 +12,9 @@ $trama = array(
     'TourCode' => "",
     'BookingID' => trim($pnr),
     'InvoiceCode' => "ACME",
-    'VAT' => ($ruc == 'NULL') ? '' : $ruc
+    'VAT' => ($ruc == 'NULL') ? '' : $ruc,
+    'Endorsement'=>$ruc_agencia.' WEB AGENCIAS',
+    'CommissionPercent'=>2.00
 );
 return $trama;
 }
