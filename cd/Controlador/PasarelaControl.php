@@ -2125,8 +2125,8 @@ if (isset($_POST['paso5'])) {
                     for ($i = 0; $i < $numero_de_vueltas; $i++) {
                         if ($arrayPersonas[$i]['Tipo_Pasajero'] == 'ADT') {
                             $tipo_pax = 'A';
-                            $tarifa_unitaria = number_format($tarifa_adulto_5 * 0.97 / $adultos_5, 2, '.', '');
-                            $igv_unitaria = number_format($igv_adulto_5 * 0.97 / $adultos_5, 2, '.', '');
+                            $tarifa_unitaria = number_format($tarifa_adulto_5 / $adultos_5, 2, '.', '');
+                            $igv_unitaria = number_format($igv_adulto_5 / $adultos_5, 2, '.', '');
                             $tuua_unitaria = number_format($tuua_adulto_5 / $adultos_5, 2, '.', '');
                             $total = $tarifa_unitaria + $igv_unitaria + $tuua_unitaria;
                             if ($ciudad_exonerada > 0) {
@@ -2138,8 +2138,8 @@ if (isset($_POST['paso5'])) {
                             }
                         } elseif ($arrayPersonas[$i]['Tipo_Pasajero'] == 'CNN') {
                             $tipo_pax = 'N';
-                            $tarifa_unitaria = number_format($tarifa_chil_5 * 0.97 / $menores_5, 2, '.', '');
-                            $igv_unitaria = number_format($igv_chil_5 * 0.97 / $menores_5, 2, '.', '');
+                            $tarifa_unitaria = number_format($tarifa_chil_5 / $menores_5, 2, '.', '');
+                            $igv_unitaria = number_format($igv_chil_5 / $menores_5, 2, '.', '');
                             $tuua_unitaria = number_format($tuua_chil_5 / $menores_5, 2, '.', '');
                             $total = $tarifa_unitaria + $igv_unitaria + $tuua_unitaria;
                             if ($ciudad_exonerada > 0) {
@@ -2151,8 +2151,8 @@ if (isset($_POST['paso5'])) {
                             }
                         } elseif ($arrayPersonas[$i]['Tipo_Pasajero'] == 'INF') {
                             $tipo_pax = 'B';
-                            $tarifa_unitaria = number_format($tarifa_bb_5 * 0.97 / $infantes_5, 2, '.', '');
-                            $igv_unitaria = number_format($igv_bb_5 * 0.97 / $infantes_5, 2, '.', '');
+                            $tarifa_unitaria = number_format($tarifa_bb_5 / $infantes_5, 2, '.', '');
+                            $igv_unitaria = number_format($igv_bb_5 / $infantes_5, 2, '.', '');
                             $tuua_unitaria = number_format($tuua_bb_5 / $infantes_5, 2, '.', '');
                             $total = $tarifa_unitaria + $igv_unitaria + $tuua_unitaria;
                             if ($ciudad_exonerada > 0) {

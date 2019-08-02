@@ -1,285 +1,389 @@
 /*======================================== FORMULARIO ========================================*/
-form{
-	width:auto;
-	margin: 0px;
+
+form {
+    width: auto;
+    margin: 0px;
 }
-table{
-	border-collapse:collapse;
+
+table {
+    border-collapse: collapse;
 }
-.no-info{
-	font-style:italic; font-weight:bold;
+
+.no-info {
+    font-style: italic;
+    font-weight: bold;
 }
-.span-activo{
-	color:#0607C3; font-weight:bold; font-style:italic;
+
+.span-activo {
+    color: #0607C3;
+    font-weight: bold;
+    font-style: italic;
 }
-.span-inactivo{
-	color:#C42425;  font-weight:bold; font-style:italic;
+
+.span-inactivo {
+    color: #C42425;
+    font-weight: bold;
+    font-style: italic;
 }
-.span-requerido{
-	display:block; float:left; font-family:Arial, Helvetica, sans-serif; color:#900; font-size:18px;
-}
-#div-requerido{ 
-	width: 200px;
-	height: 30px;
-	clear:both;
+
+.span-requerido {
+    display: block;
     float: left;
-	background: #FFFFCC;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #900;
+    font-size: 18px;
+}
+
+#div-requerido {
+    width: 200px;
+    height: 30px;
+    clear: both;
+    float: left;
+    background: #FFFFCC;
     border: 1px solid #D8D88C;
     color: #990000;
     font-size: 14px;
     line-height: 30px;
-	text-align:center;
+    text-align: center;
 }
-.span_orden{
-	padding:3px 15px 4px 8px;
-	background:url(../images/bg_circulo.png) no-repeat;
-	color:#fff;
-	font-size:15px;
+
+.span_orden {
+    padding: 3px 15px 4px 8px;
+    background: url(../images/bg_circulo.png) no-repeat;
+    color: #fff;
+    font-size: 15px;
 }
-.label_info{
-	width:120px;
-	padding:0 10px 10px 0;
-	font-size:14px;
-	font-weight:bold;
-	font-style:italic;
-	text-align:right;
-	text-transform:capitalize;
-	vertical-align:text-top;
+
+.label_info {
+    width: 120px;
+    padding: 0 10px 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: right;
+    text-transform: capitalize;
+    vertical-align: text-top;
 }
-.span_info{
-	padding:0 10px 10px 0;
-	font-size:14px;
-	vertical-align:middle;
+
+.span_info {
+    padding: 0 10px 10px 0;
+    font-size: 14px;
+    vertical-align: middle;
 }
-#div-entidad{
-	width:325px;
-	height:500px;
-	float:left;
-	border-right:1px dotted #333;
+
+#div-entidad {
+    width: 325px;
+    height: 500px;
+    float: left;
+    border-right: 1px dotted #333;
 }
-#div-entidad p{ float:left; }
-#div-funcionario{
-	width:325px;
-	height:500px;
-	float:left;
-	padding:0 0 0 4px;
-	border-right:1px dotted #333;
+
+#div-entidad p {
+    float: left;
 }
-#div-funcionario p{ float:left; }
-#div-gestor{
-	width:325px;
-	height:500px;
-	float:left;
-	padding:0 0 0 4px;
+
+#div-funcionario {
+    width: 325px;
+    height: 500px;
+    float: left;
+    padding: 0 0 0 4px;
+    border-right: 1px dotted #333;
 }
-#div-gestor p{ float:left; }
-#div-btn-registro{
-	height:50px; clear:both; text-align:center;
+
+#div-funcionario p {
+    float: left;
 }
-p{ height:22px; margin:4px;}
-label{
-	width:90px;
-	float:left;
-	display:block;
-	text-align:right;
-	text-transform:capitalize;
+
+#div-gestor {
+    width: 325px;
+    height: 500px;
+    float: left;
+    padding: 0 0 0 4px;
 }
-input{ 
-	/*width:180px;*/
-	/*height:14px;*/
-	margin:0 5px 5px 10px;
-	padding:4px 4px;
-	float:left;
-	font-size:12px;
-	color:#333;
-	background:#fff;
-	border:#e2e2e2 1px solid;
-	outline:none;
+
+#div-gestor p {
+    float: left;
+}
+
+#div-btn-registro {
+    height: 50px;
+    clear: both;
+    text-align: center;
+}
+
+p {
+    height: 22px;
+    margin: 4px;
+}
+
+label {
+    width: 90px;
+    float: left;
+    display: block;
+    text-align: right;
+    text-transform: capitalize;
+}
+
+input {
+    /*width:180px;*/
+    /*height:14px;*/
+    margin: 0 5px 5px 10px;
+    padding: 4px 4px;
+    float: left;
+    font-size: 12px;
+    color: #333;
+    background: #fff;
+    border: #e2e2e2 1px solid;
+    outline: none;
 }
 
 .btn-red {
-        background: url(../images/imgContinuar.png) no-repeat !important;
-        color: #FFFFFF;
-        font-family: 'ArialNarrowRegular', Sans-Serif;
-        border: none;
-        cursor: pointer;
-        font-size: 15px;
-        width: 100px;
-        height: 30px;
-        padding: 0 20px 2px 0;
-        }
+    background: url(../images/imgContinuar.png) no-repeat !important;
+    color: #FFFFFF;
+    font-family: 'ArialNarrowRegular', Sans-Serif;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    width: 100px;
+    height: 30px;
+    padding: 0 20px 2px 0;
+}
+
 textarea {
-	width:184px;
-	height:50px;
-	margin:0 5px 5px 10px;
-	padding:5px 0 5px 4px;
-	float:left;
-	font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif;
-	font-size:11px;
-	color:#333;
-	background:#eeeeee;
-	border:#e2e2e2 1px solid;
-	overflow:auto;
-	outline:none;
+    width: 184px;
+    height: 50px;
+    margin: 0 5px 5px 10px;
+    padding: 5px 0 5px 4px;
+    float: left;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #333;
+    background: #eeeeee;
+    border: #e2e2e2 1px solid;
+    overflow: auto;
+    outline: none;
 }
-fieldset{
-	width:185px;
-	float:left;
-	margin:0 5px 15px 103px;
-	padding: 5px 0 5px 5px;
-	border: 1px solid #999;
+
+fieldset {
+    width: 185px;
+    float: left;
+    margin: 0 5px 15px 103px;
+    padding: 5px 0 5px 5px;
+    border: 1px solid #999;
 }
-legend{
-	paddin:0 0 0 10px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size:11px;
-	color:#666;
-	text-transform:capitalize;
+
+legend {
+    paddin: 0 0 0 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #666;
+    text-transform: capitalize;
 }
-select{
-	width:150px;
-	margin:5px 0 5px 10px; 
+
+select {
+    width: 150px;
+    margin: 5px 0 5px 10px;
 }
-.button{
-	width:200px;
-	height:auto;
-	margin:10px 0 50px 200px;
-	padding:8px;
-	background: url(../images/guardar_2.png) 90% 50% no-repeat #6F9FF1;
-	border:1px solid #000;
-	color:#FFF;
-	font-weight:bold;
-	cursor:pointer;
+
+.button {
+    width: 200px;
+    height: auto;
+    margin: 10px 0 50px 200px;
+    padding: 8px;
+    background: url(../images/guardar_2.png) 90% 50% no-repeat #6F9FF1;
+    border: 1px solid #000;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
 }
-h3{ 
-	width:300px;
-	margin:0 0 0 5px;
-	border-bottom:1px dotted #039;
-	line-height:15px;
-	color:#036;
-	font-size:15px;
-	text-transform:capitalize;
+
+h3 {
+    width: 300px;
+    margin: 0 0 0 5px;
+    border-bottom: 1px dotted #039;
+    line-height: 15px;
+    color: #036;
+    font-size: 15px;
+    text-transform: capitalize;
 }
-h5{
-	margin:10px 0 0 5px;
-	line-height:30px;
-	color:#036;
-	text-transform:capitalize;
-	font-size:12px;
+
+h5 {
+    margin: 10px 0 0 5px;
+    line-height: 30px;
+    color: #036;
+    text-transform: capitalize;
+    font-size: 12px;
 }
+
+
 /*================================== DIV AVISO FORMULARIO ====================================*/
-#div-entidad-aviso{
-	width:500px;
-	height:54px;
-	float:left;
-	margin:3px 0 2px 30px;
-	text-align:center;
-	font-size:16px;
-	font-weight:bold;
+
+#div-entidad-aviso {
+    width: 500px;
+    height: 54px;
+    float: left;
+    margin: 3px 0 2px 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
 }
-#div-entidad-aviso img{
-	margin:0 10px 0 0;
+
+#div-entidad-aviso img {
+    margin: 0 10px 0 0;
 }
-.aviso_ok{
-	border:1px solid #093; 
-	background:#B5DABF; 
+
+.aviso_ok {
+    border: 1px solid #093;
+    background: #B5DABF;
 }
-.aviso_ok p{ line-height:45px; }
-.aviso_error{
-	border:1px solid #6A3737; 
-	background:#E0BBBB;
+
+.aviso_ok p {
+    line-height: 45px;
 }
+
+.aviso_error {
+    border: 1px solid #6A3737;
+    background: #E0BBBB;
+}
+
+
 /*====================================== FIN FORMULARIO ======================================*/
 
-/*========================================== LISTADO =========================================*/
-#div-busqueda{
-	width:720px; height:110px; margin:15px 0 0 0; background:#F0F0F0; border:1px solid #919B9C;
-}
-#div-busqueda input{ background: #FFF; }
-#div-busqueda select{ margin:0 0 10px 10px; }
-#div-busqueda #btnbusqueda{ 
-	width:100px; height:auto; 	 
-	background: url(../images/filtrar.png) right no-repeat #6F9FF1; 
-	border:1px solid #000;	
-	margin-top: 20px;
-	color:#FFF; font-weight:bold; cursor:pointer;
-}
-#div-listado{ width:auto; margin:10px 0; }
 
-#listaResultado .table{ 
-	border-collapse:collapse; 
-	width:auto; 
-	margin:20px 0 0 0; 
+/*========================================== LISTADO =========================================*/
+
+#div-busqueda {
+    width: 720px;
+    height: 110px;
+    margin: 15px 0 0 0;
+    background: #F0F0F0;
+    border: 1px solid #919B9C;
 }
-#listaResultado  .th{ 
-	font-size:12px;
-	text-transform:capitalize; 
+
+#div-busqueda input {
+    background: #FFF;
 }
-#listaResultado  .th, .td{ 
-	width:auto;
-	margin:0;
-	font-size:11px;
-	border-right:1px dotted #036;
-	border-left:1px dotted #036;
-	border-bottom:1px solid #036;
+
+#div-busqueda select {
+    margin: 0 0 10px 10px;
 }
-#listaResultado .data{
-	padding:8px 10px; 
+
+#div-busqueda #btnbusqueda {
+    width: 100px;
+    height: auto;
+    background: url(../images/filtrar.png) right no-repeat #6F9FF1;
+    border: 1px solid #000;
+    margin-top: 20px;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
 }
-#listaResultado .opcion{
-	padding:5px 10px; 
+
+#div-listado {
+    width: auto;
+    margin: 10px 0;
 }
-#listaResultado .centrado{
-	text-align:center;
+
+#listaResultado .table {
+    border-collapse: collapse;
+    width: auto;
+    margin: 20px 0 0 0;
 }
+
+#listaResultado .th {
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+#listaResultado .th,
+.td {
+    width: auto;
+    margin: 0;
+    font-size: 11px;
+    border-right: 1px dotted #036;
+    border-left: 1px dotted #036;
+    border-bottom: 1px solid #036;
+}
+
+#listaResultado .data {
+    padding: 8px 10px;
+}
+
+#listaResultado .opcion {
+    padding: 5px 10px;
+}
+
+#listaResultado .centrado {
+    text-align: center;
+}
+
+
 /*======================================== FIN LISTADO =======================================*/
 
+
 /*======================================= ENTIDAD SALDO ======================================*/
-#div-entidad-saldo{
-	width:350px;
-	height:170px;
-	margin:15px 0 0 0;
-	padding:20px 0 0 0;
-	background:#F0F0F0;
-	border:1px solid #919B9C;
+
+#div-entidad-saldo {
+    width: 350px;
+    height: 170px;
+    margin: 15px 0 0 0;
+    padding: 20px 0 0 0;
+    background: #F0F0F0;
+    border: 1px solid #919B9C;
 }
-#div-entidad-saldo input{ background: #FFF; text-transform:uppercase; }
-#div-entidad-saldo textarea{ width:230px; background: #FFF; text-transform:uppercase; overflow:auto;}
-#div-entidad-saldo #btn_asignar{ 
-	width:100px;  height:auto; margin: 5px 0 0 200px; 	background: #6F9FF1; border:1px solid #000;	color:#FFF; font-weight:bold; cursor:pointer;
+
+#div-entidad-saldo input {
+    background: #FFF;
+    text-transform: uppercase;
 }
+
+#div-entidad-saldo textarea {
+    width: 230px;
+    background: #FFF;
+    text-transform: uppercase;
+    overflow: auto;
+}
+
+#div-entidad-saldo #btn_asignar {
+    width: 100px;
+    height: auto;
+    margin: 5px 0 0 200px;
+    background: #6F9FF1;
+    border: 1px solid #000;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
 /*===================================== FIN ENTIDAD SALDO ====================================*/
-
-
 
 
 /*======================================== REPORTE ============================================*/
 
 .reporte {
     background-color: #FFFFFF;
-     
     border-radius: 6px 6px 6px 6px;
     border-spacing: 0;
-    font-family: "Lucida Sans Unicode","Lucida Grande",Sans-Serif;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 10px;
     text-align: left;
     width: 100%;
-	z-index:1;
-	 
-
-    
+    z-index: 1;
 }
+
 .lab_dmov {
     background-color: #F1F2F4;
     border: 3px solid #FFFFFF;
-	color:#003366;
-	padding:1px;
+    color: #003366;
+    padding: 1px;
 }
-.excel{
+
+.excel {
     background-color: #FF0000;
-    color:#FFFFFF;
-
+    color: #FFFFFF;
 }
- 
 
-
+.erow {
+    border-bottom-style: outset;
+}
