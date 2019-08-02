@@ -82,7 +82,8 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
                     header("Location: " . base_url());
             }
             $ruc_agencia=$_SESSION["s_agencia"]->RUC;
-            $trama_enviar_metodo_demandKiu = ArmarTramaTipoCredito_DemandTicket($miscellaneous, $PaymentType, $id_registro, $pnr, $ruc, $DataJsonVisa->order->transactionId, $DataJsonVisa->dataMap->CARD,$ruc_agencia);
+            $porcentaje=(double)$_SESSION["s_agencia"]->PorcentajeComision;
+            $trama_enviar_metodo_demandKiu = ArmarTramaTipoCredito_DemandTicket($miscellaneous, $PaymentType, $id_registro, $pnr, $ruc, $DataJsonVisa->order->transactionId, $DataJsonVisa->dataMap->CARD,$ruc_agencia,$porcentaje);
 
             $ResDemandTicket['dataVisa'] = $DataJsonVisa;
             $ResDemandTicket['data'] = $kiu->AirDemandTicketRQ($trama_enviar_metodo_demandKiu, $err)[3];
@@ -95,14 +96,15 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
             $campos_consulta = '';
             foreach ($ResDemandTicket['data']->TicketItemInfo as $row) {
                 $ticket_number = $row->attributes()->TicketNumber;
+                $ComisionTarifa= (double)$row->attributes()->CommissionAmount;
                 $tickets[$j-1] =  $ticket_number;
-                $res_update_tbl_reserva_detalle = $obj_reserva->UpdateReservaDetalleTicket($ticket_number, $j, $id_registro);
+                $res_update_tbl_reserva_detalle = $obj_reserva->UpdateReservaDetalleTicket($ticket_number, $j, $id_registro,$ComisionTarifa);
                 $campos_consulta .= " Ticket0" . $j . "='$ticket_number', ";
                 $j++;
             }
             if ($res_update_tbl_reserva_detalle) {
                 $miscellaneous = ($miscellaneous === 'CA') ? 'MC' : $miscellaneous;
-                $consulta = $obj_reserva->UpdateReservaTicket($pnr, $campos_consulta,$miscellaneous);
+                $consulta = $obj_reserva->UpdateReservaTicket($pnr, $campos_consulta,$porcentaje,$miscellaneous);
                 include '../../cp/bloques/views/block_confirmation/plantilla.php';
             }
             
