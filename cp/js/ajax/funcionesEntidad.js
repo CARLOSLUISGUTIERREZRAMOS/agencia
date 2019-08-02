@@ -356,7 +356,6 @@ $(document).ready(function () {
         var razon_social = $.trim($('#razon_social_a').val());
         var domicilio = $.trim($('#domicilio_a').val());
         var codigo_entidad = $.trim($('#codigo_entidad_a').val());
-        console.log(ciudad);
         if (estado == -1) {
             $.msgbox().content('Debe seleccionar un estado para la agencia');
             $.msgbox().open();

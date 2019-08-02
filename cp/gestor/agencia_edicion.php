@@ -15,6 +15,8 @@ require_once("../../config.php");
 
 $agencias = array();
 $agencias = $obj_empresa->ObtenerAgencia($agencia_entidad->CodigoEntidad);
+$ciudad = array();
+$ciudad = $obj_empresa->ObtenerNombreCiudad($agencias[13],$agencia_entidad->CodigoEntidad);
 
 require_once("../../cn/STARPERU/Modelo/LocalidadModelo.php");
 $obj_modelo = new LocalidadModelo();
@@ -65,11 +67,6 @@ $obj_modelo = new LocalidadModelo();
                         <input type="text" name="apep_a" id="apep_a" style="text-transform:uppercase;" value="<?php echo $agencias[7]; ?>"/>
                         <span class="span-requerido">*</span>  
                     </td>
-<!--                    <td  rowspan="2">
-                        <button type="submit" style="cursor:pointer;" name="editar_agencia" id="editar_agencia" value="<?= $agencia_entidad->CodigoEntidad ?>" title="Guardar datos" >
-                            <img  src="../images/disk-black.png" />
-                        </button>
-                    </td>-->
                     <td  rowspan="2">
                         <button style="cursor:pointer;" id="editar_agencia" onClick="event.preventDefault();" title="Guardar datos" >
                             <img  src="../images/disk-black.png" />
@@ -103,11 +100,7 @@ $obj_modelo = new LocalidadModelo();
                 <tr>
                     <td class="label_info">País:</td>
                     <td class="span_info">
-                        <select id="Code_Pais" name="Code_Pais" title="Seleccionar Pais" form="registrar-agencia">
-                            <?php foreach ($obj_modelo->ObtenerPaises() as $key => $pais): ?>
-                                <option <?= $pais->Code_Pais == 'PE' ? 'selected' : '' ?> value="<?= $pais->Code_Pais ?>"><?= $pais->Pais ?></option>
-                            <?php endforeach ?>
-                        </select>
+                        <input type="text" name="pais_a"  id="pais_a" style="text-transform:uppercase;" value="<?php echo $ciudad[2]; ?>" readonly=""/>
                     </td>
                     <td class="label_info">DNI Funcionario:</td>
                     <td>
@@ -152,12 +145,16 @@ $obj_modelo = new LocalidadModelo();
                     <td>
                         <select name="estado" id="estado">
                             <option value="-1">- Seleccione estado -</option>
-                            <option value="1" <?php if ($agencias[12] == 1) {
+                            <option value="1" <?php
+                            if ($agencias[12] == 1) {
                                 echo 'selected';
-                            } ?> >Activo</option>
-                            <option value="0" <?php if ($agencias[12] == 0) {
+                            }
+                            ?> >Activo</option>
+                            <option value="0" <?php
+                            if ($agencias[12] == 0) {
                                 echo 'selected';
-                            } ?> >Inactivo</option>
+                            }
+                            ?> >Inactivo</option>
                         </select>
                     </td>
                     <td class=""></td>

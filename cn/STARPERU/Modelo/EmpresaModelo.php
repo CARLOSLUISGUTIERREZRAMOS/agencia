@@ -318,20 +318,30 @@ class EmpresaModelo {
         }
     }
 
-    public function ObtenerNombreCiudad($codigoCiudad,$codigoEntidad) {
+    public function ObtenerNombreCiudad($codigoCiudad, $codigoEntidad) {
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
-        $consulta = "SELECT L.Nombre FROM  entidad as E, localidades as L where L.Codigo='$codigoCiudad' AND E.CodigoEntidad=$codigoEntidad";
-        $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
-//        var_dump($consulta); 
-        $error = $obj_conexion->ErrorEjecucion($conexion);
-        if ($error == 1) {
-            $flag = 1;
-        }
-        $obj_conexion->CerrarConexion($conexion);
-        return $flag;
-    }
+        $consulta = "SELECT L.Nombre,L.Codigo,L.Pais FROM  entidad as E, localidades as L where L.Codigo='$codigoCiudad' AND E.CodigoEntidad=$codigoEntidad";
 
+        $resultado = $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
+        $numero_filas = $obj_conexion->ContarFilas($resultado);
+         if ($numero_filas > 0) {
+            while ($fila = $obj_conexion->ObtenerDatos($resultado)) {
+            $ciudad = array();
+            $nombre_ciudad = '';
+            $codigo_ciudad = '';
+            $pais = '';
+            $nombre_ciudad = $fila['Nombre'];
+            $codigo_ciudad = $fila['Codigo'];
+            $pais = $fila['Pais'];
+            $ciudad[] = $nombre_ciudad;
+            $ciudad[] = $codigo_ciudad;
+            $ciudad[] = $pais;
+            }
+            $obj_conexion->CerrarConexion($conexion);
+            return $ciudad;
+        }
+    }
 }
 ?>
 

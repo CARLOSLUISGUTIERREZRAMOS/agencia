@@ -14,10 +14,9 @@ $agencia_entidad = $_SESSION['s_agencia'];
 require_once("../../config.php");
 
 $agencias = array();
+$ciudad = array();
 $agencias = $obj_empresa->ObtenerAgencia($agencia_entidad->CodigoEntidad);
-
-require_once("../../cn/STARPERU/Modelo/LocalidadModelo.php");
-$obj_modelo = new LocalidadModelo();
+$ciudad = $obj_empresa->ObtenerNombreCiudad($agencias[13],$agencia_entidad->CodigoEntidad);
 ?>
 
 <?php ob_start(); ?>
@@ -69,20 +68,14 @@ $obj_modelo = new LocalidadModelo();
                     <td class="span_info"><?= $agencias[5] ? $agencias[5] : '-' ?></td>
                 </tr>
                 <tr>
-<!--                    <td class="label_info">País:</td>
-                    <td class="span_info">
-                        <select id="Code_Pais" name="Code_Pais" title="Seleccionar Pais" form="registrar-agencia">
-                    <?php foreach ($obj_modelo->ObtenerPaises() as $key => $pais): ?>
-                                        <option <?= $pais->Code_Pais == 'PE' ? 'selected' : '' ?> value="<?= $pais->Code_Pais ?>"><?= $pais->Pais ?></option>
-                    <?php endforeach ?>
-                        </select>
-                    </td>-->
+                    <td class="label_info">País:</td>
+                    <td class="span_info"><?= $ciudad[2] ?></td>
                     <td class="label_info">DNI:</td>
                     <td class="span_info"><?= $agencias[1] ? $agencias[1] : '-' ?></td>
                 </tr>
                 <tr>
                     <td class="label_info">Ciudad:</td>
-                    <td class="span_info"><?= $ciudad->Codigo == $agencias[13] ? $ciudad->Codigo : '' ?></td>
+                    <td class="span_info"><?= $ciudad[0] ?></td>
                     <td class="label_info">Celular:</td>
                     <td class="span_info"><?= $agencias[9] ? $agencias[9] : '-' ?></td>
                 </tr>
