@@ -135,10 +135,9 @@ function EnviaValores()
                                 </tr>
                             </table>
                         </td>
-                          <td align="right" > <?php echo $_SESSION['mensaje'];
-                         ?>
-                            <input <?php echo $_SESSION['puede'];?> name="btnAceptar" id="btnAceptar" value="Continuar" class="btn-red" type="submit" />
-                        
+                          <td align="right" > 
+                            <?php //echo $_SESSION['mensaje'];?>
+                            <input <?php //echo $_SESSION['puede'];?> name="btnAceptar" id="btnAceptar" value="Continuar" class="btn-red" type="submit" />
                         </td>
                       </tr>
                        

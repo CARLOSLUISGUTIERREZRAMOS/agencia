@@ -133,7 +133,11 @@
                                 	<td height="10"><input type="hidden" name="confirma" id="confirma" /></td>
                               	</tr>
                               	<tr>
-                                  	<td height="30" align="left"><input type="checkbox" id="terms" name="terms" value="1" onclick="Change()" /> He le&iacute;do y estoy de acuerdo con las <a id="checkthickbox" onclick="VerCondicion();" class="thickbox" style="color:#0266CC;cursor:pointer;">condiciones</a> relacionadas a la compra.</td>
+                                  	<td height="30" align="left">
+                                        <label>
+                                            <input type="checkbox" id="terms" name="terms" value="1" onclick="Change()" /> He le&iacute;do y estoy de acuerdo con las <a id="checkthickbox" onclick="VerCondicion();" class="thickbox" style="color:#0266CC;cursor:pointer;">condiciones</a> relacionadas a la compra.
+                                        </label>
+                                    </td>
                               	</tr>
                               	<tr>
                                     <?php if ($codigo_reserva!=''): ?>

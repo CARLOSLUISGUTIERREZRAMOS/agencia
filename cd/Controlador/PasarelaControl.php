@@ -213,14 +213,14 @@ if (isset($_POST['paso2'])) {
                 }
             }
 
-//                      echo "<pre>";
-//                      print_r($vuelos_disponibles);
-//                      echo "</pre>";
+            // echo "<pre>";
+            // print_r($vuelos_disponibles);
+            // echo "</pre>";
 
             $clases_tarifas_disponibles = $obj_tarifa->ObtenerTarifaClaseFamilia($fecha_salida, $origen, $destino, $tipo_vuelo, $estadia);
-//                       echo "<pre>";
-//                      print_r($clases_tarifas_disponibles["Clases"]);
-//                      echo "</pre>";
+            // echo "<pre>";
+            // print_r($clases_tarifas_disponibles["Clases"]);
+            // echo "</pre>";
             $tabla_disponibilidades = '<table class="tabla_vuelos_de_ida">' . "\n";
             $tabla_disponibilidades .= '<tr>' . "\n";
             $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Vuelo</td>' . "\n";
@@ -251,13 +251,11 @@ if (isset($_POST['paso2'])) {
                     $filas .= '<td class="bgTable-data" align="center">' . $vuelos_disponibles[$w]["Escala"] . '</td>' . "\n";
 
                     for ($p = 0; $p < count($clases_vector); $p++) {
-
-
                         $filas .= '<td><table><tr><td width="70" class="subtitleTableSFlexi td_clase_B" align="center" style="background-color: #DEC8BF; color: #5A3F2F">' . "\n";
-                        $filas .= '<input type="radio" id="vuelo_ida" name="vuelo_ida" value="' . $clases_vector[$p]["tarifa"] . '#' . $vuelos_disponibles[$w]["Vuelo"] . '#' . $vuelos_disponibles[$w]["Salida"] . '#' . $vuelos_disponibles[$w]["Llegada"] . '#' . $clases_vector[$p]["clase"] . '#' . $origen . '#' . $destino . '" onclick="EnviaImporteD()"><br/>Clase ' . $clases_vector[$p]["clase"] . "\n";
+                        $filas .= '<label><input type="radio" id="vuelo_ida" name="vuelo_ida" value="' . $clases_vector[$p]["tarifa"] . '#' . $vuelos_disponibles[$w]["Vuelo"] . '#' . $vuelos_disponibles[$w]["Salida"] . '#' . $vuelos_disponibles[$w]["Llegada"] . '#' . $clases_vector[$p]["clase"] . '#' . $origen . '#' . $destino . '" onclick="EnviaImporteD()"><br/>Clase ' . $clases_vector[$p]["clase"] . "\n";
                         $filas .= '<br><font color="#004000">$' . number_format($clases_vector[$p]["tarifa"], 2) . '</font>' . "\n";
-//                                      $filas.='<a title="Click para ver las condiciones" class="clase" onClick="VerCondicion(\''.trim(strtoupper($clase)).'\')">Condición</a>'."\n";       
-                        $filas .= '</td></tr></table></td>' . "\n";
+                        $filas .= '</label></td></tr></table></td>' . "\n";
+                        // $filas.='<a title="Click para ver las condiciones" class="clase" onClick="VerCondicion(\''.trim(strtoupper($clase)).'\')">Condición</a>'."\n";       
                     }
                     $filas .= '</tr>' . "\n";
                 }
@@ -376,12 +374,11 @@ if (isset($_POST['paso2'])) {
                         $filas1 .= '<td class="bgTable-data" align="center">' . $vuelos_disponibles[$w]["Escala"] . '</td>' . "\n";
 
                         for ($p = 0; $p < count($clases_vector); $p++) {
-
                             $filas1 .= '<td><table><tr><td width="70" class="subtitleTableSFlexi td_clase_B" align="center" style="background-color: #DEC8BF; color: #5A3F2F">' . "\n";
-                            $filas1 .= '<input type="radio" id="vuelo_vuelta" name="vuelo_vuelta" value="' . $clases_vector[$p]["tarifa"] . '#' . $vuelos_disponibles[$w]["Vuelo"] . '#' . $vuelos_disponibles[$w]["Salida"] . '#' . $vuelos_disponibles[$w]["Llegada"] . '#' . $clases_vector[$p]["clase"] . '#' . $origen . '#' . $destino . '" onclick="EnviaImporteR()"><br/>Clase ' . $clases_vector[$p]["clase"] . "\n";
+                            $filas1 .= '<label><input type="radio" id="vuelo_vuelta" name="vuelo_vuelta" value="' . $clases_vector[$p]["tarifa"] . '#' . $vuelos_disponibles[$w]["Vuelo"] . '#' . $vuelos_disponibles[$w]["Salida"] . '#' . $vuelos_disponibles[$w]["Llegada"] . '#' . $clases_vector[$p]["clase"] . '#' . $origen . '#' . $destino . '" onclick="EnviaImporteR()"><br/>Clase ' . $clases_vector[$p]["clase"] . "\n";
                             $filas1 .= '<br><font color="#004000">$' . number_format($clases_vector[$p]["tarifa"], 2) . '</font><br>' . "\n";
-                            //                        $tabla_disponibilidades1.='<a title="Click para ver las condiciones" class="clase" onClick="VerCondicion(\''.trim(strtoupper($clase)).'\')">Condición</a>'."\n";       
-                            $filas1 .= '</td></tr></table></td>' . "\n";
+                            $filas1 .= '</label></td></tr></table></td>' . "\n";
+                            // $tabla_disponibilidades1.='<a title="Click para ver las condiciones" class="clase" onClick="VerCondicion(\''.trim(strtoupper($clase)).'\')">Condición</a>'."\n";       
                         }
 
                         $filas1 .= '</tr>' . "\n";
@@ -2286,11 +2283,10 @@ if (isset($_POST['paso5'])) {
             </tr>
             <tr>
                 <td colspan="5" class="subtitleTabla">
-                <select name="forma_pago" id="forma_pago">
-                <option value="" selected disabled hidden>SELECCIONE</option>
-                                <option value="TC">Tarjeta de Credito</option>
-                                <option value="LC">Linea de Credito</option>
-                                </select>
+                    <select name="forma_pago" id="forma_pago">
+                        <option value="TC">Tarjeta de Credito</option>
+                        <option value="LC" disabled>Linea de Credito</option>
+                    </select>
                 </td>
             </tr>';
 
