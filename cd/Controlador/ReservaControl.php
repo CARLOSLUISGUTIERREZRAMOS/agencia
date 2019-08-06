@@ -6,11 +6,12 @@ ini_set("display_errors",0);
 date_default_timezone_set('America/Lima');
 require_once("../../cn/STARPERU/Modelo/PersonalModelo.php");
 require_once("../../cn/STARPERU/Modelo/ReservaModelo.php");
+require_once("../../cn/STARPERU/Modelo/VisaModelo.php");
 require_once("../../cn/KIU/KIU_Controller_class.php");
 $KIU = new KIU_Controller(array());
 $obj_personal=new PersonalModelo();
 $obj_reserva=new ReservaModelo();
-
+$obj_visa=new VisaModelo();
 
 if($_POST['obtener_datos_pasajero']==1){
     $tipo_doc=trim($_POST['tipo']);
@@ -205,74 +206,68 @@ if($_REQUEST['anular']==1){
                 $pnr='';
                 $lista_boletos='';
                 for ($i=0; $i <$cantidad ; $i++) { 
-                       $parametros_anular=explode("/", $array_anular[$i]);
-                       $pnr =$parametros_anular[0];
-                       $ticket= $parametros_anular[1];
-                       
-                       $res = $KIU->AirCancelRQ(array('IdReserva'=> $pnr, 'IdTicket' => $ticket),$err);
-//                       echo "<pre>";
-//                       print_r($res);
-//                       echo "</pre>";
-//                       $data = json_encode($res);
-//                       echo "<script>console.log('$data')</script>";
-                       if(isset($res["Error"])) {
-                           if($res["Error"]["ErrorMsg"]!=''){
-                             $tabla_boletos_reserva.='<p style="color:red;">No se pudo anular el boleto: '.$ticket.'.</p><br>';
-                             $lista_boletos.=($i+1).") ".$ticket."  /  No se pudo anular. Error KIU: ".$res["Error"]["ErrorMsg"]."<br>";
-                             $anulado = 0;
-                             
-                           }
-                           $msj_anulacion = "<strong>Error al anular el (los) ticket(s).</strong>";
-                       }else{
-                           $res1 = $KIU->TravelItineraryReadRQ(array('IdReserva'=> $pnr, 'IdTicket' => $ticket),$err);
-//                           $data = json_encode($res);
-//                           echo "<script>console.log('$data')</script>";
-                           if(isset($res1["Error"])) {
-                                $msj_anulacion = "<strong>Anulacion exitosa.</strong>";
-                                $lista_boletos.=($i+1).") ".$ticket."  /  Anulado<br>";
-                                $anulado=1;
-                                $obj_reserva->AnularTicket($ticket);
-                           }
-                           else{
-                                $anulado=0;
-                                $msj_anulacion = "<strong>Error al anular el (los) ticket(s).</strong>";
-                                $tabla_boletos_reserva='<p style="color:red;">El boleto no pudo ser anulado por encontrarse Chequeado, favor siga los siguientes pasos:<br><br>
-                                                            1.- Anule el Check In v&iacute;a <strong>www.starperu.com</strong> , opción ANULACI&Oacute;N DE CHECK IN.<br>
-                                                            2.- Proceda a anular el boleto a trav&eacute;s de su portal.
-                                                        </p>';
-                           }
-                       }
+                    $parametros_anular=explode("/", $array_anular[$i]);
+                    $pnr =$parametros_anular[0];
+                    $ticket= $parametros_anular[1];
+                    
+                    $res = $KIU->AirCancelRQ(array('IdReserva'=> $pnr, 'IdTicket' => $ticket),$err);
+                    // echo "<pre>";
+                    // print_r($res);
+                    // echo "</pre>";
+                    // $data = json_encode($res);
+                    // echo "<script>console.log('$data')</script>";
+                    if(isset($res["Error"])) {
+                        if($res["Error"]["ErrorMsg"]!=''){
+                            $tabla_boletos_reserva.='<p style="color:red;">No se pudo anular el boleto: '.$ticket.'.</p><br>';
+                            $lista_boletos.=($i+1).") ".$ticket."  /  No se pudo anular. Error KIU: ".$res["Error"]["ErrorMsg"]."<br>";
+                            $anulado = 0;
+                        }
+                        $msj_anulacion = "<strong>Error al anular el (los) ticket(s).</strong>";
+                    }else{
+                        $res1 = $KIU->TravelItineraryReadRQ(array('IdReserva'=> $pnr, 'IdTicket' => $ticket),$err);
+                        // $data = json_encode($res);
+                        // echo "<script>console.log('$data')</script>";
+                        if(isset($res1["Error"])) {
+                            $msj_anulacion = "<strong>Anulacion exitosa.</strong>";
+                            $lista_boletos.=($i+1).") ".$ticket."  /  Anulado<br>";
+                            $anulado=1;
+                            $obj_reserva->AnularTicket($ticket);
+                        }
+                        else{
+                            $anulado=0;
+                            $msj_anulacion = "<strong>Error al anular el (los) ticket(s).</strong>";
+                            $tabla_boletos_reserva='<p style="color:red;">El boleto no pudo ser anulado por encontrarse Chequeado, favor siga los siguientes pasos:<br><br>
+                                                        1.- Anule el Check In v&iacute;a <strong>www.starperu.com</strong> , opción ANULACI&Oacute;N DE CHECK IN.<br>
+                                                        2.- Proceda a anular el boleto a trav&eacute;s de su portal.
+                                                    </p>';
+                        }
+                    }
                        
                 }
 
-               
-               if($anulado!=0){
-                   $recupero=$obj_personal->ActualizarLineaCredito($codigo_entidad,$credito_recuperado,2);
-                   $resultado=$obj_reserva->AnularReserva($pnr);
+                if($anulado!=0){
+                    $recupero=$obj_personal->ActualizarLineaCredito($codigo_entidad,$credito_recuperado,2);
+                    $resultado=$obj_reserva->AnularReserva($pnr);
+                    $obj_visa->AnularPago($reserva_id);
                     if($recupero==1){
                         $tabla_boletos_reserva='<p style="color:red;">Todos los boletos fueron anulados con éxito. Verique en la opción de "Movimientos" que el boleto esté resaltado de colo rojo.</p>';
                     }else{
                          $tabla_boletos_reserva='<p style="color:red;">Los boletos fueron anulados pero no se pudo recuperar el crédito. Comuníquese con StarPerú para solucionar el problema.</p>'; 
                     }
-           $remitente = "ecel@starperu.com";
-           $mail="carlos.gutierrez@starperu.com";
-           $cabeceras = "Content-type: text/html\r\n";
-           $cabeceras.= "From: ALERTA ".utf8_decode("ANULACION")." TICKETS - WEB AGENCIAS <$remitente>\r\n";
-           $mensaje="La Agencia: ".$obj_personal->ObtenerNombreEntidad($codigo_entidad)."<br> RUC: ".$obj_personal->ObtenerRUCEntidad($codigo_entidad)." <br><br> ".utf8_decode("Intentó")." anular la Reserva: ".$pnr." y los siguientes boletos: <br><br> ";
-           $mensaje.=$lista_boletos;
-           $mensaje.="<br><br>Resultado: $msj_anulacion";
-           $mensaje.="<br><br><b>Fecha/Hora (Emisi&oacute;n):</b> ".$partes_fecha_emision[0]." ".$partes_fecha_emision[1]."<br><br><b>Fecha/Hora (Intento):</b> ".date("Y-m-d H:i:s")." <br><br> Monto recuperado (&oacute; a recuperar): USD ".number_format($credito_recuperado, 2, '.', ',')."<br><br><br> <b>NOTA: Pasada la 23h 59m 59s del d&iacute;a de emisi&oacute;n, la Entidad se hace responsable del pago de los tickets emitidos.";
-           mail($mail, utf8_decode("Anulacion")." Tickets - WEB AGENCIAS", $mensaje , $cabeceras);
-               }
+                    $remitente = "ecel@starperu.com";
+                    $mail="carlos.gutierrez@starperu.com";
+                    $cabeceras = "Content-type: text/html\r\n";
+                    $cabeceras.= "From: ALERTA ".utf8_decode("ANULACION")." TICKETS - WEB AGENCIAS <$remitente>\r\n";
+                    $mensaje="La Agencia: ".$obj_personal->ObtenerNombreEntidad($codigo_entidad)."<br> RUC: ".$obj_personal->ObtenerRUCEntidad($codigo_entidad)." <br><br> ".utf8_decode("Intentó")." anular la Reserva: ".$pnr." y los siguientes boletos: <br><br> ";
+                    $mensaje.=$lista_boletos;
+                    $mensaje.="<br><br>Resultado: $msj_anulacion";
+                    $mensaje.="<br><br><b>Fecha/Hora (Emisi&oacute;n):</b> ".$partes_fecha_emision[0]." ".$partes_fecha_emision[1]."<br><br><b>Fecha/Hora (Intento):</b> ".date("Y-m-d H:i:s")." <br><br> Monto recuperado (&oacute; a recuperar): USD ".number_format($credito_recuperado, 2, '.', ',')."<br><br><br> <b>NOTA: Pasada la 23h 59m 59s del d&iacute;a de emisi&oacute;n, la Entidad se hace responsable del pago de los tickets emitidos.";
+                    mail($mail, utf8_decode("Anulacion")." Tickets - WEB AGENCIAS", $mensaje , $cabeceras);
+                }
 
         }else{
-
             $tabla_boletos_reserva='<p style="color:red;">Ud. no puede realizar esta operación por haber excedido el tiempo límite de anulación.</p>'; 
-        }    
-        
-           
-
-        
+        }
     }else{
         $tabla_boletos_reserva='<p style="color:red;">La sesión ha termiando. Por favor ingrese nuevamente al Portal para realizar esta operación. Gracias.</p>';
     }
