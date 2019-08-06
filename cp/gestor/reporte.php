@@ -25,6 +25,7 @@ if ($_POST['buscar'] == 1) {
     $boleto = $_REQUEST['boletos'];
     $pnr = $_REQUEST['pnr'];
     $usuario = $_REQUEST['usuario'];
+    $formaPago = $_REQUEST['formaPago'];
 }
 require_once("../../config.php");
 ?>
@@ -44,7 +45,7 @@ require_once("../../config.php");
              acceder a la base de datos, puede ser un XML o una cadena en formato JSON
              devuelta por un archivo PHP, por ejemplo.
              */
-            url: '<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario=<?php echo $usuario; ?>&boleto=<?php echo $boleto ?>&pnr=<?php echo $pnr ?>&movimientos=1',
+            url: '<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario=<?php echo $usuario; ?>&boleto=<?php echo $boleto ?>&pnr=<?php echo $pnr ?>&formaPago=<?php echo $formaPago ?>&movimientos=1',
             // indicamos en que formato se manejaran los datos
             dataType: 'json',
             /* establecemos una lista de columnas a usar, indicando :
@@ -279,7 +280,7 @@ require_once("../../config.php");
             <tr>
                 <td align="right">Fecha Inicio :</td>
                 <td > <input type="text" name="fecha_inicio" id="fecha_inicio" maxlength="10" placeholder="dd/mm/yyyy" style="width: 80px" onKeyPress="return NumeroFecha(event)" value="<?php echo $fecha_inicio; ?>" readonly class="datepicker Cursor"/> </td>
-                <td align="right">PNR :</td>
+                <td align="right" >PNR :</td>
                 <td><input type="text" name="pnr" id="pnr" maxlength="6" style="width: 100px;text-align: center" value="<?php echo $pnr; ?>" /></td>
                 <td align="right" >Boleto :</td>
                 <td ><input type="text" name="boletos" id="boletos" maxlength="13" style="width: 100px;text-align: center" value="<?php echo $boleto; ?>" /></td>
@@ -291,8 +292,18 @@ require_once("../../config.php");
                 <td align="right">Fecha Final :</td>
                 <td > <input type="text" name="fecha_final" id="fecha_final" maxlength="10" placeholder="dd/mm/yyyy" style="width: 80px" onKeyPress="return NumeroFecha(event)" value="<?php echo $fecha_fin; ?>" readonly class="datepicker Cursor"/> </td>
                 <td align="right">Usuario :</td>
-                <td colspan="4" >
+                <td>
                     <select name="usuario" id="usuario" style="width: 387px;height: 22px;border: #e2e2e2 1px solid;" >
+                    </select>   
+                </td>
+                <td align="right">Forma de Pago :</td>
+                <td >
+                    <select name="formaPago" id="formaPago" style="width: 100px;height: 22px;border: #e2e2e2 1px solid;" >
+                        <option value>SELECCIONE</option>
+                        <option  <?= ($formaPago=="VI") ? 'selected' : '' ?>  value="VI" >VISA</option>
+                        <option <?= ($formaPago=="MC") ? 'selected' : '' ?> value="MC">MASTERCARD</option>
+                        <option <?= ($formaPago=="DC") ? 'selected' : '' ?> value="DC">DINERS CLUB</option>
+                        <option <?= ($formaPago=="AX") ? 'selected' : '' ?> value="AX">AMEX</option>
                     </select>   
                 </td>
             </tr>  
