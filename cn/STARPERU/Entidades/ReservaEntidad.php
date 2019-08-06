@@ -180,6 +180,9 @@ class ReservaEntidad{
    public function getRUCPasajero(){
       return $this->ruc_pasajero;
    }
+   public function getPorcentaje(){
+       return $this->porcentaje;
+   }
 
   // METODOS SET
   
@@ -315,6 +318,9 @@ class ReservaEntidad{
    }
    public function setRUCPasajero($ruc_pasajero){
        $this->ruc_pasajero=$ruc_pasajero;
+   }
+   public function setPorcentaje($porcentaje){
+       $this->porcentaje=$porcentaje;
    }
 }
 

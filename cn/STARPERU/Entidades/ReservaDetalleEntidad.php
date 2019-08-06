@@ -16,9 +16,6 @@ class ReservaDetalleEntidad{
     private $pre_telefono;
     private $telefono;
     private $anexo;
-    private $rpm;
-    private $rpc;
-    private $nextel;
     private $email;
     private $ticket;
     private $EQ;
@@ -87,15 +84,7 @@ class ReservaDetalleEntidad{
    public function getAnexo(){
        return $this->rpc;
    }
-   public function getRPM(){
-       return $this->rpm;
-   }
-   public function getRPC(){
-       return $this->rpc;
-   }
-   public function getNextel(){
-       return $this->nextel;
-   }
+   
    public function getEmail(){
        return $this->email;
    }
@@ -153,6 +142,9 @@ class ReservaDetalleEntidad{
    public function getEstadoRegistro(){
        return $this->estado_registro;
    }
+   public function getComisionTarifa(){
+       return $this->comision_tarifa;
+   }
    
   // METODOS SET
    public function setRegistro($registro){
@@ -200,15 +192,7 @@ class ReservaDetalleEntidad{
    public function setAnexo($anexo){
        $this->anexo=$anexo;
    }
-   public function setRPM($rpm){
-       $this->rpm=$rpm;
-   }
-   public function setRPC($rpc){
-       $this->rpc=$rpc;
-   }
-   public function setNextel($nextel){
-       $this->nextel=$nextel;
-   }
+
    public function setEmail($email){
        $this->email=$email;
    }
@@ -266,6 +250,10 @@ class ReservaDetalleEntidad{
    public function setEstadoRegistro($estado_registro){
        $this->estado_registro=$estado_registro;
    }
+   public function setComisionTarifa($comision_tarifa){
+       $this->comision_tarifa=$comision_tarifa;
+   }
+
 }
 
 ?>

@@ -42,7 +42,6 @@ if($_REQUEST['movimientos']==1){
             $extra=1;
             $lista_movimientos=array();
             $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr ,$limit,$extra);
-
             $data = array();
             $data['page'] = $page;
             $data['rows'] = array();
@@ -59,11 +58,18 @@ if($_REQUEST['movimientos']==1){
                                     
                                     if($movimiento[8]->getTicket()!=''){
                                         $icono_ticket='<a '.$metodo_click.' target="_blank"  href="../pasarela/imprimir_ticket.php?ticket='.$movimiento[8]->getTicket().'" ><img width="16px;" src="../images/'.$img_ticket.'"/></a>';
-                                        $descuento=0.02;
+                                        $comision_tarifa=number_format($movimiento[8]->getComisionTarifa(),2);
+                                        $porcentaje=$movimiento[7]->getPorcentaje()/100;
                                         $total_pagar=$movimiento[8]->getTotalPagar();
-                                        $total_pagar_descuento=number_format(($movimiento[8]->getEQ()-$movimiento[8]->getEQ()*$descuento)+($movimiento[8]->getPE()-$movimiento[8]->getPE()*$descuento)+($movimiento[8]->getHW()),2);
-                                        $ganancias=number_format($movimiento[8]->getEQ()*$descuento,2);
+                                        $tarifa=$movimiento[8]->getEQ();
+                                        $igv=$movimiento[8]->getPE();
+                                        $tuua=$movimiento[8]->getHW();
+                                        $total_pagar_descuento=number_format(($tarifa-$comision_tarifa)+($igv-$igv*$porcentaje)+($tuua),2);
+                                        $comision=number_format($comision_tarifa,2);
                                         $tarjeta=$movimiento[9];
+                                        $total_comision=number_format($total_comision+$comision/2,2);
+                                        $total_sin_descuento=$total_sin_descuento+$total_pagar/2;
+                                        $total=$total+$total_pagar_descuento/2;
                                             if($tarjeta=='visa'){
                                                 $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_vi.png' style='height:30px;'>";
                                             }else if($tarjeta=='amex'){
@@ -80,7 +86,6 @@ if($_REQUEST['movimientos']==1){
                                         $total_pagar="0.00";
                                         }
                                    $cant++;
-
                                      $data['rows'][] = array(
                                       'view' => $movimiento[7]->getRegistro(),
                                       'cell' => array('<div class="Consulta" style="text-align: center;">
@@ -107,6 +112,8 @@ if($_REQUEST['movimientos']==1){
 									\''.$movimiento[7]->getDestino().'\',
 									\''.$movimiento[7]->getHoraRetorno().'\',
 									\''.$movimiento[6].'\',
+									\''.$porcentaje.'\',
+									\''.$comision_tarifa.'\',
 									\''.$total_pagar.'\');"  
                                            ><img src="../images/icono_ver.png"/></a></div>',
                                           $icono_ticket,
@@ -133,14 +140,23 @@ if($_REQUEST['movimientos']==1){
                                           $movimiento[6],
                                           $total_pagar,
                                           $total_pagar_descuento,
-                                          $ganancias,
+                                          $comision,
                                           )
+                                         
                                       ); 
 
                     }
                     
-                  
+                    
                     $data['total'] =$obj_movimiento->TotalMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr);
+                    $data['rows'][] = array(
+                                      'cell' => array('','','','','','','','','','','','','','','','','','','',
+                                          '','','','',
+                                          '<div style="text-align: center; width: 100px; color:red;">'.$total_sin_descuento.'</div>',
+                                          '<div style="text-align: center; width: 100px; color:red;">'.$total.'</div>',
+                                          '<div style="text-align: center; width: 100px; color:red;">'.$total_comision.'</div>',
+                                          )
+                                      ); 
                     header("Content-type: text/x-json");
                     echo json_encode($data);
             }
@@ -327,7 +343,7 @@ if($_REQUEST['movimiento_detalle']==1){
           $nro_documento=trim($_REQUEST['nro_documento']);
           $total_pagar=trim($_REQUEST['total_pagar']);
           $nom_usuario=trim($_REQUEST['nom_usuario']);
-          $descuento=0.02;
+          $porcentaje=trim($_REQUEST['porcentaje']);
             
           $lista_movimientos=array();
           $lista_movimientos=$obj_movimiento->DetalleMovimiento($registro,$detalle);
@@ -423,7 +439,7 @@ if($_REQUEST['movimiento_detalle']==1){
             <td><?php echo number_format($total_pagar,2); ?></td>
             <td></td>
             <td width="187" align="right" class="lab_dmov" ><strong>Tarifa : </strong></td>
-            <td width="262"><?php echo number_format($movimiento[18]->getEQ()-$movimiento[18]->getEQ()*$descuento, 2);?></td>
+            <td width="262"><?php echo number_format($movimiento[18]->getEQ()-$movimiento[18]->getComisionTarifa(), 2);?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Desc Acu. :</strong></td>
             <td><?php echo $movimiento[16];?></td>
@@ -436,7 +452,7 @@ if($_REQUEST['movimiento_detalle']==1){
             <td><?php echo $movimiento[18]->getTipoPax();?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>IGV :</strong></td>
-            <td><?php echo number_format($movimiento[18]->getPE()-$movimiento[18]->getPE()*$descuento, 2);?></td>
+            <td><?php echo number_format($movimiento[18]->getPE()-$movimiento[18]->getPE()*$porcentaje, 2);?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Costo Tramo :</strong></td>
             <td><?php echo number_format($total_pagar,2); ?></td>
@@ -459,7 +475,7 @@ if($_REQUEST['movimiento_detalle']==1){
             <td><?php echo $movimiento[18]->getEmail();?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Total :</strong></td>
-            <td><?php echo number_format(($movimiento[18]->getEQ()-$movimiento[18]->getEQ()*$descuento)+($movimiento[18]->getPE()-$movimiento[18]->getPE()*$descuento)+($movimiento[18]->getHW()),2);?></td>
+            <td><?php echo number_format(($movimiento[18]->getEQ()-$movimiento[18]->getComisionTarifa())+($movimiento[18]->getPE()-$movimiento[18]->getPE()*$porcentaje)+($movimiento[18]->getHW()),2);?></td>
         </tr>
         <tr>
             <td align="right" class="lab_dmov"><strong>Fecha Operación :</strong></td>
@@ -468,8 +484,8 @@ if($_REQUEST['movimiento_detalle']==1){
             <td align="right" class="lab_dmov"><strong>Telf. Ofic. Pasajero :</strong></td>
             <td><?php echo $movimiento[18]->getTelefono();?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Ganancias :</strong></td>
-            <td><?php echo number_format($movimiento[18]->getEQ()*$descuento,2); ?></td>
+            <td align="right" class="lab_dmov"><strong>Comisión :</strong></td>
+            <td><?php echo number_format($movimiento[18]->getComisionTarifa(),2); ?></td>
         </tr>
         <tr>
             <td align="right" class="lab_dmov"><strong>Nº Boleto :</strong></td>

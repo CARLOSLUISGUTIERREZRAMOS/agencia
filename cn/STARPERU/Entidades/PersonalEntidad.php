@@ -11,9 +11,6 @@ class PersonalEntidad{
     private $telefono_oficina;
     private $anexo;
     private $celular;
-    private $rpc;
-    private $rpm;
-    private $nextel;
     private $codigo_tipo;
     private $estado;
     private $presentacion;
@@ -68,15 +65,7 @@ class PersonalEntidad{
    public function getCelular(){
        return $this->celular;
    }
-   public function getRPC(){
-       return $this->rpc;
-   }
-   public function getRPM(){
-       return $this->rpm;
-   }
-   public function getNextel(){
-       return $this->nextel;
-   }
+ 
    public function getCodigoTipo(){
        return $this->codigo_tipo;
    }
@@ -138,15 +127,7 @@ class PersonalEntidad{
    public function setCelular($celular){
        $this->celular=$celular;
    }
-   public function setRPC($rpc){
-       $this->rpc=$rpc;
-   }
-   public function setRPM($rpm){
-       $this->rpm=$rpm;
-   }
-   public function setNextel($nextel){
-       $this->nextel=$nextel;
-   }
+ 
    public function setCodigoTipo($codigo_tipo){
        $this->codigo_tipo=$codigo_tipo;
    }

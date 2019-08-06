@@ -174,6 +174,8 @@ class ReservaModelo{
         
         $consulta="(SELECT Reserva.Registro,
                            Reserva_Detalle.Detalle, 
+                           Reserva_Detalle.ComisionTarifa, 
+                           Reserva.Porcentaje, 
                            Reserva.RUC as ruc_pasajero,
                            Reserva.CodigoReserva,
                            Visa.*,
@@ -207,7 +209,9 @@ class ReservaModelo{
                     UNION ALL
 
                     (SELECT Reserva.Registro,
-                         Reserva_Detalle.Detalle, 
+                         Reserva_Detalle.Detalle,
+                         Reserva_Detalle.ComisionTarifa, 
+                           Reserva.Porcentaje, 
                          Reserva.RUC as ruc_pasajero,
                          Reserva.CodigoReserva,
                          Visa.*,
@@ -242,6 +246,8 @@ class ReservaModelo{
 
                     (SELECT Reserva.Registro,
                          Reserva_Detalle.Detalle, 
+                         Reserva_Detalle.ComisionTarifa, 
+                           Reserva.Porcentaje, 
                           Reserva.CodigoReserva,
                           Reserva.RUC as ruc_pasajero,
                           Visa.*,
@@ -276,6 +282,8 @@ class ReservaModelo{
 
                     (SELECT Reserva.Registro,
                           Reserva_Detalle.Detalle, 
+                          Reserva_Detalle.ComisionTarifa, 
+                           Reserva.Porcentaje, 
                           Reserva.RUC as ruc_pasajero,
                           Reserva.CodigoReserva,
                           Visa.*,
@@ -361,6 +369,8 @@ class ReservaModelo{
                     $reserva_detalle->setHW($fila['TUUA']);
                     $reserva_detalle->setTotalPagar($fila['TotalPagar']);
                     $reserva_detalle->setEstadoRegistro($fila['EstadoRegistro']);
+                    $reserva_detalle->setComisionTarifa($fila['ComisionTarifa']);
+                    $reserva->setPorcentaje($fila['Porcentaje']);
                     $brand=$fila['brand'];
                     $card=$fila['card'];
                     $nom_usuario=$fila['NomUsuario'];
@@ -574,6 +584,8 @@ public function DetalleMovimiento($registro,$detalle){
         
         $consulta="SELECT RIGHT(CONCAT('00000000', Reserva.Registro), 8) Registro, 
                         '20342868844' RUCEmpresa, 
+                        Reserva_Detalle.ComisionTarifa, 
+                           Reserva.Porcentaje, 
                         Entidad.RUC RUCEntidad, 
                         Entidad.DNIFuncionario, 
                         (SELECT DNI FROM Personal WHERE EstadoRegistro = 1 AND CodigoEntidad = Reserva.CodigoEntidad AND CodigoTipo = 'G') DNIGestor,
@@ -597,9 +609,6 @@ public function DetalleMovimiento($registro,$detalle){
                         Reserva_Detalle.Email,
                         Reserva_Detalle.Telefono,
                         Reserva_Detalle.Anexo,
-                        Reserva_Detalle.RPM,
-                        Reserva_Detalle.RPC,
-                        Reserva_Detalle.Nextel,
                         Reserva_Detalle.EQ Tarifa,
                         0 TarifaCombustible,
                         Reserva_Detalle.EQ TarifaTotal,
@@ -676,9 +685,6 @@ public function DetalleMovimiento($registro,$detalle){
                     $reserva_detalle->setEmail($fila['Email']);
                     $reserva_detalle->setTelefono($fila['Telefono']);
                     $reserva_detalle->setAnexo($fila['Anexo']);
-                    $reserva_detalle->setRPM($fila['RPM']);
-                    $reserva_detalle->setRPC($fila['RPC']);
-                    $reserva_detalle->setNextel($fila['Nextel']);
                     $reserva_detalle->setEQ($fila['Tarifa']);
                     $combustible=$fila['Combustible'];
                     $reserva_detalle->setPE($fila['IGV']);
@@ -689,6 +695,9 @@ public function DetalleMovimiento($registro,$detalle){
                     $tipo_moneda=$fila['TipoMoneda'];
                     $descuento_tarifa=$fila['DescuentoTarifa'];
                     $descuento_acumulado=$fila['DescuentoAcumulado'];
+                    $reserva->setPorcentaje($fila['Porcentaje']);
+                    $reserva_detalle->setComisionTarifa($fila['ComisionTarifa']);
+
                     
                     
                     $movimiento[]=$empresa;
