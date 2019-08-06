@@ -149,7 +149,7 @@ class ReservaModelo{
         }
         
     }
-     public function ListaMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr,$limit,$extra){
+     public function ListaMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr,$limit,$extra,$formaPago){
         $filtro='';
          if($fecha_inicio!='' and $fecha_fin!=''){
             $filtro.=" AND Reserva.FechaRegistro BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_fin 23:59:59'";
@@ -159,6 +159,9 @@ class ReservaModelo{
         }
         if($pnr!=''){
             $filtro.=" AND Reserva.CodigoReserva='$pnr'";
+        }
+        if($formaPago!=''){
+            $filtro.=" AND Reserva.forma_pago='$formaPago'";
         }
         if($usuario!=''){
             $filtro.=" AND (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal)='$usuario'";

@@ -35,13 +35,14 @@ if($_REQUEST['movimientos']==1){
             $usuario=trim($_REQUEST['usuario']);
             $boleto=trim($_REQUEST['boleto']);
             $pnr=trim($_REQUEST['pnr']);
+            $formaPago=$_REQUEST['formaPago'];
             $page = (int)(!isset($_POST['page']) ? 1 : $_POST['page']);
             $rp = (int)(!isset($_POST['rp']) ? 10 : $_POST['rp']);
             $start = (($page-1) * $rp);
             $limit = "LIMIT $start, $rp";
             $extra=1;
             $lista_movimientos=array();
-            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr ,$limit,$extra);
+            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr ,$limit,$extra,$formaPago);
             $data = array();
             $data['page'] = $page;
             $data['rows'] = array();
