@@ -24,7 +24,7 @@ if ($_POST['buscar'] == 1) {
     $fecha_fin = $_REQUEST['fecha_final'];
     $boleto = $_REQUEST['boletos'];
     $pnr = $_REQUEST['pnr'];
-    $usuario = $_REQUEST['usuario'];
+    $usuario_dni = $_REQUEST['usuario_dni'];
     $formaPago = $_REQUEST['formaPago'];
 }
 require_once("../../config.php");
@@ -45,7 +45,7 @@ require_once("../../config.php");
              acceder a la base de datos, puede ser un XML o una cadena en formato JSON
              devuelta por un archivo PHP, por ejemplo.
              */
-            url: '<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario=<?php echo $usuario; ?>&boleto=<?php echo $boleto ?>&pnr=<?php echo $pnr ?>&formaPago=<?php echo $formaPago ?>&movimientos=1',
+            url: '<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario_dni=<?php echo $usuario_dni; ?>&boleto=<?php echo $boleto ?>&pnr=<?php echo $pnr ?>&formaPago=<?php echo $formaPago ?>&movimientos=1',
             // indicamos en que formato se manejaran los datos
             dataType: 'json',
             /* establecemos una lista de columnas a usar, indicando :
@@ -141,7 +141,7 @@ require_once("../../config.php");
         });
 
         $.ajax({
-            url: "<?= $url ?>/cd/Controlador/MovimientoControl.php",
+            url: "<?= $url ?>/cd/Controlador/MovimientoControl.php?usuario_dni=<?php echo $usuario_dni; ?>",
             type: "POST",
             data: 'listar=1',
             success: function (mensaje) {
@@ -293,7 +293,7 @@ require_once("../../config.php");
                 <td > <input type="text" name="fecha_final" id="fecha_final" maxlength="10" placeholder="dd/mm/yyyy" style="width: 80px" onKeyPress="return NumeroFecha(event)" value="<?php echo $fecha_fin; ?>" readonly class="datepicker Cursor"/> </td>
                 <td align="right">Usuario :</td>
                 <td>
-                    <select name="usuario" id="usuario" style="width: 387px;height: 22px;border: #e2e2e2 1px solid;" >
+                    <select name="usuario_dni" id="usuario" style="width: 387px;height: 22px;border: #e2e2e2 1px solid;" >
                     </select>   
                 </td>
                 <td align="right">Forma de Pago :</td>
