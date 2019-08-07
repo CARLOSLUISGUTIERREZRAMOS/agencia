@@ -184,7 +184,11 @@ if($_REQUEST['excel']==1){
             $fecha_reporte=date('Y-m-d H:i:s');
             $fecha_inicio=trim($_REQUEST['fecha_inicial']);
             $fecha_fin=trim($_REQUEST['fecha_final']);
-
+            $usuario_dni=trim($_REQUEST['usuario_dni']);
+            $boleto=trim($_REQUEST['boleto']);
+            $pnr=trim($_REQUEST['pnr']);
+            $formaPago=$_REQUEST['formaPago'];
+            
             if($fecha_inicio!=''){
                 $fecha_inicio = str_replace("/", "-", $fecha_inicio);
                 $fecha_inicio= date('Y-m-d',strtotime($fecha_inicio));
@@ -195,10 +199,9 @@ if($_REQUEST['excel']==1){
             }
             ////
             $extra=0;
-            
             $lista_movimientos=array();
-            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr,$limit,$extra);
-            
+            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr,$limit,$extra,$formaPago);
+
             header("Content-Type: application/vnd.ms-excel" );
             header("Expires: 0");
             header("Cache-Control: must-revalidate, post-check=0, pre-check=0" );

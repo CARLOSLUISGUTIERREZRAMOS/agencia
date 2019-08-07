@@ -249,7 +249,7 @@ require_once("../../config.php");
 
     }
     function ExportarExcelMov() {
-        window.open('<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario=<?php echo $usuario; ?>&excel=1', '_blank', '');
+        window.open('<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario_dni=<?php echo $usuario_dni; ?>&boleto=<?php echo $boleto ?>&pnr=<?php echo $pnr ?>&formaPago=<?php echo $formaPago ?>&excel=1', '_blank', '');
     }
 
     function ExportarExcelDetalleMov(mov) {
