@@ -27,6 +27,8 @@ if($_POST['buscar_reserva']==1){
         $tabla_boletos_reserva= '<p style="color:red;">Ud. debe ingresar un C&oacute;digo de Reserva</p>';
     }else{
         $lista_boletos=array();
+        $reserva_id=$obj_reserva->IdReserva($codigo_reserva);
+        // var_dump($reserva_id);die;
         $lista_boletos=$obj_reserva->ListaBoletosPorReserva($codigo_reserva,$codigo_entidad);
         $boleto = array();
         $boleto = $lista_boletos[0];
@@ -185,6 +187,7 @@ if($_POST['buscar_reserva']==1){
             $tabla_boletos_reserva.='<td></td>' . "\n";
             $tabla_boletos_reserva.='</tr>' . "\n";
             $tabla_boletos_reserva.='</table>' . "\n";
+            $tabla_boletos_reserva.='<input type="hidden" name="reserva_id" value="'.$reserva_id.'" />';
             $tabla_boletos_reserva.='</form>' . "\n";
         }
     }
@@ -195,7 +198,8 @@ if($_REQUEST['anular']==1){
         $codigo_entidad=$_SESSION['s_entidad'];
         $array_anular=$_POST['checkboxpnr']; 
         $credito_recuperado=$_POST['total_recuperar']; 
-        $fecha_emision=$_POST['fecha_emision']; 
+        $fecha_emision=$_POST['fecha_emision'];
+        $reserva_id=$_POST['reserva_id'];
         $partes_fecha_emision=explode(" ",$fecha_emision);
         $fecha_actual=date("Y-m-d");
         $resultado='';
@@ -252,10 +256,10 @@ if($_REQUEST['anular']==1){
                     if($recupero==1){
                         $tabla_boletos_reserva='<p style="color:red;">Todos los boletos fueron anulados con éxito. Verique en la opción de "Movimientos" que el boleto esté resaltado de colo rojo.</p>';
                     }else{
-                         $tabla_boletos_reserva='<p style="color:red;">Los boletos fueron anulados pero no se pudo recuperar el crédito. Comuníquese con StarPerú para solucionar el problema.</p>'; 
+                        $tabla_boletos_reserva='<p style="color:red;">Los boletos fueron anulados pero no se pudo recuperar el crédito. Comuníquese con StarPerú para solucionar el problema.</p>'; 
                     }
                     $remitente = "ecel@starperu.com";
-                    $mail="carlos.gutierrez@starperu.com";
+                    $mail="carlos.gutierrez@starperu.com,henrry.cachicatari@starperu.com";
                     $cabeceras = "Content-type: text/html\r\n";
                     $cabeceras.= "From: ALERTA ".utf8_decode("ANULACION")." TICKETS - WEB AGENCIAS <$remitente>\r\n";
                     $mensaje="La Agencia: ".$obj_personal->ObtenerNombreEntidad($codigo_entidad)."<br> RUC: ".$obj_personal->ObtenerRUCEntidad($codigo_entidad)." <br><br> ".utf8_decode("Intentó")." anular la Reserva: ".$pnr." y los siguientes boletos: <br><br> ";

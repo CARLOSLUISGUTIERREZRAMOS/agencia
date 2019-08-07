@@ -17,7 +17,7 @@ class VisaModelo{
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="UPDATE visa SET anulado=0 WHERE  reserva_id='$reserva_id'";
+        $consulta="UPDATE visa SET anulado=0 WHERE  reserva_id=$reserva_id";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){

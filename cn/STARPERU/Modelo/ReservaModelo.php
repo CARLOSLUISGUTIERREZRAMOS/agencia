@@ -149,7 +149,18 @@ class ReservaModelo{
         }
         
     }
-     public function ListaMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr,$limit,$extra,$formaPago){
+
+    public function IdReserva($codigo_reserva){
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT Registro FROM reserva WHERE CodigoReserva = '$codigo_reserva'";
+        $resultado = $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $fila = $obj_conexion->ObtenerDatos($resultado);
+        return $fila['Registro'];
+        $obj_conexion->CerrarConexion($conexion);
+    }
+
+    public function ListaMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr,$limit,$extra,$formaPago){
         $filtro='';
          if($fecha_inicio!='' and $fecha_fin!=''){
             $filtro.=" AND Reserva.FechaRegistro BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_fin 23:59:59'";
