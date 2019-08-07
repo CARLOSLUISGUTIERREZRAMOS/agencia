@@ -32,7 +32,7 @@ if($_REQUEST['movimientos']==1){
                     $fecha_fin= date('Y-m-d',strtotime($fecha_fin));
             }
 
-            $usuario=trim($_REQUEST['usuario']);
+            $usuario_dni=trim($_REQUEST['usuario_dni']);
             $boleto=trim($_REQUEST['boleto']);
             $pnr=trim($_REQUEST['pnr']);
             $formaPago=$_REQUEST['formaPago'];
@@ -42,7 +42,7 @@ if($_REQUEST['movimientos']==1){
             $limit = "LIMIT $start, $rp";
             $extra=1;
             $lista_movimientos=array();
-            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr ,$limit,$extra,$formaPago);
+            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr ,$limit,$extra,$formaPago);
             $data = array();
             $data['page'] = $page;
             $data['rows'] = array();
@@ -163,7 +163,7 @@ if($_REQUEST['movimientos']==1){
             }
                    
 if($_REQUEST['listar']==1){
-       
+        $usuario_dni=trim($_REQUEST['usuario_dni']);
         $lista_delegados=array();
         $lista_delegados=$obj_personal->ListaDelegados($_SESSION['s_entidad']);
 
@@ -172,7 +172,7 @@ if($_REQUEST['listar']==1){
         }else{
             $combo_delegados='<option value="">SELECCIONE</option>';    
             foreach ($lista_delegados as $delegado) {
-                $combo_delegados.='<option value='.utf8_encode($delegado->getDNI()).'>'.utf8_encode($delegado->getNombres().' '.$delegado->getApellidoPaterno().' '.$delegado->getApellidoMaterno()).'</option>'."\n";
+                $combo_delegados.='<option '.(($usuario_dni==$delegado->getDNI()) ? 'selected': '' ).' value='.utf8_encode($delegado->getDNI()).'>'.utf8_encode($delegado->getNombres().' '.$delegado->getApellidoPaterno().' '.$delegado->getApellidoMaterno()).'</option>'."\n";
             }
             echo $combo_delegados;
         }
@@ -184,7 +184,11 @@ if($_REQUEST['excel']==1){
             $fecha_reporte=date('Y-m-d H:i:s');
             $fecha_inicio=trim($_REQUEST['fecha_inicial']);
             $fecha_fin=trim($_REQUEST['fecha_final']);
-
+            $usuario_dni=trim($_REQUEST['usuario_dni']);
+            $boleto=trim($_REQUEST['boleto']);
+            $pnr=trim($_REQUEST['pnr']);
+            $formaPago=$_REQUEST['formaPago'];
+            
             if($fecha_inicio!=''){
                 $fecha_inicio = str_replace("/", "-", $fecha_inicio);
                 $fecha_inicio= date('Y-m-d',strtotime($fecha_inicio));
@@ -195,10 +199,9 @@ if($_REQUEST['excel']==1){
             }
             ////
             $extra=0;
-            
             $lista_movimientos=array();
-            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr,$limit,$extra);
-            
+            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr,$limit,$extra,$formaPago);
+
             header("Content-Type: application/vnd.ms-excel" );
             header("Expires: 0");
             header("Cache-Control: must-revalidate, post-check=0, pre-check=0" );
