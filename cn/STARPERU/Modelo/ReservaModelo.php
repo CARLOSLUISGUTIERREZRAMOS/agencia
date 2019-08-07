@@ -149,7 +149,6 @@ class ReservaModelo{
         }
         
     }
-<<<<<<< HEAD
 
     public function IdReserva($codigo_reserva){
         $obj_conexion=new ConexionBD();
@@ -162,9 +161,6 @@ class ReservaModelo{
     }
 
     public function ListaMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr,$limit,$extra,$formaPago){
-=======
-     public function ListaMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr,$limit,$extra,$formaPago){
->>>>>>> ee7274a4a307ca9d66556cd04e75ae494f1f9e20
         $filtro='';
          if($fecha_inicio!='' and $fecha_fin!=''){
             $filtro.=" AND Reserva.FechaRegistro BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_fin 23:59:59'";
