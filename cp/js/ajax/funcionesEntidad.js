@@ -420,7 +420,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: "../../cd/Controlador/AgenciaControl.php",
-            data: "editar_agencia=1&estado=" + estado + "&dni=" + dni + "&codigo_entidad=" +
+            data: "editar_agencia=1&dni=" + dni + "&codigo_entidad=" +
                     codigo_entidad + "&apep=" + apep +
                     "&apem=" + apem + "&nombres=" + nombres + "&email=" + email + "&telefono=" + telefono +
                     "&nom_comercial=" + nom_comercial + "&celular=" + celular + "&ciudad=" + ciudad +
