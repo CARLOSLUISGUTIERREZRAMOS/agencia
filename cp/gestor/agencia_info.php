@@ -88,8 +88,6 @@ $ciudad = $obj_empresa->ObtenerNombreCiudad($agencias[13],$agencia_entidad->Codi
                 <tr>
                     <td class="label_info">Teléfono de Oficina:</td>
                     <td class="span_info"><?= $agencias[8] ? $agencias[8] : '-' ?></td>
-                    <td class="label_info">Estado:</td>
-                    <td class="span_info"><?= ($agencias[12] == 1) ? 'Activo' : 'Inactivo' ?></td>
                 </tr>
             </tbody>
         </table>

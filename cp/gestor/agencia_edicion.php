@@ -141,22 +141,6 @@ $obj_modelo = new LocalidadModelo();
                         <input type="text" name="telefono_a" id="telefono_a" style="text-transform:uppercase;" value="<?php echo $agencias[8]; ?>"/>
                         <span class="span-requerido">*</span>  
                     </td>
-                    <td  class="label_info" style="padding: 10px 10px 7px 0;">estado:</td>
-                    <td>
-                        <select name="estado" id="estado">
-                            <option value="-1">- Seleccione estado -</option>
-                            <option value="1" <?php
-                            if ($agencias[12] == 1) {
-                                echo 'selected';
-                            }
-                            ?> >Activo</option>
-                            <option value="0" <?php
-                            if ($agencias[12] == 0) {
-                                echo 'selected';
-                            }
-                            ?> >Inactivo</option>
-                        </select>
-                    </td>
                     <td class=""></td>
                     <td>
                         <input type="hidden" name="codigo_entidad_a" id="codigo_entidad_a" style="text-transform:uppercase;" value="<?php echo $agencia_entidad->CodigoEntidad; ?>"/>

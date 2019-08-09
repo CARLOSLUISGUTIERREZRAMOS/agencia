@@ -28,8 +28,8 @@ if($_REQUEST['movimientos']==1){
                 $fecha_inicio= date('Y-m-d',strtotime($fecha_inicio));
             }
             if($fecha_fin!=''){
-                    $fecha_fin = str_replace("/", "-", $fecha_fin);
-                    $fecha_fin= date('Y-m-d',strtotime($fecha_fin));
+                $fecha_fin = str_replace("/", "-", $fecha_fin);
+                $fecha_fin= date('Y-m-d',strtotime($fecha_fin));
             }
 
             $usuario_dni=trim($_REQUEST['usuario_dni']);
@@ -68,13 +68,15 @@ if($_REQUEST['movimientos']==1){
                                         $total_pagar_descuento=number_format(($tarifa-$comision_tarifa)+($igv-$igv*$porcentaje)+($tuua),2);
                                         $comision=number_format($comision_tarifa,2);
                                         $tarjeta=$movimiento[9];
+                                        if($movimiento[8]->getEstadoRegistro()==1){
                                         $total_comision=number_format($total_comision+$comision/2,2);
                                         $total_sin_descuento=$total_sin_descuento+$total_pagar/2;
                                         $total=$total+$total_pagar_descuento/2;
+                                        }
                                             if($tarjeta=='visa'){
                                                 $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_vi.png' style='height:30px;'>";
                                             }else if($tarjeta=='amex'){
-                                                $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_ax.png' style='height:30px;'>";
+                                                $tarjeta_imagen= "<img src='../../scp/images/met_pago/ico_ax.png' style='height:30px;'>";
                                             }else if($tarjeta=='dinersclub'){
                                                 $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_dc.jpg' style='height:30px;'>";
                                             }else if($tarjeta=='mastercard'){
@@ -139,15 +141,12 @@ if($_REQUEST['movimientos']==1){
                                           $movimiento[7]->getDestino(),
                                           $movimiento[7]->getHoraRetorno(),
                                           $movimiento[6],
-                                          $total_pagar,
-                                          $total_pagar_descuento,
-                                          $comision,
+                                          ($movimiento[8]->getEstadoRegistro()==1)?$total_pagar:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar.'</del></div>',
+                                          ($movimiento[8]->getEstadoRegistro()==1)?$total_pagar_descuento:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar_descuento.'</del></div>',
+                                          ($movimiento[8]->getEstadoRegistro()==1)?$comision:'<div style="text-align: center; width: 100px; color:red;"><del>'.$comision.'</del></div>',
                                           )
-                                         
                                       ); 
-
                     }
-                    
                     
                     $data['total'] =$obj_movimiento->TotalMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr);
                     $data['rows'][] = array(
@@ -315,6 +314,12 @@ if($_REQUEST['forma_pago']==1){
         <tr>
             <td align="right" class="lab_dmov"><strong>Número de cuotas :</strong></td>
             <td><?php echo ($fP[5])?$fP[5]:'Sin cuotas';?></td>
+            <?php if($fP[6]==1){ ?>
+            <td></td>
+            <?php } else{ ?>
+            <td></td>
+            <td><h5 style="color: red;"><strong>Boleto Anulado</strong></h5></td>
+            <?php }?>
         </tr>
     </table>
    <?php
@@ -354,34 +359,26 @@ if($_REQUEST['movimiento_detalle']==1){
             
             foreach ($lista_movimientos as $movimiento){
           ?>
- <table width="1503" border="0" cellspacing="6" cellpadding="6" class="reporte">
+ <table width="1500" border="0" cellspacing="6" cellpadding="6" class="reporte">
     <tr>
-            <td width="205" align="right" class="lab_dmov"><strong>Id Movimiento :</strong></td>
-            <td width="245"><?php echo $registro; ?></td>
-            <td width="8"></td>
-            <td width="206" align="right" class="lab_dmov"><strong>Origen : </strong></td>
-            <td width="232"><?php echo $origen; ?></td>
-            <td width="8"></td>
-            <td width="8" colspan="2" align="center"><h5 style="text-transform: uppercase;"><strong>Tarifa del pasajero</strong></h5></td>
-            <td width="8"></td>
-            <td width="187" align="right" class="lab_dmov"><strong>Penalidad :</strong></td>
-            <td width="262"><?php echo number_format($movimiento[12],2);?></td>
+            <td width="400" colspan="2" align="center"><h5 style="text-transform: uppercase;"><strong>Agencia</strong></h5></td>
+            <td width=""></td>
+            <td width="400" colspan="2" align="center"><h5 style="text-transform: uppercase;"><strong>Vuelo</strong></h5></td>
+            <td width=""></td>
+            <td width="400" colspan="2" align="center"><h5 style="text-transform: uppercase;"><strong>Tarifa del pasajero</strong></h5></td>
         </tr>
         <tr>
             <td align="right" class="lab_dmov"><strong>RUC Proveedor :</strong></td>
             <td><?php echo $movimiento[1];?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Fecha / Hora Origen :</strong></td>
-            <td><?php echo $fecha_hora_salida; ?></td>
+            <td align="right" class="lab_dmov"><strong>Origen : </strong></td>
+            <td><?php echo $origen; ?></td>
             <td></td>
-            <td width="187" align="right" class="lab_dmov"><strong>Tarifa : </strong></td>
-            <td width="262"><?php echo number_format($movimiento[18]->getEQ(), 2);?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Comisión Servicio :</strong></td>
-            <td><?php echo number_format($movimiento[11],2);?></td>
+            <td align="right" class="lab_dmov"><strong>Tarifa : </strong></td>
+            <td><?php echo number_format($movimiento[18]->getEQ(), 2);?></td>
         </tr>
         <tr>
-            <td align="right" class="lab_dmov"><strong>RUC Entidad :</strong></td>
+            <td align="right" class="lab_dmov"><strong>RUC Agencia :</strong></td>
             <td><?php echo $ruc_entidad; ?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Destino :</strong></td>
@@ -389,134 +386,109 @@ if($_REQUEST['movimiento_detalle']==1){
             <td></td>
             <td align="right" class="lab_dmov"><strong>IGV :</strong></td>
             <td><?php echo number_format($movimiento[18]->getPE(),2);?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Diferencia Tarifa :</strong></td>
-            <td><?php echo number_format($movimiento[13],2);?></td>
-<!--            <td align="right" class="lab_dmov"><strong>Tarifa Total :</strong></td>
-            <td><?php echo number_format($movimiento[18]->getEQ(),2);?></td>-->
         </tr>
         <tr>
             <td align="right" class="lab_dmov"><strong>DNI Funcionario :</strong></td>
             <td><?php echo $movimiento[0]->getDNIFuncionario();?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Fecha / Hora Destino :</strong></td>
-            <td><?php echo $fecha_hora_retorno; ?></td>
+            <td align="right" class="lab_dmov"><strong>Fecha / Hora Origen :</strong></td>
+            <td><?php echo $fecha_hora_salida; ?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>TUUA :</strong></td>
             <td><?php echo number_format($movimiento[18]->getHW(),2);?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Tipo Moneda :</strong></td>
-            <td><?php echo $movimiento[14];?></td>
-        </tr>
-        <tr>
-            <td align="right" class="lab_dmov"><strong>DNI Usuario:</strong></td>
-            <td><?php echo $gestor;?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Duración :</strong></td>
-            <td><?php echo $movimiento[7];?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Total :</strong></td>
-            <td><?php echo $movimiento[18]->getTotalPagar();?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Descuento Tarifa :</strong></td>
-            <td><?php echo number_format($movimiento[15],2);?></td>
         </tr>
         <tr>
             <td align="right" class="lab_dmov"><strong>Usuario :</strong></td>
             <td><?php echo $nom_usuario;?></td>
             <td></td>
+            <td align="right" class="lab_dmov"><strong>Fecha / Hora Destino :</strong></td>
+            <td><?php echo $fecha_hora_retorno; ?></td>
+            <td></td>
+            <td align="right" class="lab_dmov"><strong>Total :</strong></td>
+            <td><?php echo $movimiento[18]->getTotalPagar();?></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td align="right" class="lab_dmov"><strong>Duración :</strong></td>
+            <td><?php echo $movimiento[7];?></td>
+        </tr>
+        <tr>
+            <td width="" colspan="2" align="center"><h5 style="text-transform: uppercase;"><strong>Pasajero</strong></h5></td>
+            <td></td>
             <td align="right" class="lab_dmov"><strong>Escala Tarifa :</strong></td>
             <td><?php echo $movimiento[17]->getClaseSalida();?></td>
             <td></td>
             <td colspan="2" align="center"><h5  style="text-transform: uppercase;"><strong>Tarifa de la agencia</strong></h5></td>
-<!--            <td align="right" class="lab_dmov"><strong>IGV TUUA :</strong></td>
-            <td><?php echo number_format($movimiento[10],2);?></td>-->
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Precio Final :</strong></td>
-            <td><?php echo number_format($total_pagar,2); ?></td>
         </tr>
         <tr>
-            <td align="right" class="lab_dmov"><strong>Doc. Identidad Pasajero :</strong></td>
+            <td align="right" class="lab_dmov"><strong>Doc. Identidad :</strong></td>
             <td><?php echo $nro_documento; ?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Precio Final :</strong></td>
-            <td><?php echo number_format($total_pagar,2); ?></td>
-            <td></td>
-            <td width="187" align="right" class="lab_dmov" ><strong>Tarifa : </strong></td>
-            <td width="262"><?php echo number_format($movimiento[18]->getEQ()-$movimiento[18]->getComisionTarifa(), 2);?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Desc Acu. :</strong></td>
-            <td><?php echo $movimiento[16];?></td>
-        </tr>
-        <tr>
             <td align="right" class="lab_dmov"><strong>Tipo Operación :</strong></td>
             <td><?php echo $tipo_operacion; ?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Categoría Pasajero :</strong></td>
-            <td><?php echo $movimiento[18]->getTipoPax();?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>IGV :</strong></td>
-            <td><?php echo number_format($movimiento[18]->getPE()-$movimiento[18]->getPE()*$porcentaje, 2);?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Costo Tramo :</strong></td>
-            <td><?php echo number_format($total_pagar,2); ?></td>
+            <td align="right" class="lab_dmov" ><strong>Tarifa : </strong></td>
+            <td><?php echo number_format($movimiento[18]->getEQ()-$movimiento[18]->getComisionTarifa(), 2);?></td>
         </tr>
         <tr>
+            <td align="right" class="lab_dmov"><strong>Pasajero :</strong></td>
+            <td><?php echo $nombres_pasajero;?></td>
+            <td></td>
             <td align="right" class="lab_dmov"><strong>Cantidad Boletos :</strong></td>
             <td><?php echo $cantidad_boleto; ?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Pasajero :</strong></td>
-            <td><?php echo $nombres_pasajero;?></td>
+            <td align="right" class="lab_dmov"><strong>IGV :</strong></td>
+            <td><?php echo number_format($movimiento[18]->getPE()-$movimiento[18]->getPE()*$porcentaje, 2);?></td>
+        </tr>
+        <tr>
+            <td align="right" class="lab_dmov"><strong>E-mail :</strong></td>
+            <td><?php echo $movimiento[18]->getEmail();?></td>
+            <td></td>
+            <td align="right" class="lab_dmov"><strong>Tipo Vuelo :</strong></td>
+            <td><?php echo $tipo_vuelo;?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>TUUA :</strong></td>
             <td><?php echo number_format($movimiento[18]->getHW(),2);?></td>
         </tr>
         <tr>
-            <td align="right" class="lab_dmov"><strong>Tipo Servicio :</strong></td>
-            <td><?php echo $tipo_vuelo;?></td>
+            <td align="right" class="lab_dmov"><strong>Telf. Ofic.:</strong></td>
+            <td><?php echo $movimiento[18]->getTelefono();?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>E-mail Pasajero :</strong></td>
-            <td><?php echo $movimiento[18]->getEmail();?></td>
+            <td align="right" class="lab_dmov"><strong>Fecha Operación :</strong></td>
+            <td><?php echo $fecha_registro;?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Total :</strong></td>
             <td><?php echo number_format(($movimiento[18]->getEQ()-$movimiento[18]->getComisionTarifa())+($movimiento[18]->getPE()-$movimiento[18]->getPE()*$porcentaje)+($movimiento[18]->getHW()),2);?></td>
         </tr>
         <tr>
-            <td align="right" class="lab_dmov"><strong>Fecha Operación :</strong></td>
-            <td><?php echo $fecha_registro;?></td>
+            <td align="right" class="lab_dmov"><strong>Telf. Celular:</strong></td>
+            <td><?php echo $movimiento[18]->getCelular();?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Telf. Ofic. Pasajero :</strong></td>
-            <td><?php echo $movimiento[18]->getTelefono();?></td>
+            <td align="right" class="lab_dmov"><strong>Nº Boleto :</strong></td>
+            <td><?php echo $ticket;?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Comisión :</strong></td>
             <td><?php echo number_format($movimiento[18]->getComisionTarifa(),2); ?></td>
         </tr>
         <tr>
-            <td align="right" class="lab_dmov"><strong>Nº Boleto :</strong></td>
-            <td><?php echo $ticket;?></td>
-            <td></td>
-            <td align="right" class="lab_dmov"><strong>Telf. Celular Pasajero :</strong></td>
-            <td><?php echo $movimiento[18]->getCelular();?></td>
-        </tr>
-        <tr>
-            <td align="right" class="lab_dmov"><strong>Referencia Boleto :</strong></td>
-            <td><?php echo $movimiento[18]->getReferencia();?></td>
-            <td></td>
             <td align="right" class="lab_dmov"><strong>Forma de pago :</strong></td>
             <td><?php echo $tarjeta;?></td>
-        </tr>
-        <tr>
-            <td align="right" class="lab_dmov"><strong>Tramo :</strong></td>
-            <td><?php echo $tramo; ?></td>
             <td></td>
-            <td align="right" class="lab_dmov"><strong>Número de tarjeta  :</strong></td>
-            <td><?php echo $num_tarjeta;?></td>
-        </tr>
-        <tr>
             <td align="right" class="lab_dmov"><strong>Nº Vuelo :</strong></td>
             <td><?php echo $numero_vuelo;?></td>
+        </tr>
+        <tr>
+            <td align="right" class="lab_dmov"><strong>Número de tarjeta  :</strong></td>
+            <td><?php echo $num_tarjeta;?></td>
             <td></td>
-            <td align="right" class=""><strong></strong></td>
+            <td align="right" class="lab_dmov"><strong>Tramo :</strong></td>
+            <td><?php echo $tramo; ?></td>
+        </tr>
+        <tr>
+            <td align="right" class="lab_dmov"><strong>Categoría Pasajero :</strong></td>
+            <td><?php echo $movimiento[18]->getTipoPax();?></td>
         </tr>
         <tr>
             <!--<td height="30" colspan="2"><img width="16" height="16" border="0" style="cursor: pointer" onclick="ExportarExcelDetalleMov('00064750')" src="../images/excel.png"> <a onclick="ExportarExcelDetalleMov('00064750')" href="javascript:void(0)">Exportar Detalle</a></td>-->

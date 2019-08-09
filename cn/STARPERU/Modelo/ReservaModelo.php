@@ -193,7 +193,7 @@ class ReservaModelo{
                            SUBSTRING(Reserva_Detalle.Apellidos, INSTR(Reserva_Detalle.Apellidos, ' '), LENGTH(Reserva.Apellidos)) PAS_APEM,
                            Reserva_Detalle.Nombres PAS_NOMB,
                           (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
-                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
+                          (SELECT CASE Tipo WHEN 'Administrador' THEN '' WHEN 'Counter' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
                           CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',
                           '1' Cantidad,	
                           CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
@@ -229,7 +229,7 @@ class ReservaModelo{
                             SUBSTRING(Reserva_Detalle.Apellidos, INSTR(Reserva_Detalle.Apellidos, ' '), LENGTH(Reserva.Apellidos)) PAS_APEM,
                             Reserva_Detalle.Nombres PAS_NOMB,
                           (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
-                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
+                          (SELECT CASE Tipo WHEN 'Administrador' THEN '' WHEN 'Counter' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
                           CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',                          
                           '1' Cantidad,	
                           CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
@@ -248,77 +248,7 @@ class ReservaModelo{
                     FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
                     WHERE Visa.reserva_id= Reserva.Registro AND Reserva.TipoVuelo = 'R' AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
 
-                    UNION ALL
-
-                    (SELECT Reserva.Registro,
-                         Reserva_Detalle.Detalle, 
-                         Reserva_Detalle.ComisionTarifa, 
-                           Reserva.Porcentaje, 
-                          Reserva.CodigoReserva,
-                          Reserva.RUC as ruc_pasajero,
-                          Visa.*,
-                          E.RUC,  
-                          'SA' Tipo_Operacion,
-                          Reserva.FechaRegistro,
-                          Reserva_Detalle.Ticket,
-                          SUBSTRING(Reserva_Detalle.Apellidos, 1,INSTR(Reserva_Detalle.Apellidos, ' ') -1) PAS_APEP,
-                            SUBSTRING(Reserva_Detalle.Apellidos, INSTR(Reserva_Detalle.Apellidos, ' '), LENGTH(Reserva.Apellidos)) PAS_APEM,
-                            Reserva_Detalle.Nombres PAS_NOMB,
-                          (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) 'Gestor',
-                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
-                          CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',
-                          '1' Cantidad,	
-                          CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
-                          '1' Tramo,
-                          CONCAT('2I ', Reserva.Vuelo_Salida) 'Vuelo_Salida',
-                          Reserva.Origen,
-                          CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR), ' ', Reserva.Hora_Salida) AS DATETIME) HoraVueloSalida,
-                          Reserva.Destino,
-                          DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR),' ', Reserva.Hora_Salida) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Origen AND CodigoCiudadDestino = Reserva.Destino) MINUTE)  HoraVueloRetorno,
-                           Reserva_Detalle.Documento,
-                           ROUND(Reserva_Detalle.EQ, 2) Tarifa,
-                          ROUND(Reserva_Detalle.PE, 2) IGV,
-                          ROUND(Reserva_Detalle.HW, 2) TUUA,
-                          ROUND(Reserva_Detalle.TotalPagar, 2) * (-1),
-                          Reserva_Detalle.EstadoRegistro		
-                    FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
-                    WHERE Visa.reserva_id= Reserva.Registro AND Reserva_Detalle.EstadoRegistro = 0 AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad  $filtro)
-
-                    UNION ALL
-
-                    (SELECT Reserva.Registro,
-                          Reserva_Detalle.Detalle, 
-                          Reserva_Detalle.ComisionTarifa, 
-                           Reserva.Porcentaje, 
-                          Reserva.RUC as ruc_pasajero,
-                          Reserva.CodigoReserva,
-                          Visa.*,
-                          E.RUC,  
-                          'SA' Tipo_Operacion,
-                          Reserva.FechaRegistro,
-                          Reserva_Detalle.Ticket,
-                          SUBSTRING(Reserva_Detalle.Apellidos, 1,INSTR(Reserva_Detalle.Apellidos, ' ') -1) PAS_APEP,
-                            SUBSTRING(Reserva_Detalle.Apellidos, INSTR(Reserva_Detalle.Apellidos, ' '), LENGTH(Reserva.Apellidos)) PAS_APEM,
-                            Reserva_Detalle.Nombres PAS_NOMB,
-                          (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) 'Gestor',
-                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
-                          CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',
-                          '1' Cantidad,	
-                          CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
-                          '2' Tramo,
-                          CONCAT('2I ', Reserva.Vuelo_Retorno) 'Vuelo_Salida',
-                          Reserva.Destino,
-                          CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME),
-                          Reserva.Origen,
-                          DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Destino AND CodigoCiudadDestino = Reserva.Origen) MINUTE) HoraVueloRetorno,      
-                           Reserva_Detalle.Documento ,
-                          ROUND(Reserva_Detalle.EQ, 2) Tarifa,
-                          ROUND(Reserva_Detalle.PE, 2) IGV,
-                          ROUND(Reserva_Detalle.HW, 2) TUUA,
-                          ROUND(Reserva_Detalle.TotalPagar, 2) * (-1),
-                          Reserva_Detalle.EstadoRegistro	
-                    FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
-                    WHERE Visa.reserva_id= Reserva.Registro AND Reserva.TipoVuelo = 'R' AND Reserva_Detalle.EstadoRegistro = 0 AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
+                   
                     ORDER BY Registro ,Detalle, Tramo   $limite";
 
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
@@ -569,6 +499,7 @@ class ReservaModelo{
                     $fec_hora_transaccion=$fila['fechahora_transaccion'];
                     $monto=$fila['amount'];
                     $num_cuotas=$fila['quota_number'];
+                    $estado=$fila['anulado'];
                                         
                     $forma_pago[]=$brand;
                     $forma_pago[]=$card;
@@ -576,6 +507,7 @@ class ReservaModelo{
                     $forma_pago[]=$fec_hora_transaccion;
                     $forma_pago[]=$monto;
                     $forma_pago[]=$num_cuotas;
+                    $forma_pago[]=$estado;
                     $formaPago[]=$forma_pago;
             }
             $obj_conexion->CerrarConexion($conexion);
@@ -757,7 +689,7 @@ public function AnularReserva($pnr){
         $conexion=$obj_conexion->CrearConexion();
         
         $consulta="UPDATE Reserva SET EstadoRegistro=0 WHERE  CodigoReserva='$pnr'";
-
+        
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
 
         $error=$obj_conexion->ErrorEjecucion($conexion);
