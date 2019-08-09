@@ -60,7 +60,7 @@ class PersonalModelo{
         $lista_personal=array();
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta = "SELECT P.CambioClave,P.CodigoTipo,P.CodigoEntidad,P.CodigoPersonal,P.DNI,P.ApellidoMaterno,P.ApellidoPaterno,P.Nombres,P.Email,P.TelefonoOficina,P.Anexo,p.EstadoRegistro,P.Celular,E.RazonSocial,E.RUC,E.Direccion
+        $consulta = "SELECT P.CambioClave,P.CodigoTipo,P.Tipo,P.CodigoEntidad,P.CodigoPersonal,P.DNI,P.ApellidoMaterno,P.ApellidoPaterno,P.Nombres,P.Email,P.TelefonoOficina,P.Anexo,p.EstadoRegistro,P.Celular,E.RazonSocial,E.RUC,E.Direccion
                     FROM Personal P,Entidad E
                     WHERE  p.EstadoRegistro=1 AND e.EstadoRegistro=1 AND p.CodigoEntidad=e.CodigoEntidad AND P.CodigoEntidad='$codigo_entidad'"; 
              if($dni!=''){
@@ -92,6 +92,7 @@ class PersonalModelo{
                 $personal->setDireccion($fila['Direccion']);
                 $personal->setRUC($fila['RUC']);
                 $personal->setEstadoRegistro($fila['EstadoRegistro']);
+                $personal->setTipo($fila['Tipo']);
                 $lista_personal[] = $personal;
             }
             $obj_conexion->CerrarConexion($conexion);
@@ -615,7 +616,21 @@ class PersonalModelo{
         }
         return $pass;
     }
-     
+     public function EditarPersonal($CodigoPersonal, $CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina) {
+        $obj_conexion = new ConexionBD();
+        $conexion = $obj_conexion->CrearConexion();
+ 
+        $consulta = "UPDATE Personal SET ApellidoPaterno='$apellido_paterno',ApellidoMaterno='$apellido_materno',
+            Nombres='$nombres',DNI='$DNIFuncionario',Celular='$celular'
+            ,Email='$email',TelefonoOficina='$telefono_oficina' WHERE CodigoEntidad='$CodigoEntidad' AND CodigoPersonal='$CodigoPersonal'";
+        $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
+        $error = $obj_conexion->ErrorEjecucion($conexion);
+        if ($error == 1) {
+            $flag = 1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
+    }
 }
 
 

@@ -235,14 +235,13 @@ class EmpresaModelo {
         }
     }
 
-    public function EditarAgencia( $CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina) {
+    public function EditarAgencia($CodigoPersonal, $CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina) {
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
         $consulta = "UPDATE Entidad SET RUC='$ruc', ApellidoPaterno='$apellido_paterno',RazonSocial='$razon_social',ApellidoMaterno='$apellido_materno',
             NombreComercial='$nombre_comercial',Nombres='$nombres',DNIFuncionario='$DNIFuncionario',CodigoCiudad='$ciudad',Celular='$celular',
             Direccion= '$domicilio_fiscal',Email='$email',TelefoniaOficina='$telefono_oficina' WHERE CodigoEntidad='$CodigoEntidad'";
         $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
-//        var_dump($consulta); 
         $error = $obj_conexion->ErrorEjecucion($conexion);
         if ($error == 1) {
             $flag = 1;

@@ -11,6 +11,8 @@ $Tipo = $_SESSION['s_tipo'];
 $directorio = '../';
 $directorio_imagen = '../';
 $agencia_entidad = $_SESSION['s_agencia'];
+$codigo_personal = $_SESSION['s_idusuario'];
+
 require_once("../../config.php");
 
 $agencias = array();
@@ -145,7 +147,10 @@ $obj_modelo = new LocalidadModelo();
                     <td>
                         <input type="hidden" name="codigo_entidad_a" id="codigo_entidad_a" style="text-transform:uppercase;" value="<?php echo $agencia_entidad->CodigoEntidad; ?>"/>
                         <!--<span class="hidden">*</span>-->  
-                    </td>                
+                    </td>
+                    <td>
+                        <input type="hidden" name="codigo_personal_a" id="codigo_personal_a" style="text-transform:uppercase;" value="<?php echo $codigo_personal; ?>"/>
+                    </td> 
                 </tr>
             </table>
         </div>

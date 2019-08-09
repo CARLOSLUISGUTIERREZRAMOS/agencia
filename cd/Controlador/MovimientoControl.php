@@ -308,8 +308,13 @@ if($_REQUEST['forma_pago']==1){
             <td align="right" class="lab_dmov"><strong>Hora de transacción :</strong></td>
             <td><?php echo date('h:i:s A', strtotime(substr($fP[3], 11, 20))); ?></td>
             <td></td>
+            <?php if($fP[6]==1){ ?>
             <td align="right" class="lab_dmov"><strong>Monto :</strong></td>
             <td><?php echo $fP[4]; ?></td>
+            <?php }  else{?>
+            <td align="right" class="lab_dmov"><strong>Monto :</strong></td>
+            <td style="color:red;"><del><?php echo $fP[4]; ?></del></td>
+            <?php }?>
         </tr>
         <tr>
             <td align="right" class="lab_dmov"><strong>Número de cuotas :</strong></td>

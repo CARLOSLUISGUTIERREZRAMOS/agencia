@@ -5,9 +5,11 @@ error_reporting(E_ALL);
 ini_set("display_errors", 0);
 date_default_timezone_set('America/Lima');
 require_once("../../cn/STARPERU/Modelo/EmpresaModelo.php");
+require_once("../../cn/STARPERU/Modelo/PersonalModelo.php");
 require_once("../../config.php");
 
 $obj_empresa = new EmpresaModelo();
+$obj_personal= new PersonalModelo();
 
 if (isset($_REQUEST['cambiar_logo']) && $_REQUEST['cambiar_logo'] == 1) {
     $CodigoEntidad = (int) $_REQUEST['CodigoEntidad'];
@@ -65,6 +67,7 @@ if ($_POST['editar_agencia'] == 1) {
 //          var_dump($_POST['editar_agencia']);
 //            require_once '../Funciones/funciones.php';
     $CodigoEntidad = $_POST['codigo_entidad'];
+    $CodigoPersonal = $_POST['codigo_personal'];
     $ruc = trim($_POST['ruc']);
     $apellido_paterno = utf8_decode(strtoupper(trim($_POST['apep'])));
     $razon_social = utf8_decode(strtoupper(trim($_POST['razon_social'])));
@@ -82,7 +85,8 @@ if ($_POST['editar_agencia'] == 1) {
         echo "4_|_";
         die;
     }
-    $filas_afectadas = $obj_empresa->EditarAgencia($CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina);
+    $filas_afectadas = $obj_empresa->EditarAgencia($CodigoPersonal, $CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina);
+    $obj_personal->EditarPersonal($CodigoPersonal, $CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina);
     if ($filas_afectadas == 1) {
         echo '1_|_';
     } else {

@@ -113,8 +113,8 @@
                 <tr>
                     <td align="right">DNI:</td>
                     <td > <input type="text" style="text-align: center;" name="dni" id="dni" maxlength="8" onKeyPress="javascript:return Numero(event);"/></td>
-                    <td align="right">Apellidos</td>
-                    <td><input type="text" style="text-align: center;" name="apellido" id="apellido" style="text-transform:uppercase;"/></td>
+                    <td align="right" hidden>Apellidos</td>
+                    <td><input type="text" style="text-align: center;" name="apellido" id="apellido" style="text-transform:uppercase;" hidden/></td>
                     <td align="center"><input type="button" class="btn-red" name="btnbusqueda" id="btnbusqueda1" value="Consultar" title="Presionar para ver resultados ..." /></td>
                 </tr>
                  <tr>

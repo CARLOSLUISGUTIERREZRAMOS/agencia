@@ -355,7 +355,7 @@ $(document).ready(function () {
         var razon_social = $.trim($('#razon_social_a').val());
         var domicilio = $.trim($('#domicilio_a').val());
         var codigo_entidad = $.trim($('#codigo_entidad_a').val());
-
+        var codigo_personal = $.trim($('#codigo_personal_a').val());
         if (ruc == '' || ruc == null) {
             $.msgbox().content('El campo RUC es un campo requerido');
             $.msgbox().open();
@@ -414,7 +414,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: "../../cd/Controlador/AgenciaControl.php",
-            data: "editar_agencia=1&dni=" + dni + "&codigo_entidad=" +
+            data: "editar_agencia=1&dni=" + dni + "&codigo_personal=" +codigo_personal+"&codigo_entidad=" +
                     codigo_entidad + "&apep=" + apep +
                     "&apem=" + apem + "&nombres=" + nombres + "&email=" + email + "&telefono=" + telefono +
                     "&nom_comercial=" + nom_comercial + "&celular=" + celular + "&ciudad=" + ciudad +

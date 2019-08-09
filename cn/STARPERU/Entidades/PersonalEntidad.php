@@ -65,9 +65,11 @@ class PersonalEntidad{
    public function getCelular(){
        return $this->celular;
    }
- 
    public function getCodigoTipo(){
        return $this->codigo_tipo;
+   }
+    public function getTipo(){
+      return  $this->tipo;
    }
    public function getEstado(){
        return $this->estado;
@@ -130,6 +132,9 @@ class PersonalEntidad{
  
    public function setCodigoTipo($codigo_tipo){
        $this->codigo_tipo=$codigo_tipo;
+   }
+   public function setTipo($tipo){
+       $this->tipo=$tipo;
    }
    public function setEstado($estado){
        $this->estado=$estado;
