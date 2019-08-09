@@ -235,7 +235,7 @@ class EmpresaModelo {
         }
     }
 
-    public function EditarAgencia($estado, $CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina) {
+    public function EditarAgencia( $CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina) {
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
         $consulta = "UPDATE Entidad SET RUC='$ruc', ApellidoPaterno='$apellido_paterno',RazonSocial='$razon_social',ApellidoMaterno='$apellido_materno',

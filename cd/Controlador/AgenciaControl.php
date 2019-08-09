@@ -64,27 +64,25 @@ if ($_REQUEST['prueba'] == 1) {
 if ($_POST['editar_agencia'] == 1) {
 //          var_dump($_POST['editar_agencia']);
 //            require_once '../Funciones/funciones.php';
-//            
-    $estado = trim($_POST['estado']);
     $CodigoEntidad = $_POST['codigo_entidad'];
     $ruc = trim($_POST['ruc']);
-    $apellido_paterno = utf8_decode(trim($_POST['apep']));
-    $razon_social = utf8_decode(trim($_POST['razon_social']));
-    $apellido_materno = utf8_decode(trim($_POST['apem']));
+    $apellido_paterno = utf8_decode(strtoupper(trim($_POST['apep'])));
+    $razon_social = utf8_decode(strtoupper(trim($_POST['razon_social'])));
+    $apellido_materno = utf8_decode(strtoupper(trim($_POST['apem'])));
     $nombre_comercial = utf8_decode(trim($_POST['nom_comercial']));
-    $nombres = utf8_decode($_POST['nombres']);
+    $nombres = utf8_decode(strtoupper(trim($_POST['nombres'])));
     $pais = "";
     $DNIFuncionario = trim($_POST['dni']);
     $ciudad = utf8_decode(trim($_POST['ciudad']));
     $celular = trim($_POST['celular']);
-    $domicilio_fiscal = utf8_decode(trim($_POST['domicilio']));
+    $domicilio_fiscal = utf8_decode(strtoupper(trim($_POST['domicilio'])));
     $email = strtolower(trim($_POST['email']));
     $telefono_oficina = trim($_POST['telefono']);
     if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $email)) {
         echo "4_|_";
         die;
     }
-    $filas_afectadas = $obj_empresa->EditarAgencia($estado,$CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina);
+    $filas_afectadas = $obj_empresa->EditarAgencia($CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina);
     if ($filas_afectadas == 1) {
         echo '1_|_';
     } else {

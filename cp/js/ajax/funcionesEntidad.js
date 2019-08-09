@@ -342,7 +342,6 @@ $(document).ready(function () {
 //    });
     $('#editar_agencia').click(function () {
 
-        var estado = $.trim($('#estado').val());
         var dni = $.trim($('#dni_a').val());
         var nom_comercial = $.trim($('#nom_comer_a').val());
         var apem = $.trim($('#apem_a').val());
@@ -356,11 +355,6 @@ $(document).ready(function () {
         var razon_social = $.trim($('#razon_social_a').val());
         var domicilio = $.trim($('#domicilio_a').val());
         var codigo_entidad = $.trim($('#codigo_entidad_a').val());
-        if (estado == -1) {
-            $.msgbox().content('Debe seleccionar un estado para la agencia');
-            $.msgbox().open();
-            return false;
-        }
 
         if (ruc == '' || ruc == null) {
             $.msgbox().content('El campo RUC es un campo requerido');
