@@ -19,13 +19,13 @@ class PersonalModelo{
         $conexion=$obj_conexion->CrearConexion();
         
         $consulta="SELECT p.CodigoPersonal, p.Nombres, p.ApellidoPaterno, p.ApellidoMaterno, p.CodigoEntidad, p.CambioClave,p.CodigoTipo,p.DNI,p.Email,p.TelefonoOficina,p.Anexo,p.Celular,p.RPC,p.RPM,p.Nextel,p.Tipo,e.RazonSocial 
-                   FROM Personal p, Entidad e 
+                   FROM personal p, entidad e 
                    WHERE p.CodigoUsuario='$usuario' AND p.Password='$password' AND p.EstadoRegistro=1 AND e.EstadoRegistro=1 AND p.CodigoEntidad=e.CodigoEntidad";//e.EstadoRegistro=1 AND
-        echo "<pre>";
-        var_dump($conexion);
-        echo "_________________________<br>";
-        var_dump($consulta); 
-        echo "</pre>";die;
+        // echo "<pre>";
+        // var_dump($conexion);
+        // echo "_________________________<br>";
+        // var_dump($consulta); 
+        // echo "</pre>";die;
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
 
