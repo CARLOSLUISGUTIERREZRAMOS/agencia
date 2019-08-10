@@ -218,9 +218,9 @@ if (isset($_POST['paso2'])) {
             // echo "</pre>";
 
             $clases_tarifas_disponibles = $obj_tarifa->ObtenerTarifaClaseFamilia($fecha_salida, $origen, $destino, $tipo_vuelo, $estadia);
-            // echo "<pre>";
-            // print_r($clases_tarifas_disponibles["Clases"]);
-            // echo "</pre>";
+            echo "<pre>";
+            var_dump($clases_tarifas_disponibles["Clases"]);
+            echo "</pre>";die;
             $tabla_disponibilidades = '<table class="tabla_vuelos_de_ida">' . "\n";
             $tabla_disponibilidades .= '<tr>' . "\n";
             $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Vuelo</td>' . "\n";
