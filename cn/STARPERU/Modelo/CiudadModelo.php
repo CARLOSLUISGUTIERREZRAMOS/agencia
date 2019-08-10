@@ -14,7 +14,7 @@ class CiudadModelo{
         $conexion=$obj_conexion->CrearConexion();
         $consulta="SELECT * FROM ciudad WHERE vigente=1 AND osce=1";
         if($origen!=''){
-            $consulta="SELECT * FROM ciudad, ruta WHERE Ciudad.id_ciudad = Ruta.CodigoCiudadDestino AND CodigoCiudadOrigen = '$origen' AND EstadoRegistro = 1 AND vigente = 1 AND Ciudad.osce=1";
+            $consulta="SELECT * FROM ciudad, ruta WHERE ciudad.id_ciudad = ruta.CodigoCiudadDestino AND CodigoCiudadOrigen = '$origen' AND EstadoRegistro = 1 AND vigente = 1 AND ciudad.osce=1";
         }
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
