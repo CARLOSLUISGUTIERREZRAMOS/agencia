@@ -27,7 +27,7 @@ class ReservaModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="SELECT Registro,Nombres,Apellidos,Email,Telefono,Anexo,Celular,Nextel,RPM,RPC FROM Reserva_Detalle WHERE Documento='$num_doc' AND Tipo_Doc='$tipo_doc' ORDER BY Registro DESC LIMIT 1";
+        $consulta="SELECT Registro,Nombres,Apellidos,Email,Telefono,Anexo,Celular,Nextel,RPM,RPC FROM reserva_detalle WHERE Documento='$num_doc' AND Tipo_Doc='$tipo_doc' ORDER BY Registro DESC LIMIT 1";
         
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
@@ -52,55 +52,55 @@ class ReservaModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="(SELECT     Reserva.Registro,
-            Reserva_Detalle.Detalle,
-            Reserva_Detalle.Ticket,
-	    Reserva.TipoVuelo,
-	    Reserva.FechaRegistro,
-	    '1' Tramo,
-	    Reserva.Vuelo_Salida,
-	    Reserva.Origen,
-	    Reserva.Fecha_Salida,
-	    Reserva.Hora_Salida,
-	    Reserva.Destino,
-	    Reserva.Fecha_Salida,
-	    (SELECT Tiempo FROM Ruta WHERE CodigoCiudadOrigen=Reserva.Origen AND CodigoCiudadDestino=Reserva.Destino) Duracion,
-	    Reserva.Hora_Salida,
-	    Reserva.Clase_Salida,
-	    Reserva_Detalle.Apellidos,
-	    Reserva_Detalle.Nombres,
-	    Reserva_Detalle.TotalPagar,
-	    Reserva.EstadoRegistro,
-	    Reserva_Detalle.EstadoRegistro AS EstadoRegistroDetalle
-	    FROM Reserva, Reserva_Detalle 
-	    WHERE Reserva.Registro = Reserva_Detalle.Registro AND Reserva.CodigoReserva = '$codigo_reserva' AND Reserva.CodigoEntidad='$codigo_entidad' AND Reserva_Detalle.Ticket<>'' )
+        $consulta="(SELECT     reserva.Registro,
+            reserva_detalle.Detalle,
+            reserva_detalle.Ticket,
+            reserva.TipoVuelo,
+            reserva.FechaRegistro,
+            '1' Tramo,
+            reserva.Vuelo_Salida,
+            reserva.Origen,
+            reserva.Fecha_Salida,
+            reserva.Hora_Salida,
+            reserva.Destino,
+            reserva.Fecha_Salida,
+            (SELECT Tiempo FROM ruta WHERE CodigoCiudadOrigen=reserva.Origen AND CodigoCiudadDestino=reserva.Destino) Duracion,
+            reserva.Hora_Salida,
+            reserva.Clase_Salida,
+            reserva_detalle.Apellidos,
+            reserva_detalle.Nombres,
+            reserva_detalle.TotalPagar,
+            reserva.EstadoRegistro,
+            reserva_detalle.EstadoRegistro AS EstadoRegistroDetalle
+            FROM reserva, reserva_detalle 
+            WHERE reserva.Registro = reserva_detalle.Registro AND reserva.CodigoReserva = '$codigo_reserva' AND reserva.CodigoEntidad='$codigo_entidad' AND reserva_detalle.Ticket<>'' )
 
-	    UNION ALL
+            UNION ALL
 
-	    (SELECT 
-	    Reserva.Registro,
-            Reserva_Detalle.Detalle,
-	    Reserva_Detalle.Ticket,
-	    Reserva.TipoVuelo,
-	    Reserva.FechaRegistro,
-	    '2' Tramo,
-	    Reserva.Vuelo_Retorno,
-	    Reserva.Destino,
-	    Reserva.Fecha_Retorno,
-	    Reserva.Hora_Retorno,
-	    Reserva.Origen,
-	    Reserva.Fecha_Retorno,
-	    (SELECT Tiempo FROM Ruta WHERE CodigoCiudadOrigen=Reserva.Destino AND CodigoCiudadDestino=Reserva.Origen) Duracion,
-	    Reserva.Hora_Retorno,
-	    Reserva.Clase_Retorno,
-	    Reserva_Detalle.Apellidos,
-	    Reserva_Detalle.Nombres,
-	    Reserva_Detalle.TotalPagar,
-	    Reserva.EstadoRegistro,
-	    Reserva_Detalle.EstadoRegistro AS EstadoRegistroDetalle
-	    FROM Reserva, Reserva_Detalle 
-	    WHERE Reserva.TipoVuelo = 'R' AND Reserva.Registro = Reserva_Detalle.Registro AND Reserva.CodigoReserva = '$codigo_reserva' AND Reserva.CodigoEntidad='$codigo_entidad' AND Reserva_Detalle.Ticket<>'')
-	    ORDER BY Registro, Detalle,Tramo";
+            (SELECT 
+            reserva.Registro,
+            reserva_detalle.Detalle,
+            reserva_detalle.Ticket,
+            reserva.TipoVuelo,
+            reserva.FechaRegistro,
+            '2' Tramo,
+            reserva.Vuelo_Retorno,
+            reserva.Destino,
+            reserva.Fecha_Retorno,
+            reserva.Hora_Retorno,
+            reserva.Origen,
+            reserva.Fecha_Retorno,
+            (SELECT Tiempo FROM ruta WHERE CodigoCiudadOrigen=reserva.Destino AND CodigoCiudadDestino=reserva.Origen) Duracion,
+            reserva.Hora_Retorno,
+            reserva.Clase_Retorno,
+            reserva_detalle.Apellidos,
+            reserva_detalle.Nombres,
+            reserva_detalle.TotalPagar,
+            reserva.EstadoRegistro,
+            reserva_detalle.EstadoRegistro AS EstadoRegistroDetalle
+            FROM reserva, reserva_detalle 
+            WHERE reserva.TipoVuelo = 'R' AND reserva.Registro = reserva_detalle.Registro AND reserva.CodigoReserva = '$codigo_reserva' AND reserva.CodigoEntidad='$codigo_entidad' AND reserva_detalle.Ticket<>'')
+            ORDER BY Registro, Detalle,Tramo";
         
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
@@ -163,19 +163,19 @@ class ReservaModelo{
     public function ListaMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr,$limit,$extra,$formaPago){
         $filtro='';
          if($fecha_inicio!='' and $fecha_fin!=''){
-            $filtro.=" AND Reserva.FechaRegistro BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_fin 23:59:59'";
+            $filtro.=" AND reserva.FechaRegistro BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_fin 23:59:59'";
         }
         if($boleto!=''){
-            $filtro.=" AND Reserva_Detalle.Ticket='$boleto'";
+            $filtro.=" AND reserva_detalle.Ticket='$boleto'";
         }
         if($pnr!=''){
-            $filtro.=" AND Reserva.CodigoReserva='$pnr'";
+            $filtro.=" AND reserva.CodigoReserva='$pnr'";
         }
         if($formaPago!=''){
-            $filtro.=" AND Reserva.forma_pago='$formaPago'";
+            $filtro.=" AND reserva.forma_pago='$formaPago'";
         }
         if($usuario!=''){
-            $filtro.="AND Personal.CodigoPersonal = Reserva.CodigoPersonal  AND Personal.DNI='$usuario_dni'";
+            $filtro.="AND personal.CodigoPersonal = reserva.CodigoPersonal  AND personal.DNI='$usuario_dni'";
         }
 //        if($usuario!=''){
 //            $filtro.=" AND (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal)='$usuario'";
@@ -189,75 +189,75 @@ class ReservaModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="(SELECT Reserva.Registro,
-                           Reserva_Detalle.Detalle, 
-                           Reserva_Detalle.ComisionTarifa, 
-                           Reserva.Porcentaje, 
-                           Reserva.RUC as ruc_pasajero,
-                           Reserva.CodigoReserva,
-                           Visa.*,
+        $consulta="(SELECT reserva.Registro,
+                           reserva_detalle.Detalle, 
+                           reserva_detalle.ComisionTarifa, 
+                           reserva.Porcentaje, 
+                           reserva.RUC as ruc_pasajero,
+                           reserva.CodigoReserva,
+                           visa.*,
                            E.RUC,  
                            'EM' Tipo_Operacion,     
-                           Reserva.FechaRegistro,
-                           Reserva_Detalle.Ticket,
-                           SUBSTRING(Reserva_Detalle.Apellidos, 1,INSTR(Reserva_Detalle.Apellidos, ' ') -1) PAS_APEP,
-                           SUBSTRING(Reserva_Detalle.Apellidos, INSTR(Reserva_Detalle.Apellidos, ' '), LENGTH(Reserva.Apellidos)) PAS_APEM,
-                           Reserva_Detalle.Nombres PAS_NOMB,
-                          (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
-                          (SELECT CASE Tipo WHEN 'Administrador' THEN '' WHEN 'Counter' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
-                          CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',
+                           reserva.FechaRegistro,
+                           reserva_detalle.Ticket,
+                           SUBSTRING(reserva_detalle.Apellidos, 1,INSTR(reserva_detalle.Apellidos, ' ') -1) PAS_APEP,
+                           SUBSTRING(reserva_detalle.Apellidos, INSTR(reserva_detalle.Apellidos, ' '), LENGTH(reserva.Apellidos)) PAS_APEM,
+                           reserva_detalle.Nombres PAS_NOMB,
+                          (SELECT DNI FROM personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
+                          (SELECT CASE Tipo WHEN 'Administrador' THEN '' WHEN 'Counter' THEN DNI END FROM personal WHERE personal.CodigoPersonal = reserva.CodigoPersonal) 'Usuario',
+                          CONCAT(personal.Nombres,' ',personal.ApellidoPaterno,' ',personal.ApellidoMaterno) 'NomUsuario',
                           '1' Cantidad,	
-                          CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
+                          CASE reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '1' Tramo,
-                          CONCAT('2I ', Reserva.Vuelo_Salida) 'Vuelo_Salida',
-                          Reserva.Origen,
-                          CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR), ' ', Reserva.Hora_Salida) AS DATETIME) HoraVueloSalida,
+                          CONCAT('2I ', reserva.Vuelo_Salida) 'Vuelo_Salida',
+                          reserva.Origen,
+                          CAST(CONCAT(CAST(DATE(reserva.Fecha_Salida) AS CHAR), ' ', reserva.Hora_Salida) AS DATETIME) HoraVueloSalida,
                           Reserva.Destino,
-                          DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR), ' ' , Reserva.Hora_Salida) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Origen AND CodigoCiudadDestino = Reserva.Destino) MINUTE)  HoraVueloRetorno,
-                          CONCAT(Reserva_Detalle.Documento) Documento,
-                          ROUND(Reserva_Detalle.EQ, 2) Tarifa,
-                            ROUND(Reserva_Detalle.PE, 2) IGV,
-                            ROUND(Reserva_Detalle.HW, 2) TUUA,
-                            ROUND(Reserva_Detalle.TotalPagar, 2) TotalPagar,
-                            Reserva_Detalle.EstadoRegistro		
-                      FROM Reserva_Detalle, Reserva, Personal, Entidad E ,Visa
-                      WHERE Visa.reserva_id= Reserva.Registro AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
+                          DATE_ADD(CAST(CONCAT(CAST(DATE(reserva.Fecha_Salida) AS CHAR), ' ' , reserva.Hora_Salida) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = reserva.Origen AND CodigoCiudadDestino = reserva.Destino) MINUTE)  HoraVueloRetorno,
+                          CONCAT(reserva_detalle.Documento) Documento,
+                          ROUND(reserva_detalle.EQ, 2) Tarifa,
+                            ROUND(reserva_detalle.PE, 2) IGV,
+                            ROUND(reserva_detalle.HW, 2) TUUA,
+                            ROUND(reserva_detalle.TotalPagar, 2) TotalPagar,
+                            reserva_detalle.EstadoRegistro		
+                      FROM reserva_detalle, reserva, personal, entidad E ,visa
+                      WHERE visa.reserva_id= reserva.Registro AND reserva_detalle.Registro = reserva.Registro AND reserva.CodigoPersonal = personal.CodigoPersonal AND personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
 
                     UNION ALL
 
-                    (SELECT Reserva.Registro,
-                         Reserva_Detalle.Detalle,
-                         Reserva_Detalle.ComisionTarifa, 
-                           Reserva.Porcentaje, 
-                         Reserva.RUC as ruc_pasajero,
-                         Reserva.CodigoReserva,
-                         Visa.*,
+                    (SELECT reserva.Registro,
+                         reserva_detalle.Detalle,
+                         reserva_detalle.ComisionTarifa, 
+                         reserva.Porcentaje, 
+                         reserva.RUC as ruc_pasajero,
+                         reserva.CodigoReserva,
+                         visa.*,
                           E.RUC,  
                           'EM' Tipo_Operacion,
-                          Reserva.FechaRegistro,
-                          Reserva_Detalle.Ticket,
-                          SUBSTRING(Reserva_Detalle.Apellidos, 1,INSTR(Reserva_Detalle.Apellidos, ' ') -1) PAS_APEP,
-                            SUBSTRING(Reserva_Detalle.Apellidos, INSTR(Reserva_Detalle.Apellidos, ' '), LENGTH(Reserva.Apellidos)) PAS_APEM,
-                            Reserva_Detalle.Nombres PAS_NOMB,
-                          (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
-                          (SELECT CASE Tipo WHEN 'Administrador' THEN '' WHEN 'Counter' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Usuario',
-                          CONCAT(Personal.Nombres,' ',Personal.ApellidoPaterno,' ',Personal.ApellidoMaterno) 'NomUsuario',                          
+                          reserva.FechaRegistro,
+                          reserva_detalle.Ticket,
+                          SUBSTRING(reserva_detalle.Apellidos, 1,INSTR(reserva_detalle.Apellidos, ' ') -1) PAS_APEP,
+                            SUBSTRING(reserva_detalle.Apellidos, INSTR(reserva_detalle.Apellidos, ' '), LENGTH(reserva.Apellidos)) PAS_APEM,
+                            reserva_detalle.Nombres PAS_NOMB,
+                          (SELECT DNI FROM personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
+                          (SELECT CASE Tipo WHEN 'Administrador' THEN '' WHEN 'Counter' THEN DNI END FROM personal WHERE personal.CodigoPersonal = reserva.CodigoPersonal) 'Usuario',
+                          CONCAT(personal.Nombres,' ',personal.ApellidoPaterno,' ',personal.ApellidoMaterno) 'NomUsuario',                          
                           '1' Cantidad,	
-                          CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
+                          CASE reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '2' Tramo,
-                          CONCAT('2I ', Reserva.Vuelo_Retorno) 'Vuelo_Salida',
-                          Reserva.Destino,
-                          CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME),
-                          Reserva.Origen,
-                          DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME), INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Destino AND CodigoCiudadDestino = Reserva.Origen) MINUTE),
-                          CONCAT(Reserva_Detalle.Documento) Documento,
-                          ROUND(Reserva_Detalle.EQ, 2) Tarifa,
-                          ROUND(Reserva_Detalle.PE, 2) IGV,
-                          ROUND(Reserva_Detalle.HW, 2) TUUA,
-                          ROUND(Reserva_Detalle.TotalPagar, 2) TotalPagar,
-                          Reserva_Detalle.EstadoRegistro	
-                    FROM Reserva_Detalle, Reserva, Personal, Entidad E , Visa
-                    WHERE Visa.reserva_id= Reserva.Registro AND Reserva.TipoVuelo = 'R' AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
+                          CONCAT('2I ', reserva.Vuelo_Retorno) 'Vuelo_Salida',
+                          reserva.Destino,
+                          CAST(CONCAT(CAST(DATE(reserva.Fecha_Retorno) AS CHAR), ' ', reserva.Hora_Retorno) AS DATETIME),
+                          reserva.Origen,
+                          DATE_ADD(CAST(CONCAT(CAST(DATE(reserva.Fecha_Retorno) AS CHAR), ' ', reserva.Hora_Retorno) AS DATETIME), INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = reserva.Destino AND CodigoCiudadDestino = reserva.Origen) MINUTE),
+                          CONCAT(reserva_detalle.Documento) Documento,
+                          ROUND(reserva_detalle.EQ, 2) Tarifa,
+                          ROUND(reserva_detalle.PE, 2) IGV,
+                          ROUND(reserva_detalle.HW, 2) TUUA,
+                          ROUND(reserva_detalle.TotalPagar, 2) TotalPagar,
+                          reserva_detalle.EstadoRegistro	
+                    FROM reserva_detalle, reserva, personal, entidad E , visa
+                    WHERE visa.reserva_id= reserva.Registro AND reserva.TipoVuelo = 'R' AND reserva_detalle.Registro = reserva.Registro AND reserva.CodigoPersonal = personal.CodigoPersonal AND personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
 
                    
                     ORDER BY Registro ,Detalle, Tramo   $limite";
@@ -352,126 +352,126 @@ class ReservaModelo{
     public function TotalMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr){
         $filtro='';
          if($fecha_inicio!='' and $fecha_fin!=''){
-            $filtro=" AND Reserva.FechaRegistro BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_fin 23:59:59'";
+            $filtro=" AND reserva.FechaRegistro BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_fin 23:59:59'";
         }
         if($boleto!=''){
-            $filtro=" AND Reserva_Detalle.Ticket='$boleto'";
+            $filtro=" AND reserva_detalle.Ticket='$boleto'";
         }
         if($pnr!=''){
-            $filtro=" AND Reserva.CodigoReserva='$pnr'";
+            $filtro=" AND reserva.CodigoReserva='$pnr'";
         }
         if($usuario!=''){
-            $filtro=" AND (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal)='$usuario'";
+            $filtro=" AND (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM personal WHERE personal.CodigoPersonal = reserva.CodigoPersonal)='$usuario'";
         }
         $lista_movimientos=array();
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="SELECT RIGHT(CONCAT('00000000', Reserva.Registro),8) Registro,
-                            Reserva_Detalle.Registro as Registro_detalle,
-                            Reserva_Detalle.Detalle, 
-                            Reserva.CodigoReserva,
+        $consulta="SELECT RIGHT(CONCAT('00000000', reserva.Registro),8) Registro,
+                            reserva_detalle.Registro as Registro_detalle,
+                            reserva_detalle.Detalle, 
+                            reserva.CodigoReserva,
                             E.RUC,  
                             'EM' Tipo_Operacion,     
-                            Reserva.FechaRegistro,
-                            Reserva_Detalle.Ticket,
-                            CONCAT(Reserva_Detalle.Apellidos, ', ', Reserva_Detalle.Nombres) 'Pasajero',
-                            (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
-                            (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
+                            reserva.FechaRegistro,
+                            reserva_detalle.Ticket,
+                            CONCAT(reserva_detalle.Apellidos, ', ', reserva_detalle.Nombres) 'Pasajero',
+                            (SELECT DNI FROM personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
+                            (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM personal WHERE personal.CodigoPersonal = reserva.CodigoPersonal) 'Delegado',
                             '1' Cantidad,	
-                            CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
+                            CASE reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                             '1' Tramo,
-                            CONCAT('2I ', Reserva.Vuelo_Salida) 'Vuelo_Salida',
-                            Reserva.Origen,
-                            CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR), ' ', Reserva.Hora_Salida) AS DATETIME) HoraVueloSalida,
-                            Reserva.Destino,
-                            DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR), ' ' , Reserva.Hora_Salida) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Origen AND CodigoCiudadDestino = Reserva.Destino) MINUTE)  HoraVueloRetorno,
-                            CONCAT(Reserva_Detalle.Tipo_Doc, Reserva_Detalle.Documento) Documento,
-                            ROUND(Reserva_Detalle.TotalPagar, 2) TotalPagar,
-                            Reserva_Detalle.EstadoRegistro		
-                      FROM Reserva_Detalle, Reserva, Personal, Entidad E 
-                      WHERE Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro
+                            CONCAT('2I ', reserva.Vuelo_Salida) 'Vuelo_Salida',
+                            reserva.Origen,
+                            CAST(CONCAT(CAST(DATE(reserva.Fecha_Salida) AS CHAR), ' ', reserva.Hora_Salida) AS DATETIME) HoraVueloSalida,
+                            reserva.Destino,
+                            DATE_ADD(CAST(CONCAT(CAST(DATE(reserva.Fecha_Salida) AS CHAR), ' ' , reserva.Hora_Salida) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = reserva.Origen AND CodigoCiudadDestino = reserva.Destino) MINUTE)  HoraVueloRetorno,
+                            CONCAT(reserva_detalle.Tipo_Doc, reserva_detalle.Documento) Documento,
+                            ROUND(reserva_detalle.TotalPagar, 2) TotalPagar,
+                            reserva_detalle.EstadoRegistro		
+                      FROM reserva_detalle, reserva, personal, entidad E 
+                      WHERE reserva_detalle.Registro = reserva.Registro AND reserva.CodigoPersonal = personal.CodigoPersonal AND personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro
 
                     UNION
 
-                    SELECT RIGHT(CONCAT('00000000', Reserva.Registro),8) Registro,
-                         Reserva.Registro as Registro_detalle,
-                         Reserva_Detalle.Detalle, 
-                         Reserva.CodigoReserva,
+                    SELECT RIGHT(CONCAT('00000000', reserva.Registro),8) Registro,
+                        reserva.Registro as Registro_detalle,
+                         reserva_detalle.Detalle, 
+                         reserva.CodigoReserva,
                           E.RUC,  
                           'EM' Tipo_Operacion,
-                          Reserva.FechaRegistro,
-                          Reserva_Detalle.Ticket,
-                          CONCAT(Reserva_Detalle.Apellidos, ', ', Reserva_Detalle.Nombres) 'Pasajero',
-                          (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
-                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
+                          reserva.FechaRegistro,
+                          reserva_detalle.Ticket,
+                          CONCAT(reserva_detalle.Apellidos, ', ', reserva_detalle.Nombres) 'Pasajero',
+                          (SELECT DNI FROM personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) Gestor,
+                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM personal WHERE personal.CodigoPersonal = reserva.CodigoPersonal) 'Delegado',
                           '1' Cantidad,	
-                          CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
+                          CASE reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '2' Tramo,
-                          CONCAT('2I ', Reserva.Vuelo_Retorno) 'Vuelo_Salida',
-                          Reserva.Destino,
-                          CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME),
-                          Reserva.Origen,
-                          DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME), INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Destino AND CodigoCiudadDestino = Reserva.Origen) MINUTE),
-                          CONCAT(Reserva_Detalle.Tipo_Doc, Reserva_Detalle.Documento) Documento,
-                          ROUND(Reserva_Detalle.TotalPagar, 2) TotalPagar,
-                          Reserva_Detalle.EstadoRegistro	
-                    FROM Reserva_Detalle, Reserva, Personal, Entidad E 
-                    WHERE Reserva.TipoVuelo = 'R' AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro
+                          CONCAT('2I ', reserva.Vuelo_Retorno) 'Vuelo_Salida',
+                          reserva.Destino,
+                          CAST(CONCAT(CAST(DATE(reserva.Fecha_Retorno) AS CHAR), ' ', reserva.Hora_Retorno) AS DATETIME),
+                          reserva.Origen,
+                          DATE_ADD(CAST(CONCAT(CAST(DATE(reserva.Fecha_Retorno) AS CHAR), ' ', reserva.Hora_Retorno) AS DATETIME), INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = reserva.Destino AND CodigoCiudadDestino = reserva.Origen) MINUTE),
+                          CONCAT(reserva_detalle.Tipo_Doc, reserva_detalle.Documento) Documento,
+                          ROUND(reserva_detalle.TotalPagar, 2) TotalPagar,
+                          reserva_detalle.EstadoRegistro	
+                    FROM reserva_detalle, reserva, personal, entidad E 
+                    WHERE reserva.TipoVuelo = 'R' AND reserva_detalle.Registro = reserva.Registro AND reserva.CodigoPersonal = personal.CodigoPersonal AND personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro
 
                     UNION
 
-                    SELECT RIGHT(CONCAT('00000000', Reserva.Registro),8) Registro,
-                         Reserva.Registro as Registro_detalle,
-                         Reserva_Detalle.Detalle, 
-                          Reserva.CodigoReserva,
+                    SELECT RIGHT(CONCAT('00000000', reserva.Registro),8) Registro,
+                        reserva.Registro as Registro_detalle,
+                         reserva_detalle.Detalle, 
+                         reserva.CodigoReserva,
                           E.RUC,  
                           'SA' Tipo_Operacion,
-                          Reserva.FechaRegistro,
-                          Reserva_Detalle.Ticket,
-                          CONCAT(Reserva_Detalle.Apellidos, ', ', Reserva_Detalle.Nombres) 'Pasajero',
-                          (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) 'Gestor',
-                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
+                          reserva.FechaRegistro,
+                          reserva_detalle.Ticket,
+                          CONCAT(reserva_detalle.Apellidos, ', ', reserva_detalle.Nombres) 'Pasajero',
+                          (SELECT DNI FROM personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) 'Gestor',
+                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM personal WHERE personal.CodigoPersonal = reserva.CodigoPersonal) 'Delegado',
                           '1' Cantidad,	
-                          CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
+                          CASE reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '1' Tramo,
-                          CONCAT('2I ', Reserva.Vuelo_Salida) 'Vuelo_Salida',
-                          Reserva.Origen,
-                          CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR), ' ', Reserva.Hora_Salida) AS DATETIME) HoraVueloSalida,
-                          Reserva.Destino,
-                          DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Salida) AS CHAR),' ', Reserva.Hora_Salida) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Origen AND CodigoCiudadDestino = Reserva.Destino) MINUTE)  HoraVueloRetorno,
-                          CONCAT(Reserva_Detalle.Tipo_Doc, Reserva_Detalle.Documento) Documento,
-                          ROUND(Reserva_Detalle.TotalPagar, 2) * (-1),
-                          Reserva_Detalle.EstadoRegistro		
-                    FROM Reserva_Detalle, Reserva, Personal, Entidad E 
-                    WHERE Reserva_Detalle.EstadoRegistro = 0 AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad  $filtro
+                          CONCAT('2I ', reserva.Vuelo_Salida) 'Vuelo_Salida',
+                          reserva.Origen,
+                          CAST(CONCAT(CAST(DATE(reserva.Fecha_Salida) AS CHAR), ' ', reserva.Hora_Salida) AS DATETIME) HoraVueloSalida,
+                          reserva.Destino,
+                          DATE_ADD(CAST(CONCAT(CAST(DATE(reserva.Fecha_Salida) AS CHAR),' ', reserva.Hora_Salida) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = reserva.Origen AND CodigoCiudadDestino = reserva.Destino) MINUTE)  HoraVueloRetorno,
+                          CONCAT(reserva_detalle.Tipo_Doc, reserva_detalle.Documento) Documento,
+                          ROUND(reserva_detalle.TotalPagar, 2) * (-1),
+                          reserva_detalle.EstadoRegistro		
+                    FROM reserva_detalle, reserva, personal, entidad E 
+                    WHERE reserva_detalle.EstadoRegistro = 0 AND reserva_detalle.Registro = reserva.Registro AND reserva.CodigoPersonal = personal.CodigoPersonal AND personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad  $filtro
 
                     UNION
 
-                    SELECT RIGHT(CONCAT('00000000', Reserva.Registro),8) Registro,
-                          Reserva.Registro as Registro_detalle,
-                          Reserva_Detalle.Detalle, 
-                          Reserva.CodigoReserva,
+                    SELECT RIGHT(CONCAT('00000000', reserva.Registro),8) Registro,
+                          reserva.Registro as Registro_detalle,
+                          reserva_detalle.Detalle, 
+                          reserva.CodigoReserva,
                           E.RUC,  
                           'SA' Tipo_Operacion,
-                          Reserva.FechaRegistro,
-                          Reserva_Detalle.Ticket,
-                          CONCAT(Reserva_Detalle.Apellidos, ', ', Reserva_Detalle.Nombres) 'Pasajero',
-                          (SELECT DNI FROM Personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) 'Gestor',
-                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal) 'Delegado',
+                          reserva.FechaRegistro,
+                          reserva_detalle.Ticket,
+                          CONCAT(reserva_detalle.Apellidos, ', ', reserva_detalle.Nombres) 'Pasajero',
+                          (SELECT DNI FROM personal WHERE CodigoEntidad = E.CodigoEntidad AND CodigoTipo = 'G' AND EstadoRegistro = 1 LIMIT 1) 'Gestor',
+                          (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM personal WHERE personal.CodigoPersonal = reserva.CodigoPersonal) 'Delegado',
                           '1' Cantidad,	
-                          CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
+                          CASE reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END 'TipoVuelo',
                           '2' Tramo,
-                          CONCAT('2I ', Reserva.Vuelo_Retorno) 'Vuelo_Salida',
-                          Reserva.Destino,
-                          CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME),
-                          Reserva.Origen,
-                          DATE_ADD(CAST(CONCAT(CAST(DATE(Reserva.Fecha_Retorno) AS CHAR), ' ', Reserva.Hora_Retorno) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = Reserva.Destino AND CodigoCiudadDestino = Reserva.Origen) MINUTE) HoraVueloRetorno,      
-                          CONCAT(Reserva_Detalle.Tipo_Doc, Reserva_Detalle.Documento) Documento,
-                          ROUND(Reserva_Detalle.TotalPagar, 2) * (-1),
-                          Reserva_Detalle.EstadoRegistro	
-                    FROM Reserva_Detalle, Reserva, Personal, Entidad E 
-                    WHERE Reserva.TipoVuelo = 'R' AND Reserva_Detalle.EstadoRegistro = 0 AND Reserva_Detalle.Registro = Reserva.Registro AND Reserva.CodigoPersonal = Personal.CodigoPersonal AND Personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro
+                          CONCAT('2I ', reserva.Vuelo_Retorno) 'Vuelo_Salida',
+                          reserva.Destino,
+                          CAST(CONCAT(CAST(DATE(reserva.Fecha_Retorno) AS CHAR), ' ', reserva.Hora_Retorno) AS DATETIME),
+                          reserva.Origen,
+                          DATE_ADD(CAST(CONCAT(CAST(DATE(reserva.Fecha_Retorno) AS CHAR), ' ', reserva.Hora_Retorno) AS DATETIME),INTERVAL (SELECT IFNULL(Minutos, 0) FROM Ruta WHERE CodigoCiudadOrigen = reserva.Destino AND CodigoCiudadDestino = reserva.Origen) MINUTE) HoraVueloRetorno,      
+                          CONCAT(reserva_detalle.Tipo_Doc, reserva_detalle.Documento) Documento,
+                          ROUND(reserva_detalle.TotalPagar, 2) * (-1),
+                          reserva_detalle.EstadoRegistro	
+                    FROM reserva_detalle, reserva, personal, entidad E 
+                    WHERE reserva.TipoVuelo = 'R' AND reserva_detalle.EstadoRegistro = 0 AND reserva_detalle.Registro = reserva.Registro AND reserva.CodigoPersonal = personal.CodigoPersonal AND personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro
                     ORDER BY 5, 10";
 
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
@@ -485,9 +485,9 @@ class ReservaModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="SELECT Visa.*,Reserva.*
-                FROM Reserva ,Visa
-                WHERE  Visa.reserva_id = Reserva.Registro AND Reserva.Registro = $registro";
+        $consulta="SELECT visa.*,reserva.*
+                FROM reserva ,visa
+                WHERE  visa.reserva_id = reserva.Registro AND reserva.Registro = $registro";
 
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
@@ -533,50 +533,50 @@ public function DetalleMovimiento($registro,$detalle){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="SELECT RIGHT(CONCAT('00000000', Reserva.Registro), 8) Registro, 
+        $consulta="SELECT RIGHT(CONCAT('00000000', reserva.Registro), 8) Registro, 
                         '20342868844' RUCEmpresa, 
-                        Reserva_Detalle.ComisionTarifa, 
-                           Reserva.Porcentaje, 
-                        Entidad.RUC RUCEntidad, 
-                        Entidad.DNIFuncionario, 
-                        (SELECT DNI FROM Personal WHERE EstadoRegistro = 1 AND CodigoEntidad = Reserva.CodigoEntidad AND CodigoTipo = 'G') DNIGestor,
-                        (SELECT IFNULL(CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END, '') FROM Personal WHERE EstadoRegistro = 1 AND Personal.CodigoPersonal = Reserva.CodigoPersonal AND Personal.CodigoEntidad = Reserva.CodigoEntidad ) DNIDelegado,
-                        RIGHT(CONCAT('00000000', Reserva.Registro), 8) Operacion, 
-                        (CASE Reserva_Detalle.EstadoRegistro WHEN 0 THEN 'SA' WHEN 1 THEN 'EM' END) TipoOperacion,
+                        reserva_detalle.ComisionTarifa, 
+                        reserva.Porcentaje, 
+                        entidad.RUC RUCEntidad, 
+                        entidad.DNIFuncionario, 
+                        (SELECT DNI FROM Personal WHERE EstadoRegistro = 1 AND CodigoEntidad = reserva.CodigoEntidad AND CodigoTipo = 'G') DNIGestor,
+                        (SELECT IFNULL(CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END, '') FROM Personal WHERE EstadoRegistro = 1 AND Personal.CodigoPersonal = reserva.CodigoPersonal AND Personal.CodigoEntidad = reserva.CodigoEntidad ) DNIDelegado,
+                        RIGHT(CONCAT('00000000', reserva.Registro), 8) Operacion, 
+                        (CASE reserva_detalle.EstadoRegistro WHEN 0 THEN 'SA' WHEN 1 THEN 'EM' END) TipoOperacion,
                         1 Cantidad,
-                        CASE Reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END TipoServicio,
-                        Reserva.FechaRegistro,
-                        Reserva_Detalle.Ticket,
-                        Reserva_Detalle.Referencia,
-                        CONCAT('2I ', Reserva.Vuelo_Salida) Vuelo_Salida,
+                        CASE reserva.TipoVuelo WHEN 'O' THEN 'OW' WHEN 'R' THEN 'RT' END TipoServicio,
+                        reserva.FechaRegistro,
+                        reserva_detalle.Ticket,
+                        reserva_detalle.Referencia,
+                        CONCAT('2I ', reserva.Vuelo_Salida) Vuelo_Salida,
                         Origen,
-                        CONCAT(DATE(Reserva.Fecha_Salida), ' ', Reserva.Hora_Salida) Salida,
+                        CONCAT(DATE(reserva.Fecha_Salida), ' ', reserva.Hora_Salida) Salida,
                         Destino,
                         (SELECT Tiempo FROM Ruta WHERE CodigoCiudadOrigen = Origen AND CodigoCiudadDestino = Destino) Duracion,
-                        Reserva.Clase_Salida,
-                        CONCAT(Reserva_Detalle.Tipo_Doc, ' ', Reserva_Detalle.Documento) Documento,
-                        CASE Reserva_Detalle.Tipo_Pax WHEN 'A' THEN 'Adulto' WHEN 'N' THEN 'Niño' WHEN 'B' THEN 'Infante' END TipoPasajero,
-                        CONCAT(Reserva_Detalle.Apellidos, ', ', Reserva_Detalle.Nombres) Pasajero,
-                        Reserva_Detalle.Email,
-                        Reserva_Detalle.Telefono,
-                        Reserva_Detalle.Anexo,
-                        Reserva_Detalle.EQ Tarifa,
+                        reserva.Clase_Salida,
+                        CONCAT(reserva_detalle.Tipo_Doc, ' ', reserva_detalle.Documento) Documento,
+                        CASE reserva_detalle.Tipo_Pax WHEN 'A' THEN 'Adulto' WHEN 'N' THEN 'Niño' WHEN 'B' THEN 'Infante' END TipoPasajero,
+                        CONCAT(reserva_detalle.Apellidos, ', ', reserva_detalle.Nombres) Pasajero,
+                        reserva_detalle.Email,
+                        reserva_detalle.Telefono,
+                        reserva_detalle.Anexo,
+                        reserva_detalle.EQ Tarifa,
                         0 TarifaCombustible,
-                        Reserva_Detalle.EQ TarifaTotal,
-                        Reserva_Detalle.PE IGV,
-                        Reserva_Detalle.HW TUUA,
+                        reserva_detalle.EQ TarifaTotal,
+                        reserva_detalle.PE IGV,
+                        reserva_detalle.HW TUUA,
                         0 IGVTUUA,
-                        Reserva_Detalle.Total PrecioFinal,
+                        reserva_detalle.Total PrecioFinal,
                         0 ComisionServicio, 
                         0 Penalidad,
                         0 DiferenciaTarifaria,
                         'USD' TipoMoneda,
-                        Reserva_Detalle.Total PrecioFinal2,
+                        reserva_detalle.Total PrecioFinal2,
                         0 DescuentoTarifa,
                         0 DescuentoAcumulado,
-                        Reserva_Detalle.Total CostoTramo
-                FROM Entidad, Reserva, Reserva_Detalle 
-                WHERE Entidad.CodigoEntidad = Reserva.CodigoEntidad AND Reserva.Registro = Reserva_Detalle.Registro AND Reserva_Detalle.Registro = $registro AND Reserva_Detalle.Detalle=$detalle";
+                        reserva_detalle.Total CostoTramo
+                FROM entidad, reserva, reserva_detalle 
+                WHERE entidad.CodigoEntidad = reserva.CodigoEntidad AND reserva.Registro = reserva_detalle.Registro AND reserva_detalle.Registro = $registro AND reserva_detalle.Detalle=$detalle";
 
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
@@ -685,7 +685,7 @@ public function AnularTicket($ticket){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="UPDATE Reserva_Detalle SET EstadoRegistro=0 WHERE Ticket='$ticket'";
+        $consulta="UPDATE reserva_detalle SET EstadoRegistro=0 WHERE Ticket='$ticket'";
 
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
@@ -701,7 +701,7 @@ public function AnularReserva($pnr){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="UPDATE Reserva SET EstadoRegistro=0 WHERE  CodigoReserva='$pnr'";
+        $consulta="UPDATE reserva SET EstadoRegistro=0 WHERE  CodigoReserva='$pnr'";
         
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
 
@@ -717,7 +717,7 @@ public function AnularReserva($pnr){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="SELECT Bebes from Reserva WHERE Registro=$registro";
+        $consulta="SELECT Bebes from reserva WHERE Registro=$registro";
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion); 
         $data_bebe=$obj_conexion->ObtenerDatos($resultado);
         $cantBebes = $data_bebe['Bebes'];
@@ -727,7 +727,7 @@ function EnviaAlertaNinoEmail($registro){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="SELECT CodigoReserva, Apellidos, Nombres, Origen, Destino, Fecha_Salida, Vuelo_Salida, Fecha_Retorno, Vuelo_Retorno, Telefono, Celular, Email FROM Reserva WHERE Registro=$registro";
+        $consulta="SELECT CodigoReserva, Apellidos, Nombres, Origen, Destino, Fecha_Salida, Vuelo_Salida, Fecha_Retorno, Vuelo_Retorno, Telefono, Celular, Email FROM reserva WHERE Registro=$registro";
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion); 
         $data_nino=$obj_conexion->ObtenerDatos($resultado);
         //return $resultado1;
@@ -779,7 +779,7 @@ public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$emai
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="INSERT INTO Reserva(CodigoReserva,Apellidos,Nombres,Tipo_Doc,Documento,Telefono,Celular,Email,FechaRegistro,FechaLimite,TipoVuelo,Adultos,Ninos,Bebes,Origen,"
+        $consulta="INSERT INTO reserva(CodigoReserva,Apellidos,Nombres,Tipo_Doc,Documento,Telefono,Celular,Email,FechaRegistro,FechaLimite,TipoVuelo,Adultos,Ninos,Bebes,Origen,"
                 . "Destino,Vuelo_Salida,Clase_Salida,Fecha_Salida,Hora_Salida,Vuelo_Retorno,Clase_Retorno,Fecha_Retorno,Hora_Retorno,Pais,Ciudad,IP,Flete,TUA,"
                 . "Impuesto,Total,CodigoEntidad,CodigoPersonal,RUC) "
                 . "VALUES('$codigo_reserva','$apellidos','$nombres','$tipo_documento','$numero_documento','$telefono','$celular','$email','$fecha_registro','$fecha_registro','$tipo_vuelo_letras',$adultos_5,$menores_5,$infantes_5,"
@@ -803,7 +803,7 @@ public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$emai
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="INSERT INTO Reserva_Detalle(Registro,Detalle,Tipo_Doc,Documento,Apellidos,Nombres,Tipo_Pax,Celular,Telefono,Anexo,RPM,RPC,Email,EQ,FA,MS,PE,HW,Total,TotalPagar,FechaNacimiento)"
+        $consulta="INSERT INTO reserva_detalle(Registro,Detalle,Tipo_Doc,Documento,Apellidos,Nombres,Tipo_Pax,Celular,Telefono,Anexo,RPM,RPC,Email,EQ,FA,MS,PE,HW,Total,TotalPagar,FechaNacimiento)"
                 . " VALUES('$registro',$j,'$tipo_documento','$numero_documento','$apellidos','$nombres','$tipo_pax','$celular','$telefono','$anexo','$rpm','$rpc','$email',$tarifa_unitaria,$tarifa_unitaria,$total_pagar,$igv_unitaria,$tuua_unitaria,$total,$total_pagar,'$fecNac')";
         
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
@@ -822,7 +822,7 @@ public function UpdateReservaDetalleTicket($ticket,$i,$registro,$ComisionTarifa)
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="UPDATE Reserva_Detalle SET Ticket='$ticket',ComisionTarifa=$ComisionTarifa WHERE Registro=$registro AND Detalle=$i";
+        $consulta="UPDATE reserva_detalle SET Ticket='$ticket',ComisionTarifa=$ComisionTarifa WHERE Registro=$registro AND Detalle=$i";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        
         $error=$obj_conexion->ErrorEjecucion($conexion);
@@ -839,7 +839,7 @@ public function UpdateReservaTicket($codigo_reserva_c,$campos_consulta,$porcenta
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
-        $consulta="UPDATE Reserva SET $campos_consulta forma_pago = '$cc_code' ,EstadoRegistro=1, Porcentaje=$porcentaje WHERE CodigoReserva='$codigo_reserva_c'";
+        $consulta="UPDATE reserva SET $campos_consulta forma_pago = '$cc_code' ,EstadoRegistro=1, Porcentaje=$porcentaje WHERE CodigoReserva='$codigo_reserva_c'";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        
         $error=$obj_conexion->ErrorEjecucion($conexion);

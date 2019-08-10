@@ -10,7 +10,7 @@ class TarifaModelo{
     public function FamiliasHabilitadas(){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="SELECT NombreFamilia FROM Pais p, Pais_Familia pf, Familia f 
+        $consulta="SELECT NombreFamilia FROM pais p, pais_familia pf, familia f 
                    WHERE p.CodigoPais=pf.CodigoPais AND pf.CodigoFamilia=f.CodigoFamilia
                    AND p.Pais='PERU'";
             
@@ -73,7 +73,7 @@ class TarifaModelo{
 
         $filtro_tipo='';
         if($tipo_viaje=='O'){
-            $filtro_tipo=" FareBase.TipoViaje='O' AND ";
+            $filtro_tipo=" farebase.TipoViaje='O' AND ";
             $filtro_ruta.=" Ruta.CodigoCiudadOrigen='$origen' AND  
                             Ruta.CodigoCiudadDestino='$destino' AND ";
         }else if($tipo_viaje=='R'){
@@ -83,23 +83,23 @@ class TarifaModelo{
         $fecha_emision=date('Y-m-d');
         /*QUITANDO BASICAS A LA OSCE + REGULAR Q*/
         $consulta="SELECT NombreClase,Tarifa, NombreFamilia
-                FROM FareBase_Ruta,FareBase,Ruta,Clase,Pais_Clase ,Pais,Familia
-                WHERE FareBase_Ruta.CodigoFareBase=FareBase.CodigoFareBase AND 
-                      FareBase_Ruta.CodigoRuta=Ruta.CodigoRuta AND     
-                      FareBase.CodigoClase=Clase.CodigoClase AND 
-                      Clase.CodigoFamilia=Familia.CodigoFamilia AND
-                      Clase.TipoClase=1 AND 
-                      Pais_Clase.Clase=Clase.CodigoClase AND
-                      Pais_Clase.CodigoPais = Pais.CodigoPais AND
-                      Pais_Clase.EstadoRegistro = 1 AND
-                      Pais.Abreviatura='PE' AND                                     
-                      FareBase_Ruta.estado_web=1 AND 
-                      FareBase_Ruta.Tarifa>0 AND  
+                FROM farebase_ruta,farebase,ruta,clase,pais_clase ,pais,familia
+                WHERE farebase_ruta.CodigoFareBase=farebase.CodigoFareBase AND 
+                      farebase_ruta.CodigoRuta=Ruta.CodigoRuta AND     
+                      FareBase.CodigoClase=clase.CodigoClase AND 
+                      clase.CodigoFamilia=familia.CodigoFamilia AND
+                      clase.TipoClase=1 AND 
+                      pais_clase.Clase=clase.CodigoClase AND
+                      pais_clase.CodigoPais = pais.CodigoPais AND
+                      pais_clase.EstadoRegistro = 1 AND
+                      pais.Abreviatura='PE' AND                                     
+                      farebase_ruta.estado_web=1 AND 
+                      farebase_ruta.Tarifa>0 AND  
                       $filtro_ruta
                       $filtro_tipo     
                       EstadiaMin<=$estadia AND (EstadiaMax>=$estadia OR EstadiaMax=0) AND 
-                      ('$fecha' BETWEEN FareBase_Ruta.Inicio AND FareBase_Ruta.Final) AND 
-                      ('$fecha_emision' BETWEEN FareBase_Ruta.EmisionInicio AND FareBase_Ruta.EmisionFinal) 
+                      ('$fecha' BETWEEN farebase_ruta.Inicio AND farebase_ruta.Final) AND 
+                      ('$fecha_emision' BETWEEN farebase_ruta.EmisionInicio AND farebase_ruta.EmisionFinal) 
                       ORDER BY 2 ASC";               
 //        echo $consulta;
 //        exit;
@@ -127,7 +127,7 @@ class TarifaModelo{
     public function ObtenerFamiliaCondiciones($clase){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="SELECT Familia.NombreFamilia,Clase.CodigoClase FROM Pais_Familia, Familia, Clase WHERE  Clase.CodigoClase='$clase' AND Clase.CodigoFamilia=Familia.CodigoFamilia AND Pais_Familia.CodigoFamilia = Familia.CodigoFamilia AND EstadoRegistro = 1 AND CodigoPais = '44'";
+        $consulta="SELECT familia.NombreFamilia,clase.CodigoClase FROM pais_familia, familia, clase WHERE  clase.CodigoClase='$clase' AND clase.CodigoFamilia=familia.CodigoFamilia AND pais_familia.CodigoFamilia = familia.CodigoFamilia AND EstadoRegistro = 1 AND CodigoPais = '44'";
             
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
@@ -144,7 +144,7 @@ class TarifaModelo{
     public function IgvExonerado($codigo_ciudad){ 
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion(); 
-        $consulta="SELECT exonerado FROM Ciudad WHERE id_ciudad='$codigo_ciudad'";
+        $consulta="SELECT exonerado FROM ciudad WHERE id_ciudad='$codigo_ciudad'";
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
        
@@ -160,7 +160,7 @@ class TarifaModelo{
     public function ObtenerNombreCiudad($codigo_ciudad){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="SELECT ciudad FROM Ciudad WHERE id_ciudad='$codigo_ciudad'";
+        $consulta="SELECT ciudad FROM ciudad WHERE id_ciudad='$codigo_ciudad'";
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
        

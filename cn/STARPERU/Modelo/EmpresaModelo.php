@@ -18,7 +18,7 @@ class EmpresaModelo {
 
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
-        $consulta = "SELECT RazonSocial FROM Entidad WHERE CodigoEntidad=$codigo_entidad";
+        $consulta = "SELECT RazonSocial FROM entidad WHERE CodigoEntidad=$codigo_entidad";
 
         $resultado = $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
         $numero_filas = $obj_conexion->ContarFilas($resultado);
@@ -38,7 +38,7 @@ class EmpresaModelo {
 
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
-        $consulta = "SELECT RUC FROM Entidad WHERE CodigoEntidad=$codigo_entidad";
+        $consulta = "SELECT RUC FROM entidad WHERE CodigoEntidad=$codigo_entidad";
 
         $resultado = $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
         $numero_filas = $obj_conexion->ContarFilas($resultado);
@@ -58,7 +58,7 @@ class EmpresaModelo {
 
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
-        $consulta = "SELECT e.EstadoRegistro FROM Entidad e, Personal p "
+        $consulta = "SELECT e.EstadoRegistro FROM entidad e, Personal p "
                 . "WHERE e.CodigoEntidad=p.CodigoEntidad AND p.CodigoUsuario = '$dni_personal' AND p.EstadoRegistro=1";
 
         $resultado = $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
@@ -238,7 +238,7 @@ class EmpresaModelo {
     public function EditarAgencia($CodigoPersonal, $CodigoEntidad, $ruc, $apellido_paterno, $razon_social, $apellido_materno, $nombre_comercial, $nombres, $DNIFuncionario, $ciudad, $celular, $domicilio_fiscal, $email, $telefono_oficina) {
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
-        $consulta = "UPDATE Entidad SET RUC='$ruc', ApellidoPaterno='$apellido_paterno',RazonSocial='$razon_social',ApellidoMaterno='$apellido_materno',
+        $consulta = "UPDATE entidad SET RUC='$ruc', ApellidoPaterno='$apellido_paterno',RazonSocial='$razon_social',ApellidoMaterno='$apellido_materno',
             NombreComercial='$nombre_comercial',Nombres='$nombres',DNIFuncionario='$DNIFuncionario',CodigoCiudad='$ciudad',Celular='$celular',
             Direccion= '$domicilio_fiscal',Email='$email',TelefoniaOficina='$telefono_oficina' WHERE CodigoEntidad='$CodigoEntidad'";
         $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);

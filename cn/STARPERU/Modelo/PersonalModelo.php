@@ -21,11 +21,6 @@ class PersonalModelo{
         $consulta="SELECT p.CodigoPersonal, p.Nombres, p.ApellidoPaterno, p.ApellidoMaterno, p.CodigoEntidad, p.CambioClave,p.CodigoTipo,p.DNI,p.Email,p.TelefonoOficina,p.Anexo,p.Celular,p.RPC,p.RPM,p.Nextel,p.Tipo,e.RazonSocial 
                    FROM personal p, entidad e 
                    WHERE p.CodigoUsuario='$usuario' AND p.Password='$password' AND p.EstadoRegistro=1 AND e.EstadoRegistro=1 AND p.CodigoEntidad=e.CodigoEntidad";//e.EstadoRegistro=1 AND
-        // echo "<pre>";
-        // var_dump($conexion);
-        // echo "_________________________<br>";
-        // var_dump($consulta); 
-        // echo "</pre>";die;
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
 
@@ -65,7 +60,7 @@ class PersonalModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta = "SELECT P.CambioClave,P.CodigoTipo,P.Tipo,P.CodigoEntidad,P.CodigoPersonal,P.DNI,P.ApellidoMaterno,P.ApellidoPaterno,P.Nombres,P.Email,P.TelefonoOficina,P.Anexo,p.EstadoRegistro,P.Celular,E.RazonSocial,E.RUC,E.Direccion
-                    FROM Personal P,Entidad E
+                    FROM personal P,entidad E
                     WHERE  p.EstadoRegistro=1 AND e.EstadoRegistro=1 AND p.CodigoEntidad=e.CodigoEntidad AND P.CodigoEntidad='$codigo_entidad'"; 
              if($dni!=''){
                   $consulta.=" AND DNI='$dni'";
@@ -109,7 +104,7 @@ class PersonalModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="SELECT *
-                   FROM Personal 
+                   FROM personal 
                    WHERE DNI='$dni' AND CodigoEntidad='$codigo_entidad' AND EstadoRegistro=1";
                  
        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
@@ -120,7 +115,7 @@ class PersonalModelo{
      public function ObtenerNombreEntidad($codigo_entidad){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="SELECT RazonSocial FROM Entidad WHERE CodigoEntidad='$codigo_entidad'";
+        $consulta="SELECT RazonSocial FROM entidad WHERE CodigoEntidad='$codigo_entidad'";
                  
        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        $numero_filas=$obj_conexion->ContarFilas($resultado);
@@ -139,7 +134,7 @@ class PersonalModelo{
     public function ObtenerRUCEntidad($codigo_entidad){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="SELECT RUC FROM Entidad WHERE CodigoEntidad='$codigo_entidad'";
+        $consulta="SELECT RUC FROM entidad WHERE CodigoEntidad='$codigo_entidad'";
                  
        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        $numero_filas=$obj_conexion->ContarFilas($resultado);
@@ -159,7 +154,7 @@ class PersonalModelo{
        $linea_credito_final = "";
        $obj_conexion=new ConexionBD();
        $conexion=$obj_conexion->CrearConexion();
-       $consulta="SELECT (Linea-Acumulado) AS LineaCredito FROM Entidad WHERE CodigoEntidad='$codigo_entidad'"; 
+       $consulta="SELECT (Linea-Acumulado) AS LineaCredito FROM entidad WHERE CodigoEntidad='$codigo_entidad'"; 
        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
        $numero_filas=$obj_conexion->ContarFilas($resultado);
         if($numero_filas>0){
@@ -183,9 +178,9 @@ class PersonalModelo{
        $obj_conexion=new ConexionBD();
        $conexion=$obj_conexion->CrearConexion();
        if($tipo==1){
-           $consulta="UPDATE Entidad SET Acumulado=(Acumulado+$monto_recuperado) WHERE CodigoEntidad='$codigo_entidad'";        
+           $consulta="UPDATE entidad SET Acumulado=(Acumulado+$monto_recuperado) WHERE CodigoEntidad='$codigo_entidad'";        
        }elseif($tipo==2){
-           $consulta="UPDATE Entidad SET Acumulado=(Acumulado-$monto_recuperado) WHERE CodigoEntidad='$codigo_entidad'";        
+           $consulta="UPDATE entidad SET Acumulado=(Acumulado-$monto_recuperado) WHERE CodigoEntidad='$codigo_entidad'";        
        }
        
        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
@@ -214,7 +209,7 @@ class PersonalModelo{
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,TelefonoOficina,Anexo,Celular,CodigoTipo,CambioClave,CodigoUsuario,Password,EstadoRegistro,Tipo)
+        $consulta="INSERT INTO personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,TelefonoOficina,Anexo,Celular,CodigoTipo,CambioClave,CodigoUsuario,Password,EstadoRegistro,Tipo)
                    VALUES ($codigo_entidad,'$dni','$apep','$apem','$nom','$email','$ofic','$anexo','$celular','D',1,'$dni','$password',1,'counter')";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
@@ -229,7 +224,7 @@ class PersonalModelo{
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="INSERT INTO Personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,Celular,CodigoTipo,Tipo,CodigoUsuario,Password,EstadoRegistro)
+        $consulta="INSERT INTO personal (CodigoEntidad,DNI,ApellidoPaterno,ApellidoMaterno,Nombres,Email,Celular,CodigoTipo,Tipo,CodigoUsuario,Password,EstadoRegistro)
                    VALUES ($CodigoEntidad,'$DNI','$ApellidoPaterno','$ApellidoMaterno','$Nombres','$Email','$Celular','$CodigoTipo','$Tipo','$Usuario','$Password',0)";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
@@ -286,7 +281,7 @@ class PersonalModelo{
             $estado_registro=", EstadoRegistro=$estado";
             
         }
-        $consulta="UPDATE Personal SET $datos_actualizar CambioClave=$cambio_contrasena $nuevo_password $estado_registro
+        $consulta="UPDATE personal SET $datos_actualizar CambioClave=$cambio_contrasena $nuevo_password $estado_registro
                    WHERE CodigoEntidad=$codigo_entidad AND DNI='$dni' AND CodigoTipo='D'";
 
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
@@ -302,7 +297,7 @@ class PersonalModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="SELECT *
-                   FROM Personal 
+                   FROM personal 
                    WHERE CodigoEntidad=$codigo_entidad AND DNI='$dni' AND CodigoTipo='D'";
 
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
@@ -342,7 +337,7 @@ class PersonalModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="SELECT Email
-                   FROM Personal 
+                   FROM personal 
                    WHERE CodigoEntidad=$codigo_entidad AND CodigoTipo='G' AND EstadoRegistro=1";
 
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
@@ -362,7 +357,7 @@ class PersonalModelo{
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="UPDATE Personal SET EstadoRegistro='$estado' WHERE DNI='$dni' AND CodigoTipo='D'" ;
+        $consulta="UPDATE personal SET EstadoRegistro='$estado' WHERE DNI='$dni' AND CodigoTipo='D'" ;
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
@@ -624,7 +619,7 @@ class PersonalModelo{
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
  
-        $consulta = "UPDATE Personal SET ApellidoPaterno='$apellido_paterno',ApellidoMaterno='$apellido_materno',
+        $consulta = "UPDATE personal SET ApellidoPaterno='$apellido_paterno',ApellidoMaterno='$apellido_materno',
             Nombres='$nombres',DNI='$DNIFuncionario',Celular='$celular'
             ,Email='$email',TelefonoOficina='$telefono_oficina' WHERE CodigoEntidad='$CodigoEntidad' AND CodigoPersonal='$CodigoPersonal'";
         $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
