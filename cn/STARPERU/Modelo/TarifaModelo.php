@@ -85,7 +85,7 @@ class TarifaModelo{
         $consulta="SELECT NombreClase,Tarifa, NombreFamilia
                 FROM farebase_ruta,farebase,ruta,clase,pais_clase ,pais,familia
                 WHERE farebase_ruta.CodigoFareBase=farebase.CodigoFareBase AND 
-                      farebase_ruta.CodigoRuta=Ruta.CodigoRuta AND     
+                      farebase_ruta.CodigoRuta=ruta.CodigoRuta AND     
                       FareBase.CodigoClase=clase.CodigoClase AND 
                       clase.CodigoFamilia=familia.CodigoFamilia AND
                       clase.TipoClase=1 AND 
