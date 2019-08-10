@@ -74,11 +74,11 @@ class TarifaModelo{
         $filtro_tipo='';
         if($tipo_viaje=='O'){
             $filtro_tipo=" farebase.TipoViaje='O' AND ";
-            $filtro_ruta.=" Ruta.CodigoCiudadOrigen='$origen' AND  
-                            Ruta.CodigoCiudadDestino='$destino' AND ";
+            $filtro_ruta.=" ruta.CodigoCiudadOrigen='$origen' AND  
+                            ruta.CodigoCiudadDestino='$destino' AND ";
         }else if($tipo_viaje=='R'){
-            $filtro_ruta.=" Ruta.CodigoCiudadOrigen='$destino' AND  
-                            Ruta.CodigoCiudadDestino='$origen' AND ";
+            $filtro_ruta.=" ruta.CodigoCiudadOrigen='$destino' AND  
+                            ruta.CodigoCiudadDestino='$origen' AND ";
         }
         $fecha_emision=date('Y-m-d');
         /*QUITANDO BASICAS A LA OSCE + REGULAR Q*/
