@@ -141,9 +141,9 @@ if($_REQUEST['movimientos']==1){
                                           $movimiento[7]->getDestino(),
                                           $movimiento[7]->getHoraRetorno(),
                                           $movimiento[6],
-                                          ($movimiento[8]->getEstadoRegistro()==1)?$total_pagar:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar.'</del></div>',
-                                          ($movimiento[8]->getEstadoRegistro()==1)?$total_pagar_descuento:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar_descuento.'</del></div>',
-                                          ($movimiento[8]->getEstadoRegistro()==1)?$comision:'<div style="text-align: center; width: 100px; color:red;"><del>'.$comision.'</del></div>',
+                                          ($movimiento[8]->getEstadoRegistro()==1 && $movimiento[8]->getTicket()<>"")?$total_pagar:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar.'</del></div>',
+                                          ($movimiento[8]->getEstadoRegistro()==1 && $movimiento[8]->getTicket()<>"")?$total_pagar_descuento:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar_descuento.'</del></div>',
+                                          ($movimiento[8]->getEstadoRegistro()==1 && $movimiento[8]->getTicket()<>"")?$comision:'<div style="text-align: center; width: 100px; color:red;"><del>'.$comision.'</del></div>',
                                           )
                                       ); 
                     }

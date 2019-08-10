@@ -511,6 +511,7 @@ class ReservaModelo{
                     $monto=$fila['amount'];
                     $num_cuotas=$fila['quota_number'];
                     $estado=$fila['anulado'];
+                    $token_id=$fila['token_id'];
                                         
                     $forma_pago[]=$brand;
                     $forma_pago[]=$card;
@@ -519,6 +520,7 @@ class ReservaModelo{
                     $forma_pago[]=$monto;
                     $forma_pago[]=$num_cuotas;
                     $forma_pago[]=$estado;
+                    $forma_pago[]=$token_id;
                     $formaPago[]=$forma_pago;
             }
             $obj_conexion->CerrarConexion($conexion);
