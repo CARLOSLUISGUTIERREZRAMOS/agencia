@@ -183,37 +183,66 @@ $(document).on('submit', '#registrar-agencia', function(event) {
 
 $(document).on('blur', 'input[name=RUC]', function(arg) {
     if (this.value) {
-        CambiarInputs(false);
-        var data = 'verificar_ruc=1&RUC=' + this.value;
-        $.ajax({
-            type: 'POST',
-            url: 'cd/Controlador/RegistroAgencia.php',
-            data: data,
-            success: function(data) {
-                var data = JSON.parse(data);
-                toastr.options.timeOut = "10000";
-                if (data.data == undefined) {
-                    CambiarInputs(true);
-                    // var contenido="El RUC <strong>" + data.RUC + "</strong> ya existe y esta registrado con la siguiente razón social <strong>" + data.RazonSocial + "</strong>";
-                    var contenido = "El RUC " + data.RUC + " ya existe y esta registrado en nuestro web de Agencias con la siguiente razón social " + data.RazonSocial + ", por favor verifique su correo electrónico";
-                    swal({
-                        title: "Mensaje de Alerta",
-                        text: contenido,
-                        icon: "warning",
-                        timer: 4000,
-                        buttons: {
-                            confirm: {
-                                className: 'btn btn-warning'
-                            }
-                        },
-                    });
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                alert("Error: " + errorThrown);
+        if (this.value.length == 11) {
+            if (ValidarRucDigito(this.value)) {
+                CambiarInputs(false);
+                var data = 'verificar_ruc=1&RUC=' + this.value;
+                $.ajax({
+                    type: 'POST',
+                    url: 'cd/Controlador/RegistroAgencia.php',
+                    data: data,
+                    success: function(data) {
+                        var data = JSON.parse(data);
+                        toastr.options.timeOut = "10000";
+                        if (data.data == undefined) {
+                            CambiarInputs(true);
+                            // var contenido="El RUC <strong>" + data.RUC + "</strong> ya existe y esta registrado con la siguiente razón social <strong>" + data.RazonSocial + "</strong>";
+                            var contenido = "El RUC " + data.RUC + " ya existe y esta registrado en nuestro web de Agencias con la siguiente razón social " + data.RazonSocial + ", por favor verifique su correo electrónico";
+                            swal({
+                                title: "Mensaje de Alerta",
+                                text: contenido,
+                                icon: "warning",
+                                timer: 4000,
+                                buttons: {
+                                    confirm: {
+                                        className: 'btn btn-warning'
+                                    }
+                                },
+                            });
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            } else {
+                swal({
+                    title: "Mensaje de Alerta",
+                    text: 'RUC no válido',
+                    icon: "warning",
+                    timer: 2000,
+                    buttons: {
+                        confirm: {
+                            className: 'btn btn-warning'
+                        }
+                    },
+                });
+                CambiarInputs(true);
             }
-        });
-        // return false;
+        } else {
+            swal({
+                title: "Mensaje de Alerta",
+                text: 'El RUC debe tener 11 digitos',
+                icon: "warning",
+                timer: 2000,
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-warning'
+                    }
+                },
+            });
+            CambiarInputs(true);
+        }
     } else {
         CambiarInputs(false);
     }
@@ -228,4 +257,25 @@ function CambiarInputs(option) {
             }
         }
     });
+}
+
+function ValidarRucDigito(ruc) {
+    var digitoverificar;
+    var reglas = '5432765432';
+    var validar = ruc.substr(0, 10);
+    var ultimo = parseInt(ruc.charAt(10));
+    var suma = 0;
+    for (let i = 0; i < 10; i++) {
+        suma = suma + parseInt(validar.charAt(i)) * parseInt(reglas.charAt(i));
+    }
+    var resto = suma % 11;
+    digitoverificar = 11 - resto;
+
+    if (digitoverificar == 11 || digitoverificar == 1) {
+        digitoverificar = 1;
+    } else if (digitoverificar == 10 || digitoverificar == 0) {
+        digitoverificar = 0;
+    }
+
+    return digitoverificar == ultimo ? true : false;
 }
