@@ -306,36 +306,18 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="registrar_agencia" value="1" form="registrar-agencia">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">RUC</span>
-                                <input type="text" class="form-control" placeholder="RUC" id="RUC" name="RUC" required="" form="registrar-agencia" maxlength="11">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                <input type="text" class="form-control" placeholder="Razon Social - Ejm: Mi Empresa SAC" id="RazonSocial" name="RazonSocial" required="" form="registrar-agencia">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                <input type="text" class="form-control" placeholder="Nombre Comercial - Ejm: Empresa" id="NombreComercial" name="NombreComercial" title="Nombre comercial o marca" required="" form="registrar-agencia">
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                    <select id="Code_Pais" name="Code_Pais" class="form-control select-chosen" title="Seleccionar Pais" form="registrar-agencia">
-                                        <?php foreach ($obj_modelo->ObtenerPaises() as $key => $pais): ?>
-                                            <option <?= $pais->Code_Pais=='PE' ? 'selected' : ''?> value="<?= $pais->Code_Pais?>"><?= $pais->Pais?></option>
-                                        <?php endforeach ?>
-                                    </select>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                        <select id="Code_Pais" name="Code_Pais" class="form-control select-chosen" title="Seleccionar Pais" form="registrar-agencia">
+                                            <?php foreach ($obj_modelo->ObtenerPaises() as $key => $pais): ?>
+                                                <option <?= $pais->Code_Pais=='PE' ? 'selected' : ''?> value="<?= $pais->Code_Pais?>"><?= $pais->Pais?></option>
+                                            <?php endforeach ?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -374,6 +356,24 @@
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">RUC</span>
+                                <input type="text" class="form-control" placeholder="RUC" id="RUC" name="RUC" required="" form="registrar-agencia" maxlength="11">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                <input type="text" class="form-control" placeholder="Razon Social - Ejm: Mi Empresa SAC" id="RazonSocial" name="RazonSocial" required="" form="registrar-agencia">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                <input type="text" class="form-control" placeholder="Nombre Comercial - Ejm: Empresa" id="NombreComercial" name="NombreComercial" title="Nombre comercial o marca" required="" form="registrar-agencia">
                             </div>
                         </div>
                         <div class="form-group">
