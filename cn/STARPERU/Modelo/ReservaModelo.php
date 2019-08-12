@@ -195,6 +195,7 @@ class ReservaModelo{
                            reserva.Porcentaje, 
                            reserva.RUC as ruc_pasajero,
                            reserva.CodigoReserva,
+                           reserva_detalle.Celular,
                            visa.*,
                            E.RUC,  
                            'EM' Tipo_Operacion,     
@@ -231,6 +232,7 @@ class ReservaModelo{
                          reserva.Porcentaje, 
                          reserva.RUC as ruc_pasajero,
                          reserva.CodigoReserva,
+                         reserva_detalle.Celular,
                          visa.*,
                           E.RUC,  
                           'EM' Tipo_Operacion,
@@ -326,6 +328,7 @@ class ReservaModelo{
                     $fec_hora_transaccion=$fila['fechahora_transaccion'];
                     $monto=$fila['amount'];
                     $num_cuotas=$fila['quota_number'];
+                    $reserva_detalle->setCelular($fila['Celular']);
                     
                     $movimiento[]=$empresa;
                     $movimiento[]=$dni_gestor;
@@ -537,6 +540,7 @@ public function DetalleMovimiento($registro,$detalle){
         $consulta="SELECT RIGHT(CONCAT('00000000', reserva.Registro), 8) Registro, 
                         '20342868844' RUCEmpresa, 
                         reserva_detalle.ComisionTarifa, 
+                        reserva_detalle.Celular, 
                         reserva.Porcentaje, 
                         entidad.RUC RUCEntidad, 
                         entidad.DNIFuncionario, 
@@ -650,6 +654,7 @@ public function DetalleMovimiento($registro,$detalle){
                     $descuento_acumulado=$fila['DescuentoAcumulado'];
                     $reserva->setPorcentaje($fila['Porcentaje']);
                     $reserva_detalle->setComisionTarifa($fila['ComisionTarifa']);
+                    $reserva_detalle->setCelular($fila['Celular']);
 
                     
                     
