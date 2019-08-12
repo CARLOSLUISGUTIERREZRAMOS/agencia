@@ -61,7 +61,7 @@ class PersonalModelo{
         $conexion=$obj_conexion->CrearConexion();
         $consulta = "SELECT P.CambioClave,P.CodigoTipo,P.Tipo,P.CodigoEntidad,P.CodigoPersonal,P.DNI,P.ApellidoMaterno,P.ApellidoPaterno,P.Nombres,P.Email,P.TelefonoOficina,P.Anexo,p.EstadoRegistro,P.Celular,E.RazonSocial,E.RUC,E.Direccion
                     FROM personal P,entidad E
-                    WHERE  p.EstadoRegistro=1 AND e.EstadoRegistro=1 AND p.CodigoEntidad=e.CodigoEntidad AND P.CodigoEntidad=$codigo_entidad"; 
+                    WHERE  P.EstadoRegistro=1 AND E.EstadoRegistro=1 AND P.CodigoEntidad=E.CodigoEntidad AND P.CodigoEntidad=$codigo_entidad"; 
              if($dni!=''){
                   $consulta.=" AND DNI='$dni'";
              }      
