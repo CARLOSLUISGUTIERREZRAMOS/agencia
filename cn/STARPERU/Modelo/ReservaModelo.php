@@ -174,11 +174,11 @@ class ReservaModelo{
         if($formaPago!=''){
             $filtro.=" AND reserva.forma_pago='$formaPago'";
         }
-        // if($usuario!=''){
-        //     $filtro.="AND personal.CodigoPersonal = reserva.CodigoPersonal  AND personal.DNI='$usuario_dni'";
-        // }
+         if($usuario_dni!=''){
+             $filtro.="AND personal.CodigoPersonal = reserva.CodigoPersonal  AND personal.DNI='$usuario_dni'";
+         }
 //        if($usuario!=''){
-//            $filtro.=" AND (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal)='$usuario'";
+//            $filtro.=" AND (SELECT CASE Tipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal)='$usuario'";
 //        }
         if($extra==1){
             $limite= $limit;
