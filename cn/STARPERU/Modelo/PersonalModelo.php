@@ -59,7 +59,7 @@ class PersonalModelo{
         $lista_personal=array();
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta = "SELECT P.CambioClave,P.CodigoTipo,P.Tipo,P.CodigoEntidad,P.CodigoPersonal,P.DNI,P.ApellidoMaterno,P.ApellidoPaterno,P.Nombres,P.Email,P.TelefonoOficina,P.Anexo,p.EstadoRegistro,P.Celular,E.RazonSocial,E.RUC,E.Direccion
+        $consulta = "SELECT P.CambioClave,P.CodigoTipo,P.Tipo,P.CodigoEntidad,P.CodigoPersonal,P.DNI,P.ApellidoMaterno,P.ApellidoPaterno,P.Nombres,P.Email,P.TelefonoOficina,P.Anexo,P.EstadoRegistro,P.Celular,E.RazonSocial,E.RUC,E.Direccion
                     FROM personal P,entidad E
                     WHERE  P.EstadoRegistro=1 AND E.EstadoRegistro=1 AND P.CodigoEntidad=E.CodigoEntidad AND P.CodigoEntidad=$codigo_entidad"; 
              if($dni!=''){
