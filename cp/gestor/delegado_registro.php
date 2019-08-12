@@ -69,7 +69,7 @@ $directorio_imagen = '../';
             <div id="div-contenido" style="background:none;">	
                 <?php include('../includes/menu.php'); ?>
                 <!-- Div Credito Personal -->
-                <div style="position: absolute; height: 60px; top: 0px; left: 42%; right: 42%">
+<!--                <div style="position: absolute; height: 60px; top: 0px; left: 42%; right: 42%">
                     <table width="160" cellpadding="0" cellspacing="0" border="0" style=" background-color: #F0F0F0;color: #dd1414">
                         <tr style="">
                             <td height="25" align="center" class="gradiante" style="color:white;font-family: Arial,Helvetica,sans-serif;font-weight: bold;font-size: 13px;"> 
@@ -83,7 +83,7 @@ $directorio_imagen = '../';
                             <td id="loadLinea" height="35" align="center" style="font-size: 16px;font-weight: bold;"></td>
                         </tr>
                     </table>
-                </div>
+                </div>-->
                 <!-- fin div Credito Personal -->
                 <br><br>
                 <div style="width:900px; margin:0 auto;">

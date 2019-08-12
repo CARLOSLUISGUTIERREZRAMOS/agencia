@@ -263,7 +263,7 @@ class ReservaModelo{
 
                    
                     ORDER BY Registro ,Detalle, Tramo   $limite";
-
+        
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
       

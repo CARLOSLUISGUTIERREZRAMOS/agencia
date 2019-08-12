@@ -7,6 +7,7 @@ if ($_SESSION['s_entra'] == 0) {
     header('Location:../../index.php');
 }
 $Tipo = $_SESSION['s_tipo'];
+$Tipo2 = $_SESSION['s_tipo2'];
 $directorio = '../';
 $directorio_imagen = '../';
 
@@ -291,11 +292,14 @@ require_once("../../config.php");
             <tr>
                 <td align="right">Fecha Final :</td>
                 <td > <input type="text" name="fecha_final" id="fecha_final" maxlength="10" placeholder="dd/mm/yyyy" style="width: 80px" onKeyPress="return NumeroFecha(event)" value="<?php echo $fecha_fin; ?>" readonly class="datepicker Cursor"/> </td>
-                <td align="right">Usuario :</td>
-                <td>
-                    <select name="usuario_dni" id="usuario" style="width: 387px;height: 22px;border: #e2e2e2 1px solid;" >
-                    </select>   
-                </td>
+                <?php if($Tipo2=='administrador'){?>
+                    <td align="right">Usuario :</td>
+                    <td>
+                        <select name="usuario_dni" id="usuario" style="width: 387px;height: 22px;border: #e2e2e2 1px solid;" >
+                        </select>   
+                    </td>
+                <?php } ?>
+                
                 <td align="right">Forma de Pago :</td>
                 <td >
                     <select name="formaPago" id="formaPago" style="width: 100px;height: 22px;border: #e2e2e2 1px solid;" >

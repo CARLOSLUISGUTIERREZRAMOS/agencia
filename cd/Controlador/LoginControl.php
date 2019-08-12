@@ -50,6 +50,7 @@ if(isset($_POST['login'])){
             $_SESSION["nombre_entidad"] =$Personal->RazonSocial;
             $_SESSION["s_cambio_clave"] = $Personal->CambioClave;
             $_SESSION["s_tipo"] = $Personal->CodigoTipo;
+            $_SESSION["s_tipo2"] = $Personal->Tipo;
             
             $_SESSION["s_entra"] =1;
             $_SESSION["s_presentacion"] = 1;

@@ -112,7 +112,7 @@
                     <!-- fin menu principal -->
                     <div class="div-contenido-body">
                         <!-- Div Credito Personal -->
-                        <div style="position: absolute; height: 60px; top: 0px; left: 42%; right: 42%">
+<!--                        <div style="position: absolute; height: 60px; top: 0px; left: 42%; right: 42%">
                             <table width="160" cellpadding="0" cellspacing="0" border="0" style=" background-color: #F0F0F0;/*font-family: Arial, Helvetica, sans-serif; */color: #dd1414">
                                 <tr style="">
                                     <td height="25" align="center" class="gradiante" style="color:white;font-family: Arial,Helvetica,sans-serif;font-weight: bold;font-size: 13px;"> 
@@ -126,4 +126,4 @@
                                     <td id="loadLinea" height="35" align="center" style="font-size: 16px;font-weight: bold;"></td>
                                 </tr>
                             </table>
-                        </div>
+                        </div>-->
