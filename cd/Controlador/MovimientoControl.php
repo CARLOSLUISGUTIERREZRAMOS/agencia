@@ -43,123 +43,125 @@ if($_REQUEST['movimientos']==1){
             $extra=1;
             $lista_movimientos=array();
             $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr ,$limit,$extra,$formaPago);
+            // var_dump($lista_movimientos);die;
             $data = array();
             $data['page'] = $page;
             $data['rows'] = array();
             $cant=0;
 
-                    foreach ($lista_movimientos as $movimiento){
-                                    if($movimiento[8]->getEstadoRegistro()==1){
-                                        $img_ticket="ticket.png";
-                                        $metodo_click=' ';
-                                    }else{
-                                        $img_ticket="ticket_anulado.png";
-                                        $metodo_click=" onClick='alert(\"Su boleto ha sido anulado\");return false;' ";
-                                    }
-                                    
-                                    if($movimiento[8]->getTicket()!=''){
-                                        $icono_ticket='<a '.$metodo_click.' target="_blank"  href="../pasarela/imprimir_ticket.php?ticket='.$movimiento[8]->getTicket().'" ><img width="16px;" src="../images/'.$img_ticket.'"/></a>';
-                                        $comision_tarifa=number_format($movimiento[8]->getComisionTarifa(),2);
-                                        $porcentaje=$movimiento[7]->getPorcentaje()/100;
-                                        $total_pagar=$movimiento[8]->getTotalPagar();
-                                        $tarifa=$movimiento[8]->getEQ();
-                                        $igv=$movimiento[8]->getPE();
-                                        $tuua=$movimiento[8]->getHW();
-                                        $total_pagar_descuento=number_format(($tarifa-$comision_tarifa)+($igv-$igv*$porcentaje)+($tuua),2);
-                                        $comision=number_format($comision_tarifa,2);
-                                        $tarjeta=$movimiento[9];
-                                        if($movimiento[8]->getEstadoRegistro()==1){
-                                        $total_comision=number_format($total_comision+$comision/2,2);
-                                        $total_sin_descuento=$total_sin_descuento+$total_pagar/2;
-                                        $total=$total+$total_pagar_descuento/2;
-                                        }
-                                            if($tarjeta=='visa'){
-                                                $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_vi.png' style='height:30px;'>";
-                                            }else if($tarjeta=='amex'){
-                                                $tarjeta_imagen= "<img src='../../scp/images/met_pago/ico_ax.png' style='height:30px;'>";
-                                            }else if($tarjeta=='dinersclub'){
-                                                $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_dc.jpg' style='height:30px;'>";
-                                            }else if($tarjeta=='mastercard'){
-                                                $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_mc.png' style='height:30px;'>";
-                                            }else{
-                                                $tarjeta_imagen=$movimiento[9];
-                                            }
-                                        }else{
-                                        $icono_ticket='';
-                                        $total_pagar="0.00";
-                                        }
-                                   $cant++;
-                                     $data['rows'][] = array(
-                                      'view' => $movimiento[7]->getRegistro(),
-                                      'cell' => array('<div class="Consulta" style="text-align: center;">
-                                          <a href="javascript:void(0);" onClick=" Detalle_movimiento(
-									\''.$movimiento[7]->getRegistro().'\',  
-									\''.$movimiento[8]->getDetalle().'\',	
-									\''.$movimiento[7]->getCodigoReserva().'\',	
-									\''.$movimiento[0]->getRUC().'\',	
-									\''.$movimiento[3].'\',
-									\''.$movimiento[7]->getFechaRegistro().'\',
-									\''.$movimiento[8]->getTicket().'\',
-									\''.$movimiento[9].'\',
-									\''.$movimiento[10].'\',
-									\''.$movimiento[8]->getNombres().' '.$movimiento[8]->getApellidos().' '.trim($movimiento[8]->getApellidos2()).'\',
-									\''.$movimiento[1].'\',
-									\''.$movimiento[2].'\',
-									\''.$movimiento[11].'\',
-									\''.$movimiento[4].'\',
-									\''.$movimiento[7]->getTipoVuelo().'\',
-									\''.$movimiento[5].'\',
-									\''.$movimiento[7]->getVueloSalida().'\',
-									\''.$movimiento[7]->getOrigen().'\',
-									\''.$movimiento[7]->getFechaSalida().'\',
-									\''.$movimiento[7]->getDestino().'\',
-									\''.$movimiento[7]->getHoraRetorno().'\',
-									\''.$movimiento[6].'\',
-									\''.$porcentaje.'\',
-									\''.$comision_tarifa.'\',
-									\''.$total_pagar.'\');"  
-                                           ><img src="../images/icono_ver.png"/></a></div>',
-                                          $icono_ticket,
-                                          $movimiento[7]->getRegistro(),
-                                          $movimiento[7]->getCodigoReserva(),
-                                          $movimiento[7]->getRUCPasajero(),
-                                          $movimiento[3],
-                                          $movimiento[7]->getFechaRegistro(),
-                                          $movimiento[8]->getTicket(),
-                                          '<a href="javascript:void(0);" onClick="Forma_pago(\''.$movimiento[7]->getRegistro().'\');">'.$tarjeta_imagen.'</a>',
-                                          $movimiento[8]->getApellidos(),
-                                          trim($movimiento[8]->getApellidos2()),
-                                          $movimiento[8]->getNombres(),
-                                          $movimiento[1],
-                                          $movimiento[11],
-                                          $movimiento[4],
-                                          $movimiento[7]->getTipoVuelo(),
-                                          $movimiento[5],
-                                          $movimiento[7]->getVueloSalida(),
-                                          $movimiento[7]->getOrigen(),
-                                          $movimiento[7]->getFechaSalida(),
-                                          $movimiento[7]->getDestino(),
-                                          $movimiento[7]->getHoraRetorno(),
-                                          $movimiento[6],
-                                          ($movimiento[8]->getEstadoRegistro()==1 && $movimiento[8]->getTicket()<>"")?$total_pagar:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar.'</del></div>',
-                                          ($movimiento[8]->getEstadoRegistro()==1 && $movimiento[8]->getTicket()<>"")?$total_pagar_descuento:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar_descuento.'</del></div>',
-                                          ($movimiento[8]->getEstadoRegistro()==1 && $movimiento[8]->getTicket()<>"")?$comision:'<div style="text-align: center; width: 100px; color:red;"><del>'.$comision.'</del></div>',
-                                          )
-                                      ); 
+            foreach ($lista_movimientos as $movimiento){
+                if($movimiento[8]->getEstadoRegistro()==1){
+                    $img_ticket="ticket.png";
+                    $metodo_click=' ';
+                }else{
+                    $img_ticket="ticket_anulado.png";
+                    $metodo_click=" onClick='alert(\"Su boleto ha sido anulado\");return false;' ";
+                }
+                
+                if($movimiento[8]->getTicket()!=''){
+                    $icono_ticket='<a '.$metodo_click.' target="_blank"  href="../pasarela/imprimir_ticket.php?ticket='.$movimiento[8]->getTicket().'" ><img width="16px;" src="../images/'.$img_ticket.'"/></a>';
+                    $comision_tarifa=number_format($movimiento[8]->getComisionTarifa(),2);
+                    $porcentaje=$movimiento[7]->getPorcentaje()/100;
+                    $total_pagar=$movimiento[8]->getTotalPagar();
+                    $tarifa=$movimiento[8]->getEQ();
+                    $igv=$movimiento[8]->getPE();
+                    $tuua=$movimiento[8]->getHW();
+                    $total_pagar_descuento=number_format(($tarifa-$comision_tarifa)+($igv-$igv*$porcentaje)+($tuua),2);
+                    $comision=number_format($comision_tarifa,2);
+                    $tarjeta=$movimiento[9];
+                    if($movimiento[8]->getEstadoRegistro()==1){
+                        $total_comision=number_format($total_comision+$comision/2,2);
+                        $total_sin_descuento=$total_sin_descuento+$total_pagar/2;
+                        $total=$total+$total_pagar_descuento/2;
                     }
-                    
-                    $data['total'] =$obj_movimiento->TotalMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr);
-                    $data['rows'][] = array(
-                                      'cell' => array('','','','','','','','','','','','','','','','','','','',
-                                          '','','','',
-                                          '<div style="text-align: center; width: 100px; color:red;">'.$total_sin_descuento.'</div>',
-                                          '<div style="text-align: center; width: 100px; color:red;">'.$total.'</div>',
-                                          '<div style="text-align: center; width: 100px; color:red;">'.$total_comision.'</div>',
-                                          )
-                                      ); 
-                    header("Content-type: text/x-json");
-                    echo json_encode($data);
+                    if($tarjeta=='visa'){
+                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_vi.png' style='height:30px;'>";
+                    }else if($tarjeta=='amex'){
+                        $tarjeta_imagen= "<img src='../../scp/images/met_pago/ico_ax.png' style='height:30px;'>";
+                    }else if($tarjeta=='dinersclub'){
+                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_dc.jpg' style='height:30px;'>";
+                    }else if($tarjeta=='mastercard'){
+                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_mc.png' style='height:30px;'>";
+                    }else{
+                        $tarjeta_imagen=$movimiento[9];
+                    }
+                }
+                else{
+                    $icono_ticket='';
+                    $total_pagar="0.00";
+                }
+                $cant++;
+                $data['rows'][] = array(
+                    'view' => $movimiento[7]->getRegistro(),
+                    'cell' => array('<div class="Consulta" style="text-align: center;">
+                                <a href="javascript:void(0);" onClick=" Detalle_movimiento(
+                                \''.$movimiento[7]->getRegistro().'\',  
+                                \''.$movimiento[8]->getDetalle().'\',	
+                                \''.$movimiento[7]->getCodigoReserva().'\',	
+                                \''.$movimiento[0]->getRUC().'\',	
+                                \''.$movimiento[3].'\',
+                                \''.$movimiento[7]->getFechaRegistro().'\',
+                                \''.$movimiento[8]->getTicket().'\',
+                                \''.$movimiento[9].'\',
+                                \''.$movimiento[10].'\',
+                                \''.$movimiento[8]->getNombres().' '.$movimiento[8]->getApellidos().' '.trim($movimiento[8]->getApellidos2()).'\',
+                                \''.$movimiento[1].'\',
+                                \''.$movimiento[2].'\',
+                                \''.$movimiento[11].'\',
+                                \''.$movimiento[4].'\',
+                                \''.$movimiento[7]->getTipoVuelo().'\',
+                                \''.$movimiento[5].'\',
+                                \''.$movimiento[7]->getVueloSalida().'\',
+                                \''.$movimiento[7]->getOrigen().'\',
+                                \''.$movimiento[7]->getFechaSalida().'\',
+                                \''.$movimiento[7]->getDestino().'\',
+                                \''.$movimiento[7]->getHoraRetorno().'\',
+                                \''.$movimiento[6].'\',
+                                \''.$porcentaje.'\',
+                                \''.$comision_tarifa.'\',
+                                \''.$total_pagar.'\');"  
+                                ><img src="../images/icono_ver.png"/></a></div>',
+                                $icono_ticket,
+                                $movimiento[7]->getRegistro(),
+                                $movimiento[7]->getCodigoReserva(),
+                                $movimiento[7]->getRUCPasajero(),
+                                $movimiento[3],
+                                $movimiento[7]->getFechaRegistro(),
+                                $movimiento[8]->getTicket(),
+                                '<a href="javascript:void(0);" onClick="Forma_pago(\''.$movimiento[7]->getRegistro().'\');">'.$tarjeta_imagen.'</a>',
+                                $movimiento[8]->getApellidos(),
+                                trim($movimiento[8]->getApellidos2()),
+                                $movimiento[8]->getNombres(),
+                                $movimiento[1],
+                                $movimiento[11],
+                                $movimiento[4],
+                                $movimiento[7]->getTipoVuelo(),
+                                $movimiento[5],
+                                $movimiento[7]->getVueloSalida(),
+                                $movimiento[7]->getOrigen(),
+                                $movimiento[7]->getFechaSalida(),
+                                $movimiento[7]->getDestino(),
+                                $movimiento[7]->getHoraRetorno(),
+                                $movimiento[6],
+                                ($movimiento[8]->getEstadoRegistro()==1 && $movimiento[8]->getTicket()<>"")?$total_pagar:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar.'</del></div>',
+                                ($movimiento[8]->getEstadoRegistro()==1 && $movimiento[8]->getTicket()<>"")?$total_pagar_descuento:'<div style="text-align: center; width: 100px; color:red;"><del>'.$total_pagar_descuento.'</del></div>',
+                                ($movimiento[8]->getEstadoRegistro()==1 && $movimiento[8]->getTicket()<>"")?$comision:'<div style="text-align: center; width: 100px; color:red;"><del>'.$comision.'</del></div>',
+                            )
+                ); 
             }
+            
+            $data['total'] =$obj_movimiento->TotalMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario,$boleto,$pnr);
+            $data['rows'][] = array(
+                                'cell' => array('','','','','','','','','','','','','','','','','','','',
+                                    '','','','',
+                                    '<div style="text-align: center; width: 100px; color:red;">'.$total_sin_descuento.'</div>',
+                                    '<div style="text-align: center; width: 100px; color:red;">'.$total.'</div>',
+                                    '<div style="text-align: center; width: 100px; color:red;">'.$total_comision.'</div>',
+                                    )
+                                ); 
+            header("Content-type: text/x-json");
+            echo json_encode($data);
+}
                    
 if($_REQUEST['listar']==1){
         $usuario_dni=trim($_REQUEST['usuario_dni']);
@@ -361,7 +363,7 @@ if($_REQUEST['movimiento_detalle']==1){
             
           $lista_movimientos=array();
           $lista_movimientos=$obj_movimiento->DetalleMovimiento($registro,$detalle);
-            
+            // var_dump($lista_movimientos);die;
             foreach ($lista_movimientos as $movimiento){
           ?>
  <table width="1500" border="0" cellspacing="6" cellpadding="6" class="reporte">

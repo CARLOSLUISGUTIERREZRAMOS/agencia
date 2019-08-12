@@ -101,7 +101,8 @@
         	}
         ?>
     </head>
-    <body onLoad=" LineaCredito();">
+    <!-- <body onLoad=" LineaCredito();"> -->
+	<body>
         <div style="position:absolute; width:100%; height:100%;">
             <div id="div-main">
             	<?php include(CABECERA_PATH); ?>

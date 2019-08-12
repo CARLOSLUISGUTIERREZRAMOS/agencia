@@ -174,9 +174,9 @@ class ReservaModelo{
         if($formaPago!=''){
             $filtro.=" AND reserva.forma_pago='$formaPago'";
         }
-        if($usuario!=''){
-            $filtro.="AND personal.CodigoPersonal = reserva.CodigoPersonal  AND personal.DNI='$usuario_dni'";
-        }
+        // if($usuario!=''){
+        //     $filtro.="AND personal.CodigoPersonal = reserva.CodigoPersonal  AND personal.DNI='$usuario_dni'";
+        // }
 //        if($usuario!=''){
 //            $filtro.=" AND (SELECT CASE CodigoTipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal)='$usuario'";
 //        }
@@ -288,7 +288,7 @@ class ReservaModelo{
                     $num_cuotas='';
                     $fec_hora_transaccion='';
                     $reserva->setRegistro($fila['Registro']);
-                    $reserva_detalle->setRegistro($fila['Registro_detalle']);
+                    // $reserva_detalle->setRegistro($fila['Registro_detalle']);
                     $reserva_detalle->setDetalle($fila['Detalle']);
                     $reserva->setRegistro($fila['Registro']);
                     $reserva->setCodigoReserva($fila['CodigoReserva']);
@@ -301,7 +301,8 @@ class ReservaModelo{
                     $reserva_detalle->setApellidos2($fila['PAS_APEM']);
                     $reserva_detalle->setNombres($fila['PAS_NOMB']);
                     $dni_gestor=$fila['Gestor'];
-                    $dni_delegado=$fila['Delegado'];
+                    // $dni_delegado=$fila['Delegado'];
+                    $dni_delegado='47922169';
                     $cantidad=$fila['Cantidad'];
                     $reserva->setTipoVuelo($fila['TipoVuelo']);
                     $tramo=$fila['Tramo'];
@@ -539,7 +540,7 @@ public function DetalleMovimiento($registro,$detalle){
                         reserva.Porcentaje, 
                         entidad.RUC RUCEntidad, 
                         entidad.DNIFuncionario, 
-                        (SELECT DNI FROM personal WHERE EstadoRegistro = 1 AND CodigoEntidad = reserva.CodigoEntidad AND CodigoTipo = 'G') DNIGestor,
+                        (SELECT DNI FROM personal WHERE EstadoRegistro = 1 AND CodigoEntidad = reserva.CodigoEntidad AND CodigoTipo = 'G' LIMIT 1) DNIGestor,
                         (SELECT IFNULL(CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END, '') FROM personal WHERE EstadoRegistro = 1 AND personal.CodigoPersonal = reserva.CodigoPersonal AND personal.CodigoEntidad = reserva.CodigoEntidad ) DNIDelegado,
                         RIGHT(CONCAT('00000000', reserva.Registro), 8) Operacion, 
                         (CASE reserva_detalle.EstadoRegistro WHEN 0 THEN 'SA' WHEN 1 THEN 'EM' END) TipoOperacion,
@@ -579,6 +580,7 @@ public function DetalleMovimiento($registro,$detalle){
                 WHERE entidad.CodigoEntidad = reserva.CodigoEntidad AND reserva.Registro = reserva_detalle.Registro AND reserva_detalle.Registro = $registro AND reserva_detalle.Detalle=$detalle";
 
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        // var_dump($resultado);die;
         $numero_filas=$obj_conexion->ContarFilas($resultado);
       
        
