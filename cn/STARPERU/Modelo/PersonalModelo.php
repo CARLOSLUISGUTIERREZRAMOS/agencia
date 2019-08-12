@@ -196,7 +196,7 @@ class PersonalModelo{
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="UPDATE Personal SET Password='$contrasena', CambioClave=0 WHERE CodigoPersonal=$usuario";
+        $consulta="UPDATE personal SET Password='$contrasena', CambioClave=0 WHERE CodigoPersonal=$usuario";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){

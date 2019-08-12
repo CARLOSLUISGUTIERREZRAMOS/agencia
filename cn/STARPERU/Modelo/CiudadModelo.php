@@ -18,6 +18,7 @@ class CiudadModelo{
         }
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
+        // var_dump($numero_filas);die;
         if($numero_filas>0){
                 while($fila=  $obj_conexion->ObtenerDatos($resultado)){
                     $ciudad = new CiudadEntidad();

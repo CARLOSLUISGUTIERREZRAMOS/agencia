@@ -539,8 +539,8 @@ public function DetalleMovimiento($registro,$detalle){
                         reserva.Porcentaje, 
                         entidad.RUC RUCEntidad, 
                         entidad.DNIFuncionario, 
-                        (SELECT DNI FROM Personal WHERE EstadoRegistro = 1 AND CodigoEntidad = reserva.CodigoEntidad AND CodigoTipo = 'G') DNIGestor,
-                        (SELECT IFNULL(CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END, '') FROM Personal WHERE EstadoRegistro = 1 AND Personal.CodigoPersonal = reserva.CodigoPersonal AND Personal.CodigoEntidad = reserva.CodigoEntidad ) DNIDelegado,
+                        (SELECT DNI FROM personal WHERE EstadoRegistro = 1 AND CodigoEntidad = reserva.CodigoEntidad AND CodigoTipo = 'G') DNIGestor,
+                        (SELECT IFNULL(CASE CodigoTipo WHEN 'G' THEN '' WHEN 'D' THEN DNI END, '') FROM personal WHERE EstadoRegistro = 1 AND personal.CodigoPersonal = reserva.CodigoPersonal AND personal.CodigoEntidad = reserva.CodigoEntidad ) DNIDelegado,
                         RIGHT(CONCAT('00000000', reserva.Registro), 8) Operacion, 
                         (CASE reserva_detalle.EstadoRegistro WHEN 0 THEN 'SA' WHEN 1 THEN 'EM' END) TipoOperacion,
                         1 Cantidad,
@@ -552,7 +552,7 @@ public function DetalleMovimiento($registro,$detalle){
                         Origen,
                         CONCAT(DATE(reserva.Fecha_Salida), ' ', reserva.Hora_Salida) Salida,
                         Destino,
-                        (SELECT Tiempo FROM Ruta WHERE CodigoCiudadOrigen = Origen AND CodigoCiudadDestino = Destino) Duracion,
+                        (SELECT Tiempo FROM ruta WHERE CodigoCiudadOrigen = Origen AND CodigoCiudadDestino = Destino) Duracion,
                         reserva.Clase_Salida,
                         CONCAT(reserva_detalle.Tipo_Doc, ' ', reserva_detalle.Documento) Documento,
                         CASE reserva_detalle.Tipo_Pax WHEN 'A' THEN 'Adulto' WHEN 'N' THEN 'Niño' WHEN 'B' THEN 'Infante' END TipoPasajero,
@@ -772,7 +772,7 @@ function EnviaAlertaNinoEmail($registro){
 public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$email,
                     $tipo_documento,$numero_documento,$telefono,
                     $anexo,$celular,$nextel,$rpm,
-                    $rpc,$pasajero_ruc,$fecha_registro,$fecha_registro,$adultos_5,$menores_5,$infantes_5,$origen_ida_5,$destino_ida_5,$numero_vuelo_ida_5,
+                    $rpc,$pasajero_ruc,$fecha_registro,$fecha_limite,$adultos_5,$menores_5,$infantes_5,$origen_ida_5,$destino_ida_5,$numero_vuelo_ida_5,
                     $clase_ida_5,$fecha_salida_ida_5,$hora_salida_ida_5,$numero_vuelo_vuelta_5,$clase_vuelta_5,$fecha_salida_vuelta_5,$hora_salida_vuelta_5,
                     $pais,$ciudad,$ip,$flete,$tuua_5,$igv_5,$total_pagar_5,$usuario,$entidad,$tipo_vuelo_letras){
         $flag=0;
@@ -782,7 +782,7 @@ public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$emai
         $consulta="INSERT INTO reserva(CodigoReserva,Apellidos,Nombres,Tipo_Doc,Documento,Telefono,Celular,Email,FechaRegistro,FechaLimite,TipoVuelo,Adultos,Ninos,Bebes,Origen,"
                 . "Destino,Vuelo_Salida,Clase_Salida,Fecha_Salida,Hora_Salida,Vuelo_Retorno,Clase_Retorno,Fecha_Retorno,Hora_Retorno,Pais,Ciudad,IP,Flete,TUA,"
                 . "Impuesto,Total,CodigoEntidad,CodigoPersonal,RUC) "
-                . "VALUES('$codigo_reserva','$apellidos','$nombres','$tipo_documento','$numero_documento','$telefono','$celular','$email','$fecha_registro','$fecha_registro','$tipo_vuelo_letras',$adultos_5,$menores_5,$infantes_5,"
+                . "VALUES('$codigo_reserva','$apellidos','$nombres','$tipo_documento','$numero_documento','$telefono','$celular','$email','$fecha_registro','$fecha_limite','$tipo_vuelo_letras',$adultos_5,$menores_5,$infantes_5,"
                 . "'$origen_ida_5','$destino_ida_5','$numero_vuelo_ida_5','$clase_ida_5','$fecha_salida_ida_5','$hora_salida_ida_5','$numero_vuelo_vuelta_5','$clase_vuelta_5','$fecha_salida_vuelta_5','$hora_salida_vuelta_5','$pais','$ciudad',"
                 . "'$ip',$flete,$tuua_5,$igv_5,$total_pagar_5,$entidad,$usuario,'$pasajero_ruc')";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);

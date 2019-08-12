@@ -152,7 +152,7 @@ $fechahoy=$dia_manana."/".$mes_manana."/".$ano_manana;
             success: function(mensaje){
                 $('#origen').html(mensaje);
             },
-            error: function(obj,mensaje,e) { 
+            error: function(obj,mensaje,e,a,b,c,d) { 
                 if(e=='Internal Server Error'){
                     alert('Se ha producido un error interno. Consulte con el �rea de Sistemas de StarPer�');
                 }

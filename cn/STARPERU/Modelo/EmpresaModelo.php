@@ -58,7 +58,7 @@ class EmpresaModelo {
 
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
-        $consulta = "SELECT e.EstadoRegistro FROM entidad e, Personal p "
+        $consulta = "SELECT e.EstadoRegistro FROM entidad e, personal p "
                 . "WHERE e.CodigoEntidad=p.CodigoEntidad AND p.CodigoUsuario = '$dni_personal' AND p.EstadoRegistro=1";
 
         $resultado = $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);

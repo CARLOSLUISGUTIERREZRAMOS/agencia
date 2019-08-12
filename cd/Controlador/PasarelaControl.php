@@ -52,6 +52,7 @@ if (isset($_POST['obtener_ciudades'])) {
             }
         }
         $lista_ciudades = array();
+        // var_dump($lista_ciudades);die;
         $lista_ciudades = $obj_ciudad->ObtenerCiudades($origen);
         if (count($lista_ciudades) == 0) {
             $options_ciudad = '<option value="" selected>- No hay datos -</option>' . "\n";
