@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li>
-                            <a data-toggle="modal" data-target="#modalNuevaAgencia" style="cursor: pointer;">
+                            <a style="cursor: pointer;" class="modal-agencia">
                                 <i class="fa fa-university fa-2x" aria-hidden="true"></i>
                                 <span class="span">REGISTRA TU</span>
                                 <span class="span span-bold span-font-medium">AGENCIA</span>
@@ -198,7 +198,7 @@
                                     <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
                                     <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
                                         <p style="vertical-align: central">
-                                            <a style="font-weight: 100; color: white; font-size: large; cursor: pointer;" data-toggle="modal" data-target="#modalNuevaAgencia">!REGISTRA TU AGENCIA!
+                                            <a style="font-weight: 100; color: white; font-size: large; cursor: pointer;" class="modal-agencia">!REGISTRA TU AGENCIA!
                                             </a>
                                             <br />
                                             <span style="font-weight: 900; color: white; font-size: large">COMIENZA A AHORRAR</span>

@@ -122,29 +122,8 @@ $('#CodigoCiudad').chosen({
 $(document).on('change', '#Code_Pais', function() {
     var id = this.value;
     ClaseRUC(id);
-    var select = $("#CodigoCiudad");
     var ancho = this.parentElement.parentElement.parentElement.offsetWidth - 30 - 36;
-    $.ajax({
-        type: 'POST',
-        url: 'cd/Controlador/LocalidadControl.php',
-        data: 'localidad=1&Code_Pais=' + id,
-        success: function(data) {
-            var data = JSON.parse(data);
-            select.chosen("destroy");
-            var op = '';
-            $.each(data, function(index, elem) {
-                op += '<option value]="' + elem.Codigo + '">' + elem.Nombre + '</option>';
-            });
-            select.html(op);
-            select.chosen({
-                no_results_text: "¡Vaya, no se encontró nada!",
-                width: ancho + "px"
-            });
-        },
-        error: function(xhr, textStatus, errorThrown) {
-            alert("Error: " + errorThrown);
-        }
-    });
+    CambiarSelectPais(id, ancho);
 });
 
 $(document).on('submit', '#registrar-agencia', function(event) {
@@ -242,6 +221,52 @@ $(document).on('keypress', '.ruc-peru', function() {
     }
 });
 
+$(document).on('click', '.modal-agencia', function() {
+    $("#modalNuevaAgencia").modal();
+    $("#registrar-agencia")[0].reset();
+    ClaseRUC('PE');
+    CambiarInputs(false);
+    $("#Code_Pais").val('PE').trigger('chosen:updated')
+    var ancho = $("#Code_Pais")[0].parentElement.parentElement.parentElement.offsetWidth - 30 - 36;
+    CambiarSelectPais('PE', ancho);
+});
+
+function CambiarInputs(option) {
+    var form = $("#modalNuevaAgencia .modal-body").find('input,button');
+    $.each(form, function(index, elem) {
+        if ($(this).hasClass('form-control') || $(this).hasClass('btn-success')) {
+            if (this.id != 'RUC') {
+                $(this).prop('disabled', option)
+            }
+        }
+    });
+}
+
+function CambiarSelectPais(id, ancho) {
+    var select = $("#CodigoCiudad");
+    $.ajax({
+        type: 'POST',
+        url: 'cd/Controlador/LocalidadControl.php',
+        data: 'localidad=1&Code_Pais=' + id,
+        success: function(data) {
+            var data = JSON.parse(data);
+            select.chosen("destroy");
+            var op = '';
+            $.each(data, function(index, elem) {
+                op += '<option value]="' + elem.Codigo + '">' + elem.Nombre + '</option>';
+            });
+            select.html(op);
+            select.chosen({
+                no_results_text: "¡Vaya, no se encontró nada!",
+                width: ancho + "px"
+            });
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            alert("Error: " + errorThrown);
+        }
+    });
+}
+
 function ValidarRucExistente(ruc) {
     var dato = 'verificar_ruc=1&RUC=' + ruc;
     $.ajax({
@@ -272,17 +297,6 @@ function ValidarRucExistente(ruc) {
     });
 }
 
-function CambiarInputs(option) {
-    var form = $("#modalNuevaAgencia .modal-body").find('input,button');
-    $.each(form, function(index, elem) {
-        if ($(this).hasClass('form-control') || $(this).hasClass('btn-success')) {
-            if (this.id != 'RUC') {
-                $(this).prop('disabled', option)
-            }
-        }
-    });
-}
-
 function ValidarRucDigito(ruc) {
     var digitoverificar;
     var reglas = '5432765432';
@@ -309,19 +323,21 @@ function ClaseRUC(code) {
     if (code == 'PE') {
         element.removeClass('ruc-extranjero');
         element.addClass('ruc-peru');
-        if (!ValidarRucDigito(element.val())) {
-            swal({
-                title: "Mensaje de Alerta",
-                text: 'RUC no válido',
-                icon: "warning",
-                timer: 2000,
-                buttons: {
-                    confirm: {
-                        className: 'btn btn-warning'
-                    }
-                },
-            });
-            CambiarInputs(true);
+        if (element.val()) {
+            if (!ValidarRucDigito(element.val())) {
+                swal({
+                    title: "Mensaje de Alerta",
+                    text: 'RUC no válido',
+                    icon: "warning",
+                    timer: 2000,
+                    buttons: {
+                        confirm: {
+                            className: 'btn btn-warning'
+                        }
+                    },
+                });
+                CambiarInputs(true);
+            }
         }
     } else {
         element.removeClass('ruc-peru');
