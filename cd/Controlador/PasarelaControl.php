@@ -1293,7 +1293,7 @@ if (isset($_POST['paso4'])) {
                                 <td width="112" align="left"><input name="num_doc_a_' . $i . '" type="text" id="num_doc_a_' . $i . '" maxlength="15" class="frmInput documento_a" style="width: 96px" onKeyPress="Change()"  title="Ingrese el número de Documento para obtener información del Pasajero de forma automática." value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input type="text" name="email_a_' . $i . '" id="email_a_' . $i . '" class="frmInput" style="width: 157px; text-transform: lowercase" onKeyPress="Change(); return CaractValidoEmail(event)"  value=""/></td>
+                                <td align="left"><input type="text" name="email_a_' . $i . '" id="email_a_' . $i . '" class="frmInput" style="width: 157px; text-transform: uppercase" onKeyPress="Change(); return CaractValidoEmail(event)"  value=""/></td>
                               </tr>
                               <tr>
                                 <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
@@ -1406,7 +1406,7 @@ if (isset($_POST['paso4'])) {
                                         <td width="112" align="left"><input name="num_doc_m_' . $j . '" type="text" id="num_doc_m_' . $j . '" maxlength="15" class="frmInput documento_m" style="width: 96px" onKeyPress="Change()"  title="Ingrese el número de Documento para obtener información del Pasajero de forma automática." value=""/></td>
                                         <td style="background-color: #FFFFFF"></td>
                                         <td></td>
-                                        <td align="left"><input type="text" name="email_m_' . $j . '" id="email_m_' . $j . '" class="frmInput" style="width: 157px; text-transform: lowercase" onKeyPress="Change(); return CaractValidoEmail(event)"  value=""/></td>
+                                        <td align="left"><input type="text" name="email_m_' . $j . '" id="email_m_' . $j . '" class="frmInput" style="width: 157px; text-transform: uppercase" onKeyPress="Change(); return CaractValidoEmail(event)"  value=""/></td>
                                       </tr>
                                       <tr>
                                         <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
@@ -1522,7 +1522,7 @@ if (isset($_POST['paso4'])) {
                                 <td width="112" align="left"><input name="num_doc_i_' . $k . '" type="text" id="num_doc_i_' . $k . '" maxlength="15" class="frmInput documento_i" style="width: 96px" onKeyPress="Change()"  title="Ingrese el número de Documento para obtener información del Pasajero de forma automática." value=""/></td>
                                 <td style="background-color: #FFFFFF"></td>
                                 <td></td>
-                                <td align="left"><input type="text" name="email_i_' . $k . '" id="email_i_' . $k . '" class="frmInput" style="width: 157px; text-transform: lowercase" onKeyPress="Change(); return CaractValidoEmail(event)"  value=""/></td>
+                                <td align="left"><input type="text" name="email_i_' . $k . '" id="email_i_' . $k . '" class="frmInput" style="width: 157px; text-transform: uppercase" onKeyPress="Change(); return CaractValidoEmail(event)"  value=""/></td>
                               </tr>
                               <tr>
                                 <td height="1" colspan="17" style="background-color: #FFFFFF"></td>
