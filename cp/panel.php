@@ -50,13 +50,15 @@
     
     <script type="text/javascript" >
         $(document).ready(function () {
-
             var alto_pantalla = $(window).height();
             $("#frame_principal").attr('height', alto_pantalla - 124);
             //               alert(alto_pantalla);
             $("#btn_cerrar").click(function () {
                 cerrarAvisoIngreso();
-            })
+            });
+            if(<?= $_SESSION["s_cambio_clave"]?> ==1){
+                $("#modalCambiarPassword").modal({backdrop: 'static', keyboard: false});
+            }
         });
 
         function enviaFormSeguridad()
@@ -92,10 +94,139 @@
             //iframe.src = 'pasarela/paso1.php';
         }
 
-        function cerrarAvisoAdvertencia()
-        {
+        function cerrarAvisoAdvertencia(){
             window.location = "logout.php";
         }
+
+        $(document).on('click','.cambiar-password',function () {
+            var pass=$("input[name=password]").val();
+            var pass1=$("input[name=password1]").val();
+            if(pass!='' && pass1!=''){
+                if (pass==pass1) {
+                    $.ajax({
+                        url:"<?=$url?>/cd/Controlador/LoginControl.php",
+                        type: "POST", 
+                        data:'cambio_password=1 && password='+pass,
+                        success: function(mensaje){
+                            var data=JSON.parse(mensaje);
+                            $("#modalCambiarPassword").modal('hide');
+                            if (data.code==1) {
+                                swal({
+                                    title: "Mensaje",
+                                    text: '¡Listo! Su contraseña fue cambiado con exito',
+                                    icon: "success",
+                                    timer: 2000,
+                                    buttons: {
+                                        confirm: {
+                                            className: 'btn btn-success'
+                                        }
+                                    },
+                                });
+                            }
+                            else{
+                                swal({
+                                    title: "Mensaje",
+                                    text: 'Ups! Hubo un error al cambiar',
+                                    icon: "warning",
+                                    timer: 2000,
+                                    buttons: {
+                                        confirm: {
+                                            className: 'btn btn-warning'
+                                        }
+                                    },
+                                });
+                            }
+                        },
+                        error: function (error,obj,mensaje) {
+                            $("#modalCambiarPassword").modal('hide');
+                            swal({
+                                title: "Mensaje de Error",
+                                text: 'Error en sentencia SQL',
+                                icon: "error",
+                                timer: 2000,
+                                buttons: {
+                                    confirm: {
+                                        className: 'btn btn-danger'
+                                    }
+                                },
+                            });
+                        }
+                    });
+                }
+                else{
+                    swal({
+                        title: "Mensaje de Alerta",
+                        text: 'Las contraseñas son diferentes, digite correctamente',
+                        icon: "warning",
+                        timer: 2000,
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-warning'
+                            }
+                        },
+                    });
+                }
+            }
+            else{
+                swal({
+                    title: "Mensaje de Alerta",
+                    text: 'Ingrese la nueva contraseña',
+                    icon: "warning",
+                    timer: 2000,
+                    buttons: {
+                        confirm: {
+                            className: 'btn btn-warning'
+                        }
+                    },
+                });
+            }
+        });
+
+        $(document).on('blur','input[name=password]',function () {
+            var pass1=$("input[name=password1").val();
+            if (pass1) {
+                if (this.value!=pass1) {
+                    swal({
+                        title: "Mensaje de Alerta",
+                        text: 'Las contraseñas son diferentes, digite correctamente',
+                        icon: "warning",
+                        timer: 2000,
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-warning'
+                            }
+                        },
+                    });
+                    $('.cambiar-password').attr('disabled',true);
+                }
+                else{
+                    $('.cambiar-password').attr('disabled',false);
+                }
+            }
+        });
+
+        $(document).on('blur','input[name=password1]',function () {
+            var pass=$("input[name=password").val();
+            if (pass) {
+                if (this.value!=pass) {
+                    swal({
+                        title: "Mensaje de Alerta",
+                        text: 'Las contraseñas son diferentes, digite correctamente',
+                        icon: "warning",
+                        timer: 2000,
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-warning'
+                            }
+                        },
+                    });
+                    $('.cambiar-password').attr('disabled',true);
+                }
+                else{
+                    $('.cambiar-password').attr('disabled',false);
+                }
+            }
+        });
     </script>
     <?php $style_script_contenido = ob_get_contents(); ?>
 <?php ob_end_clean(); ?>
@@ -296,6 +427,42 @@
                  </div>          
              </div>           
          </div>           
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="modalCambiarPassword">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">¡Cambiar Contraseña!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <p>
+                                <b>Ingrese su nuevo password, el sistema le pedirá solo por primera vez.</b>
+                            </p>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Nueva Contraseña</label>
+                                    <input name="password" type="password" id="password" class="form-control input-password" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Repetir Contraseña</label>
+                                    <input name="password1" type="password" id="password1" class="form-control input-password" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success cambiar-password">Cambiar Contraseña</button>
+                </div>
+            </div>
+        </div>
     </div>
     <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
