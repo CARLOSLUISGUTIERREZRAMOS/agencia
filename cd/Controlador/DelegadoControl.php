@@ -202,7 +202,7 @@ if($_POST['guardar_delegado']==1){
         $apep=  utf8_decode(caracter_especial(addslashes(trim($_POST['apep']))));
         $apem=  utf8_decode(caracter_especial(addslashes(trim($_POST['apem']))));
         $nom=  utf8_decode(caracter_especial(addslashes(trim($_POST['nom']))));
-        $email= strtolower(trim($_POST['email']));
+        $email= caracter_especial($_POST['email']);
         $ofic= trim($_POST['ofic']);
         $anexo= trim($_POST['anexo']);
         $celular= trim($_POST['celular']);

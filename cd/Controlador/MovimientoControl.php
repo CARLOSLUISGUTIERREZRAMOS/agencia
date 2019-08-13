@@ -31,8 +31,11 @@ if($_REQUEST['movimientos']==1){
                 $fecha_fin = str_replace("/", "-", $fecha_fin);
                 $fecha_fin= date('Y-m-d',strtotime($fecha_fin));
             }
-
+            if($_SESSION['s_tipo2']=='administrador'){
             $usuario_dni=trim($_REQUEST['usuario_dni']);
+            }else {
+            $usuario_dni=$_SESSION['s_dni'];    
+            }
             $boleto=trim($_REQUEST['boleto']);
             $pnr=trim($_REQUEST['pnr']);
             $formaPago=$_REQUEST['formaPago'];

@@ -128,7 +128,7 @@ $directorio_imagen = '../';
                             <tr>
                                 <td  class="label_info" style="padding: 10px 10px 7px 0;">email:</td><td >
                                     <input type="hidden" id="email" value="<?php echo $email; ?>">
-                                    <input type="text" name="email_d" id="email_d" value="<?php echo $email; ?>"/>
+                                    <input type="text" name="email_d" id="email_d" style="text-transform:uppercase;" value="<?php echo $email; ?>"/>
                                     <span class="span-requerido">*</span>
                                 </td>
                             </tr>

@@ -357,7 +357,7 @@ class PersonalModelo{
         $flag=0;
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="UPDATE personal SET EstadoRegistro='$estado' WHERE DNI='$dni' AND CodigoTipo='D'" ;
+        $consulta="UPDATE personal SET EstadoRegistro='$estado' WHERE DNI='$dni' AND Tipo='counter'" ;
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
