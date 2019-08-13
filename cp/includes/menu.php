@@ -4,13 +4,13 @@
             <li onClick="javascript:window.location = '<?php echo $directorio_personal;?>gestor_info_personal.php';" >
                 <div onMouseOver="javascript:this.className = 'div_hover';" onMouseOut="javascript:this.className = ''" style="width:180px;">
                     <img src="<?php echo $directorio_imagen;?>images/datospersonales.png" style="position:relative;top:7px;">
-                    <a title="Ver Datos Personales del Gestor" href="<?php echo $directorio_personal;?>gestor_info_personal.php" style="top: 0px;left:5px;position: relative;"> datos personales</a>
+                    <a title="Ver Datos de la Agencia" href="<?php echo $directorio_personal;?>gestor_info_personal.php" style="top: 0px;left:5px;position: relative;"> datos personales</a>
                 </div>
             </li>
             <li onClick="javascript:window.location = '<?php echo $directorio_personal;?>delegado_listado.php'">
                 <div onMouseOver="javascript:this.className = 'div_hover';" onMouseOut="javascript:this.className = ''" style="width:130px;">
                     <img src="<?php echo $directorio_imagen;?>images/delegados.png" style="position:relative;top:7px;">
-                    <a title="Ver Listado de Delegados" href="<?php echo $directorio_personal;?>delegado_listado.php" style="top: 0px;left:5px;position: relative;">usuarios</a>
+                    <a title="Ver Listado de Usuarios" href="<?php echo $directorio_personal;?>delegado_listado.php" style="top: 0px;left:5px;position: relative;">usuarios</a>
                 </div>
             </li>
             <li onClick="javascript:window.location = '<?php echo $directorio;?>panel.php';">
@@ -39,7 +39,7 @@
             <li onClick="javascript:window.location = '<?php echo $directorio_personal;?>delegado_info_personal.php';">
                 <div onMouseOver="javascript:this.className = 'div_hover';" onMouseOut="javascript:this.className = ''" style="width:180px;">
                     <img src="<?php echo $directorio_imagen;?>images/datospersonales.png" style="position:relative;top:7px;">
-                    <a title="Ver Datos Personales del Delegado" href="<?php echo $directorio_personal;?>delegado_info_personal.php" style="top: 0px;left:5px;position: relative;"> datos personales</a>
+                    <a title="Ver Datos Personales del Counter" href="<?php echo $directorio_personal;?>delegado_info_personal.php" style="top: 0px;left:5px;position: relative;"> datos personales</a>
                 </div>
             </li>
             <li onClick="javascript:window.location = '<?php echo $directorio;?>panel.php';">
