@@ -121,6 +121,7 @@ $('#CodigoCiudad').chosen({
 
 $(document).on('change', '#Code_Pais', function() {
     var id = this.value;
+    ClaseRUC(id);
     var select = $("#CodigoCiudad");
     var ancho = this.parentElement.parentElement.parentElement.offsetWidth - 30 - 36;
     $.ajax({
@@ -181,40 +182,12 @@ $(document).on('submit', '#registrar-agencia', function(event) {
     return false;
 });
 
-$(document).on('blur', 'input[name=RUC]', function(arg) {
+$(document).on('blur', '.ruc-peru', function(arg) {
     if (this.value) {
         if (this.value.length == 11) {
             if (ValidarRucDigito(this.value)) {
                 CambiarInputs(false);
-                var data = 'verificar_ruc=1&RUC=' + this.value;
-                $.ajax({
-                    type: 'POST',
-                    url: 'cd/Controlador/RegistroAgencia.php',
-                    data: data,
-                    success: function(data) {
-                        var data = JSON.parse(data);
-                        toastr.options.timeOut = "10000";
-                        if (data.data == undefined) {
-                            CambiarInputs(true);
-                            // var contenido="El RUC <strong>" + data.RUC + "</strong> ya existe y esta registrado con la siguiente razón social <strong>" + data.RazonSocial + "</strong>";
-                            var contenido = "El RUC " + data.RUC + " ya existe y esta registrado en nuestro web de Agencias con la siguiente razón social " + data.RazonSocial + ", por favor verifique su correo electrónico";
-                            swal({
-                                title: "Mensaje de Alerta",
-                                text: contenido,
-                                icon: "warning",
-                                timer: 4000,
-                                buttons: {
-                                    confirm: {
-                                        className: 'btn btn-warning'
-                                    }
-                                },
-                            });
-                        }
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        alert("Error: " + errorThrown);
-                    }
-                });
+                ValidarRucExistente(this.value);
             } else {
                 swal({
                     title: "Mensaje de Alerta",
@@ -248,6 +221,57 @@ $(document).on('blur', 'input[name=RUC]', function(arg) {
     }
 });
 
+$(document).on('blur', '.ruc-extranjero', function() {
+    if (this.value) {
+        ValidarRucExistente(this.value);
+    }
+});
+
+$(document).on('keypress', '.ruc-peru', function() {
+    var regex = new RegExp("^[0-9]+$");
+    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (!regex.test(key)) {
+        event.preventDefault();
+        return false;
+    } else {
+        var len = $(this).val().length;
+        if (len > 10) {
+            event.preventDefault();
+            return false;
+        }
+    }
+});
+
+function ValidarRucExistente(ruc) {
+    var dato = 'verificar_ruc=1&RUC=' + ruc;
+    $.ajax({
+        type: 'POST',
+        url: 'cd/Controlador/RegistroAgencia.php',
+        data: dato,
+        success: function(data) {
+            var data = JSON.parse(data);
+            if (data.data == undefined) {
+                CambiarInputs(true);
+                var contenido = "El RUC " + data.RUC + " ya existe y esta registrado en nuestro web de Agencias con la siguiente razón social " + data.RazonSocial + ", por favor verifique su correo electrónico";
+                swal({
+                    title: "Mensaje de Alerta",
+                    text: contenido,
+                    icon: "warning",
+                    timer: 4000,
+                    buttons: {
+                        confirm: {
+                            className: 'btn btn-warning'
+                        }
+                    },
+                });
+            }
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            alert("Error: " + errorThrown);
+        }
+    });
+}
+
 function CambiarInputs(option) {
     var form = $("#modalNuevaAgencia .modal-body").find('input,button');
     $.each(form, function(index, elem) {
@@ -278,4 +302,30 @@ function ValidarRucDigito(ruc) {
     }
 
     return digitoverificar == ultimo ? true : false;
+}
+
+function ClaseRUC(code) {
+    var element = $('input[name=RUC]');
+    if (code == 'PE') {
+        element.removeClass('ruc-extranjero');
+        element.addClass('ruc-peru');
+        if (!ValidarRucDigito(element.val())) {
+            swal({
+                title: "Mensaje de Alerta",
+                text: 'RUC no válido',
+                icon: "warning",
+                timer: 2000,
+                buttons: {
+                    confirm: {
+                        className: 'btn btn-warning'
+                    }
+                },
+            });
+            CambiarInputs(true);
+        }
+    } else {
+        element.removeClass('ruc-peru');
+        element.addClass('ruc-extranjero');
+        CambiarInputs(false)
+    }
 }

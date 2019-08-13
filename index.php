@@ -361,7 +361,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon">RUC</span>
-                                <input type="text" class="form-control" placeholder="RUC" id="RUC" name="RUC" required="" form="registrar-agencia" maxlength="11">
+                                <input type="text" class="form-control ruc-peru" placeholder="RUC" id="RUC" name="RUC" required="" form="registrar-agencia">
                             </div>
                         </div>
                         <div class="form-group">
