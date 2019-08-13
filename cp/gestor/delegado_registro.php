@@ -100,9 +100,9 @@ $directorio_imagen = '../';
                                 <td height="10" colspan="5"  ></td>
                             </tr>
                             <tr>
-                                <td  class="label_info" style="padding: 10px 10px 7px 0;">DNI:</td><td ><input type="text" name="dni_d" id="dni_d" style="text-align: center;" maxlength="8" onKeyPress="javascript:return Numero(event);"/>
+                                <td  class="label_info" style="padding: 10px 10px 7px 0;">DNI:</td><td ><input type="text" name="dni_d" id="dni_d" maxlength="8" onKeyPress="javascript:return Numero(event);"/>
                                     <span class="span-requerido">*</span></td>
-                                <td  class="label_info" style="padding: 10px 10px 7px 0;">anexo:</td><td >  <input type="text" name="anexo_d" id="anexo_d" style="text-align: center;" maxlength="6" onKeyPress="javascript:return Numero(event);"/></td>
+                                <td  class="label_info" style="padding: 10px 10px 7px 0;">anexo:</td><td >  <input type="text" name="anexo_d" id="anexo_d"  maxlength="6" onKeyPress="javascript:return Numero(event);"/></td>
                                 <td  rowspan="1"> <button style="cursor:pointer;" id="guarda_delegado" onClick="event.preventDefault();" title="Guardar Delegado"><img src="../images/disk-black.png" /></button></td>
                             </tr>
                             <tr>
@@ -133,7 +133,7 @@ $directorio_imagen = '../';
                                 </td>
                             </tr>
                             <tr>
-                                <td  class="label_info" style="padding: 10px 10px 7px 0;">tel&eacute;fono oficina:</td><td ><input type="text" name="ofic_d" id="ofic_d" maxlength="7" style="text-align: center;" onKeyPress="javascript:return Numero(event);"/>
+                                <td  class="label_info" style="padding: 10px 10px 7px 0;">tel&eacute;fono oficina:</td><td ><input type="text" name="ofic_d" id="ofic_d" maxlength="7" onKeyPress="javascript:return Numero(event);"/>
                                     <span class="span-requerido">*</span></td>
                             </tr>
                             <tr>
