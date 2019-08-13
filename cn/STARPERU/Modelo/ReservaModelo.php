@@ -160,7 +160,7 @@ class ReservaModelo{
         $obj_conexion->CerrarConexion($conexion);
     }
 
-    public function ListaMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr,$limit,$extra,$formaPago){
+    public function ListaMovimientos($codigo_entidad,$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr,$limit,$extra,$formaPago,$estado){
         $filtro='';
          if($fecha_inicio!='' and $fecha_fin!=''){
             $filtro.=" AND reserva.FechaRegistro BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_fin 23:59:59'";
@@ -176,6 +176,9 @@ class ReservaModelo{
         }
          if($usuario_dni!=''){
              $filtro.="AND personal.CodigoPersonal = reserva.CodigoPersonal  AND personal.DNI='$usuario_dni'";
+         }
+         if($estado!=''){
+             $filtro.="AND reserva.Registro = visa.reserva_id  AND visa.anulado='$estado'";
          }
 //        if($usuario!=''){
 //            $filtro.=" AND (SELECT CASE Tipo WHEN 'G' THEN '' WHEN 'DNI' THEN DNI END FROM Personal WHERE Personal.CodigoPersonal = Reserva.CodigoPersonal)='$usuario'";

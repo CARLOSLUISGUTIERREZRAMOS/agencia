@@ -88,11 +88,12 @@ $(document).ready(function(){
                 success: function(html) {
                     var resultado=html.split('_|_')
                     if (resultado[0] == 1) {
-                        $("#formRegistro").each(function() {
+                         $("#formRegistro").each(function() {
                             this.reset();
                         });
-                          $.msgbox().content('El delegado fue guardado con &eacute;xito');
-                          $.msgbox().open();
+//                        $.msgbox().content('El delegado fue guardado con &eacute;xito');
+//                        $.msgbox().open();
+                        window.location.href='delegado_listado.php';
                            
                     }
                     else if(resultado[0] == 3){
