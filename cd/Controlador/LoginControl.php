@@ -75,4 +75,15 @@ if(isset($_POST['deuda'])){
     }
 }
 
+if(isset($_POST['cambio_password'])){
+    $obj_personal=new PersonalModelo();
+    $Password=$_POST["password"];
+    $clave_encrypt= $obj_personal->encrypt($Password,"starperu");
+    $contrasena=$obj_personal->CambioContrasena($_SESSION["s_idusuario"],$clave_encrypt);
+    if ($contrasena==1) {
+        $_SESSION["s_cambio_clave"]=0;
+    }
+    echo json_encode(['code'=>$contrasena]);
+}
+
 ?>
