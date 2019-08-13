@@ -79,7 +79,7 @@ if ($_POST['editar_agencia'] == 1) {
     $ciudad = utf8_decode(trim($_POST['ciudad']));
     $celular = trim($_POST['celular']);
     $domicilio_fiscal = utf8_decode(strtoupper(trim($_POST['domicilio'])));
-    $email = strtolower(trim($_POST['email']));
+    $email = strtoupper(trim($_POST['email']));
     $telefono_oficina = trim($_POST['telefono']);
     if (!preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $email)) {
         echo "4_|_";
