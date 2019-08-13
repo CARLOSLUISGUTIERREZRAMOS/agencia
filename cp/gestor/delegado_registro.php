@@ -111,7 +111,7 @@ $directorio_imagen = '../';
                                     <span class="span-requerido">*</span>
                                 </td>
                                 <td  class="label_info" style="padding: 10px 10px 7px 0;">celular:</td><td > <input type="text" name="celu_d" id="celu_d" maxlength="9" onKeyPress="javascript:return Numero(event);" value="<?php echo $celular; ?>"/></td>
-                                <td  rowspan="1"> <button style="cursor:pointer;" onClick="event.preventDefault();window.location.href = 'delegado_listado.php';" title="Volver al listado de Delegados" ><img src="../images/table.png" /></button></td>
+                                <!--<td  rowspan="1"> <button style="cursor:pointer;" onClick="event.preventDefault();window.location.href = 'delegado_listado.php';" title="Volver al listado de Delegados" ><img src="../images/table.png" /></button></td>-->
                             </tr>
                             <tr>
                                 <td  class="label_info" style="padding: 10px 10px 7px 0;">apellido materno:</td><td >
