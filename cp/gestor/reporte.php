@@ -27,6 +27,7 @@ if ($_POST['buscar'] == 1) {
     $pnr = $_REQUEST['pnr'];
     $usuario_dni = $_REQUEST['usuario_dni'];
     $formaPago = $_REQUEST['formaPago'];
+    $estado = $_REQUEST['estado'];
 }
 require_once("../../config.php");
 ?>
@@ -46,7 +47,7 @@ require_once("../../config.php");
              acceder a la base de datos, puede ser un XML o una cadena en formato JSON
              devuelta por un archivo PHP, por ejemplo.
              */
-            url: '<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario_dni=<?php echo $usuario_dni; ?>&boleto=<?php echo $boleto ?>&pnr=<?php echo $pnr ?>&formaPago=<?php echo $formaPago ?>&movimientos=1',
+            url: '<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario_dni=<?php echo $usuario_dni; ?>&boleto=<?php echo $boleto ?>&pnr=<?php echo $pnr ?>&formaPago=<?php echo $formaPago ?>&estado=<?php echo $estado ?>&movimientos=1',
             // indicamos en que formato se manejaran los datos
             dataType: 'json',
             /* establecemos una lista de columnas a usar, indicando :
@@ -250,7 +251,7 @@ require_once("../../config.php");
 
     }
     function ExportarExcelMov() {
-        window.open('<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario_dni=<?php echo $usuario_dni; ?>&boleto=<?php echo $boleto ?>&pnr=<?php echo $pnr ?>&formaPago=<?php echo $formaPago ?>&excel=1', '_blank', '');
+        window.open('<?= $url ?>/cd/Controlador/MovimientoControl.php?fecha_inicial=<?php echo $fecha_inicio; ?>&fecha_final=<?php echo $fecha_fin; ?>&usuario_dni=<?php echo $usuario_dni; ?>&boleto=<?php echo $boleto ?>&pnr=<?php echo $pnr ?>&formaPago=<?php echo $formaPago ?>&estado=<?php echo $estado ?>&excel=1', '_blank', '');
     }
 
     function ExportarExcelDetalleMov(mov) {
@@ -270,13 +271,13 @@ require_once("../../config.php");
     <form id="form1" name="form1" method="post" action="" autocomplete="off">
         <table width="1100" border="0" cellpadding="0" cellspacing="0" style="background-color: #F0F0F0">
             <tr>
-                <td height="26" colspan="7" align="left" class="titleTable gradiante" style="color:white;padding: 0px 5px;margin: 0px;font-weight: bold;">Opciones de B&uacute;squeda</td>
+                <td height="26" colspan="12" align="left" class="titleTable gradiante" style="color:white;padding: 0px 5px;margin: 0px;font-weight: bold;">Opciones de B&uacute;squeda</td>
             </tr>
             <tr>
-                <td height="3" colspan="7"  style="background:#fdb813;"></td>
+                <td height="3" colspan="12"  style="background:#fdb813;"></td>
             </tr>
             <tr>
-                <td height="20" colspan="7"  ></td>
+                <td height="20" colspan="12"  ></td>
             </tr>
             <tr>
                 <td align="right">Fecha Inicio :</td>
@@ -284,17 +285,26 @@ require_once("../../config.php");
                 <td align="right" >PNR :</td>
                 <td><input type="text" name="pnr" id="pnr" maxlength="6" style="width: 100px;text-align: center" value="<?php echo $pnr; ?>" /></td>
                 <td align="right" >Boleto :</td>
-                <td ><input type="text" name="boletos" id="boletos" maxlength="13" style="width: 100px;text-align: center" value="<?php echo $boleto; ?>" /></td>
-                <td rowspan="3" align="center">
+                <td ><input type="text" name="boletos" id="boletos" maxlength="13" style="width: 120px;text-align: center" value="<?php echo $boleto; ?>" /></td>
+                 <td align="right" >Estado :</td>
+                <td >
+                    <select name="estado" id="estado" style="width: 100px;height: 22px;border: #e2e2e2 1px solid;" >
+                        <option value>SELECCIONE</option>
+                        <option  <?= ($estado=="0") ? 'selected' : '' ?>  value="0" >ANULADO</option>
+                        <option <?= ($estado=="1") ? 'selected' : '' ?> value="1">NO ANULADO</option>
+                    </select>   
+                </td>       
+                <td rowspan="3" >
                     <input type="hidden" name="buscar" value="1"  />
-                    <input type="submit" class="btn-red" name="btnbusqueda" id="btnbusqueda1" value="Consultar" title="Presionar para ver resultados ..." /></td>
+                    <input type="submit" class="btn-red" name="btnbusqueda" id="btnbusqueda1" value="Consultar" title="Presionar para ver resultados ..." />
+                </td>
             </tr>  
             <tr>
                 <td align="right">Fecha Final :</td>
                 <td > <input type="text" name="fecha_final" id="fecha_final" maxlength="10" placeholder="dd/mm/yyyy" style="width: 80px" onKeyPress="return NumeroFecha(event)" value="<?php echo $fecha_fin; ?>" readonly class="datepicker Cursor"/> </td>
                 <?php if($Tipo2=='administrador'){?>
-                    <td align="right">Usuario :</td>
-                    <td>
+                    <td align="right" col>Usuario :</td>
+                    <td colspan="3">
                         <select name="usuario_dni" id="usuario" style="width: 387px;height: 22px;border: #e2e2e2 1px solid;" >
                         </select>   
                     </td>
@@ -309,7 +319,7 @@ require_once("../../config.php");
                         <option <?= ($formaPago=="DC") ? 'selected' : '' ?> value="DC">DINERS CLUB</option>
                         <option <?= ($formaPago=="AX") ? 'selected' : '' ?> value="AX">AMEX</option>
                     </select>   
-                </td>
+                </td>  
             </tr>  
             <tr>
                 <td height="20" colspan="7"  ></td>

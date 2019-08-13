@@ -106,13 +106,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-top">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
+<!--                        <li>
                             <a target="_blank">
                                 <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
                                 <span class="span">INFORMACIÓN AL</span>
                                 <span class="span span-bold span-font-medium">PASAJERO</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li>
                             <a style="cursor: pointer;" class="modal-agencia">
                                 <i class="fa fa-university fa-2x" aria-hidden="true"></i>

@@ -36,6 +36,8 @@ if($_REQUEST['movimientos']==1){
             }else {
             $usuario_dni=$_SESSION['s_dni'];    
             }
+            
+            $estado=$_REQUEST['estado'];
             $boleto=trim($_REQUEST['boleto']);
             $pnr=trim($_REQUEST['pnr']);
             $formaPago=$_REQUEST['formaPago'];
@@ -45,7 +47,7 @@ if($_REQUEST['movimientos']==1){
             $limit = "LIMIT $start, $rp";
             $extra=1;
             $lista_movimientos=array();
-            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr ,$limit,$extra,$formaPago);
+            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr ,$limit,$extra,$formaPago,$estado);
             // var_dump($lista_movimientos);die;
             $data = array();
             $data['page'] = $page;
@@ -192,6 +194,7 @@ if($_REQUEST['excel']==1){
             $boleto=trim($_REQUEST['boleto']);
             $pnr=trim($_REQUEST['pnr']);
             $formaPago=$_REQUEST['formaPago'];
+            $estado=$_REQUEST['estado'];
             
             if($fecha_inicio!=''){
                 $fecha_inicio = str_replace("/", "-", $fecha_inicio);
@@ -204,7 +207,7 @@ if($_REQUEST['excel']==1){
             ////
             $extra=0;
             $lista_movimientos=array();
-            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr,$limit,$extra,$formaPago);
+            $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr,$limit,$extra,$formaPago,$estado);
 
             header("Content-Type: application/vnd.ms-excel" );
             header("Expires: 0");
