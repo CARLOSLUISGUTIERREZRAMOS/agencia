@@ -290,8 +290,8 @@ require_once("../../config.php");
                 <td >
                     <select name="estado" id="estado" style="width: 100px;height: 22px;border: #e2e2e2 1px solid;" >
                         <option value>SELECCIONE</option>
-                        <option  <?= ($estado=="0") ? 'selected' : '' ?>  value="0" >ANULADO</option>
-                        <option <?= ($estado=="1") ? 'selected' : '' ?> value="1">NO ANULADO</option>
+                        <option  <?= ($estado=="0") ? 'selected' : '' ?>  value="0" >SIN BOLETO</option>
+                        <option <?= ($estado=="1") ? 'selected' : '' ?> value="1">CON BOLETO</option>
                     </select>   
                 </td>       
                 <td rowspan="3" >

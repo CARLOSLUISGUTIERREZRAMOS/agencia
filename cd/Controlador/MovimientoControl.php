@@ -132,7 +132,7 @@ if($_REQUEST['movimientos']==1){
                                 $movimiento[7]->getRUCPasajero(),
                                 $movimiento[3],
                                 $movimiento[7]->getFechaRegistro(),
-                                $movimiento[8]->getTicket(),
+                                ($movimiento[8]->getEstadoRegistro()==1)?$movimiento[8]->getTicket():'<div style="text-align: center; width: 100px; color:red;"><del>'.$movimiento[8]->getTicket().'</del></div>',
                                 '<a href="javascript:void(0);" onClick="Forma_pago(\''.$movimiento[7]->getRegistro().'\');">'.$tarjeta_imagen.'</a>',
                                 $movimiento[8]->getApellidos(),
                                 trim($movimiento[8]->getApellidos2()),
