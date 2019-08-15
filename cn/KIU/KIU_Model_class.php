@@ -12,8 +12,8 @@ class KIU_Model extends KIU_Connection
     protected $Device ='LIM002IV01'; //TerminalID Agencias
     /* protected $Device ='TCQ002IA01';  | PERUCOMPRAS*/
     /* protected $Device = 'LIM002IX01'; | WEB*/ 
-	/* protected $Target ='Production'; */
-	protected $Target ='Testing';
+	protected $Target ='Production';
+	// protected $Target ='Testing';
 	protected $SequenceNmbr = 1;
 
         

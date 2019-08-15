@@ -1,41 +1,30 @@
 <?php
-
-
 class Connection_visa {
-
-
-        /*
-        CREDENCIALES DE PRODUCCION
-         */
-        // protected $endpoint = 'https://apiprod.vnforapps.com/api.security/v1/security';
-        // protected $endpoint_sesion = 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/';
-        // protected $endpoint_genera_autorizacion_transaccion = 'https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/';
-        // protected $user = 'carlos.gutierrez@starperu.com';
-        // protected $pass = '@92e-xCK'; 
-        // protected $url_post = '/api.security/v1/security';
-        // protected $host = 'apiprod.vnforapps.com';
-        // protected $codigo_comercio =  650029979;
-        // protected $Credentials;
-        // protected $libreria_checkout = 'https://static-content.vnforapps.com/v2/js/checkout.js';
-    /*
-    CRENENCIALES SANDBOX
-    */
-        protected $endpoint = 'https://apitestenv.vnforapps.com/api.security/v1/security';
-        protected $endpoint_sesion = 'https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/';
-        protected $endpoint_genera_autorizacion_transaccion = 'https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/';
-        protected $user = 'integraciones.visanet@necomplus.com';
-        protected $pass = 'd5e7nk$M';
-        protected $url_post = '/api.security/v1/security';
-        protected $host = 'apitestenv.vnforapps.com';
-        protected $codigo_comercio = 115015006;
-        protected $Credentials;
-        protected $libreria_checkout = "js/checkout_test.js";
+    /*CREDENCIALES DE PRODUCCION*/
+    protected $endpoint = 'https://apiprod.vnforapps.com/api.security/v1/security';
+    protected $endpoint_sesion = 'https://apiprod.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/';
+    protected $endpoint_genera_autorizacion_transaccion = 'https://apiprod.vnforapps.com/api.authorization/v3/authorization/ecommerce/';
+    protected $user = 'carlos.gutierrez@starperu.com';
+    protected $pass = '@92e-xCK'; 
+    protected $url_post = '/api.security/v1/security';
+    protected $host = 'apiprod.vnforapps.com';
+    protected $codigo_comercio =  650029979;
+    protected $Credentials;
+    protected $libreria_checkout = 'https://static-content.vnforapps.com/v2/js/checkout.js';
+    //CRENENCIALES SANDBOX 
+    // protected $endpoint = 'https://apitestenv.vnforapps.com/api.security/v1/security';
+    // protected $endpoint_sesion = 'https://apitestenv.vnforapps.com/api.ecommerce/v2/ecommerce/token/session/';
+    // protected $endpoint_genera_autorizacion_transaccion = 'https://apitestenv.vnforapps.com/api.authorization/v3/authorization/ecommerce/';
+    // protected $user = 'integraciones.visanet@necomplus.com';
+    // protected $pass = 'd5e7nk$M';
+    // protected $url_post = '/api.security/v1/security';
+    // protected $host = 'apitestenv.vnforapps.com';
+    // protected $codigo_comercio = 115015006;
+    // protected $Credentials;
+    // protected $libreria_checkout = "js/checkout_test.js";
 
     public function __construct() {
         $this->setCredentials();
-        
-//        $codigo_comercio_test = 115015006; TEST
-//        $codigo_comercio_test = 342868825;
 //        $this->setCodigo_comercio($codigo_comercio_test);
     }
     
