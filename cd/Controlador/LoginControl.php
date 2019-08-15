@@ -86,4 +86,24 @@ if(isset($_POST['cambio_password'])){
     echo json_encode(['code'=>$contrasena]);
 }
 
+if(isset($_POST['resetear_password'])){
+    $obj_personal=new PersonalModelo();
+    $documento=$_POST["documento"];
+    $existe=$obj_personal->ConsultarUsuario($documento);
+    if ($existe==1) {
+        $pass=  $obj_personal->generaPassword();
+        $clave_encrypt= $obj_personal->encrypt($pass,"starperu");
+        $usuario=$obj_personal->ObtenerEmailUsuario($documento);
+        if ($usuario) {
+            $obj_personal->ResetearPassword($usuario->CodigoPersonal,$clave_encrypt);
+            $obj_personal->EnvioMailResetPassword($usuario->Email,$usuario->ApellidoPaterno,$usuario->ApellidoMaterno,$usuario->Nombres,$documento,$pass);
+            echo json_encode(['code'=>'200','email'=>$usuario->Email]);
+        } else {
+            echo json_encode(['code'=>'422']);
+        }
+    }
+    else{
+        echo json_encode(['code'=>'403']);
+    }
+}
 ?>

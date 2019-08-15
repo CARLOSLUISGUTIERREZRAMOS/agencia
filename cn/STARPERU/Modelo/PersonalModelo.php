@@ -1,4 +1,6 @@
 <?php
+use ___PHPSTORM_HELPERS\object;
+
 if (isset($url_proyecto)) {
     require_once(PATH_PROYECTO."/cn/STARPERU/Conexion/ConexionBD.php");
     require_once(PATH_PROYECTO."/cn/STARPERU/Entidades/PersonalEntidad.php");
@@ -149,6 +151,41 @@ class PersonalModelo{
             return "";
         }
     }
+
+    public function ConsultarUsuario($documento){
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT p.* FROM personal p
+                    INNER JOIN	entidad e 
+                    ON p.CodigoEntidad=e.CodigoEntidad
+                    WHERE CodigoUsuario='$documento' AND p.EstadoRegistro=1 AND e.EstadoRegistro=1 limit 1";
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        $obj_conexion->CerrarConexion($conexion);
+        if($numero_filas>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+    public function ObtenerEmailUsuario($documento){
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT p.* FROM personal p
+                    INNER JOIN	entidad e 
+                    ON p.CodigoEntidad=e.CodigoEntidad
+                    WHERE CodigoUsuario='$documento' AND p.EstadoRegistro=1 AND e.EstadoRegistro=1 limit 1";
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        if($numero_filas>0){
+            $fila=  $obj_conexion->ObtenerDatos($resultado);
+            return (object)$fila;
+            $obj_conexion->CerrarConexion($conexion);
+        }else{
+            return "";
+        }
+    }
     
     public function ObtenerLineaCredito($codigo_entidad){
        $linea_credito_final = "";
@@ -205,6 +242,21 @@ class PersonalModelo{
         $obj_conexion->CerrarConexion($conexion);
         return $flag;
     }
+
+    public function ResetearPassword($usuario,$contrasena){
+        $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="UPDATE personal SET Password='$contrasena', CambioClave=1 WHERE CodigoPersonal=$usuario";
+        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $error=$obj_conexion->ErrorEjecucion($conexion);
+        if($error==1){
+            $flag=1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
+    }
+
     public function GuardaDelegado($codigo_entidad,$dni,$apep,$apem,$nom,$email,$ofic,$anexo,$celular,$password){
         $flag=0;
         $obj_conexion=new ConexionBD();
@@ -486,45 +538,90 @@ class PersonalModelo{
    
    
     public function EnvioMailResetPassword($email,$paterno,$materno,$nombres,$usuario,$clave){
-        $mail ="<html>";
-        $mail .="<body style='font-family:Trebuchet MS;font-size:13px'>";
-        $mail .="<center>";
-        $mail .="<div style='border: 1px solid #69778d;width:720px;padding-bottom: 10px;'>";
-        $mail .="<table width='700' border='0' align='center'>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td  colspan='2' align='center' style='font-size: 18px;'><font color='#4e99bf'><strong>NOTIFICACI&Oacute;N - SISTEMA Web Agencias</strong></font></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'><p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, en virtud de su acreditaci&oacute;n como <font color='#080897'><strong>DELEGADO</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha realizado correctamente el cambio de clave del Usuario <font color='#080897'><strong>DELEGADO: $paterno $materno , $nombres</strong></font>, y el <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.</p></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'><font color='#080897'><strong>DELEGADO :</strong></font></td></tr>";
-        $mail .=" <tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
-        $mail .="<tr><td width='178'><font color='#33333'><strong>Entidad:</strong></font></td><td width='512'><font color='#33333'><strong>Web Agencias</strong></font></td></tr>";
-        $mail .="<tr><td><font color='#33333'><strong>Delegado:</strong></font></td><td><font color='#33333'><strong>$paterno $materno, $nombres</strong></font></td></tr>";
-        $mail .="<tr><td><font color='#33333'><strong>Usuario de Acceso:</strong></font></td><td><font color='#080897'><strong>$usuario</strong></font></td></tr>";
-        $mail .="<tr><td><font color='#33333'><strong>Password:</strong></font></td><td><font color='#080897'><strong>$clave</strong></font></td></tr>";
-        $mail .="<tr><td colspan='2' bgcolor='#4e99bf'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2'></td></tr>";
-        $mail .="<tr><td colspan='2' style='font-size: 14px;'><font color='#000000'><strong>Se le recuerda que al ingresar por primera vez al SISTEMA se le solicitar&aacute; el cambio de su password.</strong></font></td></tr>";
-        $mail .="</table>";
-        $mail .="</div>";
-        $mail .="</center>";
-        $mail .="</body>";
-        $mail .="</html>";
+        $mail ="<html>
+                    <body style='font-family:Trebuchet MS;font-size:13px'>
+                        <center>
+                            <div style='border: 1px solid #69778d;width:720px;padding-bottom: 10px;'>
+                                <table width='700' border='0' align='center'>
+                                    <tr>
+                                        <td colspan='2'></td>
+                                    </tr>
+                                    <tr>
+                                        <td  colspan='2' align='center' style='font-size: 18px;'>
+                                            <font color='#4e99bf'><strong>NOTIFICACI&Oacute;N - SISTEMA Web Agencias</strong></font>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2' bgcolor='#4e99bf'></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'>
+                                            <p>Estimado Sr(a). <font color='#080897'><strong>$paterno $materno, $nombres</strong></font>, se le informa que <font color='#080897'><strong>STARPERU</strong></font> ha realizado correctamente el cambio de clave <font color='#080897'><strong>USUARIO: ".$usuario."</strong></font>"." <font color='#000000'>para el acceso al</font> "."<font color='#000000'><strong>SISTEMA DE COMPRA DE PASAJES - Web Agencias</strong></font>.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'><font color='#080897'><strong>INFORMACION :</strong></font></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2' bgcolor='#4e99bf'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <font color='#33333'><strong>Usuario de Acceso:</strong></font>
+                                        </td>
+                                        <td>
+                                            <font color='#080897'><strong>$usuario</strong></font>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <font color='#33333'><strong>Password:</strong></font>
+                                        </td>
+                                        <td>
+                                            <font color='#080897'><strong>$clave</strong></font>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2' bgcolor='#4e99bf'></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2' style='font-size: 14px;'>
+                                            <font color='#000000'><strong>Se le recuerda que al ingresar por primera vez al SISTEMA se le solicitar&aacute; el cambio de su password.</strong></font>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </center>
+                    </body>
+                </html>";
 
-        $email.= ", "."carlos.gutierrez@starperu.com";
+        $email.= ", "."carlos.gutierrez@starperu.com,henrry.cachicatari@starperu.com";
         $remitente ="ecel@starperu.com";
         $to=$email;
         $subject='Web Agencias - Notificacion de Cambio de Clave';
         $message=$mail;
         $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
         $cabeceras.= "From: Web Agencias <$remitente>\r\n";
-        mail($to, $subject,$message,$cabeceras ); 
-   }
+        mail($to, $subject,$message,$cabeceras );
+    }
    
 
     public function encrypt($string, $key) {

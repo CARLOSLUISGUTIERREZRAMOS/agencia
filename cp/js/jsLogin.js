@@ -231,6 +231,73 @@ $(document).on('click', '.modal-agencia', function() {
     CambiarSelectPais('PE', ancho);
 });
 
+$(document).on('keyup', 'input[name=documento]', function() {
+    if (this.value.length > 0) {
+        $(".resetear-password").attr('disabled', false);
+    } else {
+        $(".resetear-password").attr('disabled', true);
+    }
+});
+
+$(document).on('click', '.resetear-password', function() {
+    var doc = $("input[name=documento]").val();
+    if (doc) {
+        $("#modalPassword").modal('hide');
+        mostrarLoadingConsulta();
+        $.ajax({
+            type: 'POST',
+            url: 'cd/Controlador/LoginControl.php',
+            data: 'resetear_password=1 && documento=' + doc,
+            success: function(data) {
+                ocultarLoadingConsulta();
+                var data = JSON.parse(data);
+                if (data.code == 200) {
+                    var contenido = "Hemos enviado un correo electronico " + data.email + " de la cuenta asociada al usuario.";
+                    swal({
+                        title: "¡Listo!",
+                        text: contenido,
+                        icon: "success",
+                        timer: 4000,
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-success'
+                            }
+                        },
+                    });
+                } else if (data.code == 422) {
+                    swal({
+                        // title: "¡Listo!",
+                        text: 'Hubo algun error, recarga la página',
+                        icon: "warning",
+                        timer: 3000,
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-warning'
+                            }
+                        },
+                    });
+                } else {
+                    swal({
+                        // title: "¡Listo!",
+                        text: 'N° de documento no existe o la cuenta esta desactivada',
+                        icon: "error",
+                        timer: 3000,
+                        buttons: {
+                            confirm: {
+                                className: 'btn btn-danger'
+                            }
+                        },
+                    });
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                ocultarLoadingConsulta();
+                alert("Error: " + errorThrown);
+            }
+        });
+    }
+});
+
 function CambiarInputs(option) {
     var form = $("#modalNuevaAgencia .modal-body").find('input,button');
     $.each(form, function(index, elem) {
@@ -344,4 +411,17 @@ function ClaseRUC(code) {
         element.addClass('ruc-extranjero');
         CambiarInputs(false)
     }
+}
+
+function mostrarLoadingConsulta() {
+    swal({
+        text: 'procesando ...',
+        closeOnEsc: false,
+        closeOnClickOutside: false,
+        button: false
+    })
+}
+
+function ocultarLoadingConsulta() {
+    swal.close();
 }

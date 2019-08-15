@@ -259,33 +259,18 @@
                                 <p>
                                     Para realizar el restablecimiento de la contraseña ingrese el numero de documento y se le enviara instrucciones a su correo.
                                 </p>
-                                <p>&nbsp;</p>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <span id="lblDNI">Documento</span>
-                                        <input name="txtDocumento" type="text" id="txtDocumento" class="form-control" />
+                                        <label>Documento</label>
+                                        <input name="documento" type="text" id="documento" class="form-control" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row post-clave">
-                            <div class="col-md-3 col-sm-3 col-xs-12 hidden-xs">
-                                <img src="images/success.png" style="margin-top: 21px;" />
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12 visible-xs" style="text-align:center; margin-bottom:15px;">
-                                <img src="images/success.png" />
-                            </div>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                                <p>¡Listo!</p>
-                                <p>Hemos enviado un correo electronico a la cuenta asociada al usuario.</p>
-                                <p>Gracias</p>
-                            </div>
-                        </div>
-                        
                     </div>
                     <div class="modal-footer buttons-clave">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <span id="btnEnviar" class="btn btn-success" onclick="RestablecerPassword(&#39;txtDocumento&#39;); return false">Enviar</span>
+                        <button class="btn btn-success resetear-password" disabled>Enviar</button>
                     </div>
                 </div>
             </div>
@@ -454,14 +439,5 @@
         <script src="cp/js/chosen.js" type="text/javascript"></script>
         <script src="cp/js/sweetalert.min.js" type="text/javascript"></script>
         <script src="cp/js/jsLogin.js" type="text/javascript"></script>
-        <script>
-            $(function () {
-                $('.btn-reset-pass').on("click", function () {
-                    $('.buttons-clave').show();
-                    $('.previo-clave').show();
-                    $('.post-clave').hide();
-                });
-            });
-        </script>
     </body>
 </html>
