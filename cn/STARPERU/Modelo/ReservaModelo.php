@@ -263,10 +263,8 @@ class ReservaModelo{
                           reserva_detalle.EstadoRegistro	
                     FROM reserva_detalle, reserva, personal, entidad E , visa
                     WHERE visa.reserva_id= reserva.Registro AND reserva.TipoVuelo = 'R' AND reserva_detalle.Registro = reserva.Registro AND reserva.CodigoPersonal = personal.CodigoPersonal AND personal.CodigoEntidad = E.CodigoEntidad AND E.CodigoEntidad = $codigo_entidad $filtro)
-
-                   
                     ORDER BY Registro ,Detalle, Tramo   $limite";
-                    var_dump($consulta);die;
+                    // var_dump($consulta);die;
         
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);

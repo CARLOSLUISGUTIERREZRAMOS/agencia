@@ -170,7 +170,7 @@
                                         <div class="row form-group">
                                             <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
                                             <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: center">
-                                                <input type="password" maxlength="8"  placeholder="Ingrese contraseña" name="password" id="password"   class="form-control"/>
+                                                <input type="password" maxlength="12"  placeholder="Ingrese contraseña" name="password" id="password"   class="form-control"/>
                                                 <span style="float: right; font-size: 13px; margin-top:2px; cursor: pointer;">
                                                     <a class="links btn-reset-pass" data-toggle="modal" data-target="#modalPassword">¿Olvido su contraseña?</a>
                                                 </span>

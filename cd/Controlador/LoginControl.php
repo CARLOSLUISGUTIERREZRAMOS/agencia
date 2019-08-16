@@ -17,6 +17,7 @@ if(isset($_POST['login'])){
         }
         $clave_encrypt= $obj_personal->encrypt($clave,"starperu");
         $Personal= $obj_personal->AutentificarPersonal($usuario,$clave_encrypt);
+        // var_dump($Personal);die;
         if($Personal!=""){
             // $_SESSION["s_idusuario"] = $Personal->getCodigoPersonal();
             // $_SESSION["s_nombre"] = $Personal->getNombres();

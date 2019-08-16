@@ -48,7 +48,7 @@ if($_REQUEST['movimientos']==1){
             $extra=1;
             $lista_movimientos=array();
             $lista_movimientos=$obj_movimiento->ListaMovimientos($_SESSION['s_entidad'],$fecha_inicio,$fecha_fin,$usuario_dni,$boleto,$pnr ,$limit,$extra,$formaPago,$estado);
-            var_dump($lista_movimientos);die;
+            // var_dump($lista_movimientos);die;
             $data = array();
             $data['page'] = $page;
             $data['rows'] = array();
