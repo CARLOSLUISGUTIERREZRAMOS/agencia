@@ -149,7 +149,7 @@
                         <div class="modal-content">
                           <div class="modal-body mb-0 p-0">
                             <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                                <iframe class="embed-responsive-item" src="../../cp/videos/registrar_agencia.mp4"
+                                <iframe class="embed-responsive-item" src="../../cp/videos/registrar_agencia_1.mp4"
                                 allowfullscreen></iframe>
                             </div>
                           </div>
@@ -173,7 +173,7 @@
     <br>
     <table width="900" border="0" cellpadding="0" cellspacing="0" style="margin: 0px auto;background-color: #F0F0F0;">
         <tr>
-            <td height="26" colspan="4" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Manual</td>
+            <td height="26" colspan="4" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Manualtd>
         </tr>
         <tr>
             <td height="3" colspan="4"  style="background:#fdb813;"></td>
