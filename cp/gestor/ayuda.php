@@ -149,7 +149,7 @@
                         <div class="modal-content">
                           <div class="modal-body mb-0 p-0">
                             <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                                <iframe class="embed-responsive-item" src="../../cp/videos/registrar_agencia_1.mp4"
+                                <iframe class="embed-responsive-item" src="../../cp/videos/registrar_agencia.mp4"
                                 allowfullscreen></iframe>
                             </div>
                           </div>
