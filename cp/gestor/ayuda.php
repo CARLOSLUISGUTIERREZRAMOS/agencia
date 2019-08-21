@@ -171,9 +171,9 @@
         </tr>
     </table>
     <br>
-<!--    <table width="900" border="0" cellpadding="0" cellspacing="0" style="margin: 0px auto;background-color: #F0F0F0;">
+    <table width="900" border="0" cellpadding="0" cellspacing="0" style="margin: 0px auto;background-color: #F0F0F0;">
         <tr>
-            <td height="26" colspan="4" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Manuales</td>
+            <td height="26" colspan="4" class="gradiante" style="color:white;font-size: 13px;padding: 0px 5px;margin: 0px;font-weight: bold;">Manual</td>
         </tr>
         <tr>
             <td height="3" colspan="4"  style="background:#fdb813;"></td>
@@ -182,9 +182,14 @@
             <td height="10" colspan="4"  ></td>
         </tr>
         <tr>
+            <td>
+                Haz click en el botón para descargar el manual de usuario. <a class="btn" href="../../cp/pdf/MANUAL DE USUARIO.pdf" download="MANUAL DE USUARIO" style="background: -webkit-linear-gradient(#f01515, darkred) !important;color:white"><i class="fa fa-file-pdf"></i></a>
+            </td>
+        </tr>
+        <tr>
         <tr>
             <td height="10" colspan="4"  ></td>
         </tr>
-    </table>-->
+    </table>
 </div>
 <?php include(FOOTER_PATH); ?>
