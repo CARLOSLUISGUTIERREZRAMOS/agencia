@@ -113,18 +113,18 @@ if (isset($_POST['cambiar_correo'])) {
     $obj_personal = new PersonalModelo();
     $documento = $_POST["dni"];
     $correo = $_POST["correo"];
-    $existe = $obj_personal->BuscarUsuario($documento);
-    if ($existe) {
-        $obj_personal->CambioCorreo($documento, $correo);
-        $usuario = $obj_personal->BuscarUsuario($documento);
+    $usuario = $obj_personal->BuscarUsuario($documento);
+        if ($usuario) {
+        
         $token_id = $obj_personal->ObtenerTokenID($usuario->CodigoEntidad, $usuario->CodigoPersonal);
         if ($token_id) {
+            $obj_personal->CambioCorreo($documento, $correo);
             $token = $token_id . '|' . $usuario->CodigoEntidad . '|' . $usuario->CodigoPersonal;
             $password = $obj_personal->decrypt($usuario->Password, "");
-            EnvioCreacionMailUsuarios($usuario->Email, $usuario->ApellidoPaterno, $usuario->ApellidoMaterno, $usuario->Nombres, $documento, $password, 'ADMINISTRADOR', $usuario->RazonSocial, $usuario->RUC, $token);
+            EnvioCreacionMailUsuarios($correo, $usuario->ApellidoPaterno, $usuario->ApellidoMaterno, $usuario->Nombres, $documento, $password, 'ADMINISTRADOR', $usuario->RazonSocial, $usuario->RUC, $token);
             $data = [];
             $data['code'] = '200';
-            $data['email'] = $usuario->Email;
+            $data['email'] = $correo;
             echo json_encode($data);
         } else {
             echo json_encode(['code' => '422']);

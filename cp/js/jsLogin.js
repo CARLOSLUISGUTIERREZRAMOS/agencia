@@ -301,7 +301,7 @@ $(document).on('click', '.resetear-password', function() {
 $(document).on('click', '.cambiar-correo', function() {
     var dni = $("input[name=dni]").val();
     var correo = $("input[name=correo]").val();
-        if(dni){
+        if(dni!=="" && correo!==""){
             $("#modalCambiarCorreo").modal('hide');
             mostrarLoadingConsulta();
             $.ajax({
@@ -310,6 +310,8 @@ $(document).on('click', '.cambiar-correo', function() {
                 data: 'cambiar_correo=1 && dni=' + dni +'&& correo=' + correo,
                 success: function(data) {
                     ocultarLoadingConsulta();
+                    document.getElementById("dni").value = "";
+                    document.getElementById("correo").value = "";
                     var data = JSON.parse(data);
                     if (data.code == 200) {
                         var contenido = "Hemos enviado un correo electronico a " + data.email ;
@@ -352,7 +354,7 @@ $(document).on('click', '.cambiar-correo', function() {
     } else {
         swal({
             title: "Mensaje de Alerta",
-            text: 'Usuario no válido',
+            text: 'Ingresar usuario y correo',
             icon: "warning",
             timer: 2000,
             buttons: {
