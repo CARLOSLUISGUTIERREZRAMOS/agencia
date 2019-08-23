@@ -114,10 +114,9 @@ if (isset($_POST['cambiar_correo'])) {
     $documento = $_POST["dni"];
     $correo = $_POST["correo"];
     $usuario = $obj_personal->BuscarUsuario($documento);
-        if ($usuario) {
-        
+    if ($usuario) {
         $token_id = $obj_personal->ObtenerTokenID($usuario->CodigoEntidad, $usuario->CodigoPersonal);
-        if ($token_id) {
+        if ($token_id && $usuario->EstadoRegistro='0') {
             $obj_personal->CambioCorreo($documento, $correo);
             $token = $token_id . '|' . $usuario->CodigoEntidad . '|' . $usuario->CodigoPersonal;
             $password = $obj_personal->decrypt($usuario->Password, "");
@@ -129,7 +128,7 @@ if (isset($_POST['cambiar_correo'])) {
         } else {
             echo json_encode(['code' => '422']);
         }
-    } else {
+    }else {
         echo json_encode(['code' => '403']);
     }
 }
