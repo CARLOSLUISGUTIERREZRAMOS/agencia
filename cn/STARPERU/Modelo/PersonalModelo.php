@@ -745,7 +745,7 @@ class PersonalModelo{
     public function BuscarUsuario($documento){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
-        $consulta="SELECT p.CodigoEntidad,p.CodigoPersonal,p.Email,p.ApellidoPaterno,p.ApellidoMaterno,p.Nombres,p.Password,e.RazonSocial,e.RUC FROM personal p
+        $consulta="SELECT p.CodigoEntidad,p.CodigoPersonal,p.Email,p.ApellidoPaterno,p.ApellidoMaterno,p.Nombres,p.Password,p.EstadoRegistro,e.RazonSocial,e.RUC FROM personal p
                     INNER JOIN	entidad e 
                     ON p.CodigoEntidad=e.CodigoEntidad
                     WHERE CodigoUsuario='$documento'";
