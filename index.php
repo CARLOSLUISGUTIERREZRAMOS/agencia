@@ -76,6 +76,21 @@
             .alert{
                 margin-bottom: 0;
             }
+             #modalCambiarCorreo .modal-header .close { 
+                margin-top: -30px; 
+            } 
+            #modalCambiarCorreo .modal-header { 
+                background-color: #b90007; 
+                border-radius: 5px 5px 0 0; 
+            }
+            #modalCambiarCorreo .modal-title { 
+                color:#f3f3f3; 
+                font-size: 18px; 
+                font-weight: bold; 
+            }
+            button.close { 
+                color: #020202; 
+            } 
         </style>
     </head>
     <body class="fondo_panel">
@@ -202,6 +217,8 @@
                                             </a>
                                             <br />
                                             <span style="font-weight: 900; color: white; font-size: large">COMIENZA A AHORRAR</span>
+                                            <br />
+                                            <a class="links btn-reset-pass" data-toggle="modal" data-target="#modalCambiarCorreo">Haz click aquí si aún no te llega el correo</a>
                                         </p>
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
@@ -240,6 +257,39 @@
                             </div>
                             
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog" id="modalCambiarCorreo">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cambiar Correo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row previo-clave">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <p>
+                                    Para cambiar el correo ingrese su usuario(número de DNI).
+                                </p>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Usuario(número de DNI)</label>
+                                        <input name="dni" type="text" id="dni" class="form-control" />
+                                        <label>Correo</label>
+                                        <input name="correo" type="email" id="correo" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer buttons-clave">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-success cambiar-correo" enabled>Enviar</button>
                     </div>
                 </div>
             </div>
