@@ -279,7 +279,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Usuario(número de DNI)</label>
-                                        <input name="dni" type="text" id="dni" class="form-control" />
+                                        <input name="dni" type="text" id="dni" maxlength="8" class="form-control" />
                                         <label>Correo</label>
                                         <input name="correo" type="email" id="correo" class="form-control" />
                                     </div>
