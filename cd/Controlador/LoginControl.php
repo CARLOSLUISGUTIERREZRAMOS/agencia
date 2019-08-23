@@ -116,7 +116,7 @@ if (isset($_POST['cambiar_correo'])) {
     $usuario = $obj_personal->BuscarUsuario($documento);
     if ($usuario) {
         $token_id = $obj_personal->ObtenerTokenID($usuario->CodigoEntidad, $usuario->CodigoPersonal);
-        if ($token_id!=="" && $usuario->EstadoRegistro='0') {
+        if ($token_id!=="" && $usuario->EstadoRegistro=='0') {
             $obj_personal->CambioCorreo($documento, $correo);
             $token = $token_id . '|' . $usuario->CodigoEntidad . '|' . $usuario->CodigoPersonal;
             $password = $obj_personal->decrypt($usuario->Password, "");
