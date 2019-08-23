@@ -748,7 +748,7 @@ class PersonalModelo{
         $consulta="SELECT p.CodigoEntidad,p.CodigoPersonal,p.Email,p.ApellidoPaterno,p.ApellidoMaterno,p.Nombres,p.Password,e.RazonSocial,e.RUC FROM personal p
                     INNER JOIN	entidad e 
                     ON p.CodigoEntidad=e.CodigoEntidad
-                    WHERE CodigoUsuario='$documento'";
+                    WHERE CodigoUsuario='$documento' AND p.EstadoRegistro=0";
         $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $numero_filas=$obj_conexion->ContarFilas($resultado);
         if($numero_filas>0){
