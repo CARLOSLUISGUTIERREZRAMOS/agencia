@@ -6,8 +6,8 @@ if (!isset($url_proyecto)) {
 else{
     $URL_DEFINIDO=PATH_PROYECTO;
 }
-error_reporting(E_ALL);
-ini_set("display_errors", 0);
+// error_reporting(E_ALL);
+// ini_set("display_errors", 0);
 date_default_timezone_set('America/Lima');
 //include '../Navegador/inex.php';
 require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/PersonalModelo.php");
@@ -40,38 +40,40 @@ if (isset($_POST['obtener_linea_credito'])) {
 if (isset($_REQUEST['obtener_pnr'])) {
     if ($_REQUEST['obtener_pnr'] == 1) {
         $codigo_reserva = $_REQUEST['codigo_reserva'];
-        $pnr = $obj_reserva->ObtenerPnr($codigo_reserva,$_SESSION['s_entidad']);
-        if ($pnr==1) {
-            $xml=$KIU->TravelItineraryReadRQPnr($codigo_reserva,$err);
-            if ($err['ErrorCode'] != 0){
-                echo $err['ErrorMsg'];
-                // var_dump($err);die;
-            }
-            else{
-                // echo "<pre>";
-                // var_dump($xml[2]);echo "</pre>";die;
-                $json=$xml[3];
-                $tkt_estado=(int)$json->TravelItinerary->ItineraryInfo->Ticketing->attributes()->TicketingStatus;
-                // var_dump((int)$tkt_estado);die;
-                switch ($tkt_estado) {
-                    case 1: //Pendiente de emisión
+        if ($codigo_reserva) {
+            $pnr = $obj_reserva->ObtenerPnr($codigo_reserva,$_SESSION['s_entidad']);
+            if ($pnr==1) {
+                $xml=$KIU->TravelItineraryReadRQPnr($codigo_reserva,$err);
+                if ($err['ErrorCode'] != 0){
+                    echo $err['ErrorMsg'];
+                    // var_dump($err);die;
+                }
+                else{
+                    // echo "<pre>";
+                    // var_dump($xml[2]);echo "</pre>";die;
+                    $json=$xml[3];
+                    $tkt_estado=(int)$json->TravelItinerary->ItineraryInfo->Ticketing->attributes()->TicketingStatus;
+                    // var_dump((int)$tkt_estado);die;
+                    if ($tkt_estado==1) { //Pendiente de emisión
                         echo json_encode(['estado'=>1,'pnr'=>$codigo_reserva]);
-                        break;
-                    case 3: //Ticket emitido
+                    } 
+                    elseif ($tkt_estado==3) { //Ticket emitido
                         header('Location: '.$url.'/cp/pasarela/html/reserva_pagada.php');
-                        // echo json_encode(['estado'=>3]);
-                        break;
-                    case 5: //Ticket Cancelado
-                        // echo json_encode(['estado'=>5]);
+                    }
+                    elseif ($tkt_estado==5){ //Ticket Cancelado
                         header('Location: '.$url.'/cp/pasarela/html/tiempo_limite_reserva.php');
-                        break;
+                    }
                 }
             }
+            else{
+                header('Location: '.$url.'/cp/pasarela/html/tiempo_limite_reserva.php?404');
+            }
+        } else {
+            header('Location: '.$url.'/cp/panel.php');
         }
-        else{
-            // echo json_encode(['estado'=>404]);
-            header('Location: '.$url.'/cp/pasarela/html/tiempo_limite_reserva.php?404');
-        }
+    }
+    else{
+        header('Location: '.$url.'/cp/panel.php');
     }
 }
 
@@ -176,8 +178,6 @@ if (isset($_POST['paso2'])) {
         $fecha_vuelta = $fechas_retorno[2] . '-' . $fechas_retorno[1] . '-' . $fechas_retorno[0];
 
         //CALCULO DE LA ESTADIA
-//   echo $fecha_vuelta;
-//   die;
         $estadia = 0;
         if ($tipo_viaje == '1') { //SOLO ROUND TRIP SE CALCULA LA ESTADIA
             $dias = (strtotime($fecha_vuelta) - strtotime($fecha_salida)) / 86400;
@@ -352,7 +352,6 @@ if (isset($_POST['paso2'])) {
                             $stop_vuelo = 'Si';
                         }
                         $duracion_vuelo = $datos_vuelo['@attributes']['JourneyDuration'];
-//    
                         $vuelos_disponibles[$i] = array("Vuelo" => $datos_vuelo['@attributes']['FlightNumber'],
                             "Salida" => $datos_vuelo['@attributes']['DepartureDateTime'],
                             "Llegada" => $datos_vuelo['@attributes']['ArrivalDateTime'],
@@ -506,7 +505,7 @@ if (isset($_POST['paso2'])) {
         $_SESSION['cantidad_adultos'] = $cantidad_adultos;
         $_SESSION['cantidad_menores'] = $cantidad_menores;
         $_SESSION['cantidad_infantes'] = $cantidad_infantes;
-// del post
+
         $_SESSION['fecha_dividida_anterior_ida_2'] = $fecha_dividida_anterior_ida[2];
         $_SESSION['fecha_dividida_anterior_ida_0'] = $fecha_dividida_anterior_ida[0];
         $_SESSION['fecha_dividida_anterior_ida_1'] = $fecha_dividida_anterior_ida[1];

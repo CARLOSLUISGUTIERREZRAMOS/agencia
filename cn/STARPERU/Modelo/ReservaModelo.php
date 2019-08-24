@@ -1,9 +1,14 @@
 <?php
-
-require_once("../../cn/STARPERU/Conexion/ConexionBD.php");
-require_once("../../cn/STARPERU/Entidades/ReservaEntidad.php");
-require_once("../../cn/STARPERU/Entidades/ReservaDetalleEntidad.php");
-require_once("../../cn/STARPERU/Entidades/EmpresaEntidad.php");
+if (!isset($url_proyecto)) {
+    $URL_DEFINIDO='../..';
+}
+else{
+    $URL_DEFINIDO=PATH_PROYECTO;
+}
+require_once($URL_DEFINIDO."/cn/STARPERU/Conexion/ConexionBD.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/ReservaEntidad.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/ReservaDetalleEntidad.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/EmpresaEntidad.php");
 
 class ReservaModelo{
     

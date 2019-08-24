@@ -1,7 +1,12 @@
 <?php
-
-require_once("../../cn/STARPERU/Conexion/ConexionBD.php");
-require_once("../../cn/STARPERU/Entidades/CiudadEntidad.php");
+if (!isset($url_proyecto)) {
+    $URL_DEFINIDO='../..';
+}
+else{
+    $URL_DEFINIDO=PATH_PROYECTO;
+}
+require_once($URL_DEFINIDO."/cn/STARPERU/Conexion/ConexionBD.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/CiudadEntidad.php");
 
 class CiudadModelo{
     
