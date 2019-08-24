@@ -44,18 +44,16 @@ class KIU_Controller extends KIU_Model
         $this->ErrorCode=0;
         $this->ErrorMsg='';
 		$respuesta_model = $this->Model_AirDemandTicketRQ($args);
-                $xml=$respuesta_model[0];
-                $json = json_encode($xml);
+        $xml=$respuesta_model[0];
+        $json = json_encode($xml);
 		$array = json_decode($json,TRUE);
         $err=array('ErrorCode'=>$this->ErrorCode, 'ErrorMsg'=>$this->ErrorMsg);
-         $salida=array();
+        $salida=array();
         $salida[]=$array;
         $salida[]=$respuesta_model[1];
         $salida[]=$respuesta_model[2];
         $salida[]=$respuesta_model[3];
 		return $salida;
-                 
-                 
     }
  
     public function TravelItineraryReadRQ($args,&$err)
@@ -69,35 +67,52 @@ class KIU_Controller extends KIU_Model
 		return $array;
     }
 
+    public function TravelItineraryReadRQPnr($args,&$err)
+    {   
+        $this->ErrorCode=0;
+        $this->ErrorMsg='';
+        $respuesta_model = $this->Model_TravelItineraryReadRQPnr($args);
+        $xml=$respuesta_model[0];
+        $json = json_encode($xml);
+		$array = json_decode($json,TRUE);
+        $err=array('ErrorCode'=>$this->ErrorCode, 'ErrorMsg'=>$this->ErrorMsg);
+        $salida=array();
+        $salida[]=$array;
+        $salida[]=$respuesta_model[1];
+        $salida[]=$respuesta_model[2];
+        $salida[]=$respuesta_model[3];
+		return $salida;
+    }
+
     public function AirCancelRQ($args,&$err)
     {
         $this->ErrorCode=0;
         $this->ErrorMsg='';
-	$xml = $this->Model_AirCancelRQ($args);
-	$json = json_encode($xml);
-	$array = json_decode($json,TRUE);
+	    $xml = $this->Model_AirCancelRQ($args);
+	    $json = json_encode($xml);
+	    $array = json_decode($json,TRUE);
         $err=array("ErrorCode"=>$this->ErrorCode, "ErrorMsg"=>$this->ErrorMsg);
-	return $array;
+	    return $array;
     }
     
     public function AirRulesRQ($args,&$err){
         $this->ErrorCode=0;
         $this->ErrorMsg='';
-	$xml = $this->Model_AirRulesRQ($args);
-	$json = json_encode($xml);
-	$array = json_decode($json,TRUE);
+	    $xml = $this->Model_AirRulesRQ($args);
+	    $json = json_encode($xml);
+	    $array = json_decode($json,TRUE);
         $err=array("ErrorCode"=>$this->ErrorCode, "ErrorMsg"=>$this->ErrorMsg);
-	return $array;
+	    return $array;
     }
     
     public function AirFareDisplayRQ($args,&$err){
         $this->ErrorCode=0;
         $this->ErrorMsg='';
-	$xml = $this->Model_AirFareDisplayRQ($args);
-	$json = json_encode($xml);
-	$array = json_decode($json,TRUE);
+	    $xml = $this->Model_AirFareDisplayRQ($args);
+	    $json = json_encode($xml);
+	    $array = json_decode($json,TRUE);
         $err=array("ErrorCode"=>$this->ErrorCode, "ErrorMsg"=>$this->ErrorMsg);
-	return $array;
+	    return $array;
     }
  }
  ?>

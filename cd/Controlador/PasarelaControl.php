@@ -1,16 +1,21 @@
 <?php
-
-session_start();
+if (!isset($url_proyecto)) {
+    session_start();
+    $URL_DEFINIDO='../..';
+}
+else{
+    $URL_DEFINIDO=PATH_PROYECTO;
+}
 error_reporting(E_ALL);
 ini_set("display_errors", 0);
 date_default_timezone_set('America/Lima');
 //include '../Navegador/inex.php';
-require_once("../../cn/STARPERU/Modelo/PersonalModelo.php");
-require_once("../../cn/STARPERU/Modelo/CiudadModelo.php");
-require_once("../../cn/STARPERU/Modelo/TarifaModelo.php");
-require_once("../../cn/STARPERU/Modelo/ReservaModelo.php");
-require_once("../../cn/STARPERU/Modelo/EmpresaModelo.php");
-include "../../cn/KIU/KIU_Controller_class.php";
+require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/PersonalModelo.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/CiudadModelo.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/TarifaModelo.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/ReservaModelo.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/EmpresaModelo.php");
+include $URL_DEFINIDO."/cn/KIU/KIU_Controller_class.php";
 //include "../Funciones/funciones.php";
 $KIU = new KIU_Controller();
 
@@ -25,9 +30,47 @@ if (isset($_POST['obtener_linea_credito'])) {
 //    $codigo_entidad=$_POST['obtener_linea_credito'];
         $codigo_entidad = $_POST['codigo_entidad'];
 
-        $linea_credito = $obj_persona->ObtenerLineaCredito($codigo_entidad);
+        $linea_credito = $obj_reserva->ObtenerLineaCredito($codigo_entidad);
         if ($linea_credito != "") {
             echo trim($linea_credito);
+        }
+    }
+}
+
+if (isset($_REQUEST['obtener_pnr'])) {
+    if ($_REQUEST['obtener_pnr'] == 1) {
+        $codigo_reserva = $_REQUEST['codigo_reserva'];
+        $pnr = $obj_reserva->ObtenerPnr($codigo_reserva,$_SESSION['s_entidad']);
+        if ($pnr==1) {
+            $xml=$KIU->TravelItineraryReadRQPnr($codigo_reserva,$err);
+            if ($err['ErrorCode'] != 0){
+                echo $err['ErrorMsg'];
+                // var_dump($err);die;
+            }
+            else{
+                // echo "<pre>";
+                // var_dump($xml[2]);echo "</pre>";die;
+                $json=$xml[3];
+                $tkt_estado=(int)$json->TravelItinerary->ItineraryInfo->Ticketing->attributes()->TicketingStatus;
+                // var_dump((int)$tkt_estado);die;
+                switch ($tkt_estado) {
+                    case 1: //Pendiente de emisión
+                        echo json_encode(['estado'=>1,'pnr'=>$codigo_reserva]);
+                        break;
+                    case 3: //Ticket emitido
+                        header('Location: '.$url.'/cp/pasarela/html/reserva_pagada.php');
+                        // echo json_encode(['estado'=>3]);
+                        break;
+                    case 5: //Ticket Cancelado
+                        // echo json_encode(['estado'=>5]);
+                        header('Location: '.$url.'/cp/pasarela/html/tiempo_limite_reserva.php');
+                        break;
+                }
+            }
+        }
+        else{
+            // echo json_encode(['estado'=>404]);
+            header('Location: '.$url.'/cp/pasarela/html/tiempo_limite_reserva.php?404');
         }
     }
 }

@@ -22,6 +22,25 @@ class ReservaModelo{
         return $resultado;
 
     }
+
+    public function ObtenerPnr($pnr,$entidad){
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        
+        $consulta="SELECT CodigoReserva FROM reserva WHERE CodigoReserva='$pnr' AND CodigoEntidad=$entidad";
+        
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        
+        if($numero_filas>0){
+            $obj_conexion->CerrarConexion($conexion);
+            return 1;
+        }
+        else{
+            return 0;
+        }
+        
+    }
     
     public function ObtenerDatosPasajero($tipo_doc,$num_doc){
         $obj_conexion=new ConexionBD();
