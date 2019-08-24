@@ -170,7 +170,7 @@ $(document).on('blur', '.ruc-peru', function(arg) {
             } else {
                 swal({
                     title: "Mensaje de Alerta",
-                    text: 'RUC no válido',
+                    text: 'El usuario no existe',
                     icon: "warning",
                     timer: 2000,
                     buttons: {
@@ -295,6 +295,75 @@ $(document).on('click', '.resetear-password', function() {
                 alert("Error: " + errorThrown);
             }
         });
+    }
+});
+
+$(document).on('click', '.cambiar-correo', function() {
+    var dni = $("input[name=dni]").val();
+    var correo = $("input[name=correo]").val();
+        if(dni!=="" && correo!==""){
+            $("#modalCambiarCorreo").modal('hide');
+            mostrarLoadingConsulta();
+            $.ajax({
+                type: 'POST',
+                url: 'cd/Controlador/LoginControl.php',
+                data: 'cambiar_correo=1 && dni=' + dni +'&& correo=' + correo,
+                success: function(data) {
+                    ocultarLoadingConsulta();
+                    document.getElementById("dni").value = "";
+                    document.getElementById("correo").value = "";
+                    var data = JSON.parse(data);
+                    if (data.code == 200) {
+                        var contenido = "Hemos enviado un correo electronico a " + data.email ;
+                        swal({
+                            title: "¡Listo!",
+                            text: contenido,
+                            icon: "success",
+                            timer: 5000,
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-success'
+                                }
+                            },
+                        });
+                    } else if (data.code == 422) {
+                        swal({
+                            text: 'Cuenta verificada',
+                            icon: "warning",
+                            timer: 3000,
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-warning'
+                                }
+                            },
+                        });
+                    } else {
+                        swal({
+                            text: 'Usuario no existe',
+                            icon: "error",
+                            timer: 3000,
+                            buttons: {
+                                confirm: {
+                                    className: 'btn btn-danger'
+                                }
+                            },
+                        });
+                    } 
+                }
+            });
+    } else {
+        swal({
+            title: "Mensaje de Alerta",
+            text: 'Ingresar usuario y correo',
+            icon: "warning",
+            timer: 2000,
+            buttons: {
+                confirm: {
+                            className: 'btn btn-warning'
+                        }
+                    },
+                });
+                CambiarInputs(true);
     }
 });
 

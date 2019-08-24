@@ -168,7 +168,8 @@ class PersonalModelo{
             return 0;
         }
     }
-
+    
+    
     public function ObtenerEmailUsuario($documento){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
@@ -234,6 +235,19 @@ class PersonalModelo{
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         $consulta="UPDATE personal SET Password='$contrasena', CambioClave=0 WHERE CodigoPersonal=$usuario";
+        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $error=$obj_conexion->ErrorEjecucion($conexion);
+        if($error==1){
+            $flag=1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
+    }
+    public function CambioCorreo($documento,$correo){
+        $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="UPDATE personal as p, entidad as e SET p.Email='$correo' , e.Email='$correo' WHERE p.CodigoUsuario='$documento' AND e.DNIFuncionario='$documento';";
         $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         $error=$obj_conexion->ErrorEjecucion($conexion);
         if($error==1){
@@ -727,6 +741,35 @@ class PersonalModelo{
         $obj_conexion->CerrarConexion($conexion);
         return $flag;
     }
+
+    public function BuscarUsuario($documento){
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT p.CodigoEntidad,p.CodigoPersonal,p.Email,p.ApellidoPaterno,p.ApellidoMaterno,p.Nombres,p.Password,p.EstadoRegistro,e.RazonSocial,e.RUC FROM personal p
+                    INNER JOIN	entidad e 
+                    ON p.CodigoEntidad=e.CodigoEntidad
+                    WHERE CodigoUsuario='$documento'";
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        if($numero_filas>0){
+            $fila=  $obj_conexion->ObtenerDatos($resultado);
+            return (object)$fila;
+            $obj_conexion->CerrarConexion($conexion);
+        }else{
+            return "";
+        }
+    }
+
+    public function ObtenerTokenID($empresa, $usuario) {
+        $obj_conexion = new ConexionBD();
+        $conexion = $obj_conexion->CrearConexion();
+        $consulta = "SELECT token FROM confirmacion_token WHERE entidad_id=$empresa AND user_id=$usuario";
+        $resultado = $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $fila = $obj_conexion->ObtenerDatos($resultado);
+        return $fila['token'];
+        $obj_conexion->CerrarConexion($conexion);
+    }
+    
 }
 
 

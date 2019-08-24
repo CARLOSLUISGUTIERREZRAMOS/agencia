@@ -37,6 +37,12 @@
                     <a title="Ver Movimientos" href="<?php echo $directorio_personal;?>reporte.php" style="top: 7px;left:5px;position: relative;">movimientos</a>
                 </div>
             </li>
+            <li onClick="javascript:window.location = '<?php echo $directorio_personal;?>ayuda.php'">
+                <div onMouseOver="javascript:this.className = 'div_hover';" onMouseOut="javascript:this.className = ''" style="width:150px;">
+                    <img src="<?php echo $directorio_imagen;?>images/movimientos.png" style="position:relative;top:5px;">
+                    <a title="Ver Movimientos" href="<?php echo $directorio_personal;?>ayuda.php" style="top: 7px;left:5px;position: relative;">manuales</a>
+                </div>
+            </li>
         </ul>
     </div>
 <?php else: ?>
