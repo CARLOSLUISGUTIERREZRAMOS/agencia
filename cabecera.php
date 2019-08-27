@@ -5,7 +5,7 @@ $Nombres=$_SESSION['s_nombre'];
 $ApellidoPaterno=$_SESSION['s_apellido_paterno'];
 $ApellidoMaterno=$_SESSION['s_apellido_materno'];
 $Tipo=$_SESSION['s_tipo'];
-$LogoEntidad=$_SESSION['s_logo_entidad'];
+$LogoEntidad=$_SESSION['s_agencia']->LogoEntidad;
 // echo "$LogoEntidad";die;
 ?>
 <div id="div-header">

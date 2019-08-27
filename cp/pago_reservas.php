@@ -64,12 +64,55 @@
         function EnviarValores() {
             var reserva=$("input[name=codigo_reserva]").val();
             if (reserva) {
-                $("form").submit();
+                // $.ajax({
+                //     url:"<?=$url?>/cd/Controlador/PasarelaControl.php",
+                //     type: "POST", 
+                //     data:'obtener_pnr=1 && codigo_reserva='+reserva,
+                //     success: function(mensaje){
+                //         var data=JSON.parse(mensaje);
+                //         if (data.estado==5) {
+                //             window.location="<?= $url?>/cp/pasarela/html/tiempo_limite_reserva.php";
+                //         }
+                //         else if (data.estado==3) {
+                //             window.location="<?= $url?>/cp/pasarela/html/reserva_pagada.php";
+                //         }
+                //         else if (data.estado==1) {
+                //             window.location="<?= $url?>/cp/pasarela/html/reserva_pagada.php";
+                //         }
+                //         else if(data.estado==404){
+                //             swal({
+                //                 title: "Mensaje",
+                //                 text: 'Ups! Hubo un error al cambiar',
+                //                 icon: "warning",
+                //                 timer: 2000,
+                //                 buttons: {
+                //                     confirm: {
+                //                         className: 'btn btn-warning'
+                //                     }
+                //                 },
+                //             });
+                //         }
+                //     },
+                //     error: function (error,obj,mensaje) {
+                //         swal({
+                //             title: "Mensaje de Error",
+                //             text: 'Error en sentencia SQL',
+                //             icon: "error",
+                //             timer: 2000,
+                //             buttons: {
+                //                 confirm: {
+                //                     className: 'btn btn-danger'
+                //                 }
+                //             },
+                //         });
+                //     }
+                // });
+                $("#form-reserva").submit();
             }
             else{
                 swal({
-                    title: "Mensaje de Alerta",
-                    text: 'Ingresar Codigo de reserva',
+                    title: "Ingresar Codigo de reserva",
+                    text: '',
                     icon: "warning",
                     timer: 2000,
                     buttons: {
@@ -99,7 +142,8 @@
                                     <h4>Pago de Reservas</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="reprocesar.php" method="get" onsubmit="EnviarValores(); return false;">
+                                    <form action="reprocesar.php" id="form-reserva" method="get" onsubmit="EnviarValores(); return false;">
+                                        <input type="hidden" value="1" name="obtener_pnr">
                                         <div class="row form-body">
                                             <div class="col-sm-12 col-md-6">
                                                 <div class="form-group">
@@ -114,7 +158,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <input class="btn btn-danger" name="botoncillo" type="submit" value="buscar">
+                                                <button type="submit" class="btn btn-danger">BUSCAR</button>
                                             </div>
                                         </div>
                                     </form>

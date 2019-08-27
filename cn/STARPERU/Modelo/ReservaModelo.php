@@ -1,9 +1,14 @@
 <?php
-
-require_once("../../cn/STARPERU/Conexion/ConexionBD.php");
-require_once("../../cn/STARPERU/Entidades/ReservaEntidad.php");
-require_once("../../cn/STARPERU/Entidades/ReservaDetalleEntidad.php");
-require_once("../../cn/STARPERU/Entidades/EmpresaEntidad.php");
+if (!isset($url_proyecto)) {
+    $URL_DEFINIDO='../..';
+}
+else{
+    $URL_DEFINIDO=PATH_PROYECTO;
+}
+require_once($URL_DEFINIDO."/cn/STARPERU/Conexion/ConexionBD.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/ReservaEntidad.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/ReservaDetalleEntidad.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/EmpresaEntidad.php");
 
 class ReservaModelo{
     
@@ -21,6 +26,25 @@ class ReservaModelo{
         $resultado = $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
         return $resultado;
 
+    }
+
+    public function ObtenerPnr($pnr,$entidad){
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        
+        $consulta="SELECT CodigoReserva FROM reserva WHERE CodigoReserva='$pnr' AND CodigoEntidad=$entidad";
+        
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        
+        if($numero_filas>0){
+            $obj_conexion->CerrarConexion($conexion);
+            return 1;
+        }
+        else{
+            return 0;
+        }
+        
     }
     
     public function ObtenerDatosPasajero($tipo_doc,$num_doc){
