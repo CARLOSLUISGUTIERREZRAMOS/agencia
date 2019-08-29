@@ -113,9 +113,10 @@
                             <?php
                                 $_SESSION['registro_id'] = $reserva_id;
                                 $_SESSION['token_seguridad_visa'] = $token;
+                                $libreriavisaproduccion = $_SERVER['SERVER_PORT'] == 443 ?  $url.'/cp/pasarela/'.$libreriaJsVisa : $libreriaJsVisa ;
                             ?>
                             <form  action="<?=$url?>/cp/MetodoReprocesado.php" target="my-iframe" id="form_visa" method='post' style="display: none">
-                                <script src='<?=$url.'/cp/pasarela/'.$libreriaJsVisa?>'
+                                <script src='<?=$libreriavisaproduccion?>'
                                     data-sessiontoken='<?= $objSessionVisa->sessionKey ?>'
                                     data-channel='web'
                                     data-merchantid='<?= $visa->getCodigo_comercio() ?>'
