@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    error_reporting(E_ALL);
-    ini_set("display_errors", 0);
+    // error_reporting(E_ALL);
+    // ini_set("display_errors", 0);
     date_default_timezone_set('America/Lima');
 
 	if ($_SESSION['s_entra'] == 0) {
