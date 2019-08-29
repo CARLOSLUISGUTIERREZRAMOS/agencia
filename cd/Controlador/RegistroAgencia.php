@@ -7,6 +7,10 @@
 	require_once(PATH_PROYECTO."/cn/STARPERU/Modelo/EmpresaModelo.php");
 	require_once(PATH_PROYECTO."/cd/Funciones/envio_emails.php");
 
+	require_once(PATH_PROYECTO."/cn/STARPERU/PHPMailer/SMTP.php");
+	require_once(PATH_PROYECTO."/cn/STARPERU/PHPMailer/PHPMailer.php");
+	require_once(PATH_PROYECTO."/cn/STARPERU/PHPMailer/sendemail.php");
+
 	$obj_personal=new PersonalModelo();
 	$obj_empresa=new EmpresaModelo();
 

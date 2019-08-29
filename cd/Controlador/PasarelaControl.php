@@ -2,9 +2,16 @@
 if (!isset($url_proyecto)) {
     session_start();
     $URL_DEFINIDO='../..';
+    $p_ = empty($_SERVER['HTTPS']) ? 'http' : 'https';
+    $d_ = $_SERVER['SERVER_NAME'];
+	$port_ = $_SERVER['SERVER_PORT'];
+	$disp_port_ = ($p_ == 'http' && $port_ == 80 || $p_ == 'https' && $port_ == 443) ? '' : ":$port_";
+    $project_name_=basename(dirname(dirname(dirname(__FILE__))));
+    $URL_BASE="${p_}://${d_}${disp_port_}/${project_name_}";
 }
 else{
     $URL_DEFINIDO=PATH_PROYECTO;
+    $URL_BASE=$url_proyecto;
 }
 // error_reporting(E_ALL);
 // ini_set("display_errors", 0);
@@ -46,16 +53,25 @@ if (isset($_REQUEST['obtener_pnr'])) {
                 $xml=$KIU->TravelItineraryReadRQPnr($codigo_reserva,$err);
                 if ($err['ErrorCode'] != 0){
                     echo $err['ErrorMsg'];
-                    // var_dump($err);die;
                 }
                 else{
-                    // echo "<pre>";
-                    // var_dump($xml[2]);echo "</pre>";die;
+                    // echo '<pre>';
+                    // var_dump($xml[2]);
+                    // echo '</pre>';die;
                     $json=$xml[3];
                     $tkt_estado=(int)$json->TravelItinerary->ItineraryInfo->Ticketing->attributes()->TicketingStatus;
-                    // var_dump((int)$tkt_estado);die;
                     if ($tkt_estado==1) { //Pendiente de emisión
-                        echo json_encode(['estado'=>1,'pnr'=>$codigo_reserva]);
+                        $id_reserva = $obj_reserva->BuscarIdReservaPorPnr($codigo_reserva);
+                        if ($id_reserva) {
+                            $data['Pasajeros'] = $json->TravelItinerary->CustomerInfos->CustomerInfo;
+                            $data['Itinerarios'] = $json->TravelItinerary->ItineraryInfo->ReservationItems->Item;
+                            $data['TravelItinerary'] = $json->TravelItinerary;
+                            $data['ruc'] = (isset($json->TravelItinerary->Remarks)) ? (strlen((string)$json->TravelItinerary->Remarks->Remark) == 11) ? $json->TravelItinerary->Remarks->Remark : '' : "";
+                            $data['TotalPagar'] = $json->TravelItinerary->ItineraryInfo->ItineraryPricing->Cost->attributes()->AmountAfterTax;
+                            $data['reserva_id'] = $id_reserva;
+                        } else {
+                            header('Location: '.$url.'/cp/panel.php');
+                        }
                     } 
                     elseif ($tkt_estado==3) { //Ticket emitido
                         header('Location: '.$url.'/cp/pasarela/html/reserva_pagada.php');
@@ -75,6 +91,80 @@ if (isset($_REQUEST['obtener_pnr'])) {
     else{
         header('Location: '.$url.'/cp/panel.php');
     }
+}
+
+if (isset($_REQUEST['transaccion'])) {
+    if ($_REQUEST['transaccion']==1) {
+        if (isset($_REQUEST['cc_code']) && isset($_REQUEST['reserva_id'])) {
+            $cc_code = $_REQUEST['cc_code'];
+            $reserva_id = $_REQUEST['reserva_id'];
+            if ($reserva_id!='' && $cc_code!='') {
+                $res_datareserva=$obj_reserva->BuscarReservaPorId($reserva_id);
+                $data_reprocesa['fecha_limite'] = $res_datareserva->FechaLimite;
+                $data_reprocesa['cc_code'] = $cc_code;
+                $data_reprocesa['num_cel'] = $res_datareserva->Celular;
+                $data_reprocesa['pnr'] = $res_datareserva->CodigoReserva;
+                $data_reprocesa['$total_pagar'] = $res_datareserva->Total;
+                $data_reprocesa['reserva_id'] = $reserva_id;
+                $data_reprocesa['email'] = $res_datareserva->Email;
+                $data_reprocesa['nombres_adl_1'] = $res_datareserva->Nombres;
+                $data_reprocesa['apellidos_adl_1'] = $res_datareserva->Apellidos;
+                $data_reprocesa['tipo_documento_adl_1'] = $res_datareserva->Tipo_Doc;
+                $data_reprocesa['numdoc_adl_1'] = $res_datareserva->Documento;
+                $data_reprocesa['ruc'] = (empty($res_datareserva->RUC) || $res_datareserva->RUC === "NULL") ? '' : $res_datareserva->RUC;
+                $obj_reserva->ActualizarMetodoPagoTransaccion($cc_code, $reserva_id);               
+                switch ($data_reprocesa['cc_code']) {
+                    case 'TC': // Visa
+                        if (isset($_SESSION['registro_id'])) {
+                            unset($_SESSION['registro_id']);
+                        }
+                        if (isset($_SESSION['token_seguridad_visa'])) {
+                            unset($_SESSION['token_seguridad_visa']);
+                        }
+                        // echo $URL_BASE;die;
+                        include $URL_DEFINIDO.'/cn/METODOS_PAGO/Connection_visa.php';
+                        //include "../Funciones/funciones.php";
+                        $visa = new Connection_visa();
+                        
+                        $token = $visa->Connection();
+                        $IP = $_SERVER['REMOTE_ADDR'];
+                        $request_body = $visa->GenerarBody($res_datareserva->Total, $IP);
+                        $visa_res = $visa->GenerarSesion($token, $request_body);
+                        $objSessionVisa = json_decode($visa_res);
+                        $libreriaJsVisa = $visa->GetLibreriaJSVisa();
+                        // var_dump($libreriaJsVisa);die;
+                        // $forma_pago = 'TC';
+                        // var_dump($forma_pago);die;
+                        // ProcesarConVisa($total_pagar, $data_reprocesa, $reserva_id, $pnr,$URL_BASE);
+                        break;
+                    case 'SP_C': // SAFETYPAY
+                    case 'SP_I': // SAFETYPAY
+                    case 'SP_E': // SAFETYPAY
+                        ProcesarConSafetyPay($total_pagar, $pnr, $reserva_id, $data_reprocesa);
+                        break;
+                    case 'PE':  // PAGO EFECTIVO
+                    case 'PEB':  // PAGO EFECTIVO 
+                        $this->ProcesarConPagoEfectivo($data_reprocesa, $total_pagar, $reserva_id);
+                        break;
+                }
+                // PosicionarMetodoDePago($data_reprocesa, $res_datareserva->total_pagar, $res_datareserva->pnr, $reserva_id,$URL_BASE);
+            }
+            else {
+                header('Location: '.$url.'/cp/panel.php');
+            }
+        }
+        else {
+            header('Location: '.$url.'/cp/panel.php');
+        }
+    }
+    else{
+        header('Location: '.$url.'/cp/panel.php');
+    }
+
+}
+
+function ProcesarConVisa($total_pagar, $xss_post, $reserva_id, $pnr,$URL_BASE){
+    
 }
 
 if (isset($_POST['ver_condiciones'])) {

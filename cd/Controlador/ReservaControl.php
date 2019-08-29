@@ -8,6 +8,10 @@ require_once("../../cn/STARPERU/Modelo/PersonalModelo.php");
 require_once("../../cn/STARPERU/Modelo/ReservaModelo.php");
 require_once("../../cn/STARPERU/Modelo/VisaModelo.php");
 require_once("../../cn/KIU/KIU_Controller_class.php");
+
+require_once("../../cn/STARPERU/PHPMailer/SMTP.php");
+require_once("../../cn/STARPERU/PHPMailer/PHPMailer.php");
+require_once("../../cn/STARPERU/PHPMailer/sendemail.php");
 $KIU = new KIU_Controller(array());
 $obj_personal=new PersonalModelo();
 $obj_reserva=new ReservaModelo();
@@ -258,15 +262,30 @@ if($_REQUEST['anular']==1){
                     }else{
                         $tabla_boletos_reserva='<p style="color:red;">Los boletos fueron anulados pero no se pudo recuperar el crédito. Comuníquese con StarPerú para solucionar el problema.</p>'; 
                     }
-                    $remitente = "ecel@starperu.com";
-                    $mail="carlos.gutierrez@starperu.com,henrry.cachicatari@starperu.com";
-                    $cabeceras = "Content-type: text/html\r\n";
-                    $cabeceras.= "From: ALERTA ".utf8_decode("ANULACION")." TICKETS - WEB AGENCIAS <$remitente>\r\n";
-                    $mensaje="La Agencia: ".$obj_personal->ObtenerNombreEntidad($codigo_entidad)."<br> RUC: ".$obj_personal->ObtenerRUCEntidad($codigo_entidad)." <br><br> ".utf8_decode("Intentó")." anular la Reserva: ".$pnr." y los siguientes boletos: <br><br> ";
+                    // $remitente = "ecel@starperu.com";
+                    // $mail="carlos.gutierrez@starperu.com,henrry.cachicatari@starperu.com";
+                    // $cabeceras = "Content-type: text/html\r\n";
+                    // $cabeceras.= "From: ALERTA ".utf8_decode("ANULACION")." TICKETS - WEB AGENCIAS <$remitente>\r\n";
+                    $mensaje ="<!DOCTYPE html>
+                                <html lang='es'>
+                                <head>
+                                    <meta charset='UTF-8'>
+                                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                                    <meta http-equiv='X-UA-Compatible' content='ie=edge'>                    
+                                </head>
+                                <body style='font-family:Trebuchet MS;font-size:13px'>";
+                    $mensaje="La Agencia: ".$obj_personal->ObtenerNombreEntidad($codigo_entidad)."<br> RUC: ".$obj_personal->ObtenerRUCEntidad($codigo_entidad)." <br><br> Intentó anular la Reserva: ".$pnr." y los siguientes boletos: <br><br> ";
                     $mensaje.=$lista_boletos;
                     $mensaje.="<br><br>Resultado: $msj_anulacion";
                     $mensaje.="<br><br><b>Fecha/Hora (Emisi&oacute;n):</b> ".$partes_fecha_emision[0]." ".$partes_fecha_emision[1]."<br><br><b>Fecha/Hora (Intento):</b> ".date("Y-m-d H:i:s")." <br><br> Monto recuperado (&oacute; a recuperar): USD ".number_format($credito_recuperado, 2, '.', ',')."<br><br><br> <b>NOTA: Pasada la 23h 59m 59s del d&iacute;a de emisi&oacute;n, la Entidad se hace responsable del pago de los tickets emitidos.";
-                    mail($mail, utf8_decode("Anulacion")." Tickets - WEB AGENCIAS", $mensaje , $cabeceras);
+                    $mensaje .="</body>";
+                    $mensaje .="</html>";
+                    // mail($mail, utf8_decode("Anulacion")." Tickets - WEB AGENCIAS", $mensaje , $cabeceras);
+
+                    $subject='Web Agencias - Alerta de Anulacion de Tickets';
+                    $responder='no-responder@starperu.com';
+                    $para='henrry.cachicatari@starperu.com';
+                    sendemail($responder,'Alerta Web Agencias',$para,$mensaje,$subject);
                 }
 
         }else{

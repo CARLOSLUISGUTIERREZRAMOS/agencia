@@ -2,12 +2,18 @@
 use ___PHPSTORM_HELPERS\object;
 
 if (isset($url_proyecto)) {
-    require_once(PATH_PROYECTO."/cn/STARPERU/Conexion/ConexionBD.php");
-    require_once(PATH_PROYECTO."/cn/STARPERU/Entidades/PersonalEntidad.php");
-} else {
-    require_once("../../cn/STARPERU/Conexion/ConexionBD.php");
-    require_once("../../cn/STARPERU/Entidades/PersonalEntidad.php");
+    $URL_DEFINIDO=PATH_PROYECTO;
 }
+else {
+    $URL_DEFINIDO='../..';
+}
+
+require_once($URL_DEFINIDO."/cn/STARPERU/Conexion/ConexionBD.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/PersonalEntidad.php");
+
+require_once($URL_DEFINIDO."/cn/STARPERU/PHPMailer/SMTP.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/PHPMailer/PHPMailer.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/PHPMailer/sendemail.php");
 
 
 class PersonalModelo{
@@ -49,7 +55,6 @@ class PersonalModelo{
             // $personal->setRPM($fila['RPM']);
             // $personal->setNextel($fila['Nextel']);
             $obj_conexion->CerrarConexion($conexion);
-            
             // return $personal;
             return $fila;
         }else{
@@ -434,7 +439,13 @@ class PersonalModelo{
     }
     
     public function EnvioMailCreacionUser($email,$paterno,$materno,$nombres,$usuario,$clave,$agencia){
-        $mail ="<html>
+        $mail ="<!DOCTYPE html>
+                <html lang='es'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                        <meta http-equiv='X-UA-Compatible' content='ie=edge'>                    
+                    </head>
                     <body style='font-family:Trebuchet MS;font-size:13px'>
                         <center>
                             <div style='border: 1px solid #69778d;width:720px;padding-bottom: 10px;'>
@@ -540,19 +551,31 @@ class PersonalModelo{
                     </body>
                 </html>";
         
-        $email.= ", ".$_SESSION['s_email'].",carlos.gutierrez@starperu.com";
-        $remitente ="ecel@starperu.com";
-        $to=$email;
+        // $email.= ", ".$_SESSION['s_email'].",carlos.gutierrez@starperu.com";
+        // $remitente ="ecel@starperu.com";
+        // $to=$email;
+        // $subject='Web Agencias - Notificacion de Registro';
+        // $message=utf8_decode($mail);
+        // $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
+        // $cabeceras.= "From: Web Agencias <$remitente>\r\n";
+        // mail($to, $subject,$message,$cabeceras );
+
         $subject='Web Agencias - Notificacion de Registro';
-        $message=utf8_decode($mail);
-        $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
-        $cabeceras.= "From: Web Agencias <$remitente>\r\n";
-        mail($to, $subject,$message,$cabeceras ); 
+        $responder='no-responder@starperu.com';
+        $para=$email;
+        $copias=$_SESSION['s_email'].',henrry.cachicatari@starperu.com';
+        sendemail($responder,'WEB AGENCIAS',$para,$mail,$subject,$copias);
    }
    
    
     public function EnvioMailResetPassword($email,$paterno,$materno,$nombres,$usuario,$clave){
-        $mail ="<html>
+        $mail ="<!DOCTYPE html>
+                <html lang='es'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                        <meta http-equiv='X-UA-Compatible' content='ie=edge'>                    
+                    </head>
                     <body style='font-family:Trebuchet MS;font-size:13px'>
                         <center>
                             <div style='border: 1px solid #69778d;width:720px;padding-bottom: 10px;'>
@@ -627,14 +650,20 @@ class PersonalModelo{
                     </body>
                 </html>";
 
-        $email.= ", "."carlos.gutierrez@starperu.com,henrry.cachicatari@starperu.com";
-        $remitente ="ecel@starperu.com";
-        $to=$email;
+        // $email.= ", "."carlos.gutierrez@starperu.com,henrry.cachicatari@starperu.com";
+        // $remitente ="ecel@starperu.com";
+        // $to=$email;
+        // $subject='Web Agencias - Notificacion de Cambio de Clave';
+        // $message=$mail;
+        // $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
+        // $cabeceras.= "From: Web Agencias <$remitente>\r\n";
+        // mail($to, $subject,$message,$cabeceras );
+
         $subject='Web Agencias - Notificacion de Cambio de Clave';
-        $message=$mail;
-        $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
-        $cabeceras.= "From: Web Agencias <$remitente>\r\n";
-        mail($to, $subject,$message,$cabeceras );
+        $responder='no-responder@starperu.com';
+        $para=$email;
+        $copias='henrry.cachicatari@starperu.com';
+        sendemail($responder,'WEB AGENCIAS',$para,$mail,$subject,$copias);
     }
    
 

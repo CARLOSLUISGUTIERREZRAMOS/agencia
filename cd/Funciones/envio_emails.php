@@ -1,51 +1,71 @@
 <?php
     function EnvioMailCreacionUserEjecutivos($paterno,$materno,$nombres,$usuario,$tipo,$razon_social,$ruc){
-        $mail ="<html><body style='font-family:Trebuchet MS;font-size:13px'>";
-        $mail.="<table width='700' border='0' align='center'>
-                    <tr>
-                        <td bgcolor='#fce8e6' colspan='2'>
-                            <font color='#e46b63'><strong>NOTIFICACION - SISTEMA WEB AGENCIAS</strong></font>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan='2'>
-                            <p>Estimado Sr(a). Ejecutivo, se le informa que STARPERU ha generado el registro correcto del $tipo: $paterno $materno , $nombres, para el acceso al sistema de compra de pasajes - WEB AGENCIAS.</p>
-                        </td>
-                    </tr>
-                    <tr><td colspan='2'></td></tr>
-                    <tr><td colspan='2'>INFORMACIÓN DE LA CUENTA :</td></tr>
-                    <tr><td colspan='2' bgcolor='#fce8e6'>&nbsp;</td></tr>
-                    <tr>
-                        <td width='178'>WEB AGENCIAS:</td>
-                        <td width='512'>$razon_social</td>
-                    </tr>
-                    <tr>
-                        <td width='178'>RUC:</td>
-                        <td width='512'>$ruc</td>
-                    </tr>
-                    <tr>
-                        <td>Usuario:</td>
-                        <td>$paterno $materno, $nombres</td>
-                    </tr>
-                    <tr>
-                        <td>Usuario de Acceso:</td>
-                        <td>$usuario</td>
-                    </tr>
-                </table>";
+        $mail ="<!DOCTYPE html>
+                <html lang='es'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                        <meta http-equiv='X-UA-Compatible' content='ie=edge'>                    
+                    </head>
+                    <body style='font-family:Trebuchet MS;font-size:13px'>
+                        <table width='700' border='0' align='center'>
+                            <tr>
+                                <td bgcolor='#fce8e6' colspan='2'>
+                                    <font color='#e46b63'><strong>NOTIFICACION - SISTEMA WEB AGENCIAS</strong></font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='2'>
+                                    <p>Estimado Sr(a). Ejecutivo, se le informa que STARPERU ha generado el registro correcto del $tipo: $paterno $materno , $nombres, para el acceso al sistema de compra de pasajes - WEB AGENCIAS.</p>
+                                </td>
+                            </tr>
+                            <tr><td colspan='2'></td></tr>
+                            <tr><td colspan='2'>INFORMACIÓN DE LA CUENTA :</td></tr>
+                            <tr><td colspan='2' bgcolor='#fce8e6'>&nbsp;</td></tr>
+                            <tr>
+                                <td width='178'>WEB AGENCIAS:</td>
+                                <td width='512'>$razon_social</td>
+                            </tr>
+                            <tr>
+                                <td width='178'>RUC:</td>
+                                <td width='512'>$ruc</td>
+                            </tr>
+                            <tr>
+                                <td>Usuario:</td>
+                                <td>$paterno $materno, $nombres</td>
+                            </tr>
+                            <tr>
+                                <td>Usuario de Acceso:</td>
+                                <td>$usuario</td>
+                            </tr>
+                        </table>
+                    </body>
+                </html>";
+
+        // $email= "ecel@starperu.com,grupos@starperu.com,maria.marrou@starperu.com,carlos.flores@starperu.com,jhonatta.bernal@starperu.com,karinna.ruiz@starperu.com,henrry.cachicatari@starperu.com,carlos.gutierrez@starperu.com";
+        // $remitente ="ecel@starperu.com";
+        // $to=$email;
+        // $subject='WEB AGENCIAS - Notificacion de Registro - Ejecutivos';
+        // $message=$mail;
+        // $cabeceras = "Content-type: text/html\r\n"; 
+        // $cabeceras.= "From: WEB AGENCIAS <$remitente>\r\n";
+        // mail($to, $subject,$message,$cabeceras );
         
-        $email= "ecel@starperu.com,grupos@starperu.com,maria.marrou@starperu.com,carlos.flores@starperu.com,jhonatta.bernal@starperu.com,karinna.ruiz@starperu.com,henrry.cachicatari@starperu.com,carlos.gutierrez@starperu.com";
-        $remitente ="ecel@starperu.com";
-        $to=$email;
         $subject='WEB AGENCIAS - Notificacion de Registro - Ejecutivos';
-        $mail.="</body></html>";
-        $message=$mail;
-        $cabeceras = "Content-type: text/html\r\n"; 
-        $cabeceras.= "From: WEB AGENCIAS <$remitente>\r\n";
-        mail($to, $subject,$message,$cabeceras );
+        $responder='no-responder@starperu.com';
+        $para='grupos@starperu.com';
+        $copias='maria.marrou@starperu.com,carlos.flores@starperu.com,jhonatta.bernal@starperu.com,karinna.ruiz@starperu.com,henrry.cachicatari@starperu.com,carlos.gutierrez@starperu.com';
+        sendemail($responder,'WEB AGENCIAS',$para,$mail,$subject,$copias);
     }
 
     function EnvioCreacionMailUsuarios($email,$paterno,$materno,$nombres,$usuario,$clave,$tipo,$razon_social,$ruc,$token){
-        $mail ="<html>
+        $mail ="<!DOCTYPE html>
+                <html lang='es'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                        <meta http-equiv='X-UA-Compatible' content='ie=edge'>                    
+                    </head>
                     <body style='font-family:Trebuchet MS;font-size:13px'>
                         <center>
                             <div style='border: 1px solid #69778d;width:720px;padding-bottom: 10px;'>
@@ -162,13 +182,19 @@
                     </body>
                 </html>";
         
-        $email.= ",henrry.cachicatari@starperu.com";
-        $remitente ="ecel@starperu.com";
-        $to=$email;
+        // $email.= ",henrry.cachicatari@starperu.com";
+        // $remitente ="ecel@starperu.com";
+        // $to=$email;
+        // $subject='Web Agencias - Notificacion de Registro';
+        // $message=$mail;
+        // $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
+        // $cabeceras.= "From: Web Agencias <$remitente>\r\n";
+
         $subject='Web Agencias - Notificacion de Registro';
-        $message=$mail;
-        $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
-        $cabeceras.= "From: Web Agencias <$remitente>\r\n";
-        mail($to, $subject,$message,$cabeceras ); 
+        $responder='no-responder@starperu.com';
+        $para=$email;
+        $copias='henrry.cachicatari@starperu.com';
+        sendemail($responder,'WEB AGENCIAS',$para,$mail,$subject,$copias);
+        // mail($to, $subject,$message,$cabeceras ); 
     }
 ?>

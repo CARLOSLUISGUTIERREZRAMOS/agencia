@@ -1,4 +1,7 @@
 <?php
+
+use ___PHPSTORM_HELPERS\object;
+
 if (!isset($url_proyecto)) {
     $URL_DEFINIDO='../..';
 }
@@ -9,6 +12,10 @@ require_once($URL_DEFINIDO."/cn/STARPERU/Conexion/ConexionBD.php");
 require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/ReservaEntidad.php");
 require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/ReservaDetalleEntidad.php");
 require_once($URL_DEFINIDO."/cn/STARPERU/Entidades/EmpresaEntidad.php");
+
+require_once($URL_DEFINIDO."/cn/STARPERU/PHPMailer/SMTP.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/PHPMailer/PHPMailer.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/PHPMailer/sendemail.php");
 
 class ReservaModelo{
     
@@ -45,6 +52,57 @@ class ReservaModelo{
             return 0;
         }
         
+    }
+
+    public function BuscarIdReservaPorPnr($pnr){
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        
+        $consulta="SELECT Registro FROM reserva WHERE CodigoReserva='$pnr' limit 1";
+        
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        if($numero_filas>0){
+            $fila=  $obj_conexion->ObtenerDatos($resultado);
+            return $fila['Registro'];
+            $obj_conexion->CerrarConexion($conexion);
+        }
+        else{
+            return '';
+        }
+        
+    }
+
+    public function BuscarReservaPorId($reserva_id){
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        $consulta="SELECT Celular,CodigoReserva,Total,FechaLimite,RUC,Email,Nombres,Apellidos,Tipo_Doc,Documento FROM reserva WHERE Registro='$reserva_id' limit 1";
+        $resultado=$obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $numero_filas=$obj_conexion->ContarFilas($resultado);
+        if($numero_filas>0){
+            $fila=  $obj_conexion->ObtenerDatos($resultado);
+            return (object)$fila;
+            $obj_conexion->CerrarConexion($conexion);
+        }
+        else{
+            return '';
+        }
+    }
+
+    public function ActualizarMetodoPagoTransaccion($cc_code,$reserva_id){
+        $flag=0;
+        $obj_conexion=new ConexionBD();
+        $conexion=$obj_conexion->CrearConexion();
+        
+        $consulta="UPDATE reserva SET forma_pago='$cc_code' WHERE Registro='$reserva_id'";
+
+        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+        $error=$obj_conexion->ErrorEjecucion($conexion);
+        if($error==1){
+            $flag=1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
     }
     
     public function ObtenerDatosPasajero($tipo_doc,$num_doc){
@@ -848,7 +906,7 @@ public function AnularReserva($pnr){
         $data_bebe=$obj_conexion->ObtenerDatos($resultado);
         $cantBebes = $data_bebe['Bebes'];
         return (int)$cantBebes;
-    }
+}
 function EnviaAlertaNinoEmail($registro){
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
@@ -858,43 +916,46 @@ function EnviaAlertaNinoEmail($registro){
         $data_nino=$obj_conexion->ObtenerDatos($resultado);
         //return $resultado1;
         
-        $titulo = 'Alerta de emision de tickets con infantes PERU COMPRAS - '.$data_nino['CodigoReserva'];
+        //ARMADO DEL MENSAJE
+        $mensaje="<!DOCTYPE html>
+                <html lang='es'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                        <meta http-equiv='X-UA-Compatible' content='ie=edge'>                    
+                    </head>
+                    <body style='font-family:Trebuchet MS;font-size:13px'>";
+        $mensaje='<table width="50%" border="0"><tr><td BGCOLOR="#C90E14"><center><img src="http://starpanel.starperu.com/cp/imagenes/LogoStarPie.png"></center><td></tr>';
+        $mensaje.='<tr><td BGCOLOR="#B0B0B0">ALERTA - RESERVA CON INFANTES</td></tr>';
+        $mensaje.='<tr><td BGCOLOR="WHITE" color="red">Se informa que se ha generado una reserva que cuenta con infantes.</td></tr>';
+        $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>COD RESERVA:</strong> '.$data_nino['CodigoReserva'].'</td></tr>';
+        $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>PASAJERO:</strong> '.$data_nino['Apellidos'].' ,'.$data_nino['Nombres'].'</td></tr>';
+        $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>RUTA:</strong> '.$data_nino['Origen'].'-'.$data_nino['Destino'].'</td></tr>';
+        $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>FECHA / VUELO IDA:</strong> '.$data_nino['Fecha_Salida'].'/'.$data_nino['Vuelo_Salida'].'</td></tr>';
+        if(empty($data_nino['Vuelo_Retorno'])):
+            $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>FECHA / VUELO VUELTA:</strong> '.$data_nino['Fecha_Retorno'].'/'.$data_nino['Vuelo_Retorno'].'</td></tr>';
+        endif;
+        $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>TELEFONO / CELULAR:</strong> '.$data_nino['Telefono'].' / '.$data_nino['Celular'].'</td></tr>';
+        $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>E-MAIL:</strong> '.$data_nino['Email'].'</td></tr>';
+        $mensaje.='<tr><td BGCOLOR="WHITE" color="black">-------------------------------------------------------------------------------------</td></tr>';
+        $mensaje.='</table>';
+        $mensaje .='</body>';
+        $mensaje .='</html>';
+        // mail($para, $titulo, $mensaje, $cabeceras);
 
-            //EMAIL DESTINO
-            //$para = "williams.castillo@starperu.com, diego.cortes@starperu.com";
-            $para = "controles.general@starperu.com, gabriela.monge@starperu.com,ricardo.jaramillo@starperu.com,diego.cortes@starperu.com";
-            
-            
-            //ARMADO DE LA CABECERA
-            $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
-            $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-            $cabeceras .= 'From: StarPeru <ecel@starperu.com>' . "\r\n";
-
-            //ARMADO DEL MENSAJE
-            $mensaje.='<table width="50%" border="0"><tr><td BGCOLOR="#C90E14"><center><img src="http://starpanel.starperu.com/cp/imagenes/LogoStarPie.png"></center><td></tr>';
-            $mensaje.='<tr><td BGCOLOR="#B0B0B0">ALERTA - RESERVA CON INFANTES</td></tr>';
-    //        $mensaje.="<span BGCOLOR=\"YELOW\" color=\"white\">SISTEMA DE REPORTES DE SEGURIDAD OPERACIONAL</span>"."<br><br>";
-            $mensaje.='<tr><td BGCOLOR="WHITE" color="red">Se informa que se ha generado una reserva que cuenta con infantes.</td></tr>';
-            $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>COD RESERVA:</strong> '.$data_nino['CodigoReserva'].'</td></tr>';
-            $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>PASAJERO:</strong> '.$data_nino['Apellidos'].' ,'.$data_nino['Nombres'].'</td></tr>';
-            $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>RUTA:</strong> '.$data_nino['Origen'].'-'.$data_nino['Destino'].'</td></tr>';
-            $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>FECHA / VUELO IDA:</strong> '.$data_nino['Fecha_Salida'].'/'.$data_nino['Vuelo_Salida'].'</td></tr>';
-            if(empty($data_nino['Vuelo_Retorno'])):
-                $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>FECHA / VUELO VUELTA:</strong> '.$data_nino['Fecha_Retorno'].'/'.$data_nino['Vuelo_Retorno'].'</td></tr>';
-            endif;
-            $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>TELEFONO / CELULAR:</strong> '.$data_nino['Telefono'].' / '.$data_nino['Celular'].'</td></tr>';
-            $mensaje.='<tr><td BGCOLOR="WHITE" color="black"><strong>E-MAIL:</strong> '.$data_nino['Email'].'</td></tr>';
-            $mensaje.='<tr><td BGCOLOR="WHITE" color="black">-------------------------------------------------------------------------------------</td></tr>';
-            $mensaje.='</table>';
-            mail($para, $titulo, $mensaje, $cabeceras);
-    }
-//    function Cantidad_nino($registro){
-//        $obj_conexion=new ConexionBD();
-//        $conexion=$obj_conexion->CrearConexion();
-//        
-//         $consulta="UPDATE Reserva SET EstadoRegistro=0 WHERE  Registro='$registro'";
-//         return $res;
-//    }
+        $subject='Alerta de emision de tickets con infantes WEB AGENCIA - '.$data_nino['CodigoReserva'];
+        $responder='no-responder@starperu.com';
+        $para="controles.general@starperu.com";
+        $copia='gabriela.monge@starperu.com,diego.cortes@starperu.com,henrry.cachicatari@starperu.com';
+        sendemail($responder,'Web Agencias',$para,$mensaje,$subject,$copia);
+}
+// function Cantidad_nino($registro){
+//     $obj_conexion=new ConexionBD();
+//     $conexion=$obj_conexion->CrearConexion();
+    
+//     $consulta="UPDATE Reserva SET EstadoRegistro=0 WHERE  Registro='$registro'";
+//     return $res;
+// }
 public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$email,
                     $tipo_documento,$numero_documento,$telefono,
                     $anexo,$celular,$nextel,$rpm,
@@ -902,6 +963,9 @@ public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$emai
                     $clase_ida_5,$fecha_salida_ida_5,$hora_salida_ida_5,$numero_vuelo_vuelta_5,$clase_vuelta_5,$fecha_salida_vuelta_5,$hora_salida_vuelta_5,
                     $pais,$ciudad,$ip,$flete,$tuua_5,$igv_5,$total_pagar_5,$usuario,$entidad,$tipo_vuelo_letras){
         $flag=0;
+        $DatetTimeLimitReserva = new DateTime();
+        $DatetTimeLimitReserva->modify('+6 hours');
+        $fecha_limite = $DatetTimeLimitReserva->format('Y-m-d H:i:s');
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
         
@@ -915,33 +979,27 @@ public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$emai
         $registro=  mysqli_insert_id($conexion);
         // $error=$obj_conexion->ErrorEjecucion();
         $obj_conexion->CerrarConexion($conexion);
-
-//       if($error==1){
-//            $flag=1;
-//           return $flag;
-//        }else{
-            return $registro;
-//        }        
+        return $registro;      
+}
+public function GuardarReservaDetalle($registro,$j,$tipo_documento,$numero_documento,$apellidos,
+                $nombres,$tipo_pax,$celular,$telefono,$anexo,$rpc,
+                $rpm,$email,$tarifa_unitaria,$igv_unitaria,$tuua_unitaria,$total,$total_pagar,$fecNac){
+    $flag=0;
+    $obj_conexion=new ConexionBD();
+    $conexion=$obj_conexion->CrearConexion();
+    $consulta="INSERT INTO reserva_detalle(Registro,Detalle,Tipo_Doc,Documento,Apellidos,Nombres,Tipo_Pax,Celular,Telefono,Anexo,RPM,RPC,Email,EQ,FA,MS,PE,HW,Total,TotalPagar,FechaNacimiento)"
+            . " VALUES('$registro',$j,'$tipo_documento','$numero_documento','$apellidos','$nombres','$tipo_pax','$celular','$telefono','$anexo','$rpm','$rpc','$email',$tarifa_unitaria,$tarifa_unitaria,$total_pagar,$igv_unitaria,$tuua_unitaria,$total,$total_pagar,'$fecNac')";
+    
+    $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
+    
+    $error=$obj_conexion->ErrorEjecucion($conexion);
+    if($error==1){
+        $flag=1;
     }
-    public function GuardarReservaDetalle($registro,$j,$tipo_documento,$numero_documento,$apellidos,
-                    $nombres,$tipo_pax,$celular,$telefono,$anexo,$rpc,
-                    $rpm,$email,$tarifa_unitaria,$igv_unitaria,$tuua_unitaria,$total,$total_pagar,$fecNac){
-        $flag=0;
-        $obj_conexion=new ConexionBD();
-        $conexion=$obj_conexion->CrearConexion();
-        $consulta="INSERT INTO reserva_detalle(Registro,Detalle,Tipo_Doc,Documento,Apellidos,Nombres,Tipo_Pax,Celular,Telefono,Anexo,RPM,RPC,Email,EQ,FA,MS,PE,HW,Total,TotalPagar,FechaNacimiento)"
-                . " VALUES('$registro',$j,'$tipo_documento','$numero_documento','$apellidos','$nombres','$tipo_pax','$celular','$telefono','$anexo','$rpm','$rpc','$email',$tarifa_unitaria,$tarifa_unitaria,$total_pagar,$igv_unitaria,$tuua_unitaria,$total,$total_pagar,'$fecNac')";
-        
-        $obj_conexion->ConsultarDatos($consulta,$this->basedatos,$conexion);
-       
-        $error=$obj_conexion->ErrorEjecucion($conexion);
-        if($error==1){
-            $flag=1;
-        }
-        $obj_conexion->CerrarConexion($conexion);
-      
-            return $flag;
-    }
+    $obj_conexion->CerrarConexion($conexion);
+    
+        return $flag;
+}
     
 public function UpdateReservaDetalleTicket($ticket,$i,$registro,$ComisionTarifa){
         $flag=0;
@@ -987,8 +1045,14 @@ public function EnviarAlertaGestor($correo,$cod_reserva,$tickets) {
     $entidad = $_SESSION["nombre_entidad"];
 //    $gestor = 
     
-    $mail ="<html>";
-        $mail .="<body style='font-family:Trebuchet MS;font-size:13px'>";
+    $mail ="<!DOCTYPE html>
+            <html lang='es'>
+                <head>
+                    <meta charset='UTF-8'>
+                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                    <meta http-equiv='X-UA-Compatible' content='ie=edge'>                    
+                </head>
+                <body style='font-family:Trebuchet MS;font-size:13px'>";
         $mail .="<center>";
         $mail .='<div style="border: 1px solid #69778d;width:720px;padding-bottom: 10px;">';
         $mail .="<table width='700' border='0' align='center'>";
@@ -1013,15 +1077,20 @@ public function EnviarAlertaGestor($correo,$cod_reserva,$tickets) {
         $mail .="</body>";
         $mail .="</html>";
 
-        $email = $correo.", "."carlos.gutierrez@starperu.com";
-        //$email = $correo.", "."ricardo.jaramillo@starperu.com";
-        $remitente ="ecel@starperu.com";
-        $to=$email;
+        // $email = $correo.", "."carlos.gutierrez@starperu.com";
+        // $remitente ="ecel@starperu.com";
+        // $to=$email;
+        // $subject='Web Agencias - Alerta de emisión de tickets';
+        // $message=$mail;
+        // $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
+        // $cabeceras.= "From: Web Agencias <$remitente>\r\n";
+
         $subject='Web Agencias - Alerta de emisión de tickets';
-        $message=$mail;
-        $cabeceras = "Content-type: text/html; charset=UTF-8\r\n"; 
-        $cabeceras.= "From: Web Agencias <$remitente>\r\n";
-        mail($to, $subject,$message,$cabeceras ); 
+        $responder='no-responder@starperu.com';
+        $para=$correo;
+        $copia='henrry.cachicatari@starperu.com';
+        sendemail($responder,'Web Agencias',$para,$mail,$subject,$copia);
+        // mail($to, $subject,$message,$cabeceras );
 }
     
 

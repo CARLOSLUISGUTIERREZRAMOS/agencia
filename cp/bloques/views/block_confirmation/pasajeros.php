@@ -40,7 +40,7 @@
             <td align="left" class="bgTable_data"><?=$array[$i]['Nombres']?></td>
             <td align="left" class="bgTable_data"><?=$array[$i]['Apellidos']?></td>
             <td align="left" class="bgTable_data"><?=$letra_tipo_documento . ' ' . $array[$i]['Numero_Documento'] ?></td>
-            <td align="center" class="bgTable_data"><a title="Click para visualizar el Boleto" href="imprimir_ticket.php?ticket=<?=$_SESSION['ticket'] ?>" target="_blank"><img src="../images/ticket.png" width="16" height="16" border="0" style="cursor: pointer" /></a></td>
+            <td align="center" class="bgTable_data"><a title="Click para visualizar el Boleto" href="imprimir_ticket.php?ticket=<?=$_SESSION['ticket'] ?>" target="_blank"><img src="<?= $URL_PATH?>/images/ticket.png" width="16" height="16" border="0" style="cursor: pointer" /></a></td>
         </tr>
     <?php
     }

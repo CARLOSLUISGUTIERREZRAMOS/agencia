@@ -50,7 +50,7 @@ if($_SESSION['s_entra']==0){
                 <tr>
                     <td height="20" align="center" style="background-color: #FFFFFF">&nbsp;</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td height="50" align="center">
                         <table id="menu_vuelo" cellpadding="0" cellspacing="0" border="0">
                             <tr>
@@ -74,7 +74,7 @@ if($_SESSION['s_entra']==0){
                             </tr>
                         </table>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td height="340" align="center" style="background-color: #FFFFFF">
                         <form id="form1" name="form1" method="post" action="" autocomplete="off" onSubmit="EnviaValores(); return false;">
@@ -125,9 +125,9 @@ if($_SESSION['s_entra']==0){
                                 <tr>
                                     <td height="30"></td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td align="right"><input name="button2" id="button2" value="Imprimir" class="btn-red" type="button" onclick="javascript:print()" /></td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td height="30"></td>
                                 </tr>

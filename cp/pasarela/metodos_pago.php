@@ -1,15 +1,22 @@
 <?php
 use ___PHPSTORM_HELPERS\object;
+if (!isset($url_proyecto)) {
+    session_start();
+    $URL_DEFINIDO='../..';
+    $URL_PATH='..';
+}
+else{
+    $URL_DEFINIDO=PATH_PROYECTO;
+    $URL_PATH=$url_proyecto.'/cp';
+}
 
-session_start();
-
-include '../../cn/METODOS_PAGO/Connection_visa.php';
-require_once("../../cn/STARPERU/Modelo/ReservaModelo.php");
-require_once("../../cn/STARPERU/Modelo/VisaModelo.php");
-require_once '../../cd/Funciones/f_metodos_pagos.php';
-require_once '../../cd/Funciones/f_kiu.php';
-require_once '../../cd/Funciones/DB_driver.php';
-include "../../cn/KIU/KIU_Controller_class.php";
+include $URL_DEFINIDO.'/cn/METODOS_PAGO/Connection_visa.php';
+require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/ReservaModelo.php");
+require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/VisaModelo.php");
+require_once $URL_DEFINIDO.'/cd/Funciones/f_metodos_pagos.php';
+require_once $URL_DEFINIDO.'/cd/Funciones/f_kiu.php';
+require_once $URL_DEFINIDO.'/cd/Funciones/DB_driver.php';
+include $URL_DEFINIDO."/cn/KIU/KIU_Controller_class.php";
 
 
 if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
@@ -59,7 +66,7 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
 			$data_vista_error['pnr_reserva'] = $pnr;
 			$data_vista_error['TarjetaHabiente'] = $nombres.' '.$apellidos;
 			$_SESSION['error_visa']=(object)$data_vista_error;
-			include '../../cp/bloques/views/block_confirmation/error_metodo_pago.php';
+			include $URL_DEFINIDO.'/cp/bloques/views/block_confirmation/error_metodo_pago.php';
         }
         else {
             //TODO OK
@@ -105,7 +112,7 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
             if ($res_update_tbl_reserva_detalle) {
                 $miscellaneous = ($miscellaneous === 'CA') ? 'MC' : $miscellaneous;
                 $consulta = $obj_reserva->UpdateReservaTicket($pnr, $campos_consulta,$porcentaje,$miscellaneous);
-                include '../../cp/bloques/views/block_confirmation/plantilla.php';
+                include $URL_DEFINIDO.'/cp/bloques/views/block_confirmation/plantilla.php';
             }
             
             // $this->template->add_js_analitics('js/web/exito.js');
