@@ -964,7 +964,7 @@ public function GuardarReservaCabecera($codigo_reserva,$nombres,$apellidos,$emai
                     $pais,$ciudad,$ip,$flete,$tuua_5,$igv_5,$total_pagar_5,$usuario,$entidad,$tipo_vuelo_letras){
         $flag=0;
         $DatetTimeLimitReserva = new DateTime();
-        $DatetTimeLimitReserva->modify('+6 hours');
+        $DatetTimeLimitReserva->modify('+3 hours');
         $fecha_limite = $DatetTimeLimitReserva->format('Y-m-d H:i:s');
         $obj_conexion=new ConexionBD();
         $conexion=$obj_conexion->CrearConexion();
