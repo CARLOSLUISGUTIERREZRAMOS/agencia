@@ -474,7 +474,7 @@
                     <tr>
                         <td>
                             <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#miModal" style="background: -webkit-linear-gradient(#f01515, darkred) !important;">Condiciones Tarifarias</button>
-                            <!-- <a href="pago_reservas.php" class="btn btn-warning btn-sm">Pago de Reservas</a> -->
+                            <a href="pago_reservas.php" class="btn btn-warning btn-sm">Pago de Reservas</a>
                         </td>
                     </tr>
                 </table>
