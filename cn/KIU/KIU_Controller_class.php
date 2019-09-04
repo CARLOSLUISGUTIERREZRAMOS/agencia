@@ -39,6 +39,23 @@ class KIU_Controller extends KIU_Model
         return $array;
     }
 
+    public function AirPriceRQ_Reprice($args,&$err)
+    {
+        $this->ErrorCode=0;
+        $this->ErrorMsg='';
+        $respuesta_model = $this->Model_AirPriceRQ_Reprice($args);
+        $xml=$respuesta_model[0];
+        $json = json_encode($xml);
+		$array = json_decode($json,TRUE);
+        $err=array('ErrorCode'=>$this->ErrorCode, 'ErrorMsg'=>$this->ErrorMsg);
+        $salida=array();
+        $salida[]=$array;
+        $salida[]=$respuesta_model[1];
+        $salida[]=$respuesta_model[2];
+        $salida[]=$respuesta_model[3];
+		return $salida;
+    }
+
     public function AirDemandTicketRQ($args,&$err)
     {
         $this->ErrorCode=0;

@@ -72,7 +72,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <th>Monto de la Transacción</th>
-                                                                <td><?= $data_reprocesa['$total_pagar']?></td>
+                                                                <td><?= $data_reprocesa['total_pagar']?></td>
                                                             </tr>
                                                             <tr>
                                                                 <th>Descripción del Vuelo</th>
@@ -102,7 +102,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label for="email">Monto de la transacción:</label>
-                                                    <input type="text" class="form-control vacios " id="montotrans" value=" USD <?= $data_reprocesa['$total_pagar']?>" disabled="">
+                                                    <input type="text" class="form-control vacios " id="montotrans" value=" USD <?= $data_reprocesa['total_pagar']?>" disabled="">
                                                 </div>
                                             </div>
                                         </div>
@@ -123,7 +123,7 @@
                                     data-merchantlogo= 'https://www.starperu.com/es/img/Logotipo.png'
                                     data-formbuttoncolor='#D80000'
                                     data-purchasenumber= <?=$reserva_id?>
-                                    data-amount=<?=$data_reprocesa['$total_pagar']?>
+                                    data-amount=<?=$data_reprocesa['total_pagar']?>
                                     data-expirationminutes= 5
                                     data-timeouturl = '<?= $url?>/cp/pasarela/html/tiempo_limite.php'></script>
                             </form>

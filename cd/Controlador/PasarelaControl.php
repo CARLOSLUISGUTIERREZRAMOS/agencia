@@ -53,6 +53,7 @@ if (isset($_REQUEST['obtener_pnr'])) {
                 $xml=$KIU->TravelItineraryReadRQPnr($codigo_reserva,$err);
                 if ($err['ErrorCode'] != 0){
                     echo $err['ErrorMsg'];
+                    die;
                 }
                 else{
                     // echo '<pre>';
@@ -63,6 +64,9 @@ if (isset($_REQUEST['obtener_pnr'])) {
                     if ($tkt_estado==1) { //Pendiente de emisión
                         $id_reserva = $obj_reserva->BuscarIdReservaPorPnr($codigo_reserva);
                         if ($id_reserva) {
+                            // echo "<pre>";
+                            // var_dump($json->TravelItinerary->ItineraryInfo->ItineraryPricing->Cost->attributes());
+                            // echo "</pre>";die;
                             $data['Pasajeros'] = $json->TravelItinerary->CustomerInfos->CustomerInfo;
                             $data['Itinerarios'] = $json->TravelItinerary->ItineraryInfo->ReservationItems->Item;
                             $data['TravelItinerary'] = $json->TravelItinerary;
@@ -100,54 +104,93 @@ if (isset($_REQUEST['transaccion'])) {
             $reserva_id = $_REQUEST['reserva_id'];
             if ($reserva_id!='' && $cc_code!='') {
                 $res_datareserva=$obj_reserva->BuscarReservaPorId($reserva_id);
-                $data_reprocesa['fecha_limite'] = $res_datareserva->FechaLimite;
-                $data_reprocesa['cc_code'] = $cc_code;
-                $data_reprocesa['num_cel'] = $res_datareserva->Celular;
-                $data_reprocesa['pnr'] = $res_datareserva->CodigoReserva;
-                $data_reprocesa['$total_pagar'] = $res_datareserva->Total;
-                $data_reprocesa['reserva_id'] = $reserva_id;
-                $data_reprocesa['email'] = $res_datareserva->Email;
-                $data_reprocesa['nombres_adl_1'] = $res_datareserva->Nombres;
-                $data_reprocesa['apellidos_adl_1'] = $res_datareserva->Apellidos;
-                $data_reprocesa['tipo_documento_adl_1'] = $res_datareserva->Tipo_Doc;
-                $data_reprocesa['numdoc_adl_1'] = $res_datareserva->Documento;
-                $data_reprocesa['ruc'] = (empty($res_datareserva->RUC) || $res_datareserva->RUC === "NULL") ? '' : $res_datareserva->RUC;
-                $obj_reserva->ActualizarMetodoPagoTransaccion($cc_code, $reserva_id);               
-                switch ($data_reprocesa['cc_code']) {
-                    case 'TC': // Visa
-                        if (isset($_SESSION['registro_id'])) {
-                            unset($_SESSION['registro_id']);
-                        }
-                        if (isset($_SESSION['token_seguridad_visa'])) {
-                            unset($_SESSION['token_seguridad_visa']);
-                        }
-                        // echo $URL_BASE;die;
-                        include $URL_DEFINIDO.'/cn/METODOS_PAGO/Connection_visa.php';
-                        //include "../Funciones/funciones.php";
-                        $visa = new Connection_visa();
-                        
-                        $token = $visa->Connection();
-                        $IP = $_SERVER['REMOTE_ADDR'];
-                        $request_body = $visa->GenerarBody($res_datareserva->Total, $IP);
-                        $visa_res = $visa->GenerarSesion($token, $request_body);
-                        $objSessionVisa = json_decode($visa_res);
-                        $libreriaJsVisa = $visa->GetLibreriaJSVisa();
-                        // var_dump($libreriaJsVisa);die;
-                        // $forma_pago = 'TC';
-                        // var_dump($forma_pago);die;
-                        // ProcesarConVisa($total_pagar, $data_reprocesa, $reserva_id, $pnr,$URL_BASE);
-                        break;
-                    case 'SP_C': // SAFETYPAY
-                    case 'SP_I': // SAFETYPAY
-                    case 'SP_E': // SAFETYPAY
-                        ProcesarConSafetyPay($total_pagar, $pnr, $reserva_id, $data_reprocesa);
-                        break;
-                    case 'PE':  // PAGO EFECTIVO
-                    case 'PEB':  // PAGO EFECTIVO 
-                        $this->ProcesarConPagoEfectivo($data_reprocesa, $total_pagar, $reserva_id);
-                        break;
+                $xml=$KIU->TravelItineraryReadRQPnr($res_datareserva->CodigoReserva,$err);
+                if ($err['ErrorCode'] != 0){
+                    echo $err['ErrorMsg'];
+                    die;
                 }
-                // PosicionarMetodoDePago($data_reprocesa, $res_datareserva->total_pagar, $res_datareserva->pnr, $reserva_id,$URL_BASE);
+                else{
+                    $json=$xml[3];
+                    $tkt_estado=(int)$json->TravelItinerary->ItineraryInfo->Ticketing->attributes()->TicketingStatus;
+                    if ($tkt_estado==1) { //Pendiente de emisión
+                        $total_kiu=floatval($json->TravelItinerary->ItineraryInfo->ItineraryPricing->Cost->attributes()->AmountAfterTax);
+                        $total_local=floatval($res_datareserva->Total);
+                        // echo '<pre>';
+                        // var_dump($xml[2]);
+                        // var_dump($total_kiu);
+                        // echo '</pre>';
+                        // die;
+                        // if ($total_kiu===$total_local) {
+                        //     $total_pagar=$res_datareserva->Total;
+                        // } else {
+                        //     $total_pagar=$total_kiu;
+                        //     $d=$KIU->AirPriceRQ_Reprice([
+                        //         'City' => 'LIM'
+                        //         , 'Country' => 'PE'
+                        //         , 'Currency' => 'USD'
+                        //         ,'Pnr'=>$res_datareserva->CodigoReserva
+                        //     ],$err);
+                        //     echo '<pre>';
+                        //     var_dump($d[2]);
+                        //     echo '</pre>';die;
+                        // }
+                        
+                        $data_reprocesa['fecha_limite'] = $res_datareserva->FechaLimite;
+                        $data_reprocesa['cc_code'] = $cc_code;
+                        $data_reprocesa['num_cel'] = $res_datareserva->Celular;
+                        $data_reprocesa['pnr'] = $res_datareserva->CodigoReserva;
+                        // $data_reprocesa['total_pagar'] = $total_pagar;
+                        $data_reprocesa['total_pagar'] = $res_datareserva->Total;
+                        $data_reprocesa['reserva_id'] = $reserva_id;
+                        $data_reprocesa['email'] = $res_datareserva->Email;
+                        $data_reprocesa['nombres_adl_1'] = $res_datareserva->Nombres;
+                        $data_reprocesa['apellidos_adl_1'] = $res_datareserva->Apellidos;
+                        $data_reprocesa['tipo_documento_adl_1'] = $res_datareserva->Tipo_Doc;
+                        $data_reprocesa['numdoc_adl_1'] = $res_datareserva->Documento;
+                        $data_reprocesa['ruc'] = (empty($res_datareserva->RUC) || $res_datareserva->RUC === "NULL") ? '' : $res_datareserva->RUC;
+                        $obj_reserva->ActualizarMetodoPagoTransaccion($cc_code, $reserva_id);
+                        switch ($data_reprocesa['cc_code']) {
+                            case 'TC': // Visa
+                                if (isset($_SESSION['registro_id'])) {
+                                    unset($_SESSION['registro_id']);
+                                }
+                                if (isset($_SESSION['token_seguridad_visa'])) {
+                                    unset($_SESSION['token_seguridad_visa']);
+                                }
+                                // echo $URL_BASE;die;
+                                include $URL_DEFINIDO.'/cn/METODOS_PAGO/Connection_visa.php';
+                                //include "../Funciones/funciones.php";
+                                $visa = new Connection_visa();
+                                
+                                $token = $visa->Connection();
+                                $IP = $_SERVER['REMOTE_ADDR'];
+                                $request_body = $visa->GenerarBody($res_datareserva->Total, $IP);
+                                $visa_res = $visa->GenerarSesion($token, $request_body);
+                                $objSessionVisa = json_decode($visa_res);
+                                $libreriaJsVisa = $visa->GetLibreriaJSVisa();
+                                // var_dump($libreriaJsVisa);die;
+                                // $forma_pago = 'TC';
+                                // var_dump($forma_pago);die;
+                                // ProcesarConVisa($total_pagar, $data_reprocesa, $reserva_id, $pnr,$URL_BASE);
+                                break;
+                            case 'SP_C': // SAFETYPAY
+                            case 'SP_I': // SAFETYPAY
+                            case 'SP_E': // SAFETYPAY
+                                ProcesarConSafetyPay($total_pagar, $pnr, $reserva_id, $data_reprocesa);
+                                break;
+                            case 'PE':  // PAGO EFECTIVO
+                            case 'PEB':  // PAGO EFECTIVO 
+                                $this->ProcesarConPagoEfectivo($data_reprocesa, $total_pagar, $reserva_id);
+                                break;
+                        }
+                    } 
+                    elseif ($tkt_estado==3) { //Ticket emitido
+                        header('Location: '.$url.'/cp/pasarela/html/reserva_pagada.php');
+                    }
+                    elseif ($tkt_estado==5){ //Ticket Cancelado
+                        header('Location: '.$url.'/cp/pasarela/html/tiempo_limite_reserva.php');
+                    }
+                }
             }
             else {
                 header('Location: '.$url.'/cp/panel.php');
@@ -367,6 +410,14 @@ if (isset($_POST['paso2'])) {
             $filas = '';
             for ($w = 0; $w < count($vuelos_disponibles); $w++) {
                 $disponibles = array_reverse(array_intersect($vuelos_disponibles[$w]["Clases"], $clases_tarifas_disponibles["Clases"]));
+                // echo '<pre>';
+                // var_dump($vuelos_disponibles[$w]);
+                // var_dump($vuelos_disponibles[$w]["Clases"]);
+                // var_dump($clases_tarifas_disponibles["Clases"]);
+                // var_dump($clases_tarifas_disponibles);
+                // var_dump($disponibles);
+                // echo '</pre>';
+                // die;
 
                 $clases_vector = array();
 
@@ -374,6 +425,7 @@ if (isset($_POST['paso2'])) {
                     $vector = array("clase" => $class, "tarifa" => number_format($clases_tarifas_disponibles["Tarifas"][$class], 2, '.', ''));
                     $clases_vector[] = $vector;
                 }
+
                 $clases_vector = ordenar_tarifas_kiu($clases_vector, "tarifa", true);
 
                 if (count($disponibles) > 0) {
@@ -622,7 +674,7 @@ if (isset($_POST['paso2'])) {
                             <input name="clase_vuelta" type="hidden" id="clase_vuelta" value="" />         
                             <input name="navegador_vuelo" type="hidden" id="navegador_vuelo" value="0" />
                             <input type="hidden" id="importe_depart" value="0">
-		            <input type="hidden"  id="importe_return" value="0">
+		                    <input type="hidden"  id="importe_return" value="0">
                             <input type="hidden" name="paso3" value="1"/>
                             <input type="hidden" name="fecha0" value="' . $fecha_ida . '" />
                             <input type="hidden" name="fecha1" value="' . $fecha_retorno . '" />
@@ -675,6 +727,7 @@ if (isset($_POST['paso3'])) {
         $clase_ida = $vuelo_ida[4];
         $origen_ida = $vuelo_ida[5];
         $destino_ida = $vuelo_ida[6];
+        
         if ($tipo_viaje_3 == 1) {
 
             $tarifa_vuelta = 0;
@@ -693,7 +746,6 @@ if (isset($_POST['paso3'])) {
             $clase_vuelta = $vuelo_vuelta[4];
             $destino_vuelta = $vuelo_vuelta[5];
             $origen_vuelta = $vuelo_vuelta[6];
-
             $res_price = $KIU->AirPriceRQ(array(
                 'City' => 'LIM'
                 , 'Country' => 'PE'
@@ -785,8 +837,8 @@ if (isset($_POST['paso3'])) {
                             <td align="left" class="bgTable_data">23 KG</td>
                          </tr>
                  </table>';
-        } elseif ($tipo_viaje_3 == 0) {
-            
+        }
+        elseif ($tipo_viaje_3 == 0) {
             $res_price = $KIU->AirPriceRQ(array(
                 'City' => 'LIM'
                 , 'Country' => 'PE'
@@ -805,7 +857,7 @@ if (isset($_POST['paso3'])) {
                 , 'DocType' => 'DNI'
                 , 'Remark' => 'Pasajero necesita silla de ruedas'
                     ), $err);
-
+            // var_dump($res_price);die;
             $cabecera = $res_price['PricedItineraries']['PricedItinerary']['AirItinerary'];
             $ida_vuelta = $cabecera['OriginDestinationOptions']['OriginDestinationOption']['FlightSegment'];
 
@@ -876,7 +928,9 @@ if (isset($_POST['paso3'])) {
         $igv_bb = 0;
         $subtotal_bb = 0;
 
-
+        // echo "<pre>";
+        // var_dump($res_price);
+        // echo "</pre>";die;
         $detalle = $res_price['PricedItineraries']['PricedItinerary']['AirItineraryPricingInfo'];
         $total_pagar = $detalle['ItinTotalFare']['TotalFare']['@attributes']['Amount'];
         $tipo_moneda = $detalle['ItinTotalFare']['TotalFare']['@attributes']['CurrencyCode'];
@@ -943,7 +997,8 @@ if (isset($_POST['paso3'])) {
                         <td align="center" class="bgTable_data">' . number_format($tuua_adulto, 2, '.', ',') . '</td>
                         <td align="center" class="bgTable_data">' . number_format($subtotal_tabla_adl, 2, '.', ',') . '</td>
                     </tr>';
-        } else {
+        } 
+        else {
 
             $cant_adult = $detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][0]['PassengerTypeQuantity']['@attributes']['Quantity'];
             $tarifa_adulto = $detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][0]['PassengerFare']['BaseFare']['@attributes']['Amount'];

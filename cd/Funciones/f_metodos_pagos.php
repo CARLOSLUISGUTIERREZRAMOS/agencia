@@ -23,10 +23,10 @@
             $data['eci_code'] = (!isset($data_visa->data->ECI))? '' : $data_visa->data->ECI; ;
             $data['action_code'] = $data_visa->data->ACTION_CODE;
             $data['card'] = (!isset($data_visa->data->CARD)) ? '': $data_visa->data->CARD;
-            $data['merchant'] = $data_visa->data->MERCHANT;
+            $data['merchant'] = !isset($data_visa->data->MERCHANT) ? NULL : $data_visa->data->MERCHANT;
             $data['status'] = $data_visa->data->STATUS;
             $data['action_description'] = $data_visa->data->ACTION_DESCRIPTION;
-            $data['adquiriente'] = (!isset($data_visa->data->ADQUIRENTE)) ? '' : $data_visa->data->ADQUIRENTE;
+            $data['adquiriente'] = (!isset($data_visa->data->ADQUIRENTE)) ? NULL : $data_visa->data->ADQUIRENTE;
             $data['amount'] = $data_visa->data->AMOUNT;
         } 
         else if (isset($data_visa->dataMap)) {
@@ -34,10 +34,10 @@
             $data['eci_code'] = $data_visa->dataMap->ECI;
             $data['action_code'] = $data_visa->dataMap->ACTION_CODE;
             $data['card'] = $data_visa->dataMap->CARD;
-            $data['merchant'] = $data_visa->dataMap->MERCHANT;
+            $data['merchant'] = !isset($data_visa->dataMap->MERCHANT) ? NULL : $data_visa->dataMap->MERCHANT;
             $data['status'] = $data_visa->dataMap->STATUS;
             $data['action_description'] = $data_visa->dataMap->ACTION_DESCRIPTION;
-            $data['adquiriente'] = $data_visa->dataMap->ADQUIRENTE;
+            $data['adquiriente'] = !isset($data_visa->dataMap->ADQUIRENTE) ? NULL : $data_visa->dataMap->ADQUIRENTE;
             $data['quota_amount'] = (isset($data_visa->dataMap->QUOTA_AMOUNT)) ? $data_visa->dataMap->QUOTA_AMOUNT : NULL;
             $data['quota_number'] = (isset($data_visa->dataMap->QUOTA_NUMBER)) ? $data_visa->dataMap->QUOTA_NUMBER : NULL;
             $data['id_unico'] = $data_visa->dataMap->ID_UNICO;

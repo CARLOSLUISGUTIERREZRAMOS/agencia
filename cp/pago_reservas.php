@@ -64,49 +64,6 @@
         function EnviarValores() {
             var reserva=$("input[name=codigo_reserva]").val();
             if (reserva) {
-                // $.ajax({
-                //     url:"<?=$url?>/cd/Controlador/PasarelaControl.php",
-                //     type: "POST", 
-                //     data:'obtener_pnr=1 && codigo_reserva='+reserva,
-                //     success: function(mensaje){
-                //         var data=JSON.parse(mensaje);
-                //         if (data.estado==5) {
-                //             window.location="<?= $url?>/cp/pasarela/html/tiempo_limite_reserva.php";
-                //         }
-                //         else if (data.estado==3) {
-                //             window.location="<?= $url?>/cp/pasarela/html/reserva_pagada.php";
-                //         }
-                //         else if (data.estado==1) {
-                //             window.location="<?= $url?>/cp/pasarela/html/reserva_pagada.php";
-                //         }
-                //         else if(data.estado==404){
-                //             swal({
-                //                 title: "Mensaje",
-                //                 text: 'Ups! Hubo un error al cambiar',
-                //                 icon: "warning",
-                //                 timer: 2000,
-                //                 buttons: {
-                //                     confirm: {
-                //                         className: 'btn btn-warning'
-                //                     }
-                //                 },
-                //             });
-                //         }
-                //     },
-                //     error: function (error,obj,mensaje) {
-                //         swal({
-                //             title: "Mensaje de Error",
-                //             text: 'Error en sentencia SQL',
-                //             icon: "error",
-                //             timer: 2000,
-                //             buttons: {
-                //                 confirm: {
-                //                     className: 'btn btn-danger'
-                //                 }
-                //             },
-                //         });
-                //     }
-                // });
                 $("#form-reserva").submit();
             }
             else{
