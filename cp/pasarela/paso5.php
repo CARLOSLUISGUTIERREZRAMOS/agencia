@@ -20,7 +20,8 @@
         <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
         <script type="text/javascript" src="js/jquery/jquery-ui-1.10.4.custom.js"></script>
         <script type="text/javascript" language="javascript1.2" src="js/funciones.js?v1.0"></script>
-        <script type="text/javascript" src="js/metodos_pago.js?v1.0"></script>
+        <script type="text/javascript" src="js/metodos_pago.js"></script>
+        <!--<script type="text/javascript" src="js/metodos_pago.js?v=<?= time()?>"></script>-->
         <!-- 
         <script>
         function EnviaValores()
@@ -135,7 +136,8 @@
                               	<tr>
                                   	<td height="30" align="left">
                                         <label>
-                                            <input type="checkbox" id="terms" name="terms" value="1" onclick="Change()" /> He le&iacute;do y estoy de acuerdo con las <a id="checkthickbox" onclick="VerCondicion();" class="thickbox" style="color:#0266CC;cursor:pointer;">condiciones</a> relacionadas a la compra.
+                                            <input type="checkbox" id="terms" name="terms" value="1" onclick="Change()" /> He le&iacute;do y estoy de acuerdo con las <a id="checkthickbox" onclick="VerCondicion();" class="thickbox" style="color:#0266CC;cursor:pointer;">condiciones</a> relacionadas a la compra.<br>
+                                            <input type="checkbox" id="terms2" name="terms2" value="1" onclick="Change()" /> La agencia se hace 100% responsable de cualquier tipo de fraude que se haga vía el portal agencias. 
                                         </label>
                                     </td>
                               	</tr>
