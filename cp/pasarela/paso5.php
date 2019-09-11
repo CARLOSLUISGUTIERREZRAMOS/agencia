@@ -20,8 +20,8 @@
         <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
         <script type="text/javascript" src="js/jquery/jquery-ui-1.10.4.custom.js"></script>
         <script type="text/javascript" language="javascript1.2" src="js/funciones.js?v1.0"></script>
-        <script type="text/javascript" src="js/metodos_pago.js"></script>
-        <!--<script type="text/javascript" src="js/metodos_pago.js?v=<?= time()?>"></script>-->
+        <!--<script type="text/javascript" src="js/metodos_pago.js"></script>-->
+        <script type="text/javascript" src="js/metodos_pago.js?v=<?= time()?>"></script>
         <!-- 
         <script>
         function EnviaValores()
