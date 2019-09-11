@@ -1,13 +1,13 @@
 <?php
-    session_start();
-    require_once("config.php");
-    date_default_timezone_set('America/Lima');
-    include "cn/STARPERU/Modelo/LocalidadModelo.php";
-    $obj_modelo=new LocalidadModelo();
-    // echo "<pre>";
-    // var_dump($obj_modelo->ObtenerPaises());
-    // echo "</pre>";
-    // die;
+session_start();
+require_once("config.php");
+date_default_timezone_set('America/Lima');
+include "cn/STARPERU/Modelo/LocalidadModelo.php";
+$obj_modelo = new LocalidadModelo();
+// echo "<pre>";
+// var_dump($obj_modelo->ObtenerPaises());
+// echo "</pre>";
+// die;
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%">
@@ -17,81 +17,81 @@
         <link href="cp/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="cp/css/agencias.min.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
-        <link href="cp/css/chosen.css" rel="stylesheet" type="text/css"/>
-        <link href="cp/css/toastr.css" rel="stylesheet" type="text/css"/>
-        <!-- <link href="cp/css/sweetalert.min.css" rel="stylesheet" type="text/css"/> -->
-        <title>Web Agencias - StarPeru</title>
-        <style>
-            #content > span { 
-                display: block; font-size: 20px; color: #b90007; line-height: 24px; 
-            } 
-            .col-submenu { 
-                text-align: center; transform: translateY(15%); 
-            }
-            .btn{ 
-                height: auto !important; font-size: 14px !important; 
-            } 
-            a { 
-                color: #e8e9ea; 
-            } 
-            a:hover { 
-                color: #c7c9cc; 
-            } 
-            .modal { 
-                overflow-x: hidden; overflow-y: auto; 
-            }
-            #modalPassword .modal-header .close { 
-                margin-top: -30px; 
-            } 
-            #modalPassword .modal-header { 
-                background-color: #b90007; 
-                border-radius: 5px 5px 0 0; 
-            }
-            button.close { 
-                color: #020202; 
-            } 
-            #modalPassword .modal-title { 
-                color:#f3f3f3; 
-                font-size: 18px; 
-                font-weight: bold; 
-            }
-            .btn-success { 
-                color: #fff; background-color: #28a745 !important; border-color: #28a745 !important; 
-            }
-            p {
-                margin-top: 0;
-                margin-bottom: 1rem;
-            }
-            .text-muted {
-                color: #73818f !important;
-            }
-            .toast-top-right {
-                top: 30px;
-                right: 12px;
-            }
-            .swal-footer{
-                text-align: center;
-            }
-            .alert{
-                margin-bottom: 0;
-            }
-             #modalCambiarCorreo .modal-header .close { 
-                margin-top: -30px; 
-            } 
-            #modalCambiarCorreo .modal-header { 
-                background-color: #b90007; 
-                border-radius: 5px 5px 0 0; 
-            }
-            #modalCambiarCorreo .modal-title { 
-                color:#f3f3f3; 
-                font-size: 18px; 
-                font-weight: bold; 
-            }
-            button.close { 
-                color: #020202; 
-            } 
-        </style>
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
+            <link href="cp/css/chosen.css" rel="stylesheet" type="text/css"/>
+            <link href="cp/css/toastr.css" rel="stylesheet" type="text/css"/>
+            <!-- <link href="cp/css/sweetalert.min.css" rel="stylesheet" type="text/css"/> -->
+            <title>Web Agencias - StarPeru</title>
+            <style>
+                #content > span { 
+                    display: block; font-size: 20px; color: #b90007; line-height: 24px; 
+                } 
+                .col-submenu { 
+                    text-align: center; transform: translateY(15%); 
+                }
+                .btn{ 
+                    height: auto !important; font-size: 14px !important; 
+                } 
+                a { 
+                    color: #e8e9ea; 
+                } 
+                a:hover { 
+                    color: #c7c9cc; 
+                } 
+                .modal { 
+                    overflow-x: hidden; overflow-y: auto; 
+                }
+                #modalPassword .modal-header .close { 
+                    margin-top: -30px; 
+                } 
+                #modalPassword .modal-header { 
+                    background-color: #b90007; 
+                    border-radius: 5px 5px 0 0; 
+                }
+                button.close { 
+                    color: #020202; 
+                } 
+                #modalPassword .modal-title { 
+                    color:#f3f3f3; 
+                    font-size: 18px; 
+                    font-weight: bold; 
+                }
+                .btn-success { 
+                    color: #fff; background-color: #28a745 !important; border-color: #28a745 !important; 
+                }
+                p {
+                    margin-top: 0;
+                    margin-bottom: 1rem;
+                }
+                .text-muted {
+                    color: #73818f !important;
+                }
+                .toast-top-right {
+                    top: 30px;
+                    right: 12px;
+                }
+                .swal-footer{
+                    text-align: center;
+                }
+                .alert{
+                    margin-bottom: 0;
+                }
+                #modalCambiarCorreo .modal-header .close { 
+                    margin-top: -30px; 
+                } 
+                #modalCambiarCorreo .modal-header { 
+                    background-color: #b90007; 
+                    border-radius: 5px 5px 0 0; 
+                }
+                #modalCambiarCorreo .modal-title { 
+                    color:#f3f3f3; 
+                    font-size: 18px; 
+                    font-weight: bold; 
+                }
+                button.close { 
+                    color: #020202; 
+                } 
+            </style>
     </head>
     <body class="fondo_panel">
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -121,18 +121,25 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-top">
                     <ul class="nav navbar-nav navbar-right">
-<!--                        <li>
-                            <a target="_blank">
-                                <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                                <span class="span">INFORMACIÓN AL</span>
-                                <span class="span span-bold span-font-medium">PASAJERO</span>
-                            </a>
-                        </li>-->
+                        <!--                        <li>
+                                                    <a target="_blank">
+                                                        <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                                                        <span class="span">INFORMACIÓN AL</span>
+                                                        <span class="span span-bold span-font-medium">PASAJERO</span>
+                                                    </a>
+                                                </li>-->
                         <li>
                             <a style="cursor: pointer;" class="modal-agencia">
                                 <i class="fa fa-university fa-2x" aria-hidden="true"></i>
                                 <span class="span">REGISTRA TU</span>
                                 <span class="span span-bold span-font-medium">AGENCIA</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a style="cursor: pointer;" data-toggle="modal" data-target="#modal-tutorial-registrar-agencia">
+                                <i class="fa fa-film fa-2x" aria-hidden="true" ></i>
+                                <span class="span">REGISTRAR AGENCIA</span>
+                                <span class="span span-bold span-font-medium">TUTORIAL</span>
                             </a>
                         </li>
                     </ul>
@@ -156,7 +163,7 @@
                                         </div>
                                     </div> -->
                                 </div>
-                                <?php if (isset($_SESSION["s_entra"]) && $_SESSION["s_entra"]==1): ?>
+                                <?php if (isset($_SESSION["s_entra"]) && $_SESSION["s_entra"] == 1): ?>
                                     <div style="height: 210px;align-items: center;text-align: center;display: flex;justify-content: center;">
                                         <a href="cp/panel.php" style="text-decoration: none;">
                                             <i class="fa fa-university fa-2x" aria-hidden="true"></i>
@@ -201,7 +208,7 @@
                                         </div>
                                     </form>
                                 <?php endif ?>
-                                
+
                                 <div class="row form-group">
                                     <div class="col-md-1 col-sm-1 col-xs-1">&nbsp;</div>
                                     <div class="col-md-10 col-sm-10 col-xs-10">
@@ -255,7 +262,25 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 mb-4">
+            <div class="modal fade" id="modal-tutorial-registrar-agencia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body mb-0 p-0">
+                            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                                <iframe class="embed-responsive-item" src="cp/videos/registrar_agencia.mp4"
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <span class="mr-4"><center><b>Registrar Agencia</b></center></span>
+                            <button type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -336,158 +361,158 @@
                         <h2 class="modal-title">Registrar mi Agencia</h2>
                         <p class="text-muted">
                             Completa los campos con información válida <br>
-                            <span style="color: #bf1b1b;">Todo los campos son obligatorios</span>
+                                <span style="color: #bf1b1b;">Todo los campos son obligatorios</span>
                         </p>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="registrar_agencia" value="1" form="registrar-agencia">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <select id="Code_Pais" name="Code_Pais" class="form-control select-chosen" title="Seleccionar Pais" form="registrar-agencia">
-                                            <?php foreach ($obj_modelo->ObtenerPaises() as $key => $pais): ?>
-                                                <option <?= $pais->Code_Pais=='PE' ? 'selected' : ''?> value="<?= $pais->Code_Pais?>"><?= $pais->Pais?></option>
-                                            <?php endforeach ?>
-                                        </select>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                            <select id="Code_Pais" name="Code_Pais" class="form-control select-chosen" title="Seleccionar Pais" form="registrar-agencia">
+                                                <?php foreach ($obj_modelo->ObtenerPaises() as $key => $pais): ?>
+                                                    <option <?= $pais->Code_Pais == 'PE' ? 'selected' : '' ?> value="<?= $pais->Code_Pais ?>"><?= $pais->Pais ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                                            <select id="CodigoCiudad" name="CodigoCiudad" class="form-control select-chosen" title="Seleccionar Ciudad" form="registrar-agencia">
+                                                <?php foreach ($obj_modelo->ObtenerLocalidades('PE') as $key => $ciudad): ?>
+                                                    <option <?= $ciudad->Codigo == 'LIM' ? 'selected' : '' ?> value="<?= $ciudad->Codigo ?>"><?= $ciudad->Nombre ?></option>
+                                                <?php endforeach ?>
+                                                <!-- <option value="ANC">ANCASH</option>
+                                                <option value="ANS">ANDAHUAYLAS</option>
+                                                <option value="APU">APURIMAC</option>
+                                                <option value="AQP">AREQUIPA</option>
+                                                <option value="AYP">AYACUCHO</option>
+                                                <option value="CJA">CAJAMARCA</option>
+                                                <option value="CIX">CHICLAYO</option>
+                                                <option value="CUZ">CUZCO</option>
+                                                <option value="ILQ">ILO</option>
+                                                <option value="IQT">IQUITOS</option>
+                                                <option value="JAU">JAUJA</option>
+                                                <option value="JUL">JULIACA</option>
+                                                <option value="JNN">JUNIN</option>
+                                                <option value="LIM" selected="">LIMA</option>
+                                                <option value="PSC">PASCO</option>
+                                                <option value="PIO">PISCO</option>
+                                                <option value="PIU">PIURA</option>
+                                                <option value="PCL">PUCALLPA</option>
+                                                <option value="PEM">PUERTO MALDONADO</option>
+                                                <option value="PUN">PUNO</option>
+                                                <option value="TCQ">TACNA</option>
+                                                <option value="TYL">TALARA</option>
+                                                <option value="TPP">TARAPOTO</option>
+                                                <option value="TRU">TRUJILLO</option>
+                                                <option value="TBP">TUMBES</option>
+                                                <option value="UCY">UCAYALI</option> -->
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                                        <select id="CodigoCiudad" name="CodigoCiudad" class="form-control select-chosen" title="Seleccionar Ciudad" form="registrar-agencia">
-                                            <?php foreach ($obj_modelo->ObtenerLocalidades('PE') as $key => $ciudad): ?>
-                                                <option <?= $ciudad->Codigo=='LIM' ? 'selected' : ''?> value="<?= $ciudad->Codigo?>"><?= $ciudad->Nombre?></option>
-                                            <?php endforeach ?>
-                                            <!-- <option value="ANC">ANCASH</option>
-                                            <option value="ANS">ANDAHUAYLAS</option>
-                                            <option value="APU">APURIMAC</option>
-                                            <option value="AQP">AREQUIPA</option>
-                                            <option value="AYP">AYACUCHO</option>
-                                            <option value="CJA">CAJAMARCA</option>
-                                            <option value="CIX">CHICLAYO</option>
-                                            <option value="CUZ">CUZCO</option>
-                                            <option value="ILQ">ILO</option>
-                                            <option value="IQT">IQUITOS</option>
-                                            <option value="JAU">JAUJA</option>
-                                            <option value="JUL">JULIACA</option>
-                                            <option value="JNN">JUNIN</option>
-                                            <option value="LIM" selected="">LIMA</option>
-                                            <option value="PSC">PASCO</option>
-                                            <option value="PIO">PISCO</option>
-                                            <option value="PIU">PIURA</option>
-                                            <option value="PCL">PUCALLPA</option>
-                                            <option value="PEM">PUERTO MALDONADO</option>
-                                            <option value="PUN">PUNO</option>
-                                            <option value="TCQ">TACNA</option>
-                                            <option value="TYL">TALARA</option>
-                                            <option value="TPP">TARAPOTO</option>
-                                            <option value="TRU">TRUJILLO</option>
-                                            <option value="TBP">TUMBES</option>
-                                            <option value="UCY">UCAYALI</option> -->
-                                        </select>
-                                    </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">RUC</span>
+                                    <input type="text" class="form-control ruc-peru" placeholder="RUC" id="RUC" name="RUC" required="" form="registrar-agencia">
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">RUC</span>
-                                <input type="text" class="form-control ruc-peru" placeholder="RUC" id="RUC" name="RUC" required="" form="registrar-agencia">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                    <input type="text" class="form-control" placeholder="Razon Social - Ejm: Mi Empresa SAC" id="RazonSocial" name="RazonSocial" required="" form="registrar-agencia">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                <input type="text" class="form-control" placeholder="Razon Social - Ejm: Mi Empresa SAC" id="RazonSocial" name="RazonSocial" required="" form="registrar-agencia">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-university"></i></span>
+                                    <input type="text" class="form-control" placeholder="Nombre Comercial - Ejm: Empresa" id="NombreComercial" name="NombreComercial" title="Nombre comercial o marca" required="" form="registrar-agencia">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                                <input type="text" class="form-control" placeholder="Nombre Comercial - Ejm: Empresa" id="NombreComercial" name="NombreComercial" title="Nombre comercial o marca" required="" form="registrar-agencia">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-bars"></i></span>
+                                    <input type="text" class="form-control" placeholder="Domicilio Fiscal" id="Direccion" name="Direccion" required="" form="registrar-agencia">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-bars"></i></span>
-                                <input type="text" class="form-control" placeholder="Domicilio Fiscal" id="Direccion" name="Direccion" required="" form="registrar-agencia">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
+                                    <input type="text" class="form-control" placeholder="Teléfono de Oficina" id="TelefoniaOficina" name="TelefoniaOficina" required="" form="registrar-agencia">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
-                                <input type="text" class="form-control" placeholder="Teléfono de Oficina" id="TelefoniaOficina" name="TelefoniaOficina" required="" form="registrar-agencia">
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <hr>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                <input type="text" class="form-control" placeholder="Apellido Paterno" id="ApellidoPaterno" name="ApellidoPaterno" required="" form="registrar-agencia">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                <input type="text" class="form-control" placeholder="Apellido Materno" id="ApellidoMaterno" name="ApellidoMaterno" required="" form="registrar-agencia">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input type="text" class="form-control" placeholder="Apellido Paterno" id="ApellidoPaterno" name="ApellidoPaterno" required="" form="registrar-agencia">
+                                        <input type="text" class="form-control" placeholder="Nombres" id="Nombres" name="Nombres" required="" form="registrar-agencia">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">DNI</span>
+                                                <input type="text" class="form-control" placeholder="DNI" id="DNIFuncionario" name="DNIFuncionario" maxlength="8" minlength="8" required="" form="registrar-agencia">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                <input type="text" class="form-control" placeholder="Celular" id="Celular" name="Celular" form="registrar-agencia">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input type="text" class="form-control" placeholder="Apellido Materno" id="ApellidoMaterno" name="ApellidoMaterno" required="" form="registrar-agencia">
+                                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                        <input type="email" class="form-control" placeholder="Email" id="Email" name="Email" required="" form="registrar-agencia">
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Nombres" id="Nombres" name="Nombres" required="" form="registrar-agencia">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">DNI</span>
-                                        <input type="text" class="form-control" placeholder="DNI" id="DNIFuncionario" name="DNIFuncionario" maxlength="8" minlength="8" required="" form="registrar-agencia">
-                                    </div>
+                                    <button type="submit" class="btn btn-block btn-success" form="registrar-agencia">Registrarme</button>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                        <input type="text" class="form-control" placeholder="Celular" id="Celular" name="Celular" form="registrar-agencia">
-                                    </div>
+                                <form id="registrar-agencia" onsubmit="return false"></form>
+                                <form></form>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="Email" id="Email" name="Email" required="" form="registrar-agencia">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-block btn-success" form="registrar-agencia">Registrarme</button>
-                        </div>
-                        <form id="registrar-agencia" onsubmit="return false"></form>
-                        <form></form>
-                    </div>
-                </div>
+                                </div>
 
-            </div>
-        </div>
-        <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
-        <script src="cp/js/bootstrap.js" type="text/javascript"></script>
-        <script src="cp/js/toastr.js" type="text/javascript"></script>
-        <script src="cp/js/chosen.js" type="text/javascript"></script>
-        <script src="cp/js/sweetalert.min.js" type="text/javascript"></script>
-        <script src="cp/js/jsLogin.js" type="text/javascript"></script>
-    </body>
-</html>
+                                </div>
+                                </div>
+                                <!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+                                <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+                                <script src="cp/js/bootstrap.js" type="text/javascript"></script>
+                                <script src="cp/js/toastr.js" type="text/javascript"></script>
+                                <script src="cp/js/chosen.js" type="text/javascript"></script>
+                                <script src="cp/js/sweetalert.min.js" type="text/javascript"></script>
+                                <script src="cp/js/jsLogin.js" type="text/javascript"></script>
+                                </body>
+                                </html>
