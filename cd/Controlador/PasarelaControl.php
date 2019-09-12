@@ -115,25 +115,25 @@ if (isset($_REQUEST['transaccion'])) {
                     if ($tkt_estado==1) { //Pendiente de emisión
                         $total_kiu=floatval($json->TravelItinerary->ItineraryInfo->ItineraryPricing->Cost->attributes()->AmountAfterTax);
                         $total_local=floatval($res_datareserva->Total);
-                        echo '<pre>';
-                        var_dump($xml[2]);
-                        var_dump($total_kiu);
-                        echo '</pre>';
-                        die;
-                        if ($total_kiu===$total_local) {
-                            $total_pagar=$res_datareserva->Total;
-                        } else {
-                            $total_pagar=$total_kiu;
-                            $d=$KIU->AirPriceRQ_Reprice([
-                                'City' => 'LIM'
-                                , 'Country' => 'PE'
-                                , 'Currency' => 'USD'
-                                ,'Pnr'=>$res_datareserva->CodigoReserva
-                            ],$err);
-                            echo '<pre>';
-                            var_dump($d[2]);
-                            echo '</pre>';die;
-                        }
+                        // echo '<pre>';
+                        // var_dump($xml[2]);
+                        // var_dump($total_kiu);
+                        // echo '</pre>';
+                        // die;
+                        // if ($total_kiu===$total_local) {
+                        //     $total_pagar=$res_datareserva->Total;
+                        // } else {
+                        //     $total_pagar=$total_kiu;
+                        //     $d=$KIU->AirPriceRQ_Reprice([
+                        //         'City' => 'LIM'
+                        //         , 'Country' => 'PE'
+                        //         , 'Currency' => 'USD'
+                        //         ,'Pnr'=>$res_datareserva->CodigoReserva
+                        //     ],$err);
+                        //     echo '<pre>';
+                        //     var_dump($d[2]);
+                        //     echo '</pre>';die;
+                        // }
                         
                         $data_reprocesa['fecha_limite'] = $res_datareserva->FechaLimite;
                         $data_reprocesa['cc_code'] = $cc_code;
