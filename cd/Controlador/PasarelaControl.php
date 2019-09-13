@@ -1,28 +1,27 @@
 <?php
 if (!isset($url_proyecto)) {
     session_start();
-    $URL_DEFINIDO='../..';
+    $URL_DEFINIDO = '../..';
     $p_ = empty($_SERVER['HTTPS']) ? 'http' : 'https';
     $d_ = $_SERVER['SERVER_NAME'];
-	$port_ = $_SERVER['SERVER_PORT'];
-	$disp_port_ = ($p_ == 'http' && $port_ == 80 || $p_ == 'https' && $port_ == 443) ? '' : ":$port_";
-    $project_name_=basename(dirname(dirname(dirname(__FILE__))));
-    $URL_BASE="${p_}://${d_}${disp_port_}/${project_name_}";
-}
-else{
-    $URL_DEFINIDO=PATH_PROYECTO;
-    $URL_BASE=$url_proyecto;
+    $port_ = $_SERVER['SERVER_PORT'];
+    $disp_port_ = ($p_ == 'http' && $port_ == 80 || $p_ == 'https' && $port_ == 443) ? '' : ":$port_";
+    $project_name_ = basename(dirname(dirname(dirname(__FILE__))));
+    $URL_BASE = "${p_}://${d_}${disp_port_}/${project_name_}";
+} else {
+    $URL_DEFINIDO = PATH_PROYECTO;
+    $URL_BASE = $url_proyecto;
 }
 // error_reporting(E_ALL);
 // ini_set("display_errors", 0);
 date_default_timezone_set('America/Lima');
 //include '../Navegador/inex.php';
-require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/PersonalModelo.php");
-require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/CiudadModelo.php");
-require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/TarifaModelo.php");
-require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/ReservaModelo.php");
-require_once($URL_DEFINIDO."/cn/STARPERU/Modelo/EmpresaModelo.php");
-include $URL_DEFINIDO."/cn/KIU/KIU_Controller_class.php";
+require_once($URL_DEFINIDO . "/cn/STARPERU/Modelo/PersonalModelo.php");
+require_once($URL_DEFINIDO . "/cn/STARPERU/Modelo/CiudadModelo.php");
+require_once($URL_DEFINIDO . "/cn/STARPERU/Modelo/TarifaModelo.php");
+require_once($URL_DEFINIDO . "/cn/STARPERU/Modelo/ReservaModelo.php");
+require_once($URL_DEFINIDO . "/cn/STARPERU/Modelo/EmpresaModelo.php");
+include $URL_DEFINIDO . "/cn/KIU/KIU_Controller_class.php";
 //include "../Funciones/funciones.php";
 $KIU = new KIU_Controller();
 
@@ -48,20 +47,19 @@ if (isset($_REQUEST['obtener_pnr'])) {
     if ($_REQUEST['obtener_pnr'] == 1) {
         $codigo_reserva = $_REQUEST['codigo_reserva'];
         if ($codigo_reserva) {
-            $pnr = $obj_reserva->ObtenerPnr($codigo_reserva,$_SESSION['s_entidad']);
-            if ($pnr==1) {
-                $xml=$KIU->TravelItineraryReadRQPnr($codigo_reserva,$err);
-                if ($err['ErrorCode'] != 0){
+            $pnr = $obj_reserva->ObtenerPnr($codigo_reserva, $_SESSION['s_entidad']);
+            if ($pnr == 1) {
+                $xml = $KIU->TravelItineraryReadRQPnr($codigo_reserva, $err);
+                if ($err['ErrorCode'] != 0) {
                     echo $err['ErrorMsg'];
                     die;
-                }
-                else{
+                } else {
                     // echo '<pre>';
                     // var_dump($xml[2]);
                     // echo '</pre>';die;
-                    $json=$xml[3];
-                    $tkt_estado=(int)$json->TravelItinerary->ItineraryInfo->Ticketing->attributes()->TicketingStatus;
-                    if ($tkt_estado==1) { //Pendiente de emisión
+                    $json = $xml[3];
+                    $tkt_estado = (int) $json->TravelItinerary->ItineraryInfo->Ticketing->attributes()->TicketingStatus;
+                    if ($tkt_estado == 1) { //Pendiente de emisión
                         $id_reserva = $obj_reserva->BuscarIdReservaPorPnr($codigo_reserva);
                         if ($id_reserva) {
                             // echo "<pre>";
@@ -70,51 +68,46 @@ if (isset($_REQUEST['obtener_pnr'])) {
                             $data['Pasajeros'] = $json->TravelItinerary->CustomerInfos->CustomerInfo;
                             $data['Itinerarios'] = $json->TravelItinerary->ItineraryInfo->ReservationItems->Item;
                             $data['TravelItinerary'] = $json->TravelItinerary;
-                            $data['ruc'] = (isset($json->TravelItinerary->Remarks)) ? (strlen((string)$json->TravelItinerary->Remarks->Remark) == 11) ? $json->TravelItinerary->Remarks->Remark : '' : "";
+                            $data['ruc'] = (isset($json->TravelItinerary->Remarks)) ? (strlen((string) $json->TravelItinerary->Remarks->Remark) == 11) ? $json->TravelItinerary->Remarks->Remark : '' : "";
                             $data['TotalPagar'] = $json->TravelItinerary->ItineraryInfo->ItineraryPricing->Cost->attributes()->AmountAfterTax;
                             $data['reserva_id'] = $id_reserva;
                         } else {
-                            header('Location: '.$url.'/cp/panel.php');
+                            header('Location: ' . $url . '/cp/panel.php');
                         }
-                    } 
-                    elseif ($tkt_estado==3) { //Ticket emitido
-                        header('Location: '.$url.'/cp/pasarela/html/reserva_pagada.php');
-                    }
-                    elseif ($tkt_estado==5){ //Ticket Cancelado
-                        header('Location: '.$url.'/cp/pasarela/html/tiempo_limite_reserva.php');
+                    } elseif ($tkt_estado == 3) { //Ticket emitido
+                        header('Location: ' . $url . '/cp/pasarela/html/reserva_pagada.php');
+                    } elseif ($tkt_estado == 5) { //Ticket Cancelado
+                        header('Location: ' . $url . '/cp/pasarela/html/tiempo_limite_reserva.php');
                     }
                 }
-            }
-            else{
-                header('Location: '.$url.'/cp/pasarela/html/tiempo_limite_reserva.php?404');
+            } else {
+                header('Location: ' . $url . '/cp/pasarela/html/tiempo_limite_reserva.php?404');
             }
         } else {
-            header('Location: '.$url.'/cp/panel.php');
+            header('Location: ' . $url . '/cp/panel.php');
         }
-    }
-    else{
-        header('Location: '.$url.'/cp/panel.php');
+    } else {
+        header('Location: ' . $url . '/cp/panel.php');
     }
 }
 
 if (isset($_REQUEST['transaccion'])) {
-    if ($_REQUEST['transaccion']==1) {
+    if ($_REQUEST['transaccion'] == 1) {
         if (isset($_REQUEST['cc_code']) && isset($_REQUEST['reserva_id'])) {
             $cc_code = $_REQUEST['cc_code'];
             $reserva_id = $_REQUEST['reserva_id'];
-            if ($reserva_id!='' && $cc_code!='') {
-                $res_datareserva=$obj_reserva->BuscarReservaPorId($reserva_id);
-                $xml=$KIU->TravelItineraryReadRQPnr($res_datareserva->CodigoReserva,$err);
-                if ($err['ErrorCode'] != 0){
+            if ($reserva_id != '' && $cc_code != '') {
+                $res_datareserva = $obj_reserva->BuscarReservaPorId($reserva_id);
+                $xml = $KIU->TravelItineraryReadRQPnr($res_datareserva->CodigoReserva, $err);
+                if ($err['ErrorCode'] != 0) {
                     echo $err['ErrorMsg'];
                     die;
-                }
-                else{
-                    $json=$xml[3];
-                    $tkt_estado=(int)$json->TravelItinerary->ItineraryInfo->Ticketing->attributes()->TicketingStatus;
-                    if ($tkt_estado==1) { //Pendiente de emisión
-                        $total_kiu=floatval($json->TravelItinerary->ItineraryInfo->ItineraryPricing->Cost->attributes()->AmountAfterTax);
-                        $total_local=floatval($res_datareserva->Total);
+                } else {
+                    $json = $xml[3];
+                    $tkt_estado = (int) $json->TravelItinerary->ItineraryInfo->Ticketing->attributes()->TicketingStatus;
+                    if ($tkt_estado == 1) { //Pendiente de emisión
+                        $total_kiu = floatval($json->TravelItinerary->ItineraryInfo->ItineraryPricing->Cost->attributes()->AmountAfterTax);
+                        $total_local = floatval($res_datareserva->Total);
                         // echo '<pre>';
                         // var_dump($xml[2]);
                         // var_dump($total_kiu);
@@ -134,7 +127,7 @@ if (isset($_REQUEST['transaccion'])) {
                         //     var_dump($d[2]);
                         //     echo '</pre>';die;
                         // }
-                        
+
                         $data_reprocesa['fecha_limite'] = $res_datareserva->FechaLimite;
                         $data_reprocesa['cc_code'] = $cc_code;
                         $data_reprocesa['num_cel'] = $res_datareserva->Celular;
@@ -158,10 +151,10 @@ if (isset($_REQUEST['transaccion'])) {
                                     unset($_SESSION['token_seguridad_visa']);
                                 }
                                 // echo $URL_BASE;die;
-                                include $URL_DEFINIDO.'/cn/METODOS_PAGO/Connection_visa.php';
+                                include $URL_DEFINIDO . '/cn/METODOS_PAGO/Connection_visa.php';
                                 //include "../Funciones/funciones.php";
                                 $visa = new Connection_visa();
-                                
+
                                 $token = $visa->Connection();
                                 $IP = $_SERVER['REMOTE_ADDR'];
                                 $request_body = $visa->GenerarBody($res_datareserva->Total, $IP);
@@ -183,30 +176,24 @@ if (isset($_REQUEST['transaccion'])) {
                                 $this->ProcesarConPagoEfectivo($data_reprocesa, $total_pagar, $reserva_id);
                                 break;
                         }
-                    } 
-                    elseif ($tkt_estado==3) { //Ticket emitido
-                        header('Location: '.$url.'/cp/pasarela/html/reserva_pagada.php');
-                    }
-                    elseif ($tkt_estado==5){ //Ticket Cancelado
-                        header('Location: '.$url.'/cp/pasarela/html/tiempo_limite_reserva.php');
+                    } elseif ($tkt_estado == 3) { //Ticket emitido
+                        header('Location: ' . $url . '/cp/pasarela/html/reserva_pagada.php');
+                    } elseif ($tkt_estado == 5) { //Ticket Cancelado
+                        header('Location: ' . $url . '/cp/pasarela/html/tiempo_limite_reserva.php');
                     }
                 }
+            } else {
+                header('Location: ' . $url . '/cp/panel.php');
             }
-            else {
-                header('Location: '.$url.'/cp/panel.php');
-            }
+        } else {
+            header('Location: ' . $url . '/cp/panel.php');
         }
-        else {
-            header('Location: '.$url.'/cp/panel.php');
-        }
+    } else {
+        header('Location: ' . $url . '/cp/panel.php');
     }
-    else{
-        header('Location: '.$url.'/cp/panel.php');
-    }
-
 }
 
-function ProcesarConVisa($total_pagar, $xss_post, $reserva_id, $pnr,$URL_BASE){
+function ProcesarConVisa($total_pagar, $xss_post, $reserva_id, $pnr, $URL_BASE) {
     
 }
 
@@ -405,7 +392,7 @@ if (isset($_POST['paso2'])) {
             $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Llegada</td>' . "\n";
             $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Duracion</td>' . "\n";
             $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Escala</td>' . "\n";
-            $tabla_disponibilidades .= '<td class="subtitleTable" colspan="20"><b>Tarifa</b></td>' . "\n";
+            $tabla_disponibilidades .= '<td class="subtitleTable" colspan="9"><b>Tarifa</b></td>' . "\n";
             $tabla_disponibilidades .= '</tr>' . "\n";
             $filas = '';
             for ($w = 0; $w < count($vuelos_disponibles); $w++) {
@@ -437,15 +424,33 @@ if (isset($_POST['paso2'])) {
                     $filas .= '<td class="bgTable-data" align="center">' . $vuelos_disponibles[$w]["Escala"] . '</td>' . "\n";
 
                     for ($p = 0; $p < count($clases_vector); $p++) {
-                        $filas .= '<td><table><tr><td width="70" class="subtitleTableSFlexi td_clase_B" align="center" style="background-color: #DEC8BF; color: #5A3F2F">' . "\n";
+                        $clase = $clases_vector[$p]["clase"];
+
+                        if ($clase == 'A' || $clase == 'B' || $clase == 'D' || $clase == 'E' || $clase == 'O' || $clase == 'P' || $clase == 'R' || $clase == 'Z') {
+                            $tipo = "simple";
+                        } else if ($clase == 'H' || $clase == 'S' || $clase == 'T') {
+                            $tipo = "promo";
+                        } else if ($clase == 'J' || $clase == 'M' || $clase == 'N' || $clase == 'Q' || $clase == 'V' || $clase == 'W' || $clase == 'X') {
+                            $tipo = "extra";
+                        } else {
+                            $tipo = "full";
+                        }
+                        $filas .= '<td><table><tr><td width="80" class="subtitleTableSFlexi td_clase_B" align="center" style="background-color: #DEC8BF; color: #5A3F2F">' . "\n";
                         $filas .= '<label><input type="radio" id="vuelo_ida" name="vuelo_ida" value="' . $clases_vector[$p]["tarifa"] . '#' . $vuelos_disponibles[$w]["Vuelo"] . '#' . $vuelos_disponibles[$w]["Salida"] . '#' . $vuelos_disponibles[$w]["Llegada"] . '#' . $clases_vector[$p]["clase"] . '#' . $origen . '#' . $destino . '" onclick="EnviaImporteD()"><br/>Clase ' . $clases_vector[$p]["clase"] . "\n";
                         $filas .= '<br><font color="#004000">$' . number_format($clases_vector[$p]["tarifa"], 2) . '</font>' . "\n";
+                        $filas .= '<br><i style="font-size:9px;color: #883320;cursor: pointer;"><a data-toggle="modal" data-target="#modal-condiciones-' . $tipo . '-ida">Condiciones</a></i>' . "\n";
                         $filas .= '</label></td></tr></table></td>' . "\n";
                         // $filas.='<a title="Click para ver las condiciones" class="clase" onClick="VerCondicion(\''.trim(strtoupper($clase)).'\')">Condición</a>'."\n";       
                     }
                     $filas .= '</tr>' . "\n";
                 }
             }
+
+            #PROMO(H, S y T) 
+            #SIMPLE(A, B, D, E, O, P, R y Z)
+            #EXTRA(J, M, N, Q, V, W y X)
+            #FULL(K, L y Y)
+
             $tabla_disponibilidades .= $filas . "\n";
             $tabla_disponibilidades .= '</table>' . "\n";
         } else {
@@ -533,7 +538,7 @@ if (isset($_POST['paso2'])) {
                 $tabla_disponibilidades1 .= '<td width="50" class="subtitleTable">Llegada</td>' . "\n";
                 $tabla_disponibilidades1 .= '<td width="50" class="subtitleTable">Duracion</td>' . "\n";
                 $tabla_disponibilidades1 .= '<td width="50" class="subtitleTable">Escala</td>' . "\n";
-                $tabla_disponibilidades1 .= '<td class="subtitleTable" colspan="20"><b>Tarifa</b></td>' . "\n";
+                $tabla_disponibilidades1 .= '<td class="subtitleTable" colspan="9"><b>Tarifa</b></td>' . "\n";
                 $tabla_disponibilidades1 .= '</tr>' . "\n";
                 $filas1 .= '';
 
@@ -559,9 +564,21 @@ if (isset($_POST['paso2'])) {
                         $filas1 .= '<td class="bgTable-data" align="center">' . $vuelos_disponibles[$w]["Escala"] . '</td>' . "\n";
 
                         for ($p = 0; $p < count($clases_vector); $p++) {
+                            $clase = $clases_vector[$p]["clase"];
+
+                            if ($clase == 'A' || $clase == 'B' || $clase == 'D' || $clase == 'E' || $clase == 'O' || $clase == 'P' || $clase == 'R' || $clase == 'Z') {
+                                $tipo = "simple";
+                            } else if ($clase == 'H' || $clase == 'S' || $clase == 'T') {
+                                $tipo = "promo";
+                            } else if ($clase == 'J' || $clase == 'M' || $clase == 'N' || $clase == 'Q' || $clase == 'V' || $clase == 'W' || $clase == 'X') {
+                                $tipo = "extra";
+                            } else {
+                                $tipo = "full";
+                            }
                             $filas1 .= '<td><table><tr><td width="70" class="subtitleTableSFlexi td_clase_B" align="center" style="background-color: #DEC8BF; color: #5A3F2F">' . "\n";
                             $filas1 .= '<label><input type="radio" id="vuelo_vuelta" name="vuelo_vuelta" value="' . $clases_vector[$p]["tarifa"] . '#' . $vuelos_disponibles[$w]["Vuelo"] . '#' . $vuelos_disponibles[$w]["Salida"] . '#' . $vuelos_disponibles[$w]["Llegada"] . '#' . $clases_vector[$p]["clase"] . '#' . $origen . '#' . $destino . '" onclick="EnviaImporteR()"><br/>Clase ' . $clases_vector[$p]["clase"] . "\n";
                             $filas1 .= '<br><font color="#004000">$' . number_format($clases_vector[$p]["tarifa"], 2) . '</font><br>' . "\n";
+                            $filas1 .= '<br><i style="font-size:9px;color: #883320;cursor: pointer;"><a data-toggle="modal" data-target="#modal-condiciones-' . $tipo . '-vuelta">Condiciones</a></i>' . "\n";
                             $filas1 .= '</label></td></tr></table></td>' . "\n";
                             // $tabla_disponibilidades1.='<a title="Click para ver las condiciones" class="clase" onClick="VerCondicion(\''.trim(strtoupper($clase)).'\')">Condición</a>'."\n";       
                         }
@@ -727,7 +744,7 @@ if (isset($_POST['paso3'])) {
         $clase_ida = $vuelo_ida[4];
         $origen_ida = $vuelo_ida[5];
         $destino_ida = $vuelo_ida[6];
-        
+
         if ($tipo_viaje_3 == 1) {
 
             $tarifa_vuelta = 0;
@@ -837,8 +854,7 @@ if (isset($_POST['paso3'])) {
                             <td align="left" class="bgTable_data">23 KG</td>
                          </tr>
                  </table>';
-        }
-        elseif ($tipo_viaje_3 == 0) {
+        } elseif ($tipo_viaje_3 == 0) {
             $res_price = $KIU->AirPriceRQ(array(
                 'City' => 'LIM'
                 , 'Country' => 'PE'
@@ -997,8 +1013,7 @@ if (isset($_POST['paso3'])) {
                         <td align="center" class="bgTable_data">' . number_format($tuua_adulto, 2, '.', ',') . '</td>
                         <td align="center" class="bgTable_data">' . number_format($subtotal_tabla_adl, 2, '.', ',') . '</td>
                     </tr>';
-        } 
-        else {
+        } else {
 
             $cant_adult = $detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][0]['PassengerTypeQuantity']['@attributes']['Quantity'];
             $tarifa_adulto = $detalle['PTC_FareBreakdowns']['PTC_FareBreakdown'][0]['PassengerFare']['BaseFare']['@attributes']['Amount'];
@@ -1892,8 +1907,7 @@ if (isset($_POST['paso5'])) {
                    <td align="left" class="bgTable_data">23 KG</td>
                 </tr>
         </table>';
-        } 
-        elseif ($tipo_viaje_5 == 0) {
+        } elseif ($tipo_viaje_5 == 0) {
 
             $table_cabecera_5 .= '<table width="900" border="0" cellpadding="0" cellspacing="0">
                 <tr>
@@ -1954,8 +1968,7 @@ if (isset($_POST['paso5'])) {
                         <td align="center" class="bgTable_data">' . number_format($tuua_adulto, 2, '.', ',') . '</td>
                         <td align="center" class="bgTable_data">' . number_format($subtotal_tabla_adl, 2, '.', ',') . '</td>
                     </tr>';
-        } 
-        else {
+        } else {
             if ($adultos_5 > 0) {
 
                 $cant_adult = $adultos_5;
@@ -2043,7 +2056,7 @@ if (isset($_POST['paso5'])) {
                 'Telefono_Anex' => $telf_ane,
                 'Celular' => $celular,
                 'Tipo_Pasajero' => $tipo_pasajero);
-                // 'Fecha_Nacimiento'=>$fecNac
+            // 'Fecha_Nacimiento'=>$fecNac
             $p++;
 
             $nombres = utf8_decode(caracter_especial2(addslashes(trim($_POST['nombre_i_' . $i]))));
@@ -2227,7 +2240,7 @@ if (isset($_POST['paso5'])) {
                     array('DepartureDateTime' => "$fecha_hora_salida_ida_5", 'ArrivalDateTime' => "$fecha_hora_llegada_ida_5", 'FlightNumber' => "$numero_vuelo_ida_5", 'ResBookDesigCode' => "$clase_ida_5", 'DepartureAirport' => "$origen_ida_5", 'ArrivalAirport' => "$destino_ida_5", 'MarketingAirline' => '2I')
                     , array('DepartureDateTime' => "$fecha_hora_salida_vuelta_5", 'ArrivalDateTime' => "$fecha_hora_llegada_vuelta_5", 'FlightNumber' => "$numero_vuelo_vuelta_5", 'ResBookDesigCode' => "$clase_vuelta_5", 'DepartureAirport' => "$origen_vuelta_5", 'ArrivalAirport' => "$destino_vuelta_5", 'MarketingAirline' => '2I')
                 )
-	            // , 'Passengers' => $arrayPersonas
+                // , 'Passengers' => $arrayPersonas
                 , 'Passengers' => $arrayPersonasKiu
                 , 'Remark' => 'STARPERU'), $err);
             if ($err['ErrorCode'] != 0) {
@@ -2250,17 +2263,17 @@ if (isset($_POST['paso5'])) {
             $res = $KIU->TravelItineraryReadRQ(array(
                 'IdReserva' => $codigo_reserva
                     ), $err);
-           
+
             // echo "<pre>";
             // var_dump($res);die;
             // echo "</pre>";
-            
-            
+
+
             if ($err['ErrorCode'] != 0)
                 echo $err['ErrorMsg'];
-                // echo "<pre>";
-                // print_r($res);
-                // echo "</pre>";
+            // echo "<pre>";
+            // print_r($res);
+            // echo "</pre>";
             //$tarifa_sin_imp = $res[1]['TravelItinerary']['ItineraryInfo']['ItineraryPricing']['Cost']['@attributes']['AmountBeforeTax'];
             $tarifa_con_imp = $res['TravelItinerary']['ItineraryInfo']['ItineraryPricing']['Cost']['@attributes']['AmountAfterTax'];
 
@@ -2354,8 +2367,7 @@ if (isset($_POST['paso5'])) {
                     $_SESSION['pasajeros'] = $arrayPersonas;
                 }
             }
-        }
-        else {
+        } else {
             $res = $KIU->AirBookRQ(array(
                 'City' => 'LIM'
                 , 'Country' => 'PE'
@@ -2389,7 +2401,7 @@ if (isset($_POST['paso5'])) {
             $total_reserva = $flete + $tuua_reserva + $igv_reserva; //SUMA TOTAL NO IMPORTA LA EXONERACION
             $codigo_reserva = $res['BookingReferenceID']['@attributes']['ID'];
 
-            /*                 * *********************************** DESCUENTO OSCE ********************************** */
+            /*             * *********************************** DESCUENTO OSCE ********************************** */
 
             $res = $KIU->TravelItineraryReadRQ(array(
                 'IdReserva' => $codigo_reserva
@@ -2402,7 +2414,7 @@ if (isset($_POST['paso5'])) {
             $total_pagar_tabla_5 = $subtotal_tabla_adl + $subtotal_tabla_ch + $subtotal_tabla_i;
             $total_pagar_5 = $tarifa_con_imp;
 
-            /*                 * ************************************************************************************* */
+            /*             * ************************************************************************************* */
 
             if ($codigo_reserva != '') {
                 $registro = $obj_reserva->GuardarReservaCabecera($codigo_reserva, $arrayPersonas[0]['Nombres'], $arrayPersonas[0]['Apellidos'], $arrayPersonas[0]['Email'], $arrayPersonas[0]['Tipo_Documento'], $arrayPersonas[0]['Numero_Documento'], $arrayPersonas[0]['Telefono_Oficina'], $arrayPersonas[0]['Telefono_Anex'], $arrayPersonas[0]['Celular'], $arrayPersonas[0]['Nextel'], $arrayPersonas[0]['RPM'], $arrayPersonas[0]['RPC'], $arrayPersonas[0]['Pasajero_RUC'], $fecha_registro, $fecha_registro, $adultos_5, $menores_5, $infantes_5, $origen_ida_5, $destino_ida_5, $numero_vuelo_ida_5, $clase_ida_5, $fecha_salida_ida_5, $hora_salida_ida_5, $numero_vuelo_vuelta_5, $clase_vuelta_5, $fecha_salida_vuelta_5, $hora_salida_vuelta_5, $pais, $ciudad, $ip, $flete, $tuua_reserva, $igv_reserva, $total_reserva, $_SESSION['s_idusuario'], $_SESSION['s_entidad'], $tipo_vuelo_letras);
@@ -2486,7 +2498,7 @@ if (isset($_POST['paso5'])) {
         if (isset($_SESSION['token_seguridad_visa'])) {
             unset($_SESSION['token_seguridad_visa']);
         }
-            
+
         include '../../cn/METODOS_PAGO/Connection_visa.php';
         $visa = new Connection_visa();
 
@@ -2503,7 +2515,6 @@ if (isset($_POST['paso5'])) {
         $forma_pago = 'TC';
 
         // }
-        
     }
 
     if (isset($_POST['confirmacion'])) {
@@ -2724,8 +2735,7 @@ if (isset($_POST['paso5'])) {
                     $para = 'carlos.gutierrez@starperu.com';
                     mail($para, $asunto, $mensaje, $cabeceras);
                 }
-            } 
-            else {
+            } else {
                 $respuesta_kiu = $KIU->AirDemandTicketRQ(array(
                     'PaymentType' => "37"
                     , 'MiscellaneousCode' => "SR"
@@ -2916,3 +2926,311 @@ if (isset($_POST['paso5'])) {
         }
     }
 }
+?>
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!--PROMO(H, S y T) - IDA-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal-condiciones-promo-ida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div  class="container"><br>
+                            <h5>PROMO(H, S y T)</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>IDA</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                            • Máximo de estadía 180 días.<br>
+                                            • Tarifa combinable con todas las clases.<br>
+                                            • Niños (2-11 años) pagan el 100% de la tarifa. Infantes (0-2 años) pagan el 100% de la tarifa.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                            • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--SIMPLE(A, B, D, E, O, P, R y Z) - IDA-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal-condiciones-simple-ida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div class="container"><br> 
+                            <h5>SIMPLE(A, B, D, E, O, P, R y Z)</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>IDA</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br> 
+                                            • Máximo de estadía 180 días.<br> 
+                                            • Tarifa combinable con todas las clases.<br> 
+                                            • Niños (2-11 años) pagan el 100% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa. <br> 
+                                            • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br> 
+                                            • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br> 
+                                            • Reembolsos permitidos sólo para futura transportación con cargo de $23.60. 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--EXTRA(J, M, N, Q, V, W y X) - IDA-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal-condiciones-extra-ida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div class="container"><br> 
+                            <h5>EXTRA(J, M, N, Q, V, W y X)</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>IDA</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                            • Máximo de estadía 180 días.<br>
+                                            • Tarifa combinable con todas las clases.<br>
+                                            • Niños (2-11 años) pagan el 75% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                            • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--FULL(K, L y Y) - IDA-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal-condiciones-full-ida" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div class="container"><br>
+                            <h5>FULL(K, L y Y)</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>IDA</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            • Totalmente gratis: Dos (2) piezas de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                            • Máximo de estadía 180 días.<br>
+                                            • Tarifa combinable con todas las clases.<br>
+                                            • Niños (2-11 años) pagan el 50% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre sin cargo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                            • Reembolsos permitidos sin cargo
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--PROMO(H, S y T) - VUELTA-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal-condiciones-promo-vuelta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div  class="container"><br>
+                            <h5>PROMO(H, S y T)</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>VUELTA</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                            • Máximo de estadía 180 días.<br>
+                                            • Tarifa combinable con todas las clases.<br>
+                                            • Niños (2-11 años) pagan el 100% de la tarifa. Infantes (0-2 años) pagan el 100% de la tarifa.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                            • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.<br>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--SIMPLE(A, B, D, E, O, P, R y Z) - VUELTA-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal-condiciones-simple-vuelta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div class="container"><br> 
+                            <h5>SIMPLE(A, B, D, E, O, P, R y Z)</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>VUELTA</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                            • Máximo de estadía 180 días.<br>
+                                            • Tarifa combinable con todas las clases.<br>
+                                            • Niños (2-11 años) pagan el 100% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                            • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.<br>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--EXTRA(J, M, N, Q, V, W y X) - VUELTA-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal-condiciones-extra-vuelta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div class="container"><br> 
+                            <h5>EXTRA(J, M, N, Q, V, W y X)</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>VUELTA</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            • Totalmente gratis: Una (1) pieza de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                            • Máximo de estadía 180 días.<br>
+                                            • Tarifa combinable con todas las clases.<br>
+                                            • Niños (2-11 años) pagan el 75% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Sin cargo antes de las 24hrs.a la salida del vuelo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre: Dentro de las 24hrs.a la salida del vuelo, cargo de $17.70 por transacción . Corresponde diferencia tarifaria de presentarse el caso.<br>
+                                            • Reembolsos permitidos sólo para futura transportación con cargo de $23.60.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--FULL(K, L y Y) - VUELTA-->
+    <div class="col-lg-4 col-md-12 mb-4">
+        <div class="modal fade" id="modal-condiciones-full-vuelta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body mb-0 p-0">
+                        <div class="container"><br>
+                            <h5>FULL(K, L y Y)</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><strong>VUELTA</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            • Totalmente gratis: Dos (2) piezas de equipaje chequeado de 23Kgs y una (1) de mano de 8Kgs.<br>
+                                            • Máximo de estadía 180 días.<br>
+                                            • Tarifa combinable con todas las clases.<br>
+                                            • Niños (2-11 años) pagan el 50% de la tarifa. Infantes (0-2 años) pagan el 10% de la tarifa.<br>
+                                            • Cambio de vuelo, fecha, ruta o nombre sin cargo. Corresponde diferencia tarifaria de darse el caso.<br>
+                                            • Reembolsos permitidos sin cargo.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
