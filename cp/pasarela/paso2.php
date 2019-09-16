@@ -261,7 +261,7 @@ element.style {
 </head>
     <body class="waiting">
 
-        <table width="1100" border="0" align="center" cellpadding="0" cellspacing="0" style="background-color: #FFFFFF">
+        <table width="900" border="0" align="center" cellpadding="0" cellspacing="0" style="background-color: #FFFFFF">
               <tr>
                    <td>&nbsp;</td>
               </tr>
@@ -304,10 +304,10 @@ element.style {
                             <input name="infantes" type="hidden" id="infantes" value="<?php echo $_SESSION['infantes'];?>" /> 
                         </form>
                         <form id="form1" name="form1" method="post" action="paso3.php" autocomplete="off" onSubmit="return EnviaValores();">
-                            <table width="1100" border="0" cellspacing="0" cellpadding="0">
+                            <table width="900" border="0" cellspacing="0" cellpadding="0">
                                <tr>
                                   <td>
-                                         <table width="1100">
+                                         <table width="900">
                                               <tr>
                                                     <td colspan="5"  height="1"  style="background: #323131;"></td>
                                               </tr> 
@@ -357,12 +357,12 @@ element.style {
                                   </td>
                                </tr>
                             </table>
-                            <table width="1100" border="0" cellspacing="0" cellpadding="0">
+                            <table width="900" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                   <td height="30"></td>
                                </tr>
                             </table>
-                            <table width="1100" border="0" cellspacing="0" cellpadding="0">
+                            <table width="1100" border="0" cellspacing="0" cellpadding="0" align="center">
                                 <tr>
                                   <td>
                                         <table border="0" cellspacing="0" cellpadding="0" class="contenido">
@@ -413,16 +413,16 @@ element.style {
                                   </td>
                                </tr>
                             </table>
-                            <table width="1100" border="0" cellspacing="0" cellpadding="0">
+                            <table width="900" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                   <td height="30"></td>
                                </tr>
                             </table>
                             <?php   if($_SESSION['tipo_viaje']==1){ ?>
-                            <table align="center" width="1100" border="0" cellspacing="0" cellpadding="0">
+                            <table width="1100" border="0" cellspacing="0" cellpadding="0" align="center">
                                 <tr>
                                     <td>  
-                                            <table border="0" cellspacing="0" cellpadding="0" class="contenido">
+                                            <table  border="0" cellspacing="0" cellpadding="0" class="contenido">
                                                 <tr>
                                                     <?php if($_SESSION['dias_diferencia']>0){ ?>
                                                     <td>
@@ -461,15 +461,15 @@ element.style {
                                 </tr>
                             </table>
                             <?php } ?>
-                            <table width="1100" border="0" cellspacing="0" cellpadding="0">
+                            <table width="900" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                    <td height="30"></td>
                                 </tr>
                             </table>
-                            <table width="1100" border="0" cellspacing="0" cellpadding="0">
+                            <table width="900" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                  <td>
-                                     <table width="1100" border="0" cellspacing="0" cellpadding="0">
+                                     <table width="900" border="0" cellspacing="0" cellpadding="0">
                                           <tr>
                                                 <td width="420">
                                                         <table width="420" border="0" cellpadding="0" cellspacing="0" class="contenido" style="border: 1px solid #DCE0EE; background-color: #F0F0F0">
@@ -502,18 +502,20 @@ element.style {
                                  </td>
                             </tr>
                             </table>
-                            <table width="1100" border="0" cellspacing="0" cellpadding="0">
+                            <table width="900" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                      <td height="30"></td>
                                 </tr>
                             </table>
-                            <table width="1100" border="0" cellspacing="0" cellpadding="0">
+                            <table width="900" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                  <td align="right">
-                                        <table width="100%" border="0" cellpadding="0" cellspacing="0"  >
+                                        <table width="900" border="0" cellpadding="0" cellspacing="0"  >
                                             <tr>
+                                                <td align="left">
+                                                    <button type="button" class="btn btn-outline-danger btn-rounded btn-sm ml-4" data-toggle="modal" data-target="#miModal" style="background: -webkit-linear-gradient(#f01515, darkred) !important;color: white;">Condiciones Tarifarias</button> 
+                                                </td>
                                                 <td align="right">
-                                                      <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#miModal" style="background: -webkit-linear-gradient(#f01515, darkred) !important;">Condiciones Tarifarias</button>
                                                       <input name="btnAceptar" id="btnAceptar" value="Continuar" class="btn-red" type="submit"> 
                                                 </td>
                                             </tr>
@@ -750,7 +752,7 @@ element.style {
                     </div>
                 </div>
                  <div class="modal-footer">
-                     <button type="button" class="btn btn-danger" data-dismiss="modal" style="background: -webkit-linear-gradient(#f01515, darkred) !important;">Cerrar</button>
+                     <button type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal" style="background: -webkit-linear-gradient(#f01515, darkred) !important;color:white;">Cerrar</button>
                  </div>          
              </div>           
          </div>           

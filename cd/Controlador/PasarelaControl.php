@@ -386,15 +386,15 @@ if (isset($_POST['paso2'])) {
             // var_dump($clases_tarifas_disponibles["Clases"]);
             // echo "</pre>";die;
             $tabla_disponibilidades = '<table class="tabla_vuelos_de_ida">' . "\n";
-            $tabla_disponibilidades .= '<tr>' . "\n";
-            $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Vuelo</td>' . "\n";
+            $tabla_disponibilidades .= '<tr><td width="50" class="subtitleTable">Vuelo</td>' . "\n";
             $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Salida</td>' . "\n";
             $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Llegada</td>' . "\n";
             $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Duracion</td>' . "\n";
             $tabla_disponibilidades .= '<td width="50" class="subtitleTable">Escala</td>' . "\n";
             $tabla_disponibilidades .= '<td class="subtitleTable" colspan="9"><b>Tarifa</b></td>' . "\n";
             $tabla_disponibilidades .= '</tr>' . "\n";
-            $filas = '';
+            $filas .= '';
+                
             for ($w = 0; $w < count($vuelos_disponibles); $w++) {
                 $disponibles = array_reverse(array_intersect($vuelos_disponibles[$w]["Clases"], $clases_tarifas_disponibles["Clases"]));
                 // echo '<pre>';
@@ -422,7 +422,7 @@ if (isset($_POST['paso2'])) {
                     $filas .= '<td class="bgTable-data" align="center">' . substr($vuelos_disponibles[$w]["Llegada"], 11, 17) . '</td>' . "\n";
                     $filas .= '<td class="bgTable-data" align="center">' . $vuelos_disponibles[$w]["Duracion"] . '</td>' . "\n";
                     $filas .= '<td class="bgTable-data" align="center">' . $vuelos_disponibles[$w]["Escala"] . '</td>' . "\n";
-
+                        
                     for ($p = 0; $p < count($clases_vector); $p++) {
                         $clase = $clases_vector[$p]["clase"];
 
@@ -435,13 +435,14 @@ if (isset($_POST['paso2'])) {
                         } else {
                             $tipo = "full";
                         }
-                        $filas .= '<td><table><tr><td width="80" class="subtitleTableSFlexi td_clase_B" align="center" style="background-color: #DEC8BF; color: #5A3F2F">' . "\n";
+                        $filas .= '<td><table><tr><td width="70" class="subtitleTableSFlexi td_clase_B" align="center" style="background-color: #DEC8BF; color: #5A3F2F">' . "\n";
                         $filas .= '<label><input type="radio" id="vuelo_ida" name="vuelo_ida" value="' . $clases_vector[$p]["tarifa"] . '#' . $vuelos_disponibles[$w]["Vuelo"] . '#' . $vuelos_disponibles[$w]["Salida"] . '#' . $vuelos_disponibles[$w]["Llegada"] . '#' . $clases_vector[$p]["clase"] . '#' . $origen . '#' . $destino . '" onclick="EnviaImporteD()"><br/>Clase ' . $clases_vector[$p]["clase"] . "\n";
                         $filas .= '<br><font color="#004000">$' . number_format($clases_vector[$p]["tarifa"], 2) . '</font>' . "\n";
-                        $filas .= '<br><i style="font-size:9px;color: #883320;cursor: pointer;"><a data-toggle="modal" data-target="#modal-condiciones-' . $tipo . '-ida">Condiciones</a></i>' . "\n";
+                        $filas .= '<br><i style="font-size:9px;color: #883320;cursor: pointer;"><strong><a data-toggle="modal" data-target="#modal-condiciones-' . $tipo . '-ida">Condiciones</a></strong></i>' . "\n";
                         $filas .= '</label></td></tr></table></td>' . "\n";
                         // $filas.='<a title="Click para ver las condiciones" class="clase" onClick="VerCondicion(\''.trim(strtoupper($clase)).'\')">Condición</a>'."\n";       
-                    }
+                  
+                        }
                     $filas .= '</tr>' . "\n";
                 }
             }
@@ -460,7 +461,7 @@ if (isset($_POST['paso2'])) {
             $tabla_disponibilidades .= '</tr>' . "\n";
             $tabla_disponibilidades .= '</table>' . "\n";
         }
-
+        
         if ($tipo_viaje == 1) {
 
             $res1 = $KIU->AirAvailRQ(array(
@@ -578,7 +579,7 @@ if (isset($_POST['paso2'])) {
                             $filas1 .= '<td><table><tr><td width="70" class="subtitleTableSFlexi td_clase_B" align="center" style="background-color: #DEC8BF; color: #5A3F2F">' . "\n";
                             $filas1 .= '<label><input type="radio" id="vuelo_vuelta" name="vuelo_vuelta" value="' . $clases_vector[$p]["tarifa"] . '#' . $vuelos_disponibles[$w]["Vuelo"] . '#' . $vuelos_disponibles[$w]["Salida"] . '#' . $vuelos_disponibles[$w]["Llegada"] . '#' . $clases_vector[$p]["clase"] . '#' . $origen . '#' . $destino . '" onclick="EnviaImporteR()"><br/>Clase ' . $clases_vector[$p]["clase"] . "\n";
                             $filas1 .= '<br><font color="#004000">$' . number_format($clases_vector[$p]["tarifa"], 2) . '</font><br>' . "\n";
-                            $filas1 .= '<br><i style="font-size:9px;color: #883320;cursor: pointer;"><a data-toggle="modal" data-target="#modal-condiciones-' . $tipo . '-vuelta">Condiciones</a></i>' . "\n";
+                            $filas1 .= '<br><i style="font-size:9px;color: #883320;cursor: pointer;"><strong><a data-toggle="modal" data-target="#modal-condiciones-' . $tipo . '-vuelta">Condiciones</a></strong></i>' . "\n";
                             $filas1 .= '</label></td></tr></table></td>' . "\n";
                             // $tabla_disponibilidades1.='<a title="Click para ver las condiciones" class="clase" onClick="VerCondicion(\''.trim(strtoupper($clase)).'\')">Condición</a>'."\n";       
                         }
@@ -2935,6 +2936,12 @@ if (isset($_POST['paso5'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        #btnCerrar{
+                background: -webkit-linear-gradient(#f01515, darkred) !important;
+                color: white;
+        }
+    </style>
 </head>
 <body>
     <!--PROMO(H, S y T) - IDA-->
@@ -2968,7 +2975,7 @@ if (isset($_POST['paso5'])) {
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                        <button align="center" type="button" id="btnCerrar" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -3005,7 +3012,7 @@ if (isset($_POST['paso5'])) {
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                        <button align="center" type="button"  id="btnCerrar" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -3042,7 +3049,7 @@ if (isset($_POST['paso5'])) {
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                        <button align="center" type="button"  id="btnCerrar" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -3078,7 +3085,7 @@ if (isset($_POST['paso5'])) {
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                        <button align="center" type="button"  id="btnCerrar" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -3117,7 +3124,7 @@ if (isset($_POST['paso5'])) {
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                        <button align="center" type="button"  id="btnCerrar" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -3154,7 +3161,7 @@ if (isset($_POST['paso5'])) {
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                        <button align="center" type="button"  id="btnCerrar" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -3191,7 +3198,7 @@ if (isset($_POST['paso5'])) {
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                        <button align="center" type="button"  id="btnCerrar" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -3227,7 +3234,7 @@ if (isset($_POST['paso5'])) {
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button align="center" type="button" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
+                        <button align="center" type="button"  id="btnCerrar" class="btn btn-outline-danger btn-rounded btn-md ml-4" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
