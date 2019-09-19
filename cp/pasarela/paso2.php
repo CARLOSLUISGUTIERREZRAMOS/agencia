@@ -263,9 +263,6 @@ element.style {
 
         <table width="900" border="0" align="center" cellpadding="0" cellspacing="0" style="background-color: #FFFFFF">
               <tr>
-                   <td>&nbsp;</td>
-              </tr>
-              <tr>
                     <td height="50" align="center">
                         <table id="menu_vuelo" cellpadding="0" cellspacing="0" border="0">
                             <tr>

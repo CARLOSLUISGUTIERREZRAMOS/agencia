@@ -303,11 +303,11 @@ if($_REQUEST['forma_pago']==1){
             <td width="245"><?php echo $fP[0]; ?></td>
             <td width="8"></td>
             <td width="206" align="right" class="lab_dmov"><strong>Número de Tarjeta : </strong></td>
-            <td width="232"><?php echo $fP[1]; ?></td>
+            <td width="232"><?php echo ($fP[1])?$fP[1]:'-'; ?></td>
         </tr>
         <tr>
             <td align="right" class="lab_dmov"><strong>Número de compra :</strong></td>
-            <td><?php echo $fP[2]; ?></td>
+            <td><?php echo ($fP[2])?$fP[2]:'-'; ?></td>
             <td></td>
             <td align="right" class="lab_dmov"><strong>Fecha de transacción :</strong></td>
             <td><?php echo substr($fP[3], 0, 10); ?></td>
@@ -327,13 +327,25 @@ if($_REQUEST['forma_pago']==1){
         <tr>
             <td align="right" class="lab_dmov"><strong>Número de cuotas :</strong></td>
             <td><?php echo ($fP[5])?$fP[5]:'Sin cuotas';?></td>
-            <?php if($fP[6]==1){ ?>
+            <td></td>
+            <td align="right" class="lab_dmov"><strong>Estado :</strong></td>
+            <?php if($fP[6]==1 && $fP[8]=="Authorized"){ ?>
+            <td style="color:green;"><?php echo $fP[8]; ?></td>
+            <?php } else if($fP[6]==0 && $fP[8]=="Authorized"){?>
+            <td style="color:red;"><del><?php echo $fP[8]; ?></del></td>
+            <?php }else{?>
+            <td style="color:red;"><?php echo $fP[8]; ?></td>
+            <?php }?>
+        </tr>
+        <tr>
+           <?php if($fP[6]==1){ ?>
             <td></td>
             <?php } else{ ?>
             <td></td>
             <td><h5 style="color: red;"><strong>Boleto Anulado</strong></h5></td>
-            <?php }?>
+            <?php }?> 
         </tr>
+        <tr>-----------------------------------------------------------------------------------------------------------------------</tr>
     </table>
    <?php
     }
