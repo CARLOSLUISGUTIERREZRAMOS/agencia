@@ -64,7 +64,7 @@ require_once("../../config.php");
                 {display: "Cod. Reserva", name: "reser_cod_kiu", width: 80, align: "center", sortable: true},
                 {display: "RUC", name: "ruc_pasajero", width: 80, align: 'center', sortable: true},
                 {display: "Tipo Oper.", name: "ope_tipo", width: 60, align: 'center', sortable: true},
-                {display: "Fec. Hora Oper.", name: "fecha_ope", width: 120, align: 'center', sortable: true},
+                {display: "Hora Registro", name: "hora_registro", width: 120, align: 'center', sortable: true},
                 {display: "Boleto", name: "boleto", width: 100, align: 'center', sortable: true},
                 {display: "Forma de Pago", name: "tarjeta", width: 90, align: 'center', sortable: true},
                 {display: "Ap. Paterno", name: "apepa_pas", width: 100, align: 'center', sortable: true},

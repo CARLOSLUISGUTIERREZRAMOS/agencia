@@ -62,7 +62,17 @@ if($_REQUEST['movimientos']==1){
                     $img_ticket="ticket_anulado.png";
                     $metodo_click=" onClick='alert(\"Su boleto ha sido anulado\");return false;' ";
                 }
-                
+                if($movimiento[9]=='visa'){
+                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_vi.png' style='height:30px;'>";
+                    }else if($movimiento[9]=='amex'){
+                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_ax.png' style='height:30px;'>";
+                    }else if($movimiento[9]=='dinersclub'){
+                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_dc.jpg' style='height:30px;'>";
+                    }else if($movimiento[9]=='mastercard'){
+                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_mc.png' style='height:30px;'>";
+                    }else{
+                        $tarjeta_imagen="-";
+                    }
                 if($movimiento[8]->getTicket()!=''){
                     $icono_ticket='<a '.$metodo_click.' target="_blank"  href="../pasarela/imprimir_ticket.php?ticket='.$movimiento[8]->getTicket().'" ><img width="16px;" src="../images/'.$img_ticket.'"/></a>';
                     $comision_tarifa=number_format($movimiento[8]->getComisionTarifa(),2);
@@ -73,23 +83,12 @@ if($_REQUEST['movimientos']==1){
                     $tuua=$movimiento[8]->getHW();
                     $total_pagar_descuento=number_format(($tarifa-$comision_tarifa)+($igv-$igv*$porcentaje)+($tuua),2);
                     $comision=number_format($comision_tarifa,2);
-                    $tarjeta=$movimiento[9];
                     if($movimiento[8]->getEstadoRegistro()==1){
                         $total_comision=number_format($total_comision+$comision/2,2);
                         $total_sin_descuento=$total_sin_descuento+$total_pagar/2;
                         $total=$total+$total_pagar_descuento/2;
                     }
-                    if($tarjeta=='visa'){
-                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_vi.png' style='height:30px;'>";
-                    }else if($tarjeta=='amex'){
-                        $tarjeta_imagen= "<img src='../../scp/images/met_pago/ico_ax.png' style='height:30px;'>";
-                    }else if($tarjeta=='dinersclub'){
-                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_dc.jpg' style='height:30px;'>";
-                    }else if($tarjeta=='mastercard'){
-                        $tarjeta_imagen= "<img src='../../cp/images/met_pago/ico_mc.png' style='height:30px;'>";
-                    }else{
-                        $tarjeta_imagen=$movimiento[9];
-                    }
+                    
                 }
                 else{
                     $icono_ticket='';
@@ -133,7 +132,7 @@ if($_REQUEST['movimientos']==1){
                                 $movimiento[3],
                                 $movimiento[7]->getFechaRegistro(),
                                 ($movimiento[8]->getEstadoRegistro()==1)?$movimiento[8]->getTicket():'<div style="text-align: center; width: 100px; color:red;"><del>'.$movimiento[8]->getTicket().'</del></div>',
-                                '<a href="javascript:void(0);" onClick="Forma_pago(\''.$movimiento[7]->getRegistro().'\');">'.$tarjeta_imagen.'</a>',
+                                ($movimiento[9]!==NULL)?'<a href="javascript:void(0);" onClick="Forma_pago(\''.$movimiento[7]->getRegistro().'\');">'.$tarjeta_imagen.'</a>':"-",
                                 $movimiento[8]->getApellidos(),
                                 trim($movimiento[8]->getApellidos2()),
                                 $movimiento[8]->getNombres(),
@@ -316,7 +315,7 @@ if($_REQUEST['forma_pago']==1){
             <td align="right" class="lab_dmov"><strong>Hora de transacción :</strong></td>
             <td><?php echo date('h:i:s A', strtotime(substr($fP[3], 11, 20))); ?></td>
             <td></td>
-            <?php if($fP[6]==1 && $fP[1]!==""){ ?>
+            <?php if($fP[6]==1 && $fP[2]!==NULL){ ?>
             <td align="right" class="lab_dmov"><strong>Monto :</strong></td>
             <td><?php echo $fP[4]; ?></td>
             <?php }  else{?>
