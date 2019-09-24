@@ -31,7 +31,7 @@
         } 
         else if (isset($data_visa->dataMap)) {
             $data['brand'] = $data_visa->dataMap->BRAND;
-            $data['eci_code'] = $data_visa->dataMap->ECI;
+            $data['eci_code'] = !isset($data_visa->dataMap->ECI) ? '' : $data_visa->dataMap->ECI;
             $data['action_code'] = $data_visa->dataMap->ACTION_CODE;
             $data['card'] = $data_visa->dataMap->CARD;
             $data['merchant'] = !isset($data_visa->dataMap->MERCHANT) ? NULL : $data_visa->dataMap->MERCHANT;
