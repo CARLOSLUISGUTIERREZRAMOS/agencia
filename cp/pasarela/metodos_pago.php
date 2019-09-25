@@ -61,11 +61,17 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
         $obj_visa->InsertarRegistroVisa($query_sql);
 
         if (isset($DataJsonVisa->errorCode) && $DataJsonVisa->errorCode === 400) {
+            $res = ArmarDataInsertarReservaNuevo($obj_reserva->ObtenerDataReserva($id_registro));
+            $query_sql_reserva = $obj_db_driver->insert('reserva', $res);
+            $id=$obj_reserva->GuardarReservaCabeceraNueva($query_sql_reserva);
+            $obj_reserva->UpdateReservaDetalleId($id_registro,$id);
+            $obj_visa->UpdateVisaId($id_registro,$id);
+            $obj_reserva->EliminarReserva($id_registro);
             $data_vista_error['cod_error_visa'] = $DataJsonVisa->errorCode;
             $data_vista_error['dataVisa'] = $DataJsonVisa->data;
 			$data_vista_error['pnr_reserva'] = $pnr;
 			$data_vista_error['TarjetaHabiente'] = $nombres.' '.$apellidos;
-			$_SESSION['error_visa']=(object)$data_vista_error;
+            $_SESSION['error_visa']=(object)$data_vista_error;
 			include $URL_DEFINIDO.'/cp/bloques/views/block_confirmation/error_metodo_pago.php';
         }
         else {

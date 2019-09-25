@@ -33,6 +33,62 @@ class ReservaModelo {
         return $resultado;
     }
 
+    public function ObtenerDataReserva($reserva_id) {
+        $obj_conexion = new ConexionBD();
+        $conexion = $obj_conexion->CrearConexion();
+        $consulta = "SELECT * FROM reserva WHERE Registro='$reserva_id' limit 1";
+        $resultado = $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
+        $numero_filas = $obj_conexion->ContarFilas($resultado);
+        if ($numero_filas > 0) {
+            $fila = $obj_conexion->ObtenerDatos($resultado);
+            return (object) $fila;
+            $obj_conexion->CerrarConexion($conexion);
+        } else {
+            return '';
+        }
+    }
+
+    public function GuardarReservaCabeceraNueva($consulta) {
+        $obj_conexion = new ConexionBD();
+        $conexion = $obj_conexion->CrearConexion();
+
+        $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
+        $registro = mysqli_insert_id($conexion);
+        $obj_conexion->CerrarConexion($conexion);
+        return $registro;
+    }
+
+    public function UpdateReservaDetalleId($registro, $id) {
+        $flag = 0;
+        $obj_conexion = new ConexionBD();
+        $conexion = $obj_conexion->CrearConexion();
+
+        $consulta = "UPDATE reserva_detalle SET Registro = $id WHERE Registro=$registro";
+        $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
+
+        $error = $obj_conexion->ErrorEjecucion($conexion);
+        if ($error == 1) {
+            $flag = 1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+
+        return $flag;
+    }
+
+    public function EliminarReserva($reserva_id) {
+        $flag = 0;
+        $obj_conexion = new ConexionBD();
+        $conexion = $obj_conexion->CrearConexion();
+        $consulta = "DELETE FROM reserva WHERE Registro=$reserva_id";
+        $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
+        $error = $obj_conexion->ErrorEjecucion($conexion);
+        if ($error == 1) {
+            $flag = 1;
+        }
+        $obj_conexion->CerrarConexion($conexion);
+        return $flag;
+    }
+
     public function ObtenerPnr($pnr, $entidad) {
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();

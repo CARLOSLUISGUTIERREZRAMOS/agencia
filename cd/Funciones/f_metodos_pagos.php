@@ -46,3 +46,95 @@
 
         return $data;
     }
+
+    function ArmarDataInsertarReservaNuevo($reserva)
+    {
+        $data['CodigoReserva']=$reserva->CodigoReserva;
+        $data['Apellidos']=$reserva->Apellidos;
+        $data['Nombres']=$reserva->Nombres;
+        $data['Tipo_Doc']=$reserva->Tipo_Doc;
+        $data['Documento']=$reserva->Documento;
+        if ($reserva->ddi_Telefono) {
+            $data['ddi_Telefono']=$reserva->ddi_Telefono;
+        }
+        if ($reserva->pre_Telefono) {
+            $data['pre_Telefono']=$reserva->pre_Telefono;
+        }
+        if ($reserva->Telefono) {
+            $data['Telefono']=$reserva->Telefono;
+        }
+        if ($reserva->ddi_Celular) {
+            $data['ddi_Celular']=$reserva->ddi_Celular;
+        }
+        if ($reserva->pre_Celular) {
+            $data['pre_Celular']=$reserva->pre_Celular;
+        }
+        if ($reserva->Celular) {
+            $data['Celular']=$reserva->Celular;
+        }
+        $data['Email']=$reserva->Email;
+        $data['FechaRegistro']=$reserva->FechaRegistro;
+        $data['FechaLimite']=$reserva->FechaLimite;
+        $data['TipoVuelo']=$reserva->TipoVuelo;
+        $data['Adultos']=$reserva->Adultos;
+        $data['Ninos']=$reserva->Ninos;
+        $data['Bebes']=$reserva->Bebes;
+        $data['Origen']=$reserva->Origen;
+        $data['Destino']=$reserva->Destino;
+        $data['Vuelo_Salida']=$reserva->Vuelo_Salida;
+        $data['Clase_Salida']=$reserva->Clase_Salida;
+        $data['Fecha_Salida']=$reserva->Fecha_Salida;
+        $data['Hora_Salida']=$reserva->Hora_Salida;
+        if ($reserva->Vuelo_Retorno) {
+            $data['Vuelo_Retorno']=$reserva->Vuelo_Retorno;
+        }
+        if ($reserva->Clase_Retorno) {
+            $data['Clase_Retorno']=$reserva->Clase_Retorno;
+        }
+        $data['Fecha_Retorno']=$reserva->Fecha_Retorno;
+        $data['Hora_Retorno']=$reserva->Hora_Retorno;
+        $data['Pais']=$reserva->Pais;
+        $data['Ciudad']=$reserva->Ciudad;
+        $data['IP']=$reserva->IP;
+        if ($reserva->Ticket01) {
+            $data['Ticket01']=$reserva->Ticket01;
+        }
+        if ($reserva->Ticket02) {
+            $data['Ticket02']=$reserva->Ticket02;
+        }
+        if ($reserva->Ticket03) {
+            $data['Ticket03']=$reserva->Ticket03;
+        }
+        if ($reserva->Ticket04) {
+            $data['Ticket04']=$reserva->Ticket04;
+        }
+        if ($reserva->Ticket05) {
+            $data['Ticket05']=$reserva->Ticket05;
+        }
+        if ($reserva->Ticket06) {
+            $data['Ticket06']=$reserva->Ticket06;
+        }
+        if ($reserva->Ticket07) {
+            $data['Ticket07']=$reserva->Ticket07;
+        }
+        if ($reserva->Ticket08) {
+            $data['Ticket08']=$reserva->Ticket08;
+        }
+        if ($reserva->Ticket09) {
+            $data['Ticket09']=$reserva->Ticket09;
+        }
+        $data['Flete']=$reserva->Flete;
+        $data['TUA']=$reserva->TUA;
+        $data['Impuesto']=$reserva->Impuesto;
+        $data['Total']=$reserva->Total;
+        $data['CodigoEntidad']=$reserva->CodigoEntidad;
+        $data['CodigoPersonal']=$reserva->CodigoPersonal;
+        $data['EstadoRegistro']=$reserva->EstadoRegistro;
+        $data['CronAnular']=$reserva->CronAnular;
+        if ($reserva->RUC) {
+            $data['RUC']=$reserva->RUC;
+        }
+        $data['forma_pago']=$reserva->forma_pago;
+        $data['Porcentaje']=$reserva->Porcentaje;
+        return $data;
+    }
