@@ -31,19 +31,19 @@ class VisaModelo{
         $obj_conexion->CerrarConexion($conexion);
         return $flag;
     }
-
+   
     public function UpdateVisaId($reserva_id, $id) {
         $flag = 0;
         $obj_conexion = new ConexionBD();
         $conexion = $obj_conexion->CrearConexion();
-
+     
         $consulta = "UPDATE visa SET reserva_id = $id WHERE reserva_id=$reserva_id";
         $obj_conexion->ConsultarDatos($consulta, $this->basedatos, $conexion);
 
         $error = $obj_conexion->ErrorEjecucion($conexion);
         if ($error == 1) {
             $flag = 1;
-        }
+}
         $obj_conexion->CerrarConexion($conexion);
 
         return $flag;

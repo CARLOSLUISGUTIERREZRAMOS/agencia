@@ -71,7 +71,7 @@ if (isset($_POST['transactionToken']) && isset($_SESSION['registro_id'])) {
             $data_vista_error['dataVisa'] = $DataJsonVisa->data;
 			$data_vista_error['pnr_reserva'] = $pnr;
 			$data_vista_error['TarjetaHabiente'] = $nombres.' '.$apellidos;
-            $_SESSION['error_visa']=(object)$data_vista_error;
+			$_SESSION['error_visa']=(object)$data_vista_error;
 			include $URL_DEFINIDO.'/cp/bloques/views/block_confirmation/error_metodo_pago.php';
         }
         else {
